@@ -35,24 +35,24 @@
 class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_MailsRepository
+	 * @var Tx_Powermail_Domain_Repository_MailRepository
 	 */
-	protected $mailsRepository;
+	protected $mailRepository;
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FormsRepository
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
 	 */
-	protected $formsRepository;
+	protected $formRepository;
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FieldsRepository
+	 * @var Tx_Powermail_Domain_Repository_FieldRepository
 	 */
 	protected $fieldsRepository;
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_AnswersRepository
+	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
 	 */
-	protected $answersRepository;
+	protected $answerRepository;
 
 	/**
 	 * @var Tx_Powermail_Utility_Div
@@ -73,7 +73,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	  */
 	public function listAction() {
 		// get all mails
-		$mails = $this->mailsRepository->findListBySettings($this->settings, $this->piVars);
+		$mails = $this->mailRepository->findListBySettings($this->settings, $this->piVars);
 		$this->view->assign('mails', $mails);
 
 		// get field array for output
@@ -103,10 +103,10 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	/**
 	  * Show mails in a list
 	  *
-	  * @param Tx_Powermail_Domain_Model_Mails $mail
+	  * @param Tx_Powermail_Domain_Model_Mail $mail
 	  * @return void
 	  */
-	public function showAction(Tx_Powermail_Domain_Model_Mails $mail) {
+	public function showAction(Tx_Powermail_Domain_Model_Mail $mail) {
 		$this->view->assign('mail', $mail);
 
 		// get field array for output
@@ -132,10 +132,10 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	/**
 	  * Edit mail
 	  *
-	  * @param Tx_Powermail_Domain_Model_Mails $mail
+	  * @param Tx_Powermail_Domain_Model_Mail $mail
 	  * @return void
 	  */
-	public function editAction(Tx_Powermail_Domain_Model_Mails $mail) {
+	public function editAction(Tx_Powermail_Domain_Model_Mail $mail) {
 		$this->view->assign('mail', $mail);
 
 		// get field array for output
@@ -164,18 +164,18 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	/**
 	  * Update mail
 	  *
-	  * @param Tx_Powermail_Domain_Model_Mails $mail
+	  * @param Tx_Powermail_Domain_Model_Mail $mail
 	  * @param array $field Field Array with changes
 	  * @dontvalidate $mail
 	  * @dontvalidate $field
 	  * @return void
 	  */
-	public function updateAction(Tx_Powermail_Domain_Model_Mails $mail, $field = array()) {
+	public function updateAction(Tx_Powermail_Domain_Model_Mail $mail, $field = array()) {
 		if ($this->div->isAllowedToEdit($this->settings, $mail)) {
 			foreach ((array) $field as $fieldUid => $value) { // one loop for every received field
-				$answer = $this->answersRepository->findByFieldAndMail($fieldUid, $mail);
+				$answer = $this->answerRepository->findByFieldAndMail($fieldUid, $mail);
 				$answer->setValue($value);
-				$this->answersRepository->update($answer);
+				$this->answerRepository->update($answer);
 			}
 			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('PowermailFrontendEditConfirm', 'powermail'));
 		} else {
@@ -196,7 +196,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 		if (!$this->settings['list']['export']) {
 			return;
 		}
-		$mails = $this->mailsRepository->findByUidList($export['fields']);
+		$mails = $this->mailRepository->findByUidList($export['fields']);
 
 		// get field array for output
 		$fields = t3lib_div::trimExplode(',', $this->settings['list']['fields'], 1);
@@ -244,7 +244,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function rssAction() {
-		$mails = $this->mailsRepository->findListBySettings($this->settings, $this->piVars);
+		$mails = $this->mailRepository->findListBySettings($this->settings, $this->piVars);
 		$this->view->assign('mails', $mails);
 
 		// single pid
@@ -295,43 +295,43 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	}
 
 	/**
-	 * injectMailsRepository
+	 * injectMailRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_MailsRepository $mailsRepository
+	 * @param Tx_Powermail_Domain_Repository_MailRepository $mailRepository
 	 * @return void
 	 */
-	public function injectMailsRepository(Tx_Powermail_Domain_Repository_MailsRepository $mailsRepository) {
-		$this->mailsRepository = $mailsRepository;
+	public function injectMailRepository(Tx_Powermail_Domain_Repository_MailRepository $mailRepository) {
+		$this->mailRepository = $mailRepository;
 	}
 
 	/**
-	 * injectFormsRepository
+	 * injectFormRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FormsRepository $formsRepository
+	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
 	 * @return void
 	 */
-	public function injectFormsRepository(Tx_Powermail_Domain_Repository_FormsRepository $formsRepository) {
-		$this->formsRepository = $formsRepository;
+	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
+		$this->formRepository = $formRepository;
 	}
 
 	/**
-	 * injectFieldsRepository
+	 * injectFieldRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository
+	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
 	 * @return void
 	 */
-	public function injectFieldsRepository(Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository) {
+	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
 		$this->fieldsRepository = $fieldsRepository;
 	}
 
 	/**
-	 * injectAnswersRepository
+	 * injectAnswerRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_AnswersRepository $answersRepository
+	 * @param Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository
 	 * @return void
 	 */
-	public function injectAnswersRepository(Tx_Powermail_Domain_Repository_AnswersRepository $answersRepository) {
-		$this->answersRepository = $answersRepository;
+	public function injectAnswerRepository(Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository) {
+		$this->answerRepository = $answerRepository;
 	}
 }
 

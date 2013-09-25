@@ -32,10 +32,10 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Domain_Repository_FormsRepositoryTests extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Tests_Unit_BaseTestCase {
 
     /**
-     * @var Tx_Powermail_Domain_Repository_FormsRepository
+     * @var Tx_Powermail_Domain_Repository_FormRepository
      */
     protected $fixture;
 
@@ -45,7 +45,7 @@ class Tx_Powermail_Domain_Repository_FormsRepositoryTests extends Tx_Extbase_Tes
     protected $testDatabase = NULL;
 
     public function setUp() {
-        $this->fixture = new Tx_Powermail_Domain_Repository_FormsRepository();
+        $this->fixture = new Tx_Powermail_Domain_Repository_FormRepository();
         $this->testDatabase = new Tx_Phpunit_Framework('tx_powermail_domain_model_forms');
     }
 

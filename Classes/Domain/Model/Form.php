@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Domain_Model_Forms extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * title
@@ -52,16 +52,16 @@ class Tx_Powermail_Domain_Model_Forms extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * pages
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Pages>
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page>
 	 */
 	protected $pages = NULL;
 
 	/**
-	 * formsRepository
+	 * formRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormsRepository
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
 	 */
-	protected $formsRepository = NULL;
+	protected $formRepository = NULL;
 
 	/**
 	 * __construct
@@ -113,13 +113,13 @@ class Tx_Powermail_Domain_Model_Forms extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Returns the pages
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Pages> $pages
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page> $pages
 	 */
 	public function getPages() {
 		// if elementbrowser instead of IRRE (sorting workarround)
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail']);
 		if ($confArr['replaceIrreWithElementBrowser']) {
-			$formSorting = t3lib_div::trimExplode(',', $this->formsRepository->getPagesValue($this->uid), 1);
+			$formSorting = t3lib_div::trimExplode(',', $this->formRepository->getPagesValue($this->uid), 1);
 			$formSorting = array_flip($formSorting);
 			$pageArray = array();
 			foreach ($this->pages as $page) {
@@ -135,7 +135,7 @@ class Tx_Powermail_Domain_Model_Forms extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Sets the pages
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Pages> $pages
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page> $pages
 	 * @return void
 	 */
 	public function setPages(Tx_Extbase_Persistence_ObjectStorage $pages) {
@@ -143,13 +143,13 @@ class Tx_Powermail_Domain_Model_Forms extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * injectFormsRepository
+	 * injectFormRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FormsRepository $formsRepository
+	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
 	 * @return void
 	 */
-	public function injectFormsRepository(Tx_Powermail_Domain_Repository_FormsRepository $formsRepository) {
-		$this->formsRepository = $formsRepository;
+	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
+		$this->formRepository = $formRepository;
 	}
 
 }

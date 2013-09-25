@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Pages.
+ * Test case for class Tx_Powermail_Domain_Model_Page.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,21 +36,21 @@
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Powermail_Domain_Model_Pages
+	 * @var Tx_Powermail_Domain_Model_Page
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Pages();
+		$this->fixture = new Tx_Powermail_Domain_Model_Page();
 	}
 
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -59,7 +59,7 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
 	/**
 	 * @test
 	 */
-	public function setTitleForStringSetsTitle() { 
+	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -67,7 +67,7 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
 			$this->fixture->getTitle()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -89,11 +89,11 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
 			$this->fixture->getCss()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getFieldsReturnsInitialValueForObjectStorageContainingTx_Powermail_Domain_Model_Fields() { 
+	public function getFieldsReturnsInitialValueForObjectStorageContainingTx_Powermail_Domain_Model_Field() {
 		#$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->assertSame(
 			array(),
@@ -104,10 +104,10 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
 	/**
 	 * @test
 	 */
-	public function setFieldsForObjectStorageContainingTx_Powermail_Domain_Model_FieldsSetsFields() { 
+	public function setFieldsForObjectStorageContainingTx_Powermail_Domain_Model_FieldSetsFields() {
 		$objectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 
-        $field = new Tx_Powermail_Domain_Model_Fields();
+        $field = new Tx_Powermail_Domain_Model_Field();
         $field->setSorting(42);
         $objectStorage->attach($field);
 
@@ -120,12 +120,12 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
             $this->fixture->getFields()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
 	public function addFieldToObjectStorageHoldingFields() {
-		$field = new Tx_Powermail_Domain_Model_Fields();
+		$field = new Tx_Powermail_Domain_Model_Field();
 		$field->setSorting(42);
         $this->fixture->addField($field);
 
@@ -141,7 +141,7 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 * @test
 	 */
 	public function removeFieldFromObjectStorageHoldingFields() {
-        $field = new Tx_Powermail_Domain_Model_Fields();
+        $field = new Tx_Powermail_Domain_Model_Field();
         $field->setSorting(42);
         $this->fixture->addField($field);
 
@@ -158,6 +158,6 @@ class Tx_Powermail_Domain_Model_PagesTest extends Tx_Extbase_Tests_Unit_BaseTest
             $this->fixture->getFields()
         );
 	}
-	
+
 }
 ?>

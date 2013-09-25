@@ -9,11 +9,11 @@
 class Tx_Powermail_ViewHelpers_Getter_GetPageNameFromUidViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
 
 	/**
-	 * pagesRepository
+	 * pageRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_PagesRepository
+	 * @var Tx_Powermail_Domain_Repository_PageRepository
 	 */
-	protected $pagesRepository;
+	protected $pageRepository;
 
     /**
      * View helper check if given value is array or not
@@ -22,17 +22,17 @@ class Tx_Powermail_ViewHelpers_Getter_GetPageNameFromUidViewHelper extends Tx_Fl
      * @return 	string		Page Name
      */
     public function render($uid = '') {
-		return $this->pagesRepository->getPageNameFromUid($uid);
+		return $this->pageRepository->getPageNameFromUid($uid);
     }
 
 	/**
-	 * injectPagesRepository
+	 * injectPageRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_PagesRepository $pagesRepository
+	 * @param Tx_Powermail_Domain_Repository_PageRepository $pageRepository
 	 * @return void
 	 */
-	public function injectPagesRepository(Tx_Powermail_Domain_Repository_PagesRepository $pagesRepository) {
-		$this->pagesRepository = $pagesRepository;
+	public function injectPageRepository(Tx_Powermail_Domain_Repository_PageRepository $pageRepository) {
+		$this->pageRepository = $pageRepository;
 	}
 }
 

@@ -40,12 +40,12 @@ class Tx_Powermail_Utility_Div {
 	public static $extKey = 'powermail';
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FormsRepository
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
 	 */
-	protected $formsRepository;
+	protected $formRepository;
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FieldsRepository
+	 * @var Tx_Powermail_Domain_Repository_FieldRepository
 	 */
 	protected $fieldsRepository;
 
@@ -62,7 +62,7 @@ class Tx_Powermail_Utility_Div {
 	 */
 	public function getFieldsFromForm($formUid) {
 		$fields = array();
-		$form = $this->formsRepository->findByUid($formUid);
+		$form = $this->formRepository->findByUid($formUid);
 		if (!method_exists($form, 'getPages')) {
 			return;
 		}
@@ -1039,18 +1039,18 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
-	 * @param Tx_Powermail_Domain_Repository_FormsRepository $formsRepository
+	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
 	 * @return void
 	 */
-	public function injectFormsRepository(Tx_Powermail_Domain_Repository_FormsRepository $formsRepository) {
-		$this->formsRepository = $formsRepository;
+	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
+		$this->formRepository = $formRepository;
 	}
 
 	/**
-	 * @param Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository
+	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
 	 * @return void
 	 */
-	public function injectFieldsRepository(Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository) {
+	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
 		$this->fieldsRepository = $fieldsRepository;
 	}
 

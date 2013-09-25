@@ -3,14 +3,13 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *
+ *  (c) 2012 in2code GmbH <info@in2code.de>, in2code.de
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -24,38 +23,35 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+
 /**
- * Test case for class Tx_Powermail_Controller_FormsController.
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
- * @package TYPO3
- * @subpackage powermail
+ * @package powermail
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
- * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Controller_FormsControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
-	/**
-	 * @var Tx_Powermail_Domain_Model_Form
-	 */
-	protected $fixture;
-
-	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Form();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
-	}
+class Tx_Powermail_Domain_Repository_PageRepository extends Tx_Extbase_Persistence_Repository {
 
 	/**
-	 * @test
+	 * Get title from table "pages" in TYPO3
+	 *
+	 * @param $uid
 	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
-	}
+	public function getPageNameFromUid($uid) {
+		$query = $this->createQuery();
 
+		// create sql statement
+		$sql = 'select title';
+		$sql .= ' from pages';
+		$sql .= ' where uid = ' . intval($uid);
+		$sql .= ' limit 1';
+
+		$query->getQuerySettings()->setReturnRawQueryResult(true); //this generates an array and makes it much slower
+		$result = $query->statement($sql)->execute();
+
+		return $result[0]['title'];
+	}
 }
+
 ?>

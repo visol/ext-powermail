@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Fields.
+ * Test case for class Tx_Powermail_Domain_Model_Form.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,21 +36,21 @@
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Domain_Model_FieldsTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Powermail_Domain_Model_Fields
+	 * @var Tx_Powermail_Domain_Model_Form
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Fields();
+		$this->fixture = new Tx_Powermail_Domain_Model_Form();
 	}
 
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -59,7 +59,7 @@ class Tx_Powermail_Domain_Model_FieldsTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setTitleForStringSetsTitle() { 
+	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -67,70 +67,7 @@ class Tx_Powermail_Domain_Model_FieldsTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getTitle()
 		);
 	}
-	
-	/**
-	 * @test
-	 */
-	public function getTypeReturnsInitialValueForSting() {
-        $this->fixture->setType('Conceived at T3CON10');
 
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getType()
-        );
-	}
-
-	/**
-	 * @test
-	 */
-	public function setTypeForIntegerSetsType() { 
-		$this->fixture->setType(12);
-
-		$this->assertSame(
-			12,
-			$this->fixture->getType()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getPrefillValueReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setPrefillValueForStringSetsPrefillValue() { 
-		$this->fixture->setPrefillValue('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getPrefillValue()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getValidationReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
-			$this->fixture->getValidation()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setValidationForIntegerSetsValidation() { 
-		$this->fixture->setValidation(12);
-
-		$this->assertSame(
-			12,
-			$this->fixture->getValidation()
-		);
-	}
-	
 	/**
 	 * @test
 	 */
@@ -145,35 +82,36 @@ class Tx_Powermail_Domain_Model_FieldsTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function setCssForStringSetsCss() {
-        $this->fixture->setCss('Conceived at T3CON10');
+		$this->fixture->setCss('my CSS');
 
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getCss()
-        );
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getFeuserValueReturnsInitialValueForString() {
 		$this->assertSame(
-			'',
-			$this->fixture->getFeuserValue()
+			'my CSS',
+			$this->fixture->getCss()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setFeuserValueForStringSetsFeuserValue() {
-		$this->fixture->setFeuserValue('my FrontendUser');
-
-		$this->assertSame(
-			'my FrontendUser',
-			$this->fixture->getFeuserValue()
+	public function getPagesReturnsInitialValueForTx_Powermail_Domain_Model_Page() {
+		$this->assertEquals(
+			NULL,
+			$this->fixture->getPages()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function setPagesForTx_Powermail_Domain_Model_PageSetsPages() {
+		$dummyObject = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->fixture->setPages($dummyObject);
+
+		$this->assertSame(
+			$dummyObject,
+			$this->fixture->getPages()
+		);
+	}
+
 }
 ?>
