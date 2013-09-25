@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Fields.
+ * Test case for class Tx_Powermail_Domain_Model_Field.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,21 +36,21 @@
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Domain_Model_MailsTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Powermail_Domain_Model_MailTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Powermail_Domain_Model_Mails
+	 * @var Tx_Powermail_Domain_Model_Mail
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Mails();
+		$this->fixture = new Tx_Powermail_Domain_Model_Mail();
 	}
 
 	public function tearDown() {
 		unset($this->fixture);
 	}
-	
-	
+
+
 	/**
 	 * @test
 	 */
@@ -278,8 +278,8 @@ class Tx_Powermail_Domain_Model_MailsTest extends Tx_Extbase_Tests_Unit_BaseTest
     /**
      * @test
      */
-    public function setFormForTx_Powermail_Domain_Model_FormsSetsForm() {
-        $form = new Tx_Powermail_Domain_Model_Forms;
+    public function setFormForTx_Powermail_Domain_Model_FormSetsForm() {
+        $form = new Tx_Powermail_Domain_Model_Form;
         $this->fixture->setForm($form);
         $this->assertSame(
             $form,
@@ -301,7 +301,7 @@ class Tx_Powermail_Domain_Model_MailsTest extends Tx_Extbase_Tests_Unit_BaseTest
     /**
      * @test
      */
-    public function setAnswersForTx_Powermail_Domain_Model_AnswersSetsAnswers() {
+    public function setAnswersForTx_Powermail_Domain_Model_AnswerSetsAnswers() {
         $dummy = new Tx_Extbase_Persistence_ObjectStorage;
         $this->fixture->setAnswers($dummy);
         $this->assertSame(

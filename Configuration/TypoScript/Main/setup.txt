@@ -433,6 +433,11 @@ config.tx_extbase.persistence.classes {
 			tableName = fe_groups
 		}
 	}
+	Tx_Powermail_Domain_Model_Answer.mapping.tableName = tx_powermail_domain_model_answers
+	Tx_Powermail_Domain_Model_Field.mapping.tableName = tx_powermail_domain_model_fields
+	Tx_Powermail_Domain_Model_Form.mapping.tableName = tx_powermail_domain_model_forms
+	Tx_Powermail_Domain_Model_Mail.mapping.tableName = tx_powermail_domain_model_mails
+	Tx_Powermail_Domain_Model_Page.mapping.tableName = tx_powermail_domain_model_pages
 }
 
 

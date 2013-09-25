@@ -34,11 +34,11 @@
 class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * mailsRepository
+	 * mailRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_MailsRepository
+	 * @var Tx_Powermail_Domain_Repository_MailRepository
 	 */
-	protected $mailsRepository;
+	protected $mailRepository;
 
 	/**
 	 * Request arguments
@@ -60,8 +60,8 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function listBeAction() {
-		$mails = $this->mailsRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
-		$firstMail = $this->mailsRepository->findFirstInPid(t3lib_div::_GP('id'));
+		$mails = $this->mailRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
+		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
 
 		$this->view->assign('mails', $mails);
 		$this->view->assign('firstMail', $firstMail);
@@ -119,8 +119,8 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function reportingFormBeAction() {
-		$mails = $this->mailsRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
-		$firstMail = $this->mailsRepository->findFirstInPid(t3lib_div::_GP('id'));
+		$mails = $this->mailRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
+		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
 		$groupedAnswers = Tx_Powermail_Utility_Div::getGroupedMailAnswers($mails);
 
 		$this->view->assign('groupedAnswers', $groupedAnswers);
@@ -138,8 +138,8 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function reportingMarketingBeAction() {
-		$mails = $this->mailsRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
-		$firstMail = $this->mailsRepository->findFirstInPid(t3lib_div::_GP('id'));
+		$mails = $this->mailRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
+		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
 		$groupedMarketingStuff = Tx_Powermail_Utility_Div::getGroupedMarketingStuff($mails);
 
 		$this->view->assign('groupedMarketingStuff', $groupedMarketingStuff);
@@ -171,7 +171,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function exportXlsBeAction(array $export = array()) {
-		$mails = $this->mailsRepository->findByUidList($export['mails'], $export['sorting']);
+		$mails = $this->mailRepository->findByUidList($export['mails'], $export['sorting']);
 		$this->view->assign('mails', $mails);
 		$this->view->assign('fields', t3lib_div::trimExplode(',', $export['fields'], 1));
 
@@ -187,7 +187,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function exportCsvBeAction(array $export = array()) {
-		$mails = $this->mailsRepository->findByUidList($export['mails'], $export['sorting']);
+		$mails = $this->mailRepository->findByUidList($export['mails'], $export['sorting']);
 		$this->view->assign('mails', $mails);
 		$this->view->assign('fields', t3lib_div::trimExplode(',', $export['fields'], 1));
 
@@ -214,13 +214,13 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	}
 
 	/**
-	 * injectMailsRepository
+	 * injectMailRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_MailsRepository $mailsRepository
+	 * @param Tx_Powermail_Domain_Repository_MailRepository $mailRepository
 	 * @return void
 	 */
-	public function injectMailsRepository(Tx_Powermail_Domain_Repository_MailsRepository $mailsRepository) {
-		$this->mailsRepository = $mailsRepository;
+	public function injectMailRepository(Tx_Powermail_Domain_Repository_MailRepository $mailRepository) {
+		$this->mailRepository = $mailRepository;
 	}
 }
 

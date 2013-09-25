@@ -2,11 +2,11 @@
 class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
 
 	/**
-	 * formsRepository
+	 * formRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormsRepository
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
 	 */
-	protected $formsRepository;
+	protected $formRepository;
 
 	/**
 	 * Return variable
@@ -24,7 +24,7 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 	public function isValid($params) {
 		$gp = t3lib_div::_GP('tx_powermail_pi1');
 		$formUid = $gp['form'];
-		$form = $this->formsRepository->findByUid($formUid);
+		$form = $this->formRepository->findByUid($formUid);
 		if (!method_exists($form, 'getPages')) {
 			return $this->isValid;
 		}
@@ -63,13 +63,13 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
   	}
 
 	/**
-	 * injectFormsRepository
+	 * injectFormRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FormsRepository $formsRepository
+	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
 	 * @return void
 	 */
-	public function injectFormsRepository(Tx_Powermail_Domain_Repository_FormsRepository $formsRepository) {
-		$this->formsRepository = $formsRepository;
+	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
+		$this->formRepository = $formRepository;
 	}
 }
 ?>

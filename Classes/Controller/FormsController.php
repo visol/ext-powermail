@@ -35,25 +35,25 @@
 class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
-	 * formsRepository
+	 * formRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormsRepository
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
 	 */
-	protected $formsRepository;
+	protected $formRepository;
 
 	/**
-	 * mailsRepository
+	 * mailRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_MailsRepository
+	 * @var Tx_Powermail_Domain_Repository_MailRepository
 	 */
-	protected $mailsRepository;
+	protected $mailRepository;
 
 	/**
-	 * answersRepository
+	 * answerRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_AnswersRepository
+	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
 	 */
-	protected $answersRepository;
+	protected $answerRepository;
 
 	/**
 	 * @var Tx_Extbase_SignalSlot_Dispatcher
@@ -99,7 +99,7 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 		}
 
 		// get forms
-		$forms = $this->formsRepository->findByUids($this->settings['main']['form']);
+		$forms = $this->formRepository->findByUids($this->settings['main']['form']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($forms, $this));
 		$this->view->assign('forms', $forms);
 		$this->view->assign('messageClass', $this->messageClass);
@@ -272,7 +272,7 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 * Send Optin Confirmation Mail
 	 *
 	 * @param array $field array with field values
-	 * @param Tx_Powermail_Domain_Model_Mails $newMail new mail object from db
+	 * @param Tx_Powermail_Domain_Model_Mail $newMail new mail object from db
 	 * @return void
 	 */
 	protected function sendConfirmationMail($field, $newMail) {
@@ -367,12 +367,12 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 *
 	 * @param array $field Field values
 	 * @param int $form Form uid
-	 * @return Tx_Powermail_Domain_Model_Mails Mail object
+	 * @return Tx_Powermail_Domain_Model_Mail Mail object
 	 */
 	protected function saveMail($field, $form) {
 		// tx_powermail_domain_model_mails
 		$marketingInfos = Tx_Powermail_Utility_Div::getMarketingInfos();
-		$newMail = $this->objectManager->create('Tx_Powermail_Domain_Model_Mails');
+		$newMail = $this->objectManager->create('Tx_Powermail_Domain_Model_Mail');
 		$newMail->setPid(Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid']));
 		$newMail->setForm($form);
 		$newMail->setSenderMail($this->div->getSenderMailFromArguments($field));
@@ -398,7 +398,7 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 		if ($this->settings['main']['optin'] || $this->settings['db']['hidden']) {
 			$newMail->setHidden(1);
 		}
-		$this->mailsRepository->add($newMail);
+		$this->mailRepository->add($newMail);
 		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager');
 		$persistenceManager->persistAll();
 
@@ -407,13 +407,13 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 			if (!is_numeric($uid)) {
 				continue;
 			}
-			$newAnswer = $this->objectManager->create('Tx_Powermail_Domain_Model_Answers');
+			$newAnswer = $this->objectManager->create('Tx_Powermail_Domain_Model_Answer');
 			$newAnswer->setPid(Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid']));
 			$newAnswer->setValue($value);
 			$newAnswer->setField($uid);
 			$newAnswer->setMail($newMail->getUid());
 
-			$this->answersRepository->add($newAnswer);
+			$this->answerRepository->add($newAnswer);
 		}
 
 		return $newMail;
@@ -430,18 +430,18 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 */
 	public function optinConfirmAction($mail = null, $hash = null) {
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
-		$mail = $this->mailsRepository->findByUid($mail);
+		$mail = $this->mailRepository->findByUid($mail);
 
 		if (
 			!empty($hash) &&
-			$mail instanceof Tx_Powermail_Domain_Model_Mails &&
+			$mail instanceof Tx_Powermail_Domain_Model_Mail &&
 			$hash == Tx_Powermail_Utility_Div::createOptinHash($mail->getUid() . $mail->getPid() . $mail->getForm()->getUid())
 		) {
 			// only if hidden = 0
 			if ($mail->getHidden() == 1) {
 				$mail->setHidden(0);
 
-				$this->mailsRepository->update($mail);
+				$this->mailRepository->update($mail);
 				$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager');
 				$persistenceManager->persistAll();
 
@@ -519,33 +519,33 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	}
 
 	/**
-	 * injectFormsRepository
+	 * injectFormRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FormsRepository $formsRepository
+	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
 	 * @return void
 	 */
-	public function injectFormsRepository(Tx_Powermail_Domain_Repository_FormsRepository $formsRepository) {
-		$this->formsRepository = $formsRepository;
+	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
+		$this->formRepository = $formRepository;
 	}
 
 	/**
-	 * injectMailsRepository
+	 * injectMailRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_MailsRepository $mailsRepository
+	 * @param Tx_Powermail_Domain_Repository_MailRepository $mailRepository
 	 * @return void
 	 */
-	public function injectMailsRepository(Tx_Powermail_Domain_Repository_MailsRepository $mailsRepository) {
-		$this->mailsRepository = $mailsRepository;
+	public function injectMailRepository(Tx_Powermail_Domain_Repository_MailRepository $mailRepository) {
+		$this->mailRepository = $mailRepository;
 	}
 
 	/**
-	 * injectAnswersRepository
+	 * injectAnswerRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_AnswersRepository $answersRepository
+	 * @param Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository
 	 * @return void
 	 */
-	public function injectAnswersRepository(Tx_Powermail_Domain_Repository_AnswersRepository $answersRepository) {
-		$this->answersRepository = $answersRepository;
+	public function injectAnswerRepository(Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository) {
+		$this->answerRepository = $answerRepository;
 	}
 
 	/**

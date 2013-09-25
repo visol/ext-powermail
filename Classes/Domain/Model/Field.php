@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Domain_Model_Fields extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * title

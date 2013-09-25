@@ -4,7 +4,7 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
 	/**
 	 * fieldsRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FieldsRepository
+	 * @var Tx_Powermail_Domain_Repository_FieldRepository
 	 */
 	protected $fieldsRepository;
 
@@ -75,12 +75,12 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
   	}
 
 	/**
-	 * injectFieldsRepository
+	 * injectFieldRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository
+	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
 	 * @return void
 	 */
-	public function injectFieldsRepository(Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository) {
+	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
 		$this->fieldsRepository = $fieldsRepository;
 	}
 }

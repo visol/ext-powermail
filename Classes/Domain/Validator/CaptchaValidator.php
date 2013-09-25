@@ -4,16 +4,16 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	/**
 	 * fieldsRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FieldsRepository
+	 * @var Tx_Powermail_Domain_Repository_FieldRepository
 	 */
 	protected $fieldsRepository;
 
 	/**
-	 * formsRepository
+	 * formRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormsRepository
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
 	 */
-	protected $formsRepository;
+	protected $formRepository;
 
 	/**
 	 * Captcha Session clean (only if mail is out)
@@ -85,7 +85,7 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	protected function formHasCaptcha() {
 		$gp = t3lib_div::_GP('tx_powermail_pi1');
 		$formUid = $gp['form'];
-		$form = $this->formsRepository->hasCaptcha($formUid);
+		$form = $this->formRepository->hasCaptcha($formUid);
 		return count($form);
 	}
 
@@ -98,23 +98,23 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	}
 
 	/**
-	 * injectFieldsRepository
+	 * injectFieldRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository
+	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
 	 * @return void
 	 */
-	public function injectFieldsRepository(Tx_Powermail_Domain_Repository_FieldsRepository $fieldsRepository) {
+	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
 		$this->fieldsRepository = $fieldsRepository;
 	}
 
 	/**
-	 * injectFormsRepository
+	 * injectFormRepository
 	 *
-	 * @param Tx_Powermail_Domain_Repository_FormsRepository $formsRepository
+	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
 	 * @return void
 	 */
-	public function injectFormsRepository(Tx_Powermail_Domain_Repository_FormsRepository $formsRepository) {
-		$this->formsRepository = $formsRepository;
+	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
+		$this->formRepository = $formRepository;
 	}
 }
 ?>

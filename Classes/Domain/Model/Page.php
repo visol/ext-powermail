@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Domain_Model_Pages extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * title
@@ -52,7 +52,7 @@ class Tx_Powermail_Domain_Model_Pages extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Powermail Fields
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Fields>
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Field>
 	 */
 	protected $fields = NULL;
 
@@ -128,27 +128,27 @@ class Tx_Powermail_Domain_Model_Pages extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Adds a Fields
 	 *
-	 * @param Tx_Powermail_Domain_Model_Fields $field
+	 * @param Tx_Powermail_Domain_Model_Field $field
 	 * @return void
 	 */
-	public function addField(Tx_Powermail_Domain_Model_Fields $field) {
+	public function addField(Tx_Powermail_Domain_Model_Field $field) {
 		$this->fields->attach($field);
 	}
 
 	/**
 	 * Removes a Fields
 	 *
-	 * @param Tx_Powermail_Domain_Model_Fields $fieldToRemove The Fields to be removed
+	 * @param Tx_Powermail_Domain_Model_Field $fieldToRemove The Fields to be removed
 	 * @return void
 	 */
-	public function removeField(Tx_Powermail_Domain_Model_Fields $fieldToRemove) {
+	public function removeField(Tx_Powermail_Domain_Model_Field $fieldToRemove) {
 		$this->fields->detach($fieldToRemove);
 	}
 
 	/**
 	 * Returns the fields
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Fields> $fields
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Field> $fields
 	 */
 	public function getFields() {
 //		return $this->fields;
@@ -165,7 +165,7 @@ class Tx_Powermail_Domain_Model_Pages extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Sets the fields
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Fields> $fields
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Field> $fields
 	 * @return void
 	 */
 	public function setFields(Tx_Extbase_Persistence_ObjectStorage $fields) {
