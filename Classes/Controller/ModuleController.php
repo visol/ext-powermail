@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -41,7 +41,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	protected $mailsRepository;
 
 	/**
-	 * piVars
+	 * Request arguments
 	 *
 	 * @var array
 	 */
@@ -50,7 +50,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	/**
 	 * div
 	 *
-	 * @var object
+	 * @var Tx_Powermail_Utility_Div
 	 */
 	protected $div;
 

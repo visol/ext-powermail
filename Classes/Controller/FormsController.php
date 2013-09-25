@@ -63,21 +63,21 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	/**
 	 * cObj
 	 *
-	 * @var Content Object
+	 * @var tslib_cObj
 	 */
 	protected $cObj;
 
 	/**
 	 * TypoScript configuration
 	 *
-	 * @var configuration
+	 * @var array
 	 */
 	protected $conf;
 
 	/**
 	 * Instance for Misc Functions
 	 *
-	 * @var object
+	 * @var Tx_Powermail_Utility_Div
 	 */
 	protected $div;
 
