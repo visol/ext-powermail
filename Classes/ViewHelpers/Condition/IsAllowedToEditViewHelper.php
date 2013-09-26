@@ -12,6 +12,8 @@ class Tx_Powermail_ViewHelpers_Condition_IsAllowedToEditViewHelper extends Tx_Fl
 	 * Div Methods
 	 *
 	 * @var	 Tx_Powermail_Utility_Div
+	 *
+	 * @inject
 	 */
 	protected $div;
 
@@ -29,11 +31,4 @@ class Tx_Powermail_ViewHelpers_Condition_IsAllowedToEditViewHelper extends Tx_Fl
 		return false;
     }
 
-	/**
-	 * @param Tx_Powermail_Utility_Div $div
-	 * @return void
-	 */
-	public function injectDiv(Tx_Powermail_Utility_Div $div) {
-		$this->div = $div;
-	}
 }

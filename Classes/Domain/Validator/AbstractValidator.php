@@ -27,15 +27,9 @@ abstract class Tx_Powermail_Domain_Validator_AbstractValidator extends Tx_Extbas
 
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 *
+	 * @inject
 	 */
 	protected $objectManager;
-
-	/**
-	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
-	 * @return void
-	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
-		$this->objectManager = $objectManager;
-	}
 
 }

@@ -15,6 +15,8 @@ class Tx_Powermail_ViewHelpers_Misc_VariablesViewHelper extends Tx_Fluid_Core_Vi
 
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 *
+	 * @inject
 	 */
 	protected $objectManager;
 
@@ -22,6 +24,8 @@ class Tx_Powermail_ViewHelpers_Misc_VariablesViewHelper extends Tx_Fluid_Core_Vi
 	 * Div Methods
 	 *
 	 * @var	 Tx_Powermail_Utility_Div
+	 *
+	 * @inject
 	 */
 	protected $div;
 
@@ -57,26 +61,8 @@ class Tx_Powermail_ViewHelpers_Misc_VariablesViewHelper extends Tx_Fluid_Core_Vi
 	*/
 	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
-	}
-
-	/**
-	 * Injects the Object Manager
-	 *
-	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
-	 * @return void
-	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
-		$this->objectManager = $objectManager;
 		$typoScriptSetup = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
 		$this->settings = t3lib_div::removeDotsFromTS($typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.']);
-	}
-
-	/**
-	 * @param Tx_Powermail_Utility_Div $div
-	 * @return void
-	 */
-	public function injectDiv(Tx_Powermail_Utility_Div $div) {
-		$this->div = $div;
 	}
 
 }

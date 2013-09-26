@@ -13,6 +13,8 @@ class Tx_Powermail_ViewHelpers_Getter_GetFieldMarkerFromUidViewHelper extends Tx
 	 * fieldsRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 *
+	 * @inject
 	 */
 	protected $fieldsRepository;
 
@@ -29,15 +31,6 @@ class Tx_Powermail_ViewHelpers_Getter_GetFieldMarkerFromUidViewHelper extends Tx
 		}
     }
 
-	/**
-	 * injectFieldRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
-	 * @return void
-	 */
-	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
-		$this->fieldsRepository = $fieldsRepository;
-	}
 }
 
 ?>

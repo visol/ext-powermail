@@ -38,6 +38,8 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 * formRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 *
+	 * @inject
 	 */
 	protected $formRepository;
 
@@ -45,6 +47,8 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 * mailRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_MailRepository
+	 *
+	 * @inject
 	 */
 	protected $mailRepository;
 
@@ -52,11 +56,15 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 * answerRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
+	 *
+	 * @inject
 	 */
 	protected $answerRepository;
 
 	/**
 	 * @var Tx_Extbase_SignalSlot_Dispatcher
+	 *
+	 * @inject
 	 */
 	protected $signalSlotDispatcher;
 
@@ -78,6 +86,8 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 * Instance for Misc Functions
 	 *
 	 * @var Tx_Powermail_Utility_Div
+	 *
+	 * @inject
 	 */
 	protected $div;
 
@@ -508,51 +518,6 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 	 */
 	protected function getErrorFlashMessage() {
 		return false;
-	}
-
-	/**
-	 * @param Tx_Powermail_Utility_Div $div
-	 * @return void
-	 */
-	public function injectDiv(Tx_Powermail_Utility_Div $div) {
-		$this->div = $div;
-	}
-
-	/**
-	 * injectFormRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
-	 * @return void
-	 */
-	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
-		$this->formRepository = $formRepository;
-	}
-
-	/**
-	 * injectMailRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_MailRepository $mailRepository
-	 * @return void
-	 */
-	public function injectMailRepository(Tx_Powermail_Domain_Repository_MailRepository $mailRepository) {
-		$this->mailRepository = $mailRepository;
-	}
-
-	/**
-	 * injectAnswerRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository
-	 * @return void
-	 */
-	public function injectAnswerRepository(Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository) {
-		$this->answerRepository = $answerRepository;
-	}
-
-	/**
-	 * @param Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher
-	 */
-	public function injectSignalSlotDispatcher(Tx_Extbase_SignalSlot_Dispatcher $signalSlotDispatcher) {
-		$this->signalSlotDispatcher = $signalSlotDispatcher;
 	}
 
 }

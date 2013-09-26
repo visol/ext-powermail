@@ -37,6 +37,8 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * mailRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_MailRepository
+	 *
+	 * @inject
 	 */
 	protected $mailRepository;
 
@@ -205,23 +207,6 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 		$this->piVars = $this->request->getArguments();
 	}
 
-	/**
-	 * @param Tx_Powermail_Utility_Div $div
-	 * @return void
-	 */
-	public function injectDiv(Tx_Powermail_Utility_Div $div) {
-		$this->div = $div;
-	}
-
-	/**
-	 * injectMailRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_MailRepository $mailRepository
-	 * @return void
-	 */
-	public function injectMailRepository(Tx_Powermail_Domain_Repository_MailRepository $mailRepository) {
-		$this->mailRepository = $mailRepository;
-	}
 }
 
 ?>

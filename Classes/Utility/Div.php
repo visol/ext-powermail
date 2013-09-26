@@ -41,16 +41,22 @@ class Tx_Powermail_Utility_Div {
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 *
+	 * @inject
 	 */
 	protected $formRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 *
+	 * @inject
 	 */
 	protected $fieldsRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_UserRepository
+	 *
+	 * @inject
 	 */
 	protected $userRepository;
 
@@ -1038,27 +1044,4 @@ class Tx_Powermail_Utility_Div {
 		unset($tmp_settings);
 	}
 
-	/**
-	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
-	 * @return void
-	 */
-	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
-		$this->formRepository = $formRepository;
-	}
-
-	/**
-	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
-	 * @return void
-	 */
-	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
-		$this->fieldsRepository = $fieldsRepository;
-	}
-
-	/**
-	 * @param Tx_Powermail_Domain_Repository_UserRepository $userRepository
-	 * @return void
-	 */
-	public function injectUserRepository(Tx_Powermail_Domain_Repository_UserRepository $userRepository) {
-		$this->userRepository = $userRepository;
-	}
 }

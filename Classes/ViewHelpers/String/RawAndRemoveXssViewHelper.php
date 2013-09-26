@@ -18,6 +18,8 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 *
+	 * @inject
 	 */
 	protected $objectManager;
 
@@ -40,15 +42,6 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 		return $string;
 	}
 
-	/**
-	 * Injects the Object Manager
-	 *
-	 * @param Tx_Extbase_Object_ObjectManagerInterface $objectManager
-	 * @return void
-	 */
-	public function injectObjectManager(Tx_Extbase_Object_ObjectManagerInterface $objectManager) {
-		$this->objectManager = $objectManager;
-	}
 }
 
 ?>
