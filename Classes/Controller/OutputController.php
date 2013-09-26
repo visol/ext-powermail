@@ -36,26 +36,36 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_MailRepository
+	 *
+	 * @inject
 	 */
 	protected $mailRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 *
+	 * @inject
 	 */
 	protected $formRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 *
+	 * @inject
 	 */
 	protected $fieldsRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
+	 *
+	 * @inject
 	 */
 	protected $answerRepository;
 
 	/**
 	 * @var Tx_Powermail_Utility_Div
+	 *
+	 * @inject
 	 */
 	protected $div;
 
@@ -286,53 +296,6 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 		$this->piVars = $this->request->getArguments();
 	}
 
-	/**
-	 * @param Tx_Powermail_Utility_Div $div
-	 * @return void
-	 */
-	public function injectDiv(Tx_Powermail_Utility_Div $div) {
-		$this->div = $div;
-	}
-
-	/**
-	 * injectMailRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_MailRepository $mailRepository
-	 * @return void
-	 */
-	public function injectMailRepository(Tx_Powermail_Domain_Repository_MailRepository $mailRepository) {
-		$this->mailRepository = $mailRepository;
-	}
-
-	/**
-	 * injectFormRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
-	 * @return void
-	 */
-	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
-		$this->formRepository = $formRepository;
-	}
-
-	/**
-	 * injectFieldRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
-	 * @return void
-	 */
-	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
-		$this->fieldsRepository = $fieldsRepository;
-	}
-
-	/**
-	 * injectAnswerRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository
-	 * @return void
-	 */
-	public function injectAnswerRepository(Tx_Powermail_Domain_Repository_AnswerRepository $answerRepository) {
-		$this->answerRepository = $answerRepository;
-	}
 }
 
 ?>

@@ -12,6 +12,8 @@ class Tx_Powermail_ViewHelpers_Getter_GetPageNameFromUidViewHelper extends Tx_Fl
 	 * pageRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_PageRepository
+	 *
+	 * @inject
 	 */
 	protected $pageRepository;
 
@@ -25,15 +27,6 @@ class Tx_Powermail_ViewHelpers_Getter_GetPageNameFromUidViewHelper extends Tx_Fl
 		return $this->pageRepository->getPageNameFromUid($uid);
     }
 
-	/**
-	 * injectPageRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_PageRepository $pageRepository
-	 * @return void
-	 */
-	public function injectPageRepository(Tx_Powermail_Domain_Repository_PageRepository $pageRepository) {
-		$this->pageRepository = $pageRepository;
-	}
 }
 
 ?>

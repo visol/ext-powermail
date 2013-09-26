@@ -5,6 +5,8 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	 * fieldsRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 *
+	 * @inject
 	 */
 	protected $fieldsRepository;
 
@@ -12,6 +14,8 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	 * formRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 *
+	 * @inject
 	 */
 	protected $formRepository;
 
@@ -97,24 +101,5 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 		$this->clearSession = ($piVars['action'] == 'create' ? true : false); // clear captcha on create action
 	}
 
-	/**
-	 * injectFieldRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository
-	 * @return void
-	 */
-	public function injectFieldRepository(Tx_Powermail_Domain_Repository_FieldRepository $fieldsRepository) {
-		$this->fieldsRepository = $fieldsRepository;
-	}
-
-	/**
-	 * injectFormRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
-	 * @return void
-	 */
-	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
-		$this->formRepository = $formRepository;
-	}
 }
 ?>

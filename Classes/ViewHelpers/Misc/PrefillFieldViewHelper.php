@@ -15,17 +15,17 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 	protected $configurationManager;
 
 	/**
-	 * @var settings
+	 * @var array
 	 */
 	protected $settings;
 
 	/**
-	 * @var piVars
+	 * @var array
 	 */
 	protected $piVars;
 
 	/**
-	 * @var Content Object
+	 * @var tslib_cObj Object
 	 */
 	protected $cObj;
 
@@ -34,7 +34,6 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
      *
      * @param 	object 		$field Field Object
      * @param 	int 		$cycle Cycle Number (1,2,3...) - if filled it's a checkbox or radiobutton
-     * @param 	string 		$overwrite Value (Overwrites everything)
      * @return 	string		Prefill field with this string
      */
     public function render($field, $cycle = 0) {
@@ -167,8 +166,16 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 		$this->cObj = $this->configurationManager->getContentObject();
-		$this->typoScriptSetup = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$this->settings = $this->typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
+		$typoScriptSetup = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
+	}
+
+	/**
+	 * Object initialization
+	 *
+	 * @return void
+	 */
+	public function initializeObject() {
 		$this->piVars = t3lib_div::_GP('tx_powermail_pi1');
 	}
 }

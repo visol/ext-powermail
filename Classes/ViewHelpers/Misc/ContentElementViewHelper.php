@@ -9,12 +9,7 @@
 class Tx_Powermail_ViewHelpers_Misc_ContentElementViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
-	 */
-	protected $configurationManager;
-
-	/**
-	 * @var Content Object
+	 * @var tslib_cObj
 	 */
 	protected $cObj;
 
@@ -34,14 +29,13 @@ class Tx_Powermail_ViewHelpers_Misc_ContentElementViewHelper extends Tx_Fluid_Co
     }
 
 	/**
-	 * Injects the Configuration Manager
+	 * Injects the content object
 	 *
 	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
 	 * @return void
 	*/
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$this->configurationManager = $configurationManager;
-		$this->cObj = $this->configurationManager->getContentObject();
+	public function injectContentObject(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+		$this->cObj = $configurationManager->getContentObject();
 	}
 
 }

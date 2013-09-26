@@ -5,6 +5,8 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 	 * formRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 *
+	 * @inject
 	 */
 	protected $formRepository;
 
@@ -62,14 +64,5 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 		return $this->isValid;
   	}
 
-	/**
-	 * injectFormRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
-	 * @return void
-	 */
-	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
-		$this->formRepository = $formRepository;
-	}
 }
 ?>

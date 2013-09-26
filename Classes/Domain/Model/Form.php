@@ -54,14 +54,16 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page>
 	 */
-	protected $pages = NULL;
+	protected $pages;
 
 	/**
 	 * formRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 *
+	 * @inject
 	 */
-	protected $formRepository = NULL;
+	protected $formRepository;
 
 	/**
 	 * __construct
@@ -140,16 +142,6 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function setPages(Tx_Extbase_Persistence_ObjectStorage $pages) {
 		$this->pages = $pages;
-	}
-
-	/**
-	 * injectFormRepository
-	 *
-	 * @param Tx_Powermail_Domain_Repository_FormRepository $formRepository
-	 * @return void
-	 */
-	public function injectFormRepository(Tx_Powermail_Domain_Repository_FormRepository $formRepository) {
-		$this->formRepository = $formRepository;
 	}
 
 }
