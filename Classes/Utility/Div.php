@@ -51,7 +51,7 @@ class Tx_Powermail_Utility_Div {
 	 *
 	 * @inject
 	 */
-	protected $fieldsRepository;
+	protected $fieldRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_UserRepository
@@ -94,7 +94,7 @@ class Tx_Powermail_Utility_Div {
 
 		$name = '';
 		foreach ($fields as $uid => $value) {
-			$field = $this->fieldsRepository->findByUid($uid); // get field
+			$field = $this->fieldRepository->findByUid($uid); // get field
 			if (method_exists($field, 'getUid') && $field->getSenderName()) {
 				$name .= $value . ' ';
 			}
@@ -119,7 +119,7 @@ class Tx_Powermail_Utility_Div {
 
 		$email = '';
 		foreach ($fields as $uid => $value) {
-			$field = $this->fieldsRepository->findByUid($uid); // get field
+			$field = $this->fieldRepository->findByUid($uid); // get field
 			if (method_exists($field, 'getUid') && $field->getSenderEmail() && t3lib_div::validEmail($value)) {
 				$email = $value;
 				break;
@@ -262,7 +262,7 @@ class Tx_Powermail_Utility_Div {
 	 * @return string Label
 	 */
 	public function getLabelFromField($uid) {
-		$field = $this->fieldsRepository->findByUid($uid); // get field
+		$field = $this->fieldRepository->findByUid($uid); // get field
 		if (method_exists($field, 'getTitle')) {
 			$title = $field->getTitle();
 		}
@@ -279,7 +279,7 @@ class Tx_Powermail_Utility_Div {
 	 * @return string Marker name
 	 */
 	public function getMarkerFromField($uid) {
-		$field = $this->fieldsRepository->findByUid($uid); // get field
+		$field = $this->fieldRepository->findByUid($uid); // get field
 		$marker = NULL;
 		if (method_exists($field, 'getMarker')) {
 			$marker = $field->getMarker();
@@ -317,7 +317,7 @@ class Tx_Powermail_Utility_Div {
 	public function rewriteDateInFields($fields) {
 		// rewrite datetime
 		foreach ((array) $fields as $uid => $value) {
-			$field = $this->fieldsRepository->findByUid($uid);
+			$field = $this->fieldRepository->findByUid($uid);
 			if (method_exists($field, 'getType') && $field->getType() == 'date') {
 				$fields[$uid] = strtotime($value);
 			}

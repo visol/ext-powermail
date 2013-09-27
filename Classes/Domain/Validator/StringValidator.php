@@ -2,13 +2,13 @@
 class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
 
 	/**
-	 * fieldsRepository
+	 * fieldRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FieldRepository
 	 *
 	 * @inject
 	 */
-	protected $fieldsRepository;
+	protected $fieldRepository;
 
 	/**
 	 * regEx and filter array
@@ -41,7 +41,7 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
 
 		foreach ((array) $params as $uid => $value) {
 			// get current field values
-			$field = $this->fieldsRepository->findByUid($uid);
+			$field = $this->fieldRepository->findByUid($uid);
 			if (!method_exists($field, 'getUid')) {
 				continue;
 			}
