@@ -425,6 +425,7 @@ class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_
 
 			$this->answerRepository->add($newAnswer);
 		}
+		$persistenceManager->persistAll();
 
 		return $newMail;
 	}
