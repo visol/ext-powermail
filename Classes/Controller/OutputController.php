@@ -53,7 +53,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	 *
 	 * @inject
 	 */
-	protected $fieldsRepository;
+	protected $fieldRepository;
 
 	/**
 	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
@@ -154,7 +154,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
 		foreach ((array) $fields as $key => $field) {
-			$fields[$key] = $this->fieldsRepository->findByUid($field);
+			$fields[$key] = $this->fieldRepository->findByUid($field);
 		}
 		$this->view->assign('fields', $fields);
 

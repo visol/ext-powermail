@@ -10,13 +10,13 @@
 class Tx_Powermail_ViewHelpers_Getter_GetFieldLabelFromUidViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
 
 	/**
-	 * fieldsRepository
+	 * fieldRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FieldRepository
 	 *
 	 * @inject
 	 */
-	protected $fieldsRepository;
+	protected $fieldRepository;
 
     /**
      * Read Label of a field from given UID
@@ -25,7 +25,7 @@ class Tx_Powermail_ViewHelpers_Getter_GetFieldLabelFromUidViewHelper extends Tx_
      * @return 	string		Label
      */
     public function render($uid) {
-		$field = $this->fieldsRepository->findByUid($uid);
+		$field = $this->fieldRepository->findByUid($uid);
 		if (method_exists($field, 'getTitle')) {
 			return $field->getTitle();
 		}
