@@ -43,11 +43,11 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	/**
 	 * Validation of given Captcha fields
 	 *
-	 * @param $params
+	 * @param array $params
 	 * @return bool
 	 */
 	public function isValid($params) {
-		if (!$this->formHasCaptcha()) {
+		if (!$this->formHasCaptcha($params['__identity'])) {
 			return $this->isValid;
 		}
 
@@ -85,10 +85,11 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 
 	/**
 	 * Checks if given form has a captcha
+	 *
+	 * @param int $formUid
+	 * @return int
 	 */
-	protected function formHasCaptcha() {
-		$gp = t3lib_div::_GP('tx_powermail_pi1');
-		$formUid = $gp['form'];
+	protected function formHasCaptcha($formUid) {
 		$form = $this->formRepository->hasCaptcha($formUid);
 		return count($form);
 	}

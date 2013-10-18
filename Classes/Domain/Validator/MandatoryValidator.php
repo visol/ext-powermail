@@ -20,12 +20,11 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 	/**
 	 * Validation of given Params
 	 *
-	 * @param $params
+	 * @param array $params Answers
 	 * @return bool
 	 */
 	public function isValid($params) {
-		$gp = t3lib_div::_GP('tx_powermail_pi1');
-		$formUid = $gp['form'];
+		$formUid = $params['__identity'];
 		$form = $this->formRepository->findByUid($formUid);
 		if (!method_exists($form, 'getPages')) {
 			return $this->isValid;

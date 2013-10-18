@@ -92,20 +92,22 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	/**
 	 * Action create entry
 	 *
-	 * @param integer $form Form UID
-	 * @param array $field Field Values
+	 * @param array $form Field Values
 	 * @param integer $mail Mail object (normally empty, filled when mail already exists via double-optin)
-	 * @validate $field Tx_Powermail_Domain_Validator_UploadValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_MandatoryValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_StringValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_CaptchaValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_SpamShieldValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_CustomValidator
+	 * @validate $form Tx_Powermail_Domain_Validator_UploadValidator
+	 * @validate $form Tx_Powermail_Domain_Validator_MandatoryValidator
+	 * @validate $form Tx_Powermail_Domain_Validator_StringValidator
+	 * @validate $form Tx_Powermail_Domain_Validator_CaptchaValidator
+	 * @validate $form Tx_Powermail_Domain_Validator_SpamShieldValidator
+	 * @validate $form Tx_Powermail_Domain_Validator_CustomValidator
 	 * @validate $form notEmpty
 	 * @dontvalidate $mail
 	 * @return void
 	 */
-	public function createAction($form, array $field = array(), $mail = NULL) {
+	public function createAction(array $form = array(), $mail = NULL) {
+		t3lib_utility_Debug::debug($form, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+
+		return;
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
 		$this->ignoreWrongForm($form);
 
@@ -134,7 +136,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			$saveToTable->main($this->div->getVariablesWithMarkers($field), $this->conf, $this->cObj);
 
 			// Powermail sendpost
-			Tx_Powermail_Utility_Div::sendPost($field, $this->conf, $this->configurationManager);
+			$this->div->sendPost($field, $this->conf, $this->configurationManager);
 
 			// Some output stuff
 			$this->showThx($field);

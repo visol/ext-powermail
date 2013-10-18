@@ -53,10 +53,10 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	/**
 	 * Validation of given Params
 	 *
-	 * @param array $field
+	 * @param array $params
 	 * @return bool
 	 */
-	public function isValid($field) {
+	public function isValid($params) {
 		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
 			// session stuff
 			$uploadSession = array();
@@ -138,8 +138,6 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 
 	/**
 	 * Constructor
-	 *
-	 * @return	void
 	 */
 	public function __construct() {
 		$this->basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
