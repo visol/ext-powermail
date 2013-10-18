@@ -5,7 +5,7 @@
 		<vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if>
 	</label>
 	<vh:Form.SelectField
-			options="{field.settings}"
+			options="{field.modifiedSettings}"
 			property="{field.marker}"
 			class="powermail_field powermail_select {vh:Misc.ValidationClass(field: '{field}')} {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
 			id="powermail_field_{field.marker}"

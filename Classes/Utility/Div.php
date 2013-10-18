@@ -674,8 +674,10 @@ class Tx_Powermail_Utility_Div {
 	 */
 	public static function optionArray($string, $typoScriptObjectPath) {
 		if (empty($string)) {
-			// try to get from TypoScript
 			$string = self::parseTypoScriptFromTypoScriptPath($typoScriptObjectPath);
+		}
+		if (empty($string)) {
+			$string = 'Error, no options to show';
 		}
 		$options = array();
 		$string = str_replace('[\n]', "\n", $string);

@@ -7,7 +7,7 @@
 		</legend>
 
 		<div class="powermail_check_outer {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}">
-			<f:for each="{field.settings}" as="setting" iteration="index">
+			<f:for each="{field.modifiedSettings}" as="setting" iteration="index">
 				<div class="powermail_check_inner powermail_check_inner_{index.cycle}">
 					<f:form.checkbox
 							property="{field.marker}.{index.index}"
