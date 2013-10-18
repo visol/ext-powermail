@@ -32,71 +32,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Controller_FormController extends Tx_Extbase_MVC_Controller_ActionController {
-
-	/**
-	 * formRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
-	 *
-	 * @inject
-	 */
-	protected $formRepository;
-
-	/**
-	 * mailRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_MailRepository
-	 *
-	 * @inject
-	 */
-	protected $mailRepository;
-
-	/**
-	 * answerRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
-	 *
-	 * @inject
-	 */
-	protected $answerRepository;
-
-	/**
-	 * @var Tx_Extbase_SignalSlot_Dispatcher
-	 *
-	 * @inject
-	 */
-	protected $signalSlotDispatcher;
-
-	/**
-	 * cObj
-	 *
-	 * @var tslib_cObj
-	 */
-	protected $cObj;
-
-	/**
-	 * TypoScript configuration
-	 *
-	 * @var array
-	 */
-	protected $conf;
-
-	/**
-	 * Instance for Misc Functions
-	 *
-	 * @var Tx_Powermail_Utility_Div
-	 *
-	 * @inject
-	 */
-	protected $div;
-
-	/**
-	 * meesage Classe
-	 *
-	 * @var string
-	 */
-	protected $messageClass = 'error';
+class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_AbstractController {
 
 	/**
 	  * action show form for creating new mails
@@ -510,15 +446,6 @@ class Tx_Powermail_Controller_FormController extends Tx_Extbase_MVC_Controller_A
 		if (!in_array($form, $pluginHasThisAssignedForms)) {
 			$this->forward('form');
 		}
-	}
-
-	/**
-	 * Deactivate errormessages in flashmessages
-	 *
-	 * @return bool
-	 */
-	protected function getErrorFlashMessage() {
-		return false;
 	}
 
 }

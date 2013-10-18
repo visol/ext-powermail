@@ -6,7 +6,12 @@
 	</label>
 
 	<div class="powermail_captcha_outer {vh:Misc.ErrorClass(field: '{field}', class: 'error')}">
-		<f:form.textfield id="powermail_field_{field.marker}" name="field[{field.uid}]" value="" class="powermail_field powermail_captcha validate[required] {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}" required="required" />
+		<f:form.textfield
+				id="powermail_field_{field.marker}"
+				name="field[{field.uid}]"
+				value=""
+				class="powermail_field powermail_captcha validate[required] {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
+				required="required" />
 		<img src="{vh:Misc.Captcha()}" alt="captcha" class="powermail_captchaimage" id="powermail_captchaimage" />
 	</div>
 </div>
