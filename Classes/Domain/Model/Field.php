@@ -26,11 +26,10 @@
 
 
 /**
- *
+ * Field Model
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEntity {
 
@@ -140,15 +139,6 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 * @var integer
 	 */
 	protected $sorting = 0;
-
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-
-	}
 
 	/**
 	 * Returns the title
@@ -440,4 +430,3 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 }
-?>

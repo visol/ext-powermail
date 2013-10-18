@@ -25,21 +25,11 @@
 
 
 /**
- * Maps FE_Users Table
+ * FE_User Model
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 
 class Tx_Powermail_Domain_Model_User extends Tx_Extbase_Domain_Model_FrontendUser {
-
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		parent::__construct();
-	}
 }

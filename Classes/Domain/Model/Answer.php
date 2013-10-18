@@ -26,11 +26,10 @@
 
 
 /**
- *
+ * Answer Model
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractEntity {
 
@@ -44,24 +43,16 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * mail
 	 *
-	 * @var integer
+	 * @var Tx_Powermail_Domain_Model_Mail
 	 */
-	protected $mail = 0;
+	protected $mail = NULL;
 
 	/**
 	 * field
 	 *
-	 * @var integer
+	 * @var Tx_Powermail_Domain_Model_Field
 	 */
-	protected $field = 0;
-
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-	}
+	protected $field = NULL;
 
 	/**
 	 * Returns the value
@@ -92,28 +83,9 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Returns the field
-	 *
-	 * @return integer $field
-	 */
-	public function getField() {
-		return $this->field;
-	}
-
-	/**
-	 * Sets the field
-	 *
-	 * @param integer $field
-	 * @return void
-	 */
-	public function setField($field) {
-		$this->field = $field;
-	}
-
-	/**
 	 * Returns the mail
 	 *
-	 * @return integer $mail
+	 * @return Tx_Powermail_Domain_Model_Mail $mail
 	 */
 	public function getMail() {
 		return $this->mail;
@@ -122,12 +94,30 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the mail
 	 *
-	 * @param integer $mail
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return void
 	 */
-	public function setMail($mail) {
+	public function setMail(Tx_Powermail_Domain_Model_Mail $mail) {
 		$this->mail = $mail;
 	}
 
+	/**
+	 * Returns the field
+	 *
+	 * @return Tx_Powermail_Domain_Model_Field $field
+	 */
+	public function getField() {
+		return $this->field;
+	}
+
+	/**
+	 * Sets the field
+	 *
+	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @return void
+	 */
+	public function setField(Tx_Powermail_Domain_Model_Field $field) {
+		$this->field = $field;
+	}
+
 }
-?>

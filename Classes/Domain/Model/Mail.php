@@ -26,11 +26,10 @@
 
 
 /**
- *
+ * Mail Model
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEntity {
 
@@ -72,9 +71,9 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * feuser
 	 *
-	 * @var string
+	 * @var Tx_Powermail_Domain_Model_User
 	 */
-	protected $feuser = '';
+	protected $feuser = NULL;
 
 	/**
 	 * senderIp
@@ -178,8 +177,6 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 
 	/**
 	 * __construct
-	 *
-	 * @return void
 	 */
 	public function __construct() {
 		$this->initStorageObjects();
@@ -292,7 +289,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Returns the feuser
 	 *
-	 * @return string $feuser
+	 * @return Tx_Powermail_Domain_Model_User $feuser
 	 */
 	public function getFeuser() {
 		return $this->feuser;
@@ -301,10 +298,10 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the feuser
 	 *
-	 * @param string $feuser
+	 * @param Tx_Powermail_Domain_Model_User $feuser
 	 * @return void
 	 */
-	public function setFeuser($feuser) {
+	public function setFeuser(Tx_Powermail_Domain_Model_User $feuser) {
 		$this->feuser = $feuser;
 	}
 
@@ -399,7 +396,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @param Tx_Powermail_Domain_Model_Form $form
 	 * @return void
 	 */
-	public function setForm($form) {
+	public function setForm(Tx_Powermail_Domain_Model_Form $form) {
 		$this->form = $form;
 	}
 
@@ -593,6 +590,4 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	public function setMarketingFunnel($marketingFunnel) {
 		$this->marketingFunnel = serialize($marketingFunnel);
 	}
-
 }
-?>

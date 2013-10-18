@@ -26,11 +26,10 @@
 
 
 /**
- *
+ * Form Model
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEntity {
 
@@ -64,15 +63,6 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @inject
 	 */
 	protected $formRepository;
-
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-
-	}
 
 	/**
 	 * Returns the title
@@ -145,4 +135,3 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 }
-?>
