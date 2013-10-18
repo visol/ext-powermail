@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Controller_FormsController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Powermail_Controller_FormController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
 	 * formRepository

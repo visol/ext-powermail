@@ -23,10 +23,10 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	$_EXTKEY,
 	'Pi1',
 	array(
-		'Forms' => 'form, create, confirmation, optinConfirm'
+		'Form' => 'form, create, confirmation, optinConfirm'
 	),
 	array(
-		'Forms' => $uncachedFormActions
+		'Form' => $uncachedFormActions
 	)
 );
 Tx_Extbase_Utility_Extension::configurePlugin(
