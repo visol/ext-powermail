@@ -10,8 +10,8 @@
 			<f:for each="{field.settings}" as="setting" iteration="index">
 				<div class="powermail_radio_inner powermail_radio_inner_{index.cycle}">
 					<f:form.radio
-							name="field[{field.uid}]"
 							property="{field.marker}"
+							value="{setting.value}"
 							checked="{vh:Misc.PrefillField(field: '{field}', cycle: '{index.cycle}')}"
 							id="powermail_field_{field.marker}_{index.cycle}"
 							class="powermail_radio {vh:Misc.ValidationClass(field: '{field}')}" />

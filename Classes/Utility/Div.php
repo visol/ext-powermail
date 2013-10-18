@@ -643,6 +643,20 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
+	 * @param $typoScriptObjectPath
+	 * @throws TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+	 */
+	public static function parseTypoScriptFromTypoScriptPath($typoScriptObjectPath) {
+		$pathSegments = t3lib_div::trimExplode('.', $typoScriptObjectPath);
+		$lastSegment = array_pop($pathSegments);
+		$setup = $GLOBALS['TSFE']->tmpl->setup;
+		foreach ($pathSegments as $segment) {
+			$setup = $setup[$segment . '.'];
+		}
+		$content = $contentObject->cObjGetSingle($setup[$lastSegment], $setup[$lastSegment . '.']);
+	}
+
+	/**
 	 * Create an options array (Needed for fieldsettings: select, radio, check)
 	 * 		option1 =>
 	 * 			label => Red Shoes
@@ -650,10 +664,16 @@ class Tx_Powermail_Utility_Div {
 	 * 			selected => 1
 	 *
 	 * @param string $string Options from the Textarea
+	 * @param string $typoScriptPath Path to TypoScript like lib.blabla
 	 * @return array Options Array
 	 */
-	public static function optionArray($string) {
+	public static function optionArray($string, $typoScriptPath) {
+		if (empty($string)) {
+			// try to get from TypoScript
+
+		}
 		$options = array();
+		$string = str_replace('[\n]', "\n", $string);
 		$settingsField = t3lib_div::trimExplode("\n", $string, 1);
 		foreach ($settingsField as $line) {
 			$settings = t3lib_div::trimExplode('|', $line, 0);
@@ -799,11 +819,11 @@ class Tx_Powermail_Utility_Div {
 	 * @param object $configurationManager Configuration Manager
 	 * @return void
 	 */
-	public static function sendPost($fields, $conf, $configurationManager) {
+	public function sendPost($fields, $conf, $configurationManager) {
 		if (!$conf['marketing.']['sendPost.']['_enable']) {
 			return;
 		}
-		$fields = self::getVariablesWithMarkers($fields);
+		$fields = $this->getVariablesWithMarkers($fields);
 		$cObj = $configurationManager->getContentObject();
 		$cObj->start($fields);
 		$curl = array(

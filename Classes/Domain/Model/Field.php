@@ -57,6 +57,13 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	protected $settings = '';
 
 	/**
+	 * $modifiedSettings
+	 *
+	 * @var string
+	 */
+	protected $modifiedSettings = '';
+
+	/**
 	 * path
 	 *
 	 * @var string
@@ -83,6 +90,13 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 * @var string
 	 */
 	protected $prefillValue = '';
+
+	/**
+	 * $createFromTyposcript
+	 *
+	 * @var string
+	 */
+	protected $createFromTyposcript = '';
 
 	/**
 	 * validation
@@ -180,15 +194,11 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 
 	/**
 	 * Returns the settings
-	 * 		option1 =>
-	 * 			label => Red Shoes
-	 * 			value => red
-	 * 			selected => 1
 	 *
 	 * @return string $settings
 	 */
 	public function getSettings() {
-		return Tx_Powermail_Utility_Div::optionArray($this->settings);
+		return $this->settings;
 	}
 
 	/**
@@ -199,6 +209,22 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function setSettings($settings) {
 		$this->settings = $settings;
+	}
+
+	/**
+	 * Modify settings for select, radio and checkboxes
+	 * 		option1 =>
+	 * 			label => Red Shoes
+	 * 			value => red
+	 * 			selected => 1
+	 *
+	 * @return string
+	 */
+	public function getModifiedSettings() {
+		return Tx_Powermail_Utility_Div::optionArray(
+			$this->getSettings(),
+			$this->getCreateFromTyposcript()
+		);
 	}
 
 	/**
@@ -275,6 +301,20 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function setPrefillValue($prefillValue) {
 		$this->prefillValue = $prefillValue;
+	}
+
+	/**
+	 * @param string $createFromTyposcript
+	 */
+	public function setCreateFromTyposcript($createFromTyposcript) {
+		$this->createFromTyposcript = $createFromTyposcript;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCreateFromTyposcript() {
+		return $this->createFromTyposcript;
 	}
 
 	/**
