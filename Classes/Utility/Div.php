@@ -30,7 +30,6 @@
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 class Tx_Powermail_Utility_Div {
 
@@ -643,17 +642,23 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
+	 * Parse TypoScript from path like lib.blabla
+	 *
 	 * @param $typoScriptObjectPath
-	 * @throws TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+	 * @return string
 	 */
 	public static function parseTypoScriptFromTypoScriptPath($typoScriptObjectPath) {
+		if (empty($typoScriptObjectPath)) {
+			return '';
+		}
+		$setup = $GLOBALS['TSFE']->tmpl->setup;
+		$contentObject = t3lib_div::makeInstance('tslib_cObj');
 		$pathSegments = t3lib_div::trimExplode('.', $typoScriptObjectPath);
 		$lastSegment = array_pop($pathSegments);
-		$setup = $GLOBALS['TSFE']->tmpl->setup;
 		foreach ($pathSegments as $segment) {
 			$setup = $setup[$segment . '.'];
 		}
-		$content = $contentObject->cObjGetSingle($setup[$lastSegment], $setup[$lastSegment . '.']);
+		return $contentObject->cObjGetSingle($setup[$lastSegment], $setup[$lastSegment . '.']);
 	}
 
 	/**
@@ -664,13 +669,13 @@ class Tx_Powermail_Utility_Div {
 	 * 			selected => 1
 	 *
 	 * @param string $string Options from the Textarea
-	 * @param string $typoScriptPath Path to TypoScript like lib.blabla
+	 * @param string $typoScriptObjectPath Path to TypoScript like lib.blabla
 	 * @return array Options Array
 	 */
-	public static function optionArray($string, $typoScriptPath) {
+	public static function optionArray($string, $typoScriptObjectPath) {
 		if (empty($string)) {
 			// try to get from TypoScript
-
+			$string = self::parseTypoScriptFromTypoScriptPath($typoScriptObjectPath);
 		}
 		$options = array();
 		$string = str_replace('[\n]', "\n", $string);

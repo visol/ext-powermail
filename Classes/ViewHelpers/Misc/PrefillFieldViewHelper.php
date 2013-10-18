@@ -29,14 +29,14 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 	 */
 	protected $cObj;
 
-    /**
-     * Prefill string for fields
-     *
-     * @param 	object 		$field Field Object
-     * @param 	int 		$cycle Cycle Number (1,2,3...) - if filled it's a checkbox or radiobutton
-     * @return 	string		Prefill field with this string
-     */
-    public function render($field, $cycle = 0) {
+	/**
+	 * Prefill string for fields
+	 *
+	 * @param 	object 		$field Field Object
+	 * @param 	int 		$cycle Cycle Number (1,2,3...) - if filled it's a checkbox or radiobutton
+	 * @return 	string		Prefill field with this string
+	 */
+	public function render($field, $cycle = 0) {
 		// config
 		$value = '';
 		$marker = $field->getMarker();
@@ -92,7 +92,7 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 		} else {
 			$selected = 0;
 			$index = $cycle - 1;
-			$options = $field->getSettings();
+			$options = $field->getModifiedSettings();
 
 			// if GET/POST with marker (&tx_powermail_pi1[marker]=value)
 			if (isset($this->piVars[$marker])) {

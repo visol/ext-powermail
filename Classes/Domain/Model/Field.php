@@ -138,7 +138,7 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 *
 	 * @var boolean
 	 */
-	protected $mandatory = false;
+	protected $mandatory = FALSE;
 
 	/**
 	 * marker
