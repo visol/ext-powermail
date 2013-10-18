@@ -6,53 +6,53 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Form_SelectFieldViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class Tx_Powermail_ViewHelpers_Form_SelectFieldViewHelper extends Tx_Fluid_ViewHelpers_Form_SelectViewHelper {
 
 	/**
-	 * Generate Select
+	 * Render the tag.
 	 *
-	 * @param array $options Options to render
-	 * 		option1 =>
-	 * 			label => Red Shoes
-	 * 			value => red
-	 * 			selected => 1
-	 * @param string $class Class
-	 * @param string $id ID
-	 * @return string Select field
+	 * @return string rendered tag.
+	 * @api
 	 */
-	public function render($options, $class = '', $id = '') {
-		// config
-		$this->registerFieldNameForFormTokenGeneration($this->getName());
-		$string = '';
+	public function render() {
+		$content = parent::render();
 
-		// select
-		$string .= '<select';
-		if ($this->getName()) {
-			$string .= ' name="' . $this->getName() . '"';
-		}
-		if ($class) {
-			$string .= ' class="' . $class . '"';
-		}
-		if ($id) {
-			$string .= ' id="' . $id . '"';
-		}
-		$string .= '>';
+		return $content;
+	}
 
-		// option
+	/**
+	 * Render the option tags.
+	 *
+	 * @param array $options the options for the form.
+	 * @return string rendered tags.
+	 */
+	protected function renderOptionTags($options) {
+		$output = '';
 		foreach ($options as $option) {
-			$string .= '<option value="' . htmlspecialchars($option['value']) . '"';
-			if (
-				($option['selected'] && !$this->getValue()) || // preselect from flexform
-				($this->getValue() && ($option['value'] == $this->getValue() || $option['label'] == $this->getValue())) // preselect from piVars
-			) {
-				$string .= ' selected="selected"';
-			}
-			$string .= '>';
-			$string .= htmlspecialchars($option['label']);
-			$string .= '</option>';
+			$output .= $this->renderOptionTag(
+				$option['value'],
+				$option['label'],
+				$this->isSelectedAlternative($option)
+			);
+			$output .= chr(10);
 		}
-		$string .= '</select>';
+		return $output;
+	}
 
-		return $string;
+	/**
+	 * Check if option is selected
+	 *
+	 * @param array $option Current option
+	 * @return boolean TRUE if the value should be marked a s selected; FALSE otherwise
+	 */
+	protected function isSelectedAlternative($option) {
+		if (
+			($option['selected'] && !$this->getValue()) || // preselect from flexform
+			($this->getValue() && ($option['value'] == $this->getValue() || $option['label'] == $this->getValue())) // preselect from piVars
+		) {
+			return TRUE;
+		}
+
+		return FALSE;
 	}
 }

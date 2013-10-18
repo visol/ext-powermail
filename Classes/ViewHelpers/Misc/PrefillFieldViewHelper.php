@@ -45,8 +45,13 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 		// Default fieldtypes (input, textarea, hidden, select)
 		if ($cycle == 0) {
 
+			// if GET/POST with marker (&tx_powermail_pi1[form][marker]=value)
+			if (isset($this->piVars['form'][$marker])) {
+				$value = $this->piVars['form'][$marker];
+			}
+
 			// if GET/POST with marker (&tx_powermail_pi1[marker]=value)
-			if (isset($this->piVars[$marker])) {
+			elseif (isset($this->piVars[$marker])) {
 				$value = $this->piVars[$marker];
 			}
 
@@ -94,8 +99,15 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 			$index = $cycle - 1;
 			$options = $field->getModifiedSettings();
 
+			// if GET/POST with marker (&tx_powermail_pi1[form][marker]=value)
+			if (isset($this->piVars['form'][$marker])) {
+				if ($this->piVars['form'][$marker] == $options[$index]['value'] || $this->piVars['form'][$marker] == $options[$index]['label']) {
+					$selected = 1;
+				}
+			}
+
 			// if GET/POST with marker (&tx_powermail_pi1[marker]=value)
-			if (isset($this->piVars[$marker])) {
+			elseif (isset($this->piVars[$marker])) {
 				if ($this->piVars[$marker] == $options[$index]['value'] || $this->piVars[$marker] == $options[$index]['label']) {
 					$selected = 1;
 				}
