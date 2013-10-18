@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Controller_FormsController.
+ * Test case for class Tx_Powermail_Controller_FormController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,7 +36,7 @@
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Controller_FormsControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Powermail_Controller_FormControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
 	 * @var Tx_Powermail_Domain_Model_Form
 	 */
