@@ -81,6 +81,7 @@
 			<label index="tx_powermail_domain_model_fields.css.3">Layout 3</label>
 			<label index="tx_powermail_domain_model_fields.prefill_title">Prefill Field</label>
 			<label index="tx_powermail_domain_model_fields.prefill_value">With Value</label>
+			<label index="tx_powermail_domain_model_fields.create_from_typoscript">Create from TypoScript (e.g. lib.fieldvalues)</label>
 			<label index="tx_powermail_domain_model_fields.feuser_value">Value from logged in Frontent User</label>
 			<label index="tx_powermail_domain_model_fields.feuser_value.name">Name</label>
 			<label index="tx_powermail_domain_model_fields.feuser_value.address">Address</label>
@@ -242,6 +243,7 @@
 			<label index="tx_powermail_domain_model_fields.css.3">Layout 3</label>
 			<label index="tx_powermail_domain_model_fields.prefill_title">Feld vorbefüllen</label>
 			<label index="tx_powermail_domain_model_fields.prefill_value">Mit Wert</label>
+			<label index="tx_powermail_domain_model_fields.create_from_typoscript">Über TypoScript erstellen (z.B. lib.fieldvalues)</label>
 			<label index="tx_powermail_domain_model_fields.feuser_value">Aus Frontend-Benutzer-Datenbank</label>
 			<label index="tx_powermail_domain_model_fields.feuser_value.name">Name</label>
 			<label index="tx_powermail_domain_model_fields.feuser_value.address">Adresse</label>

@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_powermail_domain_model_fields'] = array(
 	'ctrl' => $TCA['tx_powermail_domain_model_fields']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings, path, content_element, text, prefill_value, mandatory, validation, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings, path, content_element, text, prefill_value, create_from_typoscript, mandatory, validation, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
 		'1' => array('showitem' => 'title, type, settings, path, content_element, text, --palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.palette1;1, --div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1, validation_title, --palette--;Validation;2, prefill_title, --palette--;Prefill;3, css, marker_title, --palette--;Variables;4,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
@@ -14,7 +14,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 	'palettes' => array(
 		'1' => array('showitem' => 'sender_email, sender_name'),
 		'2' => array('showitem' => 'mandatory, validation'),
-		'3' => array('showitem' => 'prefill_value, feuser_value'),
+		'3' => array('showitem' => 'prefill_value, feuser_value, create_from_typoscript'),
 		'4' => array('showitem' => 'auto_marker, marker, own_marker_select'),
 		'canNotCollapse' => '1'
 	),
@@ -399,6 +399,16 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'itemsProcFuncFieldName' => 'feUserProperty'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden'
+		),
+		'create_from_typoscript' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.create_from_typoscript',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim'
+			),
+			'displayCond' => 'FIELD:type:IN:select,radio,check'
 		),
 		'css' => array(
 			'l10n_mode' => 'exclude',
