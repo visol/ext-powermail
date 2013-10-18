@@ -230,7 +230,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Extbase_MVC_Controller_A
 				$mail['senderName'] = $this->div->getSenderNameFromArguments($field);
 				$mail['senderEmail'] = $this->div->getSenderMailFromArguments($field);
 				$mail['subject'] = $this->settings['receiver']['subject'];
-				$mail['template'] = 'Mails/ReceiverMail';
+				$mail['template'] = 'Mail/ReceiverMail';
 				$mail['rteBody'] = $this->settings['receiver']['body'];
 				$mail['format'] = $this->settings['receiver']['mailformat'];
 				if ($this->cObj->cObjGetSingle($this->conf['receiver.']['overwrite.']['name'], $this->conf['receiver.']['overwrite.']['name.'])) { // overwrite from typoscript
@@ -259,7 +259,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Extbase_MVC_Controller_A
 			$mail['senderName'] = $this->settings['sender']['name'];
 			$mail['senderEmail'] = $this->settings['sender']['email'];
 			$mail['subject'] = $this->settings['sender']['subject'];
-			$mail['template'] = 'Mails/SenderMail';
+			$mail['template'] = 'Mail/SenderMail';
 			$mail['rteBody'] = $this->settings['sender']['body'];
 			$mail['format'] = $this->settings['sender']['mailformat'];
 			if ($this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['email'], $this->conf['sender.']['overwrite.']['email.'])) { // overwrite from typoscript
@@ -308,7 +308,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Extbase_MVC_Controller_A
 			$mail['senderEmail'] = $this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['senderEmail'], $this->conf['optin.']['overwrite.']['senderEmail.']);
 		}
 		$mail['subject'] = $this->cObj->cObjGetSingle($this->conf['optin.']['subject'], $this->conf['optin.']['subject.']);
-		$mail['template'] = 'Mails/OptinMail';
+		$mail['template'] = 'Mail/OptinMail';
 		$mail['rteBody'] = '';
 		$mail['format'] = $this->settings['sender']['mailformat'];
 		$mail['variables'] = array(
