@@ -175,21 +175,23 @@ class Tx_Powermail_Utility_Div {
 	/**
 	 * This functions renders the powermail_all Template to use in Mails and Other views
 	 *
-	 * @param array $variables Arguments from form POST
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @param object $configurationManager Configuration Manager
 	 * @param object $objectManager Object Manager
 	 * @param string $section Choose a section (web or mail)
 	 * @param array $settings TypoScript Settings
 	 * @return string content parsed from powermailAll HTML Template
 	 */
-	public function powermailAll($variables, $configurationManager, $objectManager, $section = 'web', $settings = array()) {
+	public function powermailAll(Tx_Powermail_Domain_Model_Mail $mail, $configurationManager, $objectManager, $section = 'web', $settings = array()) {
 		$powermailAll = $objectManager->create('Tx_Fluid_View_StandaloneView');
-		$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
+			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
 		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . 'Form/PowermailAll.html';
 		$powermailAll->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
 		$powermailAll->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
 		$powermailAll->setTemplatePathAndFilename($templatePathAndFilename);
-		$powermailAll->assign('variables', $variables);
+		$powermailAll->assign('mail', $mail);
 		$powermailAll->assign('section', $section);
 		$powermailAll->assign('settings', $settings);
 		$content = $powermailAll->render();
@@ -198,14 +200,27 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
-	 * Generate a new array from POST array with markers
-	 * 		before: 123 => value
-	 * 		after: firstname => value
+	 * Generate a new array with markers and their values
+	 * 		firstname => value
 	 *
-	 * @param array $fields piVars from Form Submit
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return array new array
 	 */
-	public function getVariablesWithMarkers($fields) {
+	public function getVariablesWithMarkers(Tx_Powermail_Domain_Model_Mail $mail) {
+		$variables = array();
+		foreach ($mail->getAnswers() as $answer) {
+			if (!method_exists($answer, 'getField') || !method_exists($answer->getField(), 'getMarker')) {
+				continue;
+			}
+			$value = $answer->getValue();
+			if (is_array($value)) {
+				$value = implode(', ', $value);
+			}
+			$variables[$answer->getField()->getMarker()] = $value;
+		}
+		return $variables;
+
+		/*
 		$variables = array();
 		foreach ((array) $fields as $uid => $value) { // one loop for every received field
 			if (!is_numeric($uid)) {
@@ -229,6 +244,7 @@ class Tx_Powermail_Utility_Div {
 			}
 		}
 		return $variables;
+		*/
 	}
 
 	/**

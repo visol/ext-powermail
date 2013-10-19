@@ -18,7 +18,6 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 
 	/**
 	 * @var Tx_Extbase_Object_ObjectManagerInterface
-	 *
 	 * @inject
 	 */
 	protected $objectManager;
@@ -30,13 +29,6 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 	 */
 	public function render() {
 		$string = $this->renderChildren();
-
-		// parse string
-		$parseObject = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
-		$parseObject->setTemplateSource($string);
-		$string = $parseObject->render();
-
-		// remove XSS
 		$string = t3lib_div::removeXSS($string);
 
 		return $string;

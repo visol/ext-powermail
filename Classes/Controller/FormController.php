@@ -75,14 +75,13 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			$newArguments['mail']['answers'][] = array(
 				'field' => $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']),
 				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
-				'value_type' => Tx_Powermail_Utility_Div::getDataTypeFromFieldType(
+				'valueType' => Tx_Powermail_Utility_Div::getDataTypeFromFieldType(
 					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
 				)
 			);
 		}
 		$this->request->setArguments($newArguments);
 		$this->request->setArgument('field', NULL);
-		t3lib_utility_Debug::debug($newArguments, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
 	}
 
 	/**
@@ -92,28 +91,24 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	 * @return void
 	 */
 	public function createAction(Tx_Powermail_Domain_Model_Mail $mail = NULL) {
-		Tx_Extbase_Utility_Debugger::var_dump($mail);
-
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
 		$this->ignoreWrongForm($mail);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
 
 		// Debug Output
-		if ($this->settings['debug']['variables'] || 1) {
-			t3lib_utility_Debug::debug($mail, 'powermail debug: Show Variables');
+		if ($this->settings['debug']['variables']) {
+			t3lib_utility_Debug::debug('powermail debug: Show Variables');
+			Tx_Extbase_Utility_Debugger::var_dump($mail);
 		}
 
 		// Save Mail to DB
-		if ($this->settings['db']['enable'] && !$mail) {
-			$dbField = $this->div->rewriteDateInFields($field);
-			$newMail = $this->saveMail($dbField, $form);
-			$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterMailDbSaved', array($field, $form, $mail, $this));
+		if ($this->settings['db']['enable']) { // todo don't save if optin
+//			$dbField = $this->div->rewriteDateInFields($field);
+			$this->saveMail($mail);
+//			$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterMailDbSaved', array($field, $form, $mail, $this));
 		}
-
-		echo 'x';
-		return;
-
+/*
 		if (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail)) {
 			// Send Mail to receivers
 			$this->sendMail($field);
@@ -133,6 +128,8 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($field, $form, $mail, $this, $newMail));
 		$this->view->assign('optinActive', (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail) ? 0 : 1));
+*/
+		$this->showThx($mail);
 	}
 
 	/**
@@ -278,27 +275,26 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	/**
 	 * Show THX message after submit
 	 *
-	 * @param array $field
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return void
 	 */
-	protected function showThx($field) {
+	protected function showThx(Tx_Powermail_Domain_Model_Mail $mail) {
 		$this->redirectToTarget();
 
 		// assign
+		$this->view->assign('mail', $mail);
 		$this->view->assign('marketingInfos', Tx_Powermail_Utility_Div::getMarketingInfos());
 		$this->view->assign('messageClass', $this->messageClass);
 		$this->view->assign('powermail_rte', $this->settings['thx']['body']);
 
 		// get variable array
-		$variablesWithMarkers = $this->div->getVariablesWithMarkers($field);
+		$variablesWithMarkers = $this->div->getVariablesWithMarkers($mail);
 		$this->view->assign('variablesWithMarkers', $this->div->htmlspecialcharsOnArray($variablesWithMarkers));
 		$this->view->assignMultiple($variablesWithMarkers);
-		$variablesWithLabels = $this->div->getVariablesWithLabels($field);
-		$this->view->assign('variablesWithLabels', $variablesWithLabels);
 
 		// powermail_all
-		$variables = $this->div->getVariablesWithLabels($field);
-		$content = $this->div->powermailAll($variables, $this->configurationManager, $this->objectManager, 'web', $this->settings);
+		$content = $this->div->powermailAll($mail, $this->configurationManager, $this->objectManager, 'web', $this->settings);
+		t3lib_utility_Debug::debug($content, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
 		$this->view->assign('powermail_all', $content);
 	}
 
@@ -332,11 +328,16 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	/**
 	 * Save mail on submit
 	 *
-	 * @param array $field Field values
-	 * @param int $form Form uid
-	 * @return Tx_Powermail_Domain_Model_Mail Mail object
+	 * @param Tx_Powermail_Domain_Model_Mail $mail = NULL
+	 * @return void
 	 */
-	protected function saveMail($field, $form) {
+	protected function saveMail(Tx_Powermail_Domain_Model_Mail &$mail = NULL) {
+
+		$mail->setPid(
+			Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid'])
+		);
+
+		return;
 		// tx_powermail_domain_model_mails
 		$marketingInfos = Tx_Powermail_Utility_Div::getMarketingInfos();
 		$newMail = $this->objectManager->create('Tx_Powermail_Domain_Model_Mail');
