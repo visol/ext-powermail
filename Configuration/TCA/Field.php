@@ -480,9 +480,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'pages' => array(
 			'l10n_mode' => 'exclude',
-//			'config' => array(
-//				'type' => 'passthrough',
-//			),
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.pages',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(

@@ -59,6 +59,8 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 	/**
 	 * Rewrite Arguments to receive a clean mail object in createAction
+	 *
+	 * @return void
 	 */
 	public function initializeCreateAction() {
 		$arguments = $this->request->getArguments();
@@ -88,9 +90,11 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	public function createAction(Tx_Powermail_Domain_Model_Mail $mail = NULL) {
 		Tx_Extbase_Utility_Debugger::var_dump($mail);
 
-		return;
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
-		$this->ignoreWrongForm($form);
+		$this->ignoreWrongForm($mail);
+
+		echo 'x';
+		return;
 
 		// add uploaded files to $field
 		Tx_Powermail_Utility_Div::addUploadsToFields($field);
@@ -453,12 +457,12 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	/**
 	 * Forward to form action if wrong form in plugin variables
 	 *
-	 * @param int $form Form Uid
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return void
 	 */
-	protected function ignoreWrongForm($form) {
+	protected function ignoreWrongForm(Tx_Powermail_Domain_Model_Mail $mail) {
 		$pluginHasThisAssignedForms = t3lib_div::intExplode(',', $this->settings['main']['form']);
-		if (!in_array($form, $pluginHasThisAssignedForms)) {
+		if (!in_array($mail->getForm()->getUid(), $pluginHasThisAssignedForms)) {
 			$this->forward('form');
 		}
 	}

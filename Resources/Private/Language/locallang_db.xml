@@ -40,6 +40,7 @@
 			<label index="tx_powermail_domain_model_pages.css.2">Layout2</label>
 			<label index="tx_powermail_domain_model_pages.css.3">Layout3</label>
 			<label index="tx_powermail_domain_model_pages.fields">Fields</label>
+			<label index="tx_powermail_domain_model_pages.forms">Related Form</label>
 			<label index="tx_powermail_domain_model_fields">Fields</label>
 			<label index="tx_powermail_domain_model_fields.title">Title</label>
 			<label index="tx_powermail_domain_model_fields.type">Type</label>
@@ -99,6 +100,7 @@
 			<label index="tx_powermail_domain_model_fields.own_marker">Enter your own Variable Name</label>
 			<label index="tx_powermail_domain_model_fields.auto_marker">Individual Fieldname to use as Variable (automaticly wrapped with {})</label>
 			<label index="tx_powermail_domain_model_fields.own_marker_select">Add my own Variable Name</label>
+			<label index="tx_powermail_domain_model_fields.pages">Related Page</label>
 			<label index="tx_powermail_domain_model_fields.sheet1">Extended</label>
 			<label index="tx_powermail_domain_model_fields.sheet2">Marketing</label>
 			<label index="tx_powermail_domain_model_fields.palette1">Email or Name</label>
@@ -207,6 +209,7 @@
 			<label index="tx_powermail_domain_model_pages.css.2">Layout2</label>
 			<label index="tx_powermail_domain_model_pages.css.3">Layout3</label>
 			<label index="tx_powermail_domain_model_pages.fields">Felder</label>
+			<label index="tx_powermail_domain_model_pages.forms">Verknüpftes Formular</label>
 			<label index="tx_powermail_domain_model_fields">Felder</label>
 			<label index="tx_powermail_domain_model_fields.title">Bezeichnung</label>
 			<label index="tx_powermail_domain_model_fields.type">Typ</label>
@@ -261,6 +264,7 @@
 			<label index="tx_powermail_domain_model_fields.own_marker">Variablenname (ohne umschließende {})</label>
 			<label index="tx_powermail_domain_model_fields.auto_marker">Variablenname für dieses Feld</label>
 			<label index="tx_powermail_domain_model_fields.own_marker_select">Eigenen Variablennamen vergeben</label>
+			<label index="tx_powermail_domain_model_fields.pages">Verknüpfte Seite</label>
 			<label index="tx_powermail_domain_model_fields.sheet1">Erweitert</label>
 			<label index="tx_powermail_domain_model_fields.sheet2">Marketing</label>
 			<label index="tx_powermail_domain_model_fields.palette1">E-Mail oder Name</label>
