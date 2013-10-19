@@ -98,7 +98,6 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 		// Debug Output
 		if ($this->settings['debug']['variables']) {
-			t3lib_utility_Debug::debug('powermail debug: Show Variables');
 			Tx_Extbase_Utility_Debugger::var_dump($mail);
 		}
 
@@ -331,60 +330,43 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	 * @return void
 	 */
 	protected function saveMail(Tx_Powermail_Domain_Model_Mail &$mail = NULL) {
+		$marketingInfos = Tx_Powermail_Utility_Div::getMarketingInfos();
+		$variablesWithMarkers = $this->div->getVariablesWithMarkers($mail);
 
 		$mail->setPid(
 			Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid'])
 		);
-
-		return;
-		// tx_powermail_domain_model_mails
-		$marketingInfos = Tx_Powermail_Utility_Div::getMarketingInfos();
-		$newMail = $this->objectManager->create('Tx_Powermail_Domain_Model_Mail');
-		$newMail->setPid(Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid']));
-		$newMail->setForm($form);
-		$newMail->setSenderMail($this->div->getSenderMailFromArguments($field));
-		$newMail->setSenderName($this->div->getSenderNameFromArguments($field));
-		$newMail->setSubject($this->settings['receiver']['subject']);
-		$newMail->setBody(t3lib_utility_Debug::viewArray($this->div->getVariablesWithLabels($field)));
-		$newMail->setReceiverMail($this->settings['receiver']['email']);
+		$mail->setSenderMail($this->div->getSenderMailFromArguments($mail));
+		$mail->setSenderName($this->div->getSenderNameFromArguments($mail));
+		$mail->setSubject($this->settings['receiver']['subject']);
+		$mail->setReceiverMail($this->settings['receiver']['email']);
+		$mail->setBody(
+			t3lib_utility_Debug::viewArray(
+				$this->div->getVariablesWithLabels($mail)
+			)
+		);
+		$mail->setSpamFactor($GLOBALS['TSFE']->fe_user->getKey('ses', 'powermail_spamfactor'));
+		$mail->setTime((time() - Tx_Powermail_Utility_Div::getFormStartFromSession($mail->getForm()->getUid())));
+		$mail->setUserAgent(t3lib_div::getIndpEnv('HTTP_USER_AGENT'));
+		$mail->setMarketingSearchterm($marketingInfos['marketingSearchterm']);
+		$mail->setMarketingReferer($marketingInfos['marketingReferer']);
+		$mail->setMarketingPayedSearchResult($marketingInfos['marketingPayedSearchResult']);
+		$mail->setMarketingLanguage($marketingInfos['marketingLanguage']);
+		$mail->setMarketingBrowserLanguage($marketingInfos['marketingBrowserLanguage']);
+		$mail->setMarketingFunnel($marketingInfos['marketingFunnel']);
 		if (intval($GLOBALS['TSFE']->fe_user->user['uid']) > 0) {
-			$newMail->setFeuser($GLOBALS['TSFE']->fe_user->user['uid']);
+			$mail->setFeuser($GLOBALS['TSFE']->fe_user->user['uid']);
 		}
-		$newMail->setSpamFactor($GLOBALS['TSFE']->fe_user->getKey('ses', 'powermail_spamfactor'));
-		$newMail->setTime((time() - Tx_Powermail_Utility_Div::getFormStartFromSession($form)));
 		if (isset($this->settings['global']['disableIpLog']) && $this->settings['global']['disableIpLog'] == 0) {
-			$newMail->setSenderIp(t3lib_div::getIndpEnv('REMOTE_ADDR'));
+			$mail->setSenderIp(t3lib_div::getIndpEnv('REMOTE_ADDR'));
 		}
-		$newMail->setUserAgent(t3lib_div::getIndpEnv('HTTP_USER_AGENT'));
-		$newMail->setMarketingSearchterm($marketingInfos['marketingSearchterm']);
-		$newMail->setMarketingReferer($marketingInfos['marketingReferer']);
-		$newMail->setMarketingPayedSearchResult($marketingInfos['marketingPayedSearchResult']);
-		$newMail->setMarketingLanguage($marketingInfos['marketingLanguage']);
-		$newMail->setMarketingBrowserLanguage($marketingInfos['marketingBrowserLanguage']);
-		$newMail->setMarketingFunnel($marketingInfos['marketingFunnel']);
 		if ($this->settings['main']['optin'] || $this->settings['db']['hidden']) {
-			$newMail->setHidden(1);
+			$mail->setHidden(1);
 		}
-		$this->mailRepository->add($newMail);
+		Tx_Extbase_Utility_Debugger::var_dump($mail);
+//		$this->mailRepository->add($mail);
 		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager');
 		$persistenceManager->persistAll();
-
-		// tx_powermail_domain_model_answers
-		foreach ((array) $field as $uid => $value) { // one loop for every received field
-			if (!is_numeric($uid)) {
-				continue;
-			}
-			$newAnswer = $this->objectManager->create('Tx_Powermail_Domain_Model_Answer');
-			$newAnswer->setPid(Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid']));
-			$newAnswer->setValue($value);
-			$newAnswer->setField($uid);
-			$newAnswer->setMail($newMail->getUid());
-
-			$this->answerRepository->add($newAnswer);
-		}
-		$persistenceManager->persistAll();
-
-		return $newMail;
 	}
 
 	/**

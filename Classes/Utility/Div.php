@@ -83,19 +83,14 @@ class Tx_Powermail_Utility_Div {
 	/**
 	 * Returns sendername from a couple of arguments
 	 *
-	 * @param array $fields Given Params
+	 * @param Tx_Powermail_Domain_Model_Mail $mail Given Params
 	 * @return string Sender Name
 	 */
-	public function getSenderNameFromArguments($fields) {
-		if (!is_array($fields)) {
-			return '';
-		}
-
+	public function getSenderNameFromArguments(Tx_Powermail_Domain_Model_Mail $mail) {
 		$name = '';
-		foreach ($fields as $uid => $value) {
-			$field = $this->fieldRepository->findByUid($uid); // get field
-			if (method_exists($field, 'getUid') && $field->getSenderName()) {
-				$name .= $value . ' ';
+		foreach ($mail->getAnswers() as $answer) {
+			if (method_exists($answer->getField(), 'getUid') && $answer->getField()->getSenderName()) {
+				$name .= $answer->getValue() . ' ';
 			}
 		}
 
@@ -108,19 +103,14 @@ class Tx_Powermail_Utility_Div {
 	/**
 	 * Returns senderemail from a couple of arguments
 	 *
-	 * @param array $fields Given Params
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return string Sender Email
 	 */
-	public function getSenderMailFromArguments($fields) {
-		if (!is_array($fields)) {
-			return '';
-		}
-
+	public function getSenderMailFromArguments(Tx_Powermail_Domain_Model_Mail $mail) {
 		$email = '';
-		foreach ($fields as $uid => $value) {
-			$field = $this->fieldRepository->findByUid($uid); // get field
-			if (method_exists($field, 'getUid') && $field->getSenderEmail() && t3lib_div::validEmail($value)) {
-				$email = $value;
+		foreach ($mail->getAnswers() as $answer) {
+			if (method_exists($answer->getField(), 'getUid') && $answer->getField()->getSenderEmail() && t3lib_div::validEmail($answer->getValue())) {
+				$email = $answer->getValue();
 				break;
 			}
 		}
@@ -219,72 +209,28 @@ class Tx_Powermail_Utility_Div {
 			$variables[$answer->getField()->getMarker()] = $value;
 		}
 		return $variables;
-
-		/*
-		$variables = array();
-		foreach ((array) $fields as $uid => $value) { // one loop for every received field
-			if (!is_numeric($uid)) {
-				continue;
-			}
-			if (!is_array($value)) {
-				// default values
-				$variables[$this->getMarkerFromField($uid)] = $value;
-			} else {
-				// values from checkboxes
-				$marker = $this->getMarkerFromField($uid);
-				$variables[$marker] = '';
-				foreach ($value as $singleValue) {
-					if (empty($singleValue)) {
-						continue;
-					}
-					$variables[$marker] .= $singleValue;
-					$variables[$marker] .= ', ';
-				}
-				$variables[$marker] = substr(trim($variables[$marker]), 0, -1); // remove last comma
-			}
-		}
-		return $variables;
-		*/
 	}
 
 	/**
-	 * Generate a new array from POST array with their labels and respect FE language
-	 * 		before: 123 => value
-	 * 		after: Your Firstname: => value
+	 * Generate a new array their labels and respect FE language
+	 * 		Your Firstname: => value
 	 *
-	 * @param array $fields piVars from Form Submit
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return array new array
 	 */
-	public function getVariablesWithLabels($fields) {
+	public function getVariablesWithLabels(Tx_Powermail_Domain_Model_Mail $mail) {
 		$variables = array();
-		foreach ((array) $fields as $uid => $value) { // one loop for every received field
-			if (!is_numeric($uid)) {
+		foreach ($mail->getAnswers() as $answer) {
+			if (!method_exists($answer->getField(), 'getUid')) {
 				continue;
 			}
 			$variables[] = array(
-				'label' => $this->getLabelFromField($uid),
-				'value' => $value,
-				'uid' => $uid
+				'label' => $answer->getField()->getTitle(),
+				'value' => $answer->getValue(),
+				'uid' => $answer->getField()->getUid()
 			);
 		}
 		return $variables;
-	}
-
-	/**
-	 * Get label of a field (and respect FE language)
-	 *
-	 * @param integer $uid Field UID
-	 * @return string Label
-	 */
-	public function getLabelFromField($uid) {
-		$field = $this->fieldRepository->findByUid($uid); // get field
-		if (method_exists($field, 'getTitle')) {
-			$title = $field->getTitle();
-		}
-		if ($title === NULL || empty($title)) {
-			$title = 'Error, could not get Title';
-		}
-		return $title;
 	}
 
 	/**
