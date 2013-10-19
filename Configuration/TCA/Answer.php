@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_powermail_domain_model_answers'] = array(
 	'ctrl' => $TCA['tx_powermail_domain_model_answers']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, value, field, mail',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, value, value_type, field, mail',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'value, field, mail'),
+		'1' => array('showitem' => 'value, value_type, field, mail'),
 	),
 	'palettes' => array(
 		'1' => array(),
@@ -100,6 +100,31 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 				'type' => 'text',
 				'cols' => '60',
 				'rows' => '3'
+			),
+		),
+		'value_type' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.0',
+						'0'
+					),
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.1',
+						'1'
+					),
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.2',
+						'2'
+					),
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.3',
+						'3'
+					),
+				),
 			),
 		),
 		'field' => array(

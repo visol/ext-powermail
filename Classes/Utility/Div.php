@@ -306,20 +306,50 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
-	 * Add uploads fields and rewrite date fields
+	 * Return type from given field marker and form
 	 *
-	 * @param array $fields Field array
-	 * @return void
+	 * @param string $marker Field marker
+	 * @param integer $formUid Form UID
+	 * @return string Field Type
 	 */
-	public static function addUploadsToFields(&$fields) {
-		// add filenames to variable
-		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
-			foreach ((array) $_FILES['tx_powermail_pi1']['name']['field'] as $uid => $value) {
-				if (!empty($value)) {
-					$fields[$uid] = $value;
-				}
-			}
+	public function getFieldTypeFromMarker($marker, $formUid = 0) {
+		$field = $this->fieldRepository->findByMarkerAndForm($marker, $formUid);
+		if (method_exists($field, 'getType')) {
+			return $field->getType();
 		}
+		return '';
+	}
+
+	/**
+	 * Return expected value type from fieldtype
+	 *
+	 * @param string $fieldType
+	 * @return int
+	 */
+	public static function getDataTypeFromFieldType($fieldType) {
+		$types = array(
+			'captcha' => 0,
+			'check' => 1,
+			'content' => 0,
+			'date' => 2,
+			'file' => 3,
+			'hidden' => 0,
+			'html' => 0,
+			'input' => 0,
+			'location' => 0,
+			'password' => 0,
+			'radio' => 0,
+			'reset' => 0,
+			'select' => 0,
+			'submit' => 0,
+			'text' => 0,
+			'textarea' => 0,
+			'typoscript' => 0
+		);
+		if (array_key_exists($fieldType, $types)) {
+			return $types[$fieldType];
+		}
+		return 0;
 	}
 
 	/**

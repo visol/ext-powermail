@@ -73,8 +73,11 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 		foreach ((array) $arguments['field'] as $marker => $value) {
 			$newArguments['mail']['answers'][] = array(
-				'field' => $this->div->getFieldUidFromMarker($marker, 1),
-				'value' => $value
+				'field' => $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']),
+				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
+				'value_type' => Tx_Powermail_Utility_Div::getDataTypeFromFieldType(
+					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
+				)
 			);
 		}
 		$this->request->setArguments($newArguments);
@@ -93,13 +96,10 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
 		$this->ignoreWrongForm($mail);
 
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
+
 		echo 'x';
 		return;
-
-		// add uploaded files to $field
-		Tx_Powermail_Utility_Div::addUploadsToFields($field);
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($field, $form, $mail, $this));
-
 		// Debug Output
 		if ($this->settings['debug']['variables']) {
 			t3lib_utility_Debug::debug($field, 'powermail debug: Show Variables');
