@@ -56,6 +56,13 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	protected $fields = NULL;
 
 	/**
+	 * Powermail Forms
+	 *
+	 * @var Tx_Powermail_Domain_Model_Form
+	 */
+	protected $forms = NULL;
+
+	/**
 	 * sorting
 	 *
 	 * @var integer
@@ -186,6 +193,20 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function setSorting($sorting) {
 		$this->sorting = $sorting;
+	}
+
+	/**
+	 * @param Tx_Powermail_Domain_Model_Form $forms
+	 */
+	public function setForms($forms) {
+		$this->forms = $forms;
+	}
+
+	/**
+	 * @return Tx_Powermail_Domain_Model_Form
+	 */
+	public function getForms() {
+		return $this->forms;
 	}
 
 }

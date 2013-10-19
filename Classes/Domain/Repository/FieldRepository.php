@@ -25,13 +25,32 @@
 
 
 /**
- *
+ * Field Repository
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
 class Tx_Powermail_Domain_Repository_FieldRepository extends Tx_Extbase_Persistence_Repository {
-}
 
-?>
+	/**
+	 * Return uid from given field marker and form
+	 *
+	 * @param $marker
+	 * @param int $formUid
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findByMarkerAndForm($marker, $formUid = 0) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->matching(
+			$query->logicalAnd(
+				array(
+					 $query->equals('marker', $marker),
+					 $query->equals('pages.forms.uid', $formUid)
+				)
+			)
+		);
+		$query->setLimit(1);
+		return $query->execute()->getFirst();
+	}
+}

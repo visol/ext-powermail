@@ -272,7 +272,7 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
-	 * Read marker from given field uid
+	 * Return marker from given field uid
 	 *
 	 * @param integer $uid Field UID
 	 * @return string Marker name
@@ -288,6 +288,21 @@ class Tx_Powermail_Utility_Div {
 		}
 
 		return $marker;
+	}
+
+	/**
+	 * Return uid from given field marker and form
+	 *
+	 * @param string $marker Field marker
+	 * @param integer $formUid Form UID
+	 * @return int Field UID
+	 */
+	public function getFieldUidFromMarker($marker, $formUid = 0) {
+		$field = $this->fieldRepository->findByMarkerAndForm($marker, $formUid);
+		if (method_exists($field, 'getUid')) {
+			return $field->getUid();
+		}
+		return 0;
 	}
 
 	/**

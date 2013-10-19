@@ -58,54 +58,35 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	}
 
 	/**
-	 * Show Confirmation message after submit (if view is activated)
-	 *
-	 * @param array $field Field values
-	 * @param integer $form Form UID
-	 * @validate $field Tx_Powermail_Domain_Validator_UploadValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_MandatoryValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_StringValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_CaptchaValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_SpamShieldValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_CustomValidator
-	 * @return void
+	 * Rewrite Arguments to receive a clean mail object in createAction
 	 */
-	public function confirmationAction(array $field = array(), $form = NULL) {
-		// forward back to formAction if wrong form
-		$this->ignoreWrongForm($form);
+	public function initializeCreateAction() {
+		$arguments = $this->request->getArguments();
+		if (!isset($arguments['field'])) {
+			return;
+		}
+		$newArguments = array(
+			'mail' => $arguments['mail']
+		);
 
-		Tx_Powermail_Utility_Div::addUploadsToFields($field); // add upload fields
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($field, $form, $this));
-		$this->view->assign('field', $field);
-		$this->view->assign('form', $form);
-
-		// markers
-		$variablesWithMarkers = $this->div->getVariablesWithMarkers($field);
-		$this->view->assignMultiple($variablesWithMarkers);
-
-		// powermail_all
-		$variables = $this->div->getVariablesWithLabels($field);
-		$content = $this->div->powermailAll($variables, $this->configurationManager, $this->objectManager, 'web', $this->settings);
-		$this->view->assign('powermail_all', $content);
+		foreach ((array) $arguments['field'] as $marker => $value) {
+			$newArguments['mail']['answers'][] = array(
+				'field' => $this->div->getFieldUidFromMarker($marker, 1),
+				'value' => $value
+			);
+		}
+		$this->request->setArguments($newArguments);
+		$this->request->setArgument('field', NULL);
 	}
 
 	/**
 	 * Action create entry
 	 *
-	 * @param array $form Field Values
-	 * @param integer $mail Mail object (normally empty, filled when mail already exists via double-optin)
-	 * @validate $form Tx_Powermail_Domain_Validator_UploadValidator
-	 * @validate $form Tx_Powermail_Domain_Validator_MandatoryValidator
-	 * @validate $form Tx_Powermail_Domain_Validator_StringValidator
-	 * @validate $form Tx_Powermail_Domain_Validator_CaptchaValidator
-	 * @validate $form Tx_Powermail_Domain_Validator_SpamShieldValidator
-	 * @validate $form Tx_Powermail_Domain_Validator_CustomValidator
-	 * @validate $form notEmpty
-	 * @dontvalidate $mail
+	 * @param Tx_Powermail_Domain_Model_Mail $mail New mail object
 	 * @return void
 	 */
-	public function createAction(array $form = array(), $mail = NULL) {
-		t3lib_utility_Debug::debug($form, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+	public function createAction(Tx_Powermail_Domain_Model_Mail $mail = NULL) {
+		Tx_Extbase_Utility_Debugger::var_dump($mail);
 
 		return;
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
@@ -146,6 +127,38 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($field, $form, $mail, $this, $newMail));
 		$this->view->assign('optinActive', (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail) ? 0 : 1));
+	}
+
+	/**
+	 * Show Confirmation message after submit (if view is activated)
+	 *
+	 * @param array $field Field values
+	 * @param integer $form Form UID
+	 * @validate $field Tx_Powermail_Domain_Validator_UploadValidator
+	 * @validate $field Tx_Powermail_Domain_Validator_MandatoryValidator
+	 * @validate $field Tx_Powermail_Domain_Validator_StringValidator
+	 * @validate $field Tx_Powermail_Domain_Validator_CaptchaValidator
+	 * @validate $field Tx_Powermail_Domain_Validator_SpamShieldValidator
+	 * @validate $field Tx_Powermail_Domain_Validator_CustomValidator
+	 * @return void
+	 */
+	public function confirmationAction(array $field = array(), $form = NULL) {
+		// forward back to formAction if wrong form
+		$this->ignoreWrongForm($form);
+
+		Tx_Powermail_Utility_Div::addUploadsToFields($field); // add upload fields
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($field, $form, $this));
+		$this->view->assign('field', $field);
+		$this->view->assign('form', $form);
+
+		// markers
+		$variablesWithMarkers = $this->div->getVariablesWithMarkers($field);
+		$this->view->assignMultiple($variablesWithMarkers);
+
+		// powermail_all
+		$variables = $this->div->getVariablesWithLabels($field);
+		$content = $this->div->powermailAll($variables, $this->configurationManager, $this->objectManager, 'web', $this->settings);
+		$this->view->assign('powermail_all', $content);
 	}
 
 	/**

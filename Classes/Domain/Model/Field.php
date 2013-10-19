@@ -155,6 +155,13 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	protected $sorting = 0;
 
 	/**
+	 * pages
+	 *
+	 * @var Tx_Powermail_Domain_Model_Page
+	 */
+	protected $pages = NULL;
+
+	/**
 	 * Returns the title
 	 *
 	 * @return string $title
@@ -467,6 +474,20 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 */
 	public function setSorting($sorting) {
 		$this->sorting = $sorting;
+	}
+
+	/**
+	 * @param Tx_Powermail_Domain_Model_Page $pages
+	 */
+	public function setPages($pages) {
+		$this->pages = $pages;
+	}
+
+	/**
+	 * @return Tx_Powermail_Domain_Model_Page
+	 */
+	public function getPages() {
+		return $this->pages;
 	}
 
 }

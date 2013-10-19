@@ -15,8 +15,7 @@ Render Powermail Form
 				<f:form
 						action="{action}"
 						controller="Form"
-						name="form"
-						object="{form}"
+						name="field"
 						enctype="multipart/form-data"
 						class="powermail_form powermail_form_{form.uid} {form.css} {vh:Misc.MorestepClass(activate: '{settings.main.moresteps}', class: 'powermail_morestep')}">
 
@@ -32,6 +31,7 @@ Render Powermail Form
 						</fieldset>
 					</f:for>
 
+					<f:form.hidden name="mail[form]" value="{form.uid}" class="powermail_form_uid" />
 					<f:render partial="HoneyPod" arguments="{form: form}" />
 				</f:form>
 			</f:for>
