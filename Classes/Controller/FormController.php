@@ -331,8 +331,6 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	 */
 	protected function saveMail(Tx_Powermail_Domain_Model_Mail &$mail = NULL) {
 		$marketingInfos = Tx_Powermail_Utility_Div::getMarketingInfos();
-		$variablesWithMarkers = $this->div->getVariablesWithMarkers($mail);
-
 		$mail->setPid(
 			Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid'])
 		);
