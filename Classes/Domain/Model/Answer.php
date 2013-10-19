@@ -41,6 +41,13 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	protected $value = '';
 
 	/**
+	 * valueType
+	 *
+	 * @var int
+	 */
+	protected $valueType = 0;
+
+	/**
 	 * mail
 	 *
 	 * @var Tx_Powermail_Domain_Model_Mail
@@ -80,6 +87,20 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 			$value = serialize($value);
 		}
 		$this->value = $value;
+	}
+
+	/**
+	 * @param int $valueType
+	 */
+	public function setValueType($valueType) {
+		$this->valueType = $valueType;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getValueType() {
+		return $this->valueType;
 	}
 
 	/**

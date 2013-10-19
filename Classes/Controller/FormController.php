@@ -82,6 +82,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		}
 		$this->request->setArguments($newArguments);
 		$this->request->setArgument('field', NULL);
+		t3lib_utility_Debug::debug($newArguments, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
 	}
 
 	/**
@@ -98,11 +99,9 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
 
-		echo 'x';
-		return;
 		// Debug Output
-		if ($this->settings['debug']['variables']) {
-			t3lib_utility_Debug::debug($field, 'powermail debug: Show Variables');
+		if ($this->settings['debug']['variables'] || 1) {
+			t3lib_utility_Debug::debug($mail, 'powermail debug: Show Variables');
 		}
 
 		// Save Mail to DB
@@ -111,6 +110,9 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			$newMail = $this->saveMail($dbField, $form);
 			$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterMailDbSaved', array($field, $form, $mail, $this));
 		}
+
+		echo 'x';
+		return;
 
 		if (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail)) {
 			// Send Mail to receivers
