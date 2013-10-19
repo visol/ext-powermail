@@ -361,8 +361,12 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		if ($this->settings['main']['optin'] || $this->settings['db']['hidden']) {
 			$mail->setHidden(1);
 		}
-		Tx_Extbase_Utility_Debugger::var_dump($mail);
-//		$this->mailRepository->add($mail);
+		foreach ($mail->getAnswers() as $answer) {
+			$answer->setPid(
+				Tx_Powermail_Utility_Div::getStoragePage($this->settings['main']['pid'])
+			);
+		}
+		$this->mailRepository->add($mail);
 		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager');
 		$persistenceManager->persistAll();
 	}
