@@ -294,7 +294,6 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 		// powermail_all
 		$content = $this->div->powermailAll($mail, $this->configurationManager, $this->objectManager, 'web', $this->settings);
-		t3lib_utility_Debug::debug($content, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
 		$this->view->assign('powermail_all', $content);
 	}
 
