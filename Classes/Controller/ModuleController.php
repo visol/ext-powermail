@@ -208,5 +208,3 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	}
 
 }
-
-?>

@@ -61,4 +61,3 @@ class Tx_Powermail_Utility_InitialMarker extends Tx_Powermail_Utility_MarkerBase
 		return $fieldArray;
 	}
 }
-?>

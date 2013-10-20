@@ -176,4 +176,3 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 	}
 
 }
-?>

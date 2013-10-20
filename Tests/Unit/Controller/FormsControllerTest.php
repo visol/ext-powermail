@@ -58,4 +58,3 @@ class Tx_Powermail_Controller_FormControllerTest extends Tx_Extbase_Tests_Unit_B
 	}
 
 }
-?>

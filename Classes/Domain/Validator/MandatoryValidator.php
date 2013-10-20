@@ -15,7 +15,7 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 	 *
 	 * @var bool
 	 */
-	protected $isValid = true;
+	protected $isValid = TRUE;
 
 	/**
 	 * Validation of given Params
@@ -49,19 +49,18 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 					}
 					if ($empty) {
 						$this->addError('mandatory', $field->getUid());
-						$this->isValid = false;
+						$this->isValid = FALSE;
 					}
 				} else {
 					if (!strlen($params[$field->getUid()])) {
 						$this->addError('mandatory', $field->getUid());
-						$this->isValid = false;
+						$this->isValid = FALSE;
 					}
 				}
 			}
 		}
 
 		return $this->isValid;
-  	}
+	}
 
 }
-?>

@@ -27,5 +27,3 @@ class Tx_Powermail_ViewHelpers_Condition_IsNotEmptyViewHelper extends Tx_Fluid_V
 		}
 	}
 }
-
-?>

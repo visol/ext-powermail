@@ -22,5 +22,3 @@ class Tx_Powermail_ViewHelpers_Condition_IsDateTimeVariableInVariableViewHelper 
 		return method_exists($mixed, 'getTimestamp');
 	}
 }
-
-?>

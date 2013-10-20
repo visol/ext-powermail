@@ -192,7 +192,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('PowermailFrontendEditFailed', 'powermail'));
 		}
 
-		$this->redirect('edit', null, null, array('mail' => $mail));
+		$this->redirect('edit', NULL, NULL, array('mail' => $mail));
 	}
 
 	/**
@@ -270,7 +270,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	 * @return bool
 	 */
 	protected function getErrorFlashMessage() {
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -297,5 +297,3 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	}
 
 }
-
-?>

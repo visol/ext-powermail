@@ -45,7 +45,7 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	 */
 	public function isValid($params) {
 		if (!$this->settings['spamshield.']['_enable']) {
-			return true;
+			return TRUE;
 		}
 		$spamFactor = $this->settings['spamshield.']['factor'] / 100;
 
@@ -96,10 +96,10 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 				t3lib_div::plainMailEncoded($this->settings['spamshield.']['email'], $subject, $message, $header);
 			}
 
-			return false;
+			return FALSE;
 		}
 
-		return true;
+		return TRUE;
 	}
 
 	/**
@@ -337,4 +337,3 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	}
 
 }
-?>

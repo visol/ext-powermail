@@ -169,7 +169,7 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 			return $selected;
 		}
 
-    }
+	}
 
 	/**
 	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
@@ -191,5 +191,3 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 		$this->piVars = t3lib_div::_GP('tx_powermail_pi1');
 	}
 }
-
-?>

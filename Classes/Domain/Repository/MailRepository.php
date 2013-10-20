@@ -327,5 +327,3 @@ class Tx_Powermail_Domain_Repository_MailRepository extends Tx_Extbase_Persisten
 		return $mails;
 	}
 }
-
-?>

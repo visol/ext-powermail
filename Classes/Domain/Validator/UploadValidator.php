@@ -48,7 +48,7 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	 *
 	 * @var bool
 	 */
-	protected $isValid = true;
+	protected $isValid = TRUE;
 
 	/**
 	 * Validation of given Params
@@ -60,7 +60,7 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
 			// session stuff
 			$uploadSession = array();
-			Tx_Powermail_Utility_Div::setSessionValue('upload', array(), true); // clean old session before
+			Tx_Powermail_Utility_Div::setSessionValue('upload', array(), TRUE); // clean old session before
 
 			foreach ($_FILES['tx_powermail_pi1']['name']['field'] as $uid => $filename) {
 
@@ -84,12 +84,12 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 				$uploadSession[] = $newFile; // create array for upload session
 				if (!t3lib_div::upload_copy_move($_FILES['tx_powermail_pi1']['tmp_name']['field'][$uid], $newFile)) {
 					$this->addError('upload_error', $uid);
-					$this->isValid = false;
+					$this->isValid = FALSE;
 				}
 			}
 
 			// save uploaded filenames to session (to attach it later)
-			Tx_Powermail_Utility_Div::setSessionValue('upload', $uploadSession, true);
+			Tx_Powermail_Utility_Div::setSessionValue('upload', $uploadSession, TRUE);
 		}
 
 		return $this->isValid;
@@ -104,10 +104,10 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	protected function checkFilesize($uid) {
 		if (filesize($_FILES['tx_powermail_pi1']['tmp_name']['field'][$uid]) > $this->settings['misc.']['file.']['size']) {
 			$this->addError('upload_size', $uid);
-			$this->isValid = false;
-			return false;
+			$this->isValid = FALSE;
+			return FALSE;
 		}
-		return true;
+		return TRUE;
 	}
 
 	/**
@@ -121,10 +121,10 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 		$fileInfo = pathinfo($filename);
 		if (!isset($fileInfo['extension']) || !t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
 			$this->addError('upload_extension', $uid);
-			$this->isValid = false;
-			return false;
+			$this->isValid = FALSE;
+			return FALSE;
 		}
-		return true;
+		return TRUE;
 	}
 
 	/**
@@ -143,5 +143,3 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 		$this->basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
 	}
 }
-
-?>

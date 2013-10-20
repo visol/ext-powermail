@@ -153,4 +153,3 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 		),
 	),
 );
-?>

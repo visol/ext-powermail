@@ -80,7 +80,7 @@ class Tx_Powermail_Utility_PluginInfo {
 		if ($this->showTable) {
 			return $this->createOutput($array);
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -138,7 +138,6 @@ class Tx_Powermail_Utility_PluginInfo {
 		}
 
 		$this->showTable = 0;
-		return false;
+		return FALSE;
 	}
 }
-?>

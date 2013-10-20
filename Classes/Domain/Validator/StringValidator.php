@@ -29,7 +29,7 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
 	 *
 	 * @var bool
 	 */
-	protected $isValid = true;
+	protected $isValid = TRUE;
 
 	/**
 	 * Validation of given Params
@@ -56,16 +56,16 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
 
 				if (is_numeric($this->regEx[$field->getValidation()])) { // filter
 
-					if (filter_var($value, $this->regEx[$field->getValidation()]) === false) { // check failed
+					if (filter_var($value, $this->regEx[$field->getValidation()]) === FALSE) { // check failed
 						$this->addError('validation', $uid);
-						$this->isValid = false;
+						$this->isValid = FALSE;
 					}
 
 				} else { // regex
 
 					if (preg_replace($this->regEx[$field->getValidation()], '', $value) != $value) { // check failed
 						$this->addError('validation', $uid);
-						$this->isValid = false;
+						$this->isValid = FALSE;
 					}
 
 				}
@@ -74,7 +74,6 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
 		}
 
 		return $this->isValid;
-  	}
+	}
 
 }
-?>

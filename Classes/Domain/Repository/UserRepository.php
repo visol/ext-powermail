@@ -40,19 +40,12 @@ class Tx_Powermail_Domain_Repository_UserRepository extends Tx_Extbase_Persisten
 	 */
 	public function findByUsergroup($uid) {
 		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
-		$and = array(
-			$query->greaterThan('uid', 0), // always true like 1=1
+		$query->matching(
 			$query->contains('usergroup', $uid)
 		);
 
-		$constraint = $query->logicalAnd($and); // create where object with AND
-		$query->matching($constraint); // use constraint
-
-		$result = $query->execute();
-		return $result;
+		return $query->execute();
 	}
 }
-
-?>

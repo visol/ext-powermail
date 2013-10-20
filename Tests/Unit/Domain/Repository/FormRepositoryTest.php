@@ -34,39 +34,38 @@
  */
 class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Tests_Unit_BaseTestCase {
 
-    /**
-     * @var Tx_Powermail_Domain_Repository_FormRepository
-     */
-    protected $fixture;
+	/**
+	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 */
+	protected $fixture;
 
-    /**
-     * @var Tx_Phpunit_Framework: null
-     */
-    protected $testDatabase = NULL;
+	/**
+	 * @var Tx_Phpunit_Framework: null
+	 */
+	protected $testDatabase = NULL;
 
-    public function setUp() {
-        $this->fixture = new Tx_Powermail_Domain_Repository_FormRepository();
-        $this->testDatabase = new Tx_Phpunit_Framework('tx_powermail_domain_model_forms');
-    }
+	public function setUp() {
+		$this->fixture = new Tx_Powermail_Domain_Repository_FormRepository();
+		$this->testDatabase = new Tx_Phpunit_Framework('tx_powermail_domain_model_forms');
+	}
 
-    public function tearDown() {
-        $this->testDatabase->cleanUp();
-        unset($this->fixture,$this->testDatabase);
-    }
+	public function tearDown() {
+		$this->testDatabase->cleanUp();
+		unset($this->fixture,$this->testDatabase);
+	}
 
-    /**
-     * @test
-     */
-    public function findByUidsReturnsCorrectCountForString() {
-        $uidArray = array();
+	/**
+	 * @test
+	 */
+	public function findByUidsReturnsCorrectCountForString() {
+		$uidArray = array();
 
-        $uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-        $uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-        $uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-        $uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-        $uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
+		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
+		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
+		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
+		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
+		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
 
-        $this->assertSame(5,$this->fixture->findByUids(implode(',',$uidArray))->count());
-    }
+		$this->assertSame(5,$this->fixture->findByUids(implode(',',$uidArray))->count());
+	}
 }
-?>

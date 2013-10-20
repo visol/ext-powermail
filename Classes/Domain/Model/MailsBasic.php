@@ -139,4 +139,3 @@ class Tx_Powermail_Domain_Model_MailsBasic extends Tx_Extbase_DomainObject_Abstr
 	}
 
 }
-?>

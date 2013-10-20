@@ -35,5 +35,3 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 	}
 
 }
-
-?>

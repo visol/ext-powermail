@@ -131,7 +131,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @var bool
 	 */
-	protected $hidden = false;
+	protected $hidden = FALSE;
 
 	/**
 	 * marketingSearchterm

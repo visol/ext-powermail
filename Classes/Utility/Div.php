@@ -60,6 +60,20 @@ class Tx_Powermail_Utility_Div {
 	protected $userRepository;
 
 	/**
+	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+	 *
+	 * @inject
+	 */
+	protected $configurationManager;
+
+	/**
+	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 *
+	 * @inject
+	 */
+	protected $objectManager;
+
+	/**
 	 * Get Field Uid List from given Form Uid
 	 *
 	 * @param integer $formUid Form Uid
@@ -332,186 +346,33 @@ class Tx_Powermail_Utility_Div {
 	}
 
 	/**
-	 * This is the main-function for sending Mails
+	 * Overwrite a string if a TypoScript cObject is available
 	 *
-	 * @param array $mail Array with all needed mail information
-	 * 		$mail['receiverName'] = 'Name';
-	 * 		$mail['receiverEmail'] = 'receiver@mail.com';
-	 *		$mail['senderName'] = 'Name';
-	 * 		$mail['senderEmail'] = 'sender@mail.com';
-	 * 		$mail['subject'] = 'Subject line';
-	 * 		$mail['template'] = 'PathToTemplate/';
-	 * 		$mail['rteBody'] = 'This is the <b>content</b> of the RTE';
-	 * 		$mail['format'] = 'both'; // or plain or html
-	 * @param array $fields All arguments from POST or GET
-	 * @param array $settings TypoScript Settings
-	 * @param string $type Email to "sender" or "receiver"
-	 * @param Tx_Extbase_Object_ObjectManager $objectManager
-	 * @param object $configurationManager
-	 * @return boolean Mail was successfully sent?
+	 * @param string $string Value to overwrite
+	 * @param array $conf TypoScript Configuration Array
+	 * @param string $key Key for TypoScript Configuration
+	 * @return void
 	 */
-	public function sendTemplateEmail($mail, $fields, $settings, $type, $objectManager, $configurationManager) {
-		/*****************
-		 * Settings
-		 ****************/
-		$cObj = $configurationManager->getContentObject();
-		$typoScriptService = $objectManager->get('Tx_Extbase_Service_TypoScriptService');
-		$conf = $typoScriptService->convertPlainArrayToTypoScriptArray($settings);
+	public function overwriteValueFromTypoScript(&$string, $conf, $key) {
+		$cObj = $this->configurationManager->getContentObject();
 
-		// parsing variables with fluid engine to allow viewhelpers and variables in some flexform fields
-		$parse = array(
-			'receiverName',
-			'receiverEmail',
-			'senderName',
-			'senderEmail',
-			'subject'
-		);
-		foreach ($parse as $value) {
-			$mail[$value] = $this->fluidParseString($mail[$value], $objectManager, $this->getVariablesWithMarkers($fields));
+		if ($cObj->cObjGetSingle($conf[$key], $conf[$key . '.'])) {
+			$string = $cObj->cObjGetSingle($conf[$key], $conf[$key . '.']);
 		}
-
-		// Debug Output
-		if ($settings['debug']['mail']) {
-			t3lib_utility_Debug::debug($mail, 'powermail debug: Show Mail');
-		}
-
-		// stop mail process if receiver or sender email is not valid
-		if (!t3lib_div::validEmail($mail['receiverEmail']) || !t3lib_div::validEmail($mail['senderEmail'])) {
-			return false;
-		}
-
-		// stop mail process if subject is empty
-		if (empty($mail['subject'])) {
-			return false;
-		}
-
-		// generate mail body
-		$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . $mail['template'] . '.html';
-		$emailView = $objectManager->create('Tx_Fluid_View_StandaloneView');
-		$emailView->getRequest()->setControllerExtensionName('Powermail'); // extension name for translate viewhelper
-		$emailView->getRequest()->setPluginName('Pi1');
-		$emailView->getRequest()->setControllerName('Form');
-		$emailView->setFormat('html');
-		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailView->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
-		$emailView->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
-
-		// get variables
-			// additional variables
-		if (isset($mail['variables']) && is_array($mail['variables'])) {
-			$emailView->assignMultiple($mail['variables']);
-		}
-			// markers in HTML Template
-		$variablesWithMarkers = $this->getVariablesWithMarkers($fields);
-		$emailView->assign('variablesWithMarkers', $this->htmlspecialcharsOnArray($variablesWithMarkers));
-		$emailView->assignMultiple($variablesWithMarkers);
-			// powermail_all
-		$variables = $this->getVariablesWithLabels($fields);
-		$content = $this->powermailAll($variables, $configurationManager, $objectManager, 'mail', $settings);
-		$emailView->assign('powermail_all', $content);
-			// from rte
-		$emailView->assign('powermail_rte', $mail['rteBody']);
-		$variablesWithLabels = $this->getVariablesWithLabels($fields);
-		$emailView->assign('variablesWithLabels', $variablesWithLabels);
-		$emailView->assign('marketingInfos', self::getMarketingInfos());
-		$emailBody = $emailView->render();
-
-
-		/*****************
-		 * generate mail
-		 ****************/
-		$message = t3lib_div::makeInstance('t3lib_mail_Message');
-		$message
-			->setTo(array($mail['receiverEmail'] => $mail['receiverName']))
-			->setFrom(array($mail['senderEmail'] => $mail['senderName']))
-			->setSubject($mail['subject'])
-			->setCharset($GLOBALS['TSFE']->metaCharset);
-
-		// overwrite subject
-		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['subject'], $conf[$type . '.']['overwrite.']['subject.'])) {
-			$message->setSubject($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['subject'], $conf[$type . '.']['overwrite.']['subject.']));
-		}
-
-		// add cc receivers
-		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.'])) {
-			$ccArray = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.']), 1);
-			$message->setCc($ccArray);
-		}
-
-		// add bcc receivers
-		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.'])) {
-			$bccArray = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.']), 1);
-			$message->setBcc($bccArray);
-		}
-
-		// add Return Path
-		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'], $conf[$type . '.']['overwrite.']['returnPath.'])) {
-			$message->setReturnPath($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'], $conf[$type . '.']['overwrite.']['returnPath.']));
-		}
-
-		// add Reply Addresses
-		if (
-			$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToEmail'], $conf[$type . '.']['overwrite.']['replyToEmail.'])
-			&&
-			$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToName'], $conf[$type . '.']['overwrite.']['replyToName.'])
-		) {
-			$replyArray = array(
-				$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToEmail'], $conf[$type . '.']['overwrite.']['replyToEmail.']) =>
-					$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToName'], $conf[$type . '.']['overwrite.']['replyToName.'])
-			);
-			$message->setReplyTo($replyArray);
-		}
-
-		// add priority
-		if ($settings[$type]['overwrite']['priority']) {
-			$message->setPriority(intval($settings[$type]['overwrite']['priority']));
-		}
-
-		// add attachments from upload fields
-		if ($settings[$type]['attachment']) {
-			$uploadsFromSession = Tx_Powermail_Utility_Div::getSessionValue('upload'); // read upload session
-			foreach ((array) $uploadsFromSession as $file) {
-				$message->attach(Swift_Attachment::fromPath($file));
-			}
-		}
-
-		// add attachments from typoscript
-		if ($cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.'])) {
-			$files = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']), 1);
-			foreach ($files as $file) {
-				$message->attach(Swift_Attachment::fromPath($file));
-			}
-		}
-		if ($mail['format'] != 'plain') {
-			$message->setBody($emailBody, 'text/html');
-		}
-		if ($mail['format'] != 'html') {
-			$message->addPart($this->makePlain($emailBody), 'text/plain');
-		}
-		$message->send();
-
-		return $message->isSent();
 	}
 
 	/**
 	 * Parse String with Fluid View
 	 *
 	 * @param string $string Any string
-	 * @param object $objectManager
 	 * @param array $variables Variables
 	 * @return string Parsed string
 	 */
-	public function fluidParseString($string, $objectManager, $variables = array()) {
-		if (!$string) {
-			return '';
-		}
-		$parseObject = $objectManager->create('Tx_Fluid_View_StandaloneView');
+	public function fluidParseString($string, $variables = array()) {
+		$parseObject = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
 		$parseObject->setTemplateSource($string);
 		$parseObject->assignMultiple($variables);
-		$string = $parseObject->render();
-
-		return $string;
+		return $parseObject->render();
 	}
 
 	/**
@@ -849,7 +710,7 @@ class Tx_Powermail_Utility_Div {
 		curl_setopt($ch, CURLOPT_URL, $curl['url']);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $curl['params']);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_exec($ch);
 		curl_close($ch);
 
@@ -880,12 +741,12 @@ class Tx_Powermail_Utility_Div {
 	 */
 	public static function is_serialized($val) {
 		if (!is_string($val) || trim($val) == '') {
-			return false;
+			return FALSE;
 		}
 		if (preg_match('/^(i|s|a|o|d):(.*);/si', $val)) {
-			return true;
+			return TRUE;
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -898,7 +759,7 @@ class Tx_Powermail_Utility_Div {
 	public function isAllowedToEdit($settings, $mail) {
 		// settings
 		if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
-			return false;
+			return FALSE;
 		}
 		$usergroups = t3lib_div::trimExplode(',', $GLOBALS['TSFE']->fe_user->user['usergroup'], 1); // array with usergroups of current logged in user
 		$usersSettings = t3lib_div::trimExplode(',', $settings['edit']['feuser'], 1); // array with all allowed users
@@ -917,15 +778,15 @@ class Tx_Powermail_Utility_Div {
 
 		// 1. check user
 		if (in_array($GLOBALS['TSFE']->fe_user->user['uid'], $usersSettings)) {
-			return true;
+			return TRUE;
 		}
 
 		// 2. check usergroup
 		if (count(array_intersect($usergroups, $usergroupsSettings))) { // if there is one of the groups allowed
-			return true;
+			return TRUE;
 		}
 
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -1014,6 +875,167 @@ class Tx_Powermail_Utility_Div {
 			return $powermailSession[$name];
 		}
 		return $powermailSession;
+	}
+
+	/**
+	 * This is the main-function for sending Mails
+	 *
+	 * @param array $email Array with all needed mail information
+	 * 		$email['receiverName'] = 'Name';
+	 * 		$email['receiverEmail'] = 'receiver@mail.com';
+	 *		$email['senderName'] = 'Name';
+	 * 		$email['senderEmail'] = 'sender@mail.com';
+	 * 		$email['subject'] = 'Subject line';
+	 * 		$email['template'] = 'PathToTemplate/';
+	 * 		$email['rteBody'] = 'This is the <b>content</b> of the RTE';
+	 * 		$email['format'] = 'both'; // or plain or html
+	 * @param Tx_Powermail_Domain_Model_Mail $mail Mail object with all arguments
+	 * @param array $settings TypoScript Settings
+	 * @param string $type Email to "sender" or "receiver"
+	 * @return boolean Mail was successfully sent?
+	 */
+	public function sendTemplateEmail(array $email, Tx_Powermail_Domain_Model_Mail $mail, $settings, $type = 'receiver') {
+		/*****************
+		 * Settings
+		 ****************/
+		$cObj = $this->configurationManager->getContentObject();
+		$typoScriptService = $this->objectManager->get('Tx_Extbase_Service_TypoScriptService');
+		$conf = $typoScriptService->convertPlainArrayToTypoScriptArray($settings);
+
+		// parsing variables with fluid engine to allow viewhelpers and variables in some flexform fields
+		$parse = array(
+			'receiverName',
+			'receiverEmail',
+			'senderName',
+			'senderEmail',
+			'subject'
+		);
+		foreach ($parse as $value) {
+			$email[$value] = $this->fluidParseString($email[$value], $this->getVariablesWithMarkers($mail));
+		}
+
+		// Debug Output
+		if ($settings['debug']['mail']) {
+			t3lib_utility_Debug::debug($email, 'powermail debug: Show Mail');
+		}
+
+		// stop mail process if receiver or sender email is not valid
+		if (!t3lib_div::validEmail($email['receiverEmail']) || !t3lib_div::validEmail($email['senderEmail'])) {
+			return FALSE;
+		}
+
+		// stop mail process if subject is empty
+		if (empty($email['subject'])) {
+			return FALSE;
+		}
+
+		// generate mail body
+		$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . $email['template'] . '.html';
+		$emailView = $objectManager->create('Tx_Fluid_View_StandaloneView');
+		$emailView->getRequest()->setControllerExtensionName('Powermail'); // extension name for translate viewhelper
+		$emailView->getRequest()->setPluginName('Pi1');
+		$emailView->getRequest()->setControllerName('Form');
+		$emailView->setFormat('html');
+		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
+		$emailView->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
+		$emailView->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
+
+		// get variables
+		// additional variables
+		if (isset($email['variables']) && is_array($email['variables'])) {
+			$emailView->assignMultiple($email['variables']);
+		}
+		// markers in HTML Template
+		$variablesWithMarkers = $this->getVariablesWithMarkers($fields);
+		$emailView->assign('variablesWithMarkers', $this->htmlspecialcharsOnArray($variablesWithMarkers));
+		$emailView->assignMultiple($variablesWithMarkers);
+		// powermail_all
+		$variables = $this->getVariablesWithLabels($fields);
+		$content = $this->powermailAll($variables, $configurationManager, $objectManager, 'mail', $settings);
+		$emailView->assign('powermail_all', $content);
+		// from rte
+		$emailView->assign('powermail_rte', $email['rteBody']);
+		$variablesWithLabels = $this->getVariablesWithLabels($fields);
+		$emailView->assign('variablesWithLabels', $variablesWithLabels);
+		$emailView->assign('marketingInfos', self::getMarketingInfos());
+		$emailBody = $emailView->render();
+
+
+		/*****************
+		 * generate mail
+		 ****************/
+		$message = t3lib_div::makeInstance('t3lib_mail_Message');
+		$message
+			->setTo(array($email['receiverEmail'] => $email['receiverName']))
+			->setFrom(array($email['senderEmail'] => $email['senderName']))
+			->setSubject($email['subject'])
+			->setCharset($GLOBALS['TSFE']->metaCharset);
+
+		// overwrite subject
+		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['subject'], $conf[$type . '.']['overwrite.']['subject.'])) {
+			$message->setSubject($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['subject'], $conf[$type . '.']['overwrite.']['subject.']));
+		}
+
+		// add cc receivers
+		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.'])) {
+			$ccArray = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.']), 1);
+			$message->setCc($ccArray);
+		}
+
+		// add bcc receivers
+		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.'])) {
+			$bccArray = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.']), 1);
+			$message->setBcc($bccArray);
+		}
+
+		// add Return Path
+		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'], $conf[$type . '.']['overwrite.']['returnPath.'])) {
+			$message->setReturnPath($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'], $conf[$type . '.']['overwrite.']['returnPath.']));
+		}
+
+		// add Reply Addresses
+		if (
+			$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToEmail'], $conf[$type . '.']['overwrite.']['replyToEmail.'])
+			&&
+			$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToName'], $conf[$type . '.']['overwrite.']['replyToName.'])
+		) {
+			$replyArray = array(
+				$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToEmail'], $conf[$type . '.']['overwrite.']['replyToEmail.']) =>
+				$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['replyToName'], $conf[$type . '.']['overwrite.']['replyToName.'])
+			);
+			$message->setReplyTo($replyArray);
+		}
+
+		// add priority
+		if ($settings[$type]['overwrite']['priority']) {
+			$message->setPriority(intval($settings[$type]['overwrite']['priority']));
+		}
+
+		// add attachments from upload fields
+		if ($settings[$type]['attachment']) {
+			$uploadsFromSession = Tx_Powermail_Utility_Div::getSessionValue('upload'); // read upload session
+			foreach ((array) $uploadsFromSession as $file) {
+				$message->attach(Swift_Attachment::fromPath($file));
+			}
+		}
+
+		// add attachments from typoscript
+		if ($cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.'])) {
+			$files = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']), 1);
+			foreach ($files as $file) {
+				$message->attach(Swift_Attachment::fromPath($file));
+			}
+		}
+		if ($email['format'] != 'plain') {
+			$message->setBody($emailBody, 'text/html');
+		}
+		if ($email['format'] != 'html') {
+			$message->addPart($this->makePlain($emailBody), 'text/plain');
+		}
+		$message->send();
+
+		return $message->isSent();
 	}
 
 	/**

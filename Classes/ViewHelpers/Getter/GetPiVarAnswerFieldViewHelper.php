@@ -21,5 +21,3 @@ class Tx_Powermail_ViewHelpers_Getter_GetPiVarAnswerFieldViewHelper extends Tx_F
 		}
 	}
 }
-
-?>

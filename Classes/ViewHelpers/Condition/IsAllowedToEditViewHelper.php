@@ -26,9 +26,9 @@ class Tx_Powermail_ViewHelpers_Condition_IsAllowedToEditViewHelper extends Tx_Fl
 	 */
 	public function render($settings = array(), $mail) {
 		if ($this->div->isAllowedToEdit($settings, $mail)) {
-			return true;
+			return TRUE;
 		}
-		return false;
+		return FALSE;
     }
 
 }

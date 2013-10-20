@@ -56,5 +56,3 @@ class Tx_Powermail_Domain_Repository_AnswerRepository extends Tx_Extbase_Persist
 	}
 
 }
-
-?>

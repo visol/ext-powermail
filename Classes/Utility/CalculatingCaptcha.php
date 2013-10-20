@@ -161,4 +161,3 @@ class Tx_Powermail_Utility_CalculatingCaptcha {
 	}
 
 }
-?>

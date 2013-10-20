@@ -62,4 +62,3 @@ class Tx_Powermail_ViewHelpers_Misc_ValidationClassViewHelper extends Tx_Fluid_C
 	}
 
 }
-?>

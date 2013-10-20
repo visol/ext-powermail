@@ -60,7 +60,7 @@ class eidGetLocation {
 	protected function getAddressFromGeo($lat, $lng) {
 		$result = array();
 		$json = t3lib_div::getUrl('https://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=de&latlng=' . urlencode($lat . ',' . $lng));
-		$jsonDecoded = json_decode($json, true);
+		$jsonDecoded = json_decode($json, TRUE);
 		if (!empty($jsonDecoded['results'])) {
 			foreach ((array) $jsonDecoded['results'][0]['address_components'] as $values) {
 				$result[$values['types'][0]] = $values['long_name'];
@@ -72,4 +72,3 @@ class eidGetLocation {
 
 $eid = t3lib_div::makeInstance('eidGetLocation'); // make instance
 echo $eid->main(); // print content
-?>

@@ -55,11 +55,11 @@ class Tx_Powermail_Domain_Model_MailTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 */
 	public function getSenderNameReturnsInitialValueForString() {
-        $this->assertSame(
-            '',
-            $this->fixture->getSenderName()
-        );
-    }
+		$this->assertSame(
+			'',
+			$this->fixture->getSenderName()
+		);
+	}
 
 	/**
 	 * @test
@@ -73,15 +73,15 @@ class Tx_Powermail_Domain_Model_MailTest extends Tx_Extbase_Tests_Unit_BaseTestC
 		);
 	}
 
-    /**
+	/**
 	 * @test
 	 */
 	public function getSenderMailReturnsInitialValueForString() {
-        $this->assertSame(
-            '',
-            $this->fixture->getSenderMail()
-        );
-    }
+		$this->assertSame(
+			'',
+			$this->fixture->getSenderMail()
+		);
+	}
 
 	/**
 	 * @test
@@ -91,395 +91,393 @@ class Tx_Powermail_Domain_Model_MailTest extends Tx_Extbase_Tests_Unit_BaseTestC
 		$this->assertSame(
 			'Conceived at T3CON10',
 			$this->fixture->getSenderMail()
-        );
+		);
 	}
 
 
-    /**
-     * @test
-     */
-    public function getSubjectReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getSubject()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getSubjectReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getSubject()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setTitleForStringSetsSubject() {
-        $this->fixture->setSubject('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getSubject()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setTitleForStringSetsSubject() {
+		$this->fixture->setSubject('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getSubject()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function getReceiverMailReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getReceiverMail()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getReceiverMailReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getReceiverMail()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setTitleForStringReceiverMail() {
-        $this->fixture->setReceiverMail('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getReceiverMail()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setTitleForStringReceiverMail() {
+		$this->fixture->setReceiverMail('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getReceiverMail()
+		);
+	}
 
-     /**
-     * @test
-     */
-    public function getBodyReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getBody()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getBodyReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getBody()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setBodyForStringSetsBody() {
-        $this->fixture->setBody('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getBody()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setBodyForStringSetsBody() {
+		$this->fixture->setBody('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getBody()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function getFeuserReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getFeuser()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getFeuserReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getFeuser()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setFeuserForStringSetsFeuser() {
-        $this->fixture->setFeuser('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getFeuser()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setFeuserForStringSetsFeuser() {
+		$this->fixture->setFeuser('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getFeuser()
+		);
+	}
 
-     /**
-     * @test
-     */
-    public function getSenderipReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getSenderIp()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getSenderipReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getSenderIp()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setsenderIpForStringSetssenderIp() {
-        $this->fixture->setSenderIp('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getSenderIp()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setsenderIpForStringSetssenderIp() {
+		$this->fixture->setSenderIp('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getSenderIp()
+		);
+	}
 
-     /**
-     * @test
-     */
-    public function getuserAgentReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getSenderIp()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getuserAgentReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getSenderIp()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setuserAgentForStringSetsUseragent() {
-        $this->fixture->setUserAgent('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getUserAgent()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setuserAgentForStringSetsUseragent() {
+		$this->fixture->setUserAgent('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getUserAgent()
+		);
+	}
 
-     /**
-     * @test
-     */
-    public function getSpamfactorReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getSpamFactor()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getSpamfactorReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getSpamFactor()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setSpamfactorForStringSetsSpamfactor() {
-        $this->fixture->setSpamFactor('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getSpamFactor()
-        );
-    }
-
-
-     /**
-     * @test
-     */
-    public function getTimeReturnsInitialValueForNull(){
-        $this->assertSame(
-            NULL,
-            $this->fixture->getTime()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setTimeForDatetimeSetsTime() {
-        $now = mktime();
-        $this->fixture->setTime($now);
-        $this->assertSame(
-            $now,
-            $this->fixture->getTime()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getFormReturnsInitialValueForNull(){
-        $this->assertSame(
-            NULL,
-            $this->fixture->getForm()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setFormForTx_Powermail_Domain_Model_FormSetsForm() {
-        $form = new Tx_Powermail_Domain_Model_Form;
-        $this->fixture->setForm($form);
-        $this->assertSame(
-            $form,
-            $this->fixture->getForm()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setSpamfactorForStringSetsSpamfactor() {
+		$this->fixture->setSpamFactor('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getSpamFactor()
+		);
+	}
 
 
-    /**
-     * @test
-     */
-    public function getAnswersReturnsInitialValueForNull(){
-        $this->assertSame(
-            NULL,
-            $this->fixture->getAnswers()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getTimeReturnsInitialValueForNull(){
+		$this->assertSame(
+			NULL,
+			$this->fixture->getTime()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setAnswersForTx_Powermail_Domain_Model_AnswerSetsAnswers() {
-        $dummy = new Tx_Extbase_Persistence_ObjectStorage;
-        $this->fixture->setAnswers($dummy);
-        $this->assertSame(
-            $dummy,
-            $this->fixture->getAnswers()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setTimeForDatetimeSetsTime() {
+		$now = mktime();
+		$this->fixture->setTime($now);
+		$this->assertSame(
+			$now,
+			$this->fixture->getTime()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFormReturnsInitialValueForNull(){
+		$this->assertSame(
+			NULL,
+			$this->fixture->getForm()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setFormForTx_Powermail_Domain_Model_FormSetsForm() {
+		$form = new Tx_Powermail_Domain_Model_Form;
+		$this->fixture->setForm($form);
+		$this->assertSame(
+			$form,
+			$this->fixture->getForm()
+		);
+	}
 
 
-    /**
-     * @test
-     */
-    public function getCrdateReturnsInitialValueForNull(){
-        $this->assertSame(
-            NULL,
-            $this->fixture->getCrdate()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getAnswersReturnsInitialValueForNull(){
+		$this->assertSame(
+			NULL,
+			$this->fixture->getAnswers()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setCrdateForDatetimeSetsCrdate() {
-        $now = mktime();
-        $this->fixture->setCrdate($now);
-        $this->assertSame(
-            $now,
-            $this->fixture->getCrdate()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setAnswersForTx_Powermail_Domain_Model_AnswerSetsAnswers() {
+		$dummy = new Tx_Extbase_Persistence_ObjectStorage;
+		$this->fixture->setAnswers($dummy);
+		$this->assertSame(
+			$dummy,
+			$this->fixture->getAnswers()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function getHiddenReturnsInitialValueForFalse(){
-        $this->assertSame(
-            false,
-            $this->fixture->getHidden()
-        );
-    }
 
-    /**
-     * @test
-     */
-    public function setHiddenToTrue() {
+	/**
+	 * @test
+	 */
+	public function getCrdateReturnsInitialValueForNull(){
+		$this->assertSame(
+			NULL,
+			$this->fixture->getCrdate()
+		);
+	}
 
-        $this->fixture->setHidden(true);
-        $this->assertSame(
-            true,
-            $this->fixture->getHidden()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setCrdateForDatetimeSetsCrdate() {
+		$now = mktime();
+		$this->fixture->setCrdate($now);
+		$this->assertSame(
+			$now,
+			$this->fixture->getCrdate()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function getMarketingsearchtermReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getMarketingSearchterm()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getHiddenReturnsInitialValueForFalse(){
+		$this->assertSame(
+			FALSE,
+			$this->fixture->getHidden()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setMarketingsearchtermForStringSetsMarketingsearchterm() {
-        $this->fixture->setMarketingSearchterm('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getMarketingSearchterm()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setHiddenToTrue() {
 
-    /**
-     * @test
-     */
-    public function getmarketingRefererReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getMarketingSearchterm()
-        );
-    }
+		$this->fixture->setHidden(TRUE);
+		$this->assertSame(
+			TRUE,
+			$this->fixture->getHidden()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setmarketingRefererForStringSetsmarketingReferer() {
-        $this->fixture->setMarketingReferer('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getMarketingReferer()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getMarketingsearchtermReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getMarketingSearchterm()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function getmarketingPayedSearchResultReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getMarketingPayedSearchResult()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setMarketingsearchtermForStringSetsMarketingsearchterm() {
+		$this->fixture->setMarketingSearchterm('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getMarketingSearchterm()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setmarketingPayedSearchResultForStringSetsmarketingPayedSearchResult() {
-        $this->fixture->setMarketingPayedSearchResult('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getMarketingPayedSearchResult()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getmarketingRefererReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getMarketingSearchterm()
+		);
+	}
 
-   /**
-     * @test
-     */
-    public function getmarketingLanguageReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getMarketingLanguage()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setmarketingRefererForStringSetsmarketingReferer() {
+		$this->fixture->setMarketingReferer('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getMarketingReferer()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setmarketingLanguageForStringSetsmarketingLanguage() {
-        $this->fixture->setMarketingLanguage('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getMarketingLanguage()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getmarketingPayedSearchResultReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getMarketingPayedSearchResult()
+		);
+	}
 
-   /**
-     * @test
-     */
-    public function getmarketingBrowserLanguageReturnsInitialValueForString(){
-        $this->assertSame(
-            '',
-            $this->fixture->getMarketingBrowserLanguage()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setmarketingPayedSearchResultForStringSetsmarketingPayedSearchResult() {
+		$this->fixture->setMarketingPayedSearchResult('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getMarketingPayedSearchResult()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setmarketingBrowserLanguageForStringSetsmarketingBrowserLanguage() {
-        $this->fixture->setMarketingBrowserLanguage('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getMarketingBrowserLanguage()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getmarketingLanguageReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getMarketingLanguage()
+		);
+	}
 
-     /**
-     * @test
-     */
-    public function getmarketingFunnelReturnsInitialValueForFalse(){
-        $this->assertSame(
-            false,
-            $this->fixture->getMarketingFunnel()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function setmarketingLanguageForStringSetsmarketingLanguage() {
+		$this->fixture->setMarketingLanguage('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getMarketingLanguage()
+		);
+	}
 
-    /**
-     * @test
-     */
-    public function setmarketingFunnelForStringSetsmarketingFunnel() {
-        $this->fixture->setMarketingFunnel('Conceived at T3CON10');
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getMarketingFunnel()
-        );
-    }
+	/**
+	 * @test
+	 */
+	public function getmarketingBrowserLanguageReturnsInitialValueForString(){
+		$this->assertSame(
+			'',
+			$this->fixture->getMarketingBrowserLanguage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setmarketingBrowserLanguageForStringSetsmarketingBrowserLanguage() {
+		$this->fixture->setMarketingBrowserLanguage('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getMarketingBrowserLanguage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getmarketingFunnelReturnsInitialValueForFalse(){
+		$this->assertSame(
+			FALSE,
+			$this->fixture->getMarketingFunnel()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setmarketingFunnelForStringSetsmarketingFunnel() {
+		$this->fixture->setMarketingFunnel('Conceived at T3CON10');
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getMarketingFunnel()
+		);
+	}
 }
-
-?>

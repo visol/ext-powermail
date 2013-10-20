@@ -119,4 +119,3 @@ class Tx_Powermail_Utility_FieldSelectorUserFunc {
 		return $array;
 	}
 }
-?>

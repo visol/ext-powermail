@@ -31,5 +31,3 @@ class Tx_Powermail_ViewHelpers_Misc_CaptchaViewHelper extends Tx_Fluid_ViewHelpe
 		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 	}
 }
-
-?>

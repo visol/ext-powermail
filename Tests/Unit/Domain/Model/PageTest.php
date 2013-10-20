@@ -107,17 +107,17 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	public function setFieldsForObjectStorageContainingTx_Powermail_Domain_Model_FieldSetsFields() {
 		$objectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 
-        $field = new Tx_Powermail_Domain_Model_Field();
-        $field->setSorting(42);
-        $objectStorage->attach($field);
+		$field = new Tx_Powermail_Domain_Model_Field();
+		$field->setSorting(42);
+		$objectStorage->attach($field);
 
 		$this->fixture->setFields($objectStorage);
 
 		$this->assertSame(
-            array(
-                42 => $field,
-            ),
-            $this->fixture->getFields()
+			array(
+				 42 => $field,
+			),
+			$this->fixture->getFields()
 		);
 	}
 
@@ -127,13 +127,13 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	public function addFieldToObjectStorageHoldingFields() {
 		$field = new Tx_Powermail_Domain_Model_Field();
 		$field->setSorting(42);
-        $this->fixture->addField($field);
+		$this->fixture->addField($field);
 
 		$this->assertSame(
-            array(
-                    42 => $field,
-            ),
-            $this->fixture->getFields()
+			array(
+				 42 => $field,
+			),
+			$this->fixture->getFields()
 		);
 	}
 
@@ -141,23 +141,22 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 */
 	public function removeFieldFromObjectStorageHoldingFields() {
-        $field = new Tx_Powermail_Domain_Model_Field();
-        $field->setSorting(42);
-        $this->fixture->addField($field);
+		$field = new Tx_Powermail_Domain_Model_Field();
+		$field->setSorting(42);
+		$this->fixture->addField($field);
 
-        $this->assertSame(
-            array(
-                42 => $field,
-            ),
-            $this->fixture->getFields()
-        );
-        $this->fixture->removeField($field);
+		$this->assertSame(
+			array(
+				 42 => $field,
+			),
+			$this->fixture->getFields()
+		);
+		$this->fixture->removeField($field);
 
-        $this->assertSame(
-            array(),
-            $this->fixture->getFields()
-        );
+		$this->assertSame(
+			array(),
+			$this->fixture->getFields()
+		);
 	}
 
 }
-?>

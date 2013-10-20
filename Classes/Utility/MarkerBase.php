@@ -196,4 +196,3 @@ class Tx_Powermail_Utility_MarkerBase {
 		$this->existingMarkers = $this->getFieldMarkersFromForm();
 	}
 }
-?>

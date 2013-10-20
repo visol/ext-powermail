@@ -260,5 +260,3 @@ class Tx_Powermail_Utility_SaveToTable {
 		}
 	}
 }
-
-?>

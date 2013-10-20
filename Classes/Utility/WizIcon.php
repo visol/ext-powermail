@@ -84,4 +84,3 @@ class tx_powermail_pi1_wizicon {
 		return $LOCAL_LANG;
 	}
 }
-?>

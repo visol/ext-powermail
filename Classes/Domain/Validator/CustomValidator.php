@@ -13,7 +13,7 @@ class Tx_Powermail_Domain_Validator_CustomValidator extends Tx_Extbase_Validatio
 	 *
 	 * @var bool
 	 */
-	public $isValid = true;
+	public $isValid = TRUE;
 
 	/**
 	 * Validation of given fields with a SignalSlot
@@ -37,4 +37,3 @@ class Tx_Powermail_Domain_Validator_CustomValidator extends Tx_Extbase_Validatio
 	}
 
 }
-?>

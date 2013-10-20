@@ -81,7 +81,7 @@ class Tx_Powermail_Domain_Repository_FormRepository extends Tx_Extbase_Persisten
 	 */
 	public function getPagesValue($uid) {
 		$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(true);
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
 
 		// create sql statement
 		$sql = 'select pages';
@@ -94,5 +94,3 @@ class Tx_Powermail_Domain_Repository_FormRepository extends Tx_Extbase_Persisten
 		return $result[0]['pages'];
 	}
 }
-
-?>

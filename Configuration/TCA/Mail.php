@@ -297,4 +297,3 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 		),
 	),
 );
-?>

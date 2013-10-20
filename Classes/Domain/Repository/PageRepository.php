@@ -47,11 +47,9 @@ class Tx_Powermail_Domain_Repository_PageRepository extends Tx_Extbase_Persisten
 		$sql .= ' where uid = ' . intval($uid);
 		$sql .= ' limit 1';
 
-		$query->getQuerySettings()->setReturnRawQueryResult(true); //this generates an array and makes it much slower
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE); //this generates an array and makes it much slower
 		$result = $query->statement($sql)->execute();
 
 		return $result[0]['title'];
 	}
 }
-
-?>

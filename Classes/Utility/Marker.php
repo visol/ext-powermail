@@ -76,4 +76,3 @@ class Tx_Powermail_Utility_Marker {
 		return '';
 	}
 }
-?>

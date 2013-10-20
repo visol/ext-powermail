@@ -103,6 +103,6 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	 * @return bool
 	 */
 	protected function getErrorFlashMessage() {
-		return false;
+		return FALSE;
 	}
 }

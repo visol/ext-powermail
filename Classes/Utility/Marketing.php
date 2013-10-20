@@ -102,7 +102,7 @@ class Tx_Powermail_Utility_Marketing {
 		if (t3lib_div::getIndpEnv('HTTP_HOST') != $url['host']) {
 			return t3lib_div::getIndpEnv('HTTP_REFERER');
 		}
-		return false;
+		return FALSE;
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Tx_Powermail_Utility_Marketing {
 		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER'))); // every part of the referer in an own array
 
 		if (!isset($url['query'])) { // if GET params is set
-			return false;
+			return FALSE;
 		}
 
 		preg_match('/q=([^&]+)(&amp;)?/', $url['query'], $output); // give me only the &q="searchword" part
@@ -123,7 +123,7 @@ class Tx_Powermail_Utility_Marketing {
 			return urldecode($output[1]);
 		}
 
-		return false;
+		return FALSE;
 	}
 
 	/**

@@ -31,14 +31,14 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	 *
 	 * @var bool
 	 */
-	protected $isValid = true;
+	protected $isValid = TRUE;
 
 	/**
 	 * Captcha Field found
 	 *
 	 * @var bool
 	 */
-	protected $captchaFound = false;
+	protected $captchaFound = FALSE;
 
 	/**
 	 * Validation of given Captcha fields
@@ -67,11 +67,11 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 			$captcha = $this->objectManager->get('Tx_Powermail_Utility_CalculatingCaptcha');
 			if (!$captcha->validCode($value, $this->clearSession)) {
 				$this->addError('captcha', $uid);
-				$this->isValid = false;
+				$this->isValid = FALSE;
 			}
 
 			// Captcha field found
-			$this->captchaFound = true;
+			$this->captchaFound = TRUE;
 		}
 
 		if ($this->captchaFound) {
@@ -79,7 +79,7 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 		} else {
 			// if no captcha vars given
 			$this->addError('captcha', 0);
-			return false;
+			return FALSE;
 		}
   	}
 
@@ -99,8 +99,6 @@ class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain
 	 */
 	public function __construct() {
 		$piVars = t3lib_div::_GET('tx_powermail_pi1');
-		$this->clearSession = ($piVars['action'] == 'create' ? true : false); // clear captcha on create action
+		$this->clearSession = ($piVars['action'] == 'create' ? TRUE : FALSE); // clear captcha on create action
 	}
-
 }
-?>

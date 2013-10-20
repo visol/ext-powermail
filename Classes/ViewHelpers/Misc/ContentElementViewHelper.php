@@ -13,20 +13,20 @@ class Tx_Powermail_ViewHelpers_Misc_ContentElementViewHelper extends Tx_Fluid_Co
 	 */
 	protected $cObj;
 
-    /**
-     * Parse a content element
-     *
+	/**
+	 * Parse a content element
+	 *
 	 * @param	int			UID of any content element
-     * @return 	string		Parsed Content Element
-     */
-    public function render($uid) {
+	 * @return 	string		Parsed Content Element
+	 */
+	public function render($uid) {
 		$conf = array( // config
 			'tables' => 'tt_content',
 			'source' => $uid,
 			'dontCheckPid' => 1
 		);
 		return $this->cObj->RECORDS($conf);
-    }
+	}
 
 	/**
 	 * Injects the content object
@@ -39,5 +39,3 @@ class Tx_Powermail_ViewHelpers_Misc_ContentElementViewHelper extends Tx_Fluid_Co
 	}
 
 }
-
-?>
