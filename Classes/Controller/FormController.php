@@ -87,6 +87,12 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	 * Action create entry
 	 *
 	 * @param Tx_Powermail_Domain_Model_Mail $mail New mail object
+	 * @validate $mail Tx_Powermail_Domain_Validator_UploadValidator
+	 * validate $mail Tx_Powermail_Domain_Validator_MandatoryValidator
+	 * validate $mail Tx_Powermail_Domain_Validator_StringValidator
+	 * validate $mail Tx_Powermail_Domain_Validator_CaptchaValidator
+	 * validate $mail Tx_Powermail_Domain_Validator_SpamShieldValidator
+	 * validate $mail Tx_Powermail_Domain_Validator_CustomValidator
 	 * @return void
 	 */
 	public function createAction(Tx_Powermail_Domain_Model_Mail $mail = NULL) {

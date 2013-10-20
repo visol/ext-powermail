@@ -51,18 +51,18 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	protected $isValid = TRUE;
 
 	/**
-	 * Validation of given Params
+	 * Validation of given Mail Params
 	 *
-	 * @param array $params
+	 * @param $mail
 	 * @return bool
 	 */
-	public function isValid($params) {
+	public function isValid($mail) {
 		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
 			// session stuff
 			$uploadSession = array();
 			Tx_Powermail_Utility_Div::setSessionValue('upload', array(), TRUE); // clean old session before
 
-			foreach ($_FILES['tx_powermail_pi1']['name']['field'] as $uid => $filename) {
+			foreach ($_FILES['tx_powermail_pi1']['name']['field'] as $marker => $filename) {
 
 				// if no file given
 				if (empty($filename)) {
@@ -70,20 +70,23 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 				}
 
 				// Check extension
-				if (!$this->checkExtension($filename, $uid)) {
+				if (!$this->checkExtension($filename, $marker)) {
 					continue;
 				}
 
 				// Check filesize
-				if (!$this->checkFilesize($uid)) {
+				if (!$this->checkFilesize($marker)) {
 					continue;
 				}
 
 				// create new filename with absolute path
-				$newFile = $this->basicFileFunctions->getUniqueName($filename, t3lib_div::getFileAbsFileName($this->settings['misc.']['file.']['folder']));
+				$newFile = $this->basicFileFunctions->getUniqueName(
+					$filename,
+					t3lib_div::getFileAbsFileName($this->settings['misc.']['file.']['folder'])
+				);
 				$uploadSession[] = $newFile; // create array for upload session
-				if (!t3lib_div::upload_copy_move($_FILES['tx_powermail_pi1']['tmp_name']['field'][$uid], $newFile)) {
-					$this->addError('upload_error', $uid);
+				if (!t3lib_div::upload_copy_move($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker], $newFile)) {
+					$this->addError('upload_error', $marker);
 					$this->isValid = FALSE;
 				}
 			}
@@ -96,14 +99,14 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
   	}
 
 	/**
-	 * Check filesize of given file
+	 * Is filesize small enough?
 	 *
-	 * @param	int			Field uid
-	 * @return	bool		If file is not larger than allowed
+	 * @param string $marker Marker string like {upload}
+	 * @return bool
 	 */
-	protected function checkFilesize($uid) {
-		if (filesize($_FILES['tx_powermail_pi1']['tmp_name']['field'][$uid]) > $this->settings['misc.']['file.']['size']) {
-			$this->addError('upload_size', $uid);
+	protected function checkFilesize($marker) {
+		if (filesize($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker]) > $this->settings['misc.']['file.']['size']) {
+			$this->addError('upload_size', $marker);
 			$this->isValid = FALSE;
 			return FALSE;
 		}
@@ -111,16 +114,16 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	}
 
 	/**
-	 * Check extension of given filename
+	 * Is file-extension allowed for uploading?
 	 *
-	 * @param	string		Filename like (upload.txt)
-	 * @param	int			Field uid
-	 * @return	bool		If Extension is allowed via ts
+	 * @param string $filename Filename like (upload.txt)
+	 * @param string $marker Marker string like {upload}
+	 * @return bool
 	 */
-	protected function checkExtension($filename, $uid) {
+	protected function checkExtension($filename, $marker) {
 		$fileInfo = pathinfo($filename);
 		if (!isset($fileInfo['extension']) || !t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
-			$this->addError('upload_extension', $uid);
+			$this->addError('upload_extension', $marker);
 			$this->isValid = FALSE;
 			return FALSE;
 		}
@@ -132,7 +135,9 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	 * @return void
 	 */
 	public function injectTypoScript(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$typoScriptSetup = $configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$typoScriptSetup = $configurationManager->getConfiguration(
+			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
 		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 	}
 
