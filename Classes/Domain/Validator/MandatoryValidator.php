@@ -1,36 +1,14 @@
 <?php
-class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Powermail_Domain_Validator_AbstractValidator {
 
 	/**
-	 * formRepository
+	 * Mandatory Validation of given answers
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
-	 *
-	 * @inject
-	 */
-	protected $formRepository;
-
-	/**
-	 * Return variable
-	 *
-	 * @var bool
-	 */
-	protected $isValid = TRUE;
-
-	/**
-	 * Validation of given Params
-	 *
-	 * @param array $params Answers
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return bool
 	 */
-	public function isValid($params) {
-		$formUid = $params['__identity'];
-		$form = $this->formRepository->findByUid($formUid);
-		if (!method_exists($form, 'getPages')) {
-			return $this->isValid;
-		}
-
-		foreach ($form->getPages() as $page) { // every page in current form
+	public function isValid($mail) {
+		foreach ($mail->getForm()->getPages() as $page) { // every page in current form
 			foreach ($page->getFields() as $field) { // every field in current page
 
 				// if not a mandatory field
@@ -38,29 +16,44 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Extbase_Valida
 					continue;
 				}
 
-				// set error
-				if (is_array($params[$field->getUid()])) {
-					$empty = 1;
-					foreach ($params[$field->getUid()] as $value) {
-						if (strlen($value)) {
-							$empty = 0;
+				if (!$this->isValueSet($field, $mail)) {
+					$this->setIsValid(FALSE);
+					$this->addError('mandatory', $field->getMarker());
+				}
+			}
+		}
+		return $this->getIsValid();
+	}
+
+	/**
+	 * Check if there is a value in mail.answers.x.field for every field
+	 *
+	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @return bool
+	 */
+	protected function isValueSet(Tx_Powermail_Domain_Model_Field $field, Tx_Powermail_Domain_Model_Mail $mail) {
+		foreach ($mail->getAnswers() as $answer) {
+			if ($answer->getField()->getUid() === $field->getUid()) {
+				if (!is_array($answer->getValue())) { // default fields
+					if ($answer->getValue()) {
+						return TRUE;
+					}
+				} else { // checkboxes
+					$filled = FALSE;
+					foreach ($answer->getValue() as $subValue) {
+						if (strlen($subValue)) {
+							$filled = TRUE;
 							break;
 						}
 					}
-					if ($empty) {
-						$this->addError('mandatory', $field->getUid());
-						$this->isValid = FALSE;
-					}
-				} else {
-					if (!strlen($params[$field->getUid()])) {
-						$this->addError('mandatory', $field->getUid());
-						$this->isValid = FALSE;
+					if ($filled) {
+						return TRUE;
 					}
 				}
 			}
 		}
-
-		return $this->isValid;
+		return FALSE;
 	}
 
 }

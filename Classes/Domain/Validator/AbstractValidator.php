@@ -32,4 +32,25 @@ abstract class Tx_Powermail_Domain_Validator_AbstractValidator extends Tx_Extbas
 	 */
 	protected $objectManager;
 
+	/**
+	 * Return variable
+	 *
+	 * @var bool
+	 */
+	protected $isValid = TRUE;
+
+	/**
+	 * @param boolean $isValid
+	 */
+	public function setIsValid($isValid) {
+		$this->isValid = $isValid;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getIsValid() {
+		return $this->isValid;
+	}
+
 }

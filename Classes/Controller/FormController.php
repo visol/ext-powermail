@@ -71,6 +71,9 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		);
 
 		foreach ((array) $arguments['field'] as $marker => $value) {
+			if (substr($marker, 0, 2) === '__') { // ignore internal fields (honeypod)
+				continue;
+			}
 			$newArguments['mail']['answers'][] = array(
 				'field' => $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']),
 				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
@@ -88,7 +91,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	 *
 	 * @param Tx_Powermail_Domain_Model_Mail $mail New mail object
 	 * @validate $mail Tx_Powermail_Domain_Validator_UploadValidator
-	 * validate $mail Tx_Powermail_Domain_Validator_MandatoryValidator
+	 * @validate $mail Tx_Powermail_Domain_Validator_MandatoryValidator
 	 * validate $mail Tx_Powermail_Domain_Validator_StringValidator
 	 * validate $mail Tx_Powermail_Domain_Validator_CaptchaValidator
 	 * validate $mail Tx_Powermail_Domain_Validator_SpamShieldValidator

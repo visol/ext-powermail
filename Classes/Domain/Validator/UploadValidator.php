@@ -29,9 +29,8 @@
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
-class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_Validator_AbstractValidator {
 
 	/**
 	 * BasicFileFunctions
@@ -53,7 +52,7 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	/**
 	 * Validation of given Mail Params
 	 *
-	 * @param $mail
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @return bool
 	 */
 	public function isValid($mail) {
@@ -86,8 +85,8 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 				);
 				$uploadSession[] = $newFile; // create array for upload session
 				if (!t3lib_div::upload_copy_move($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker], $newFile)) {
+					$this->setIsValid(FALSE);
 					$this->addError('upload_error', $marker);
-					$this->isValid = FALSE;
 				}
 			}
 
@@ -95,7 +94,7 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 			Tx_Powermail_Utility_Div::setSessionValue('upload', $uploadSession, TRUE);
 		}
 
-		return $this->isValid;
+		return $this->getIsValid();
   	}
 
 	/**
@@ -106,8 +105,8 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	 */
 	protected function checkFilesize($marker) {
 		if (filesize($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker]) > $this->settings['misc.']['file.']['size']) {
+			$this->setIsValid(FALSE);
 			$this->addError('upload_size', $marker);
-			$this->isValid = FALSE;
 			return FALSE;
 		}
 		return TRUE;
@@ -123,8 +122,8 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Extbase_Validatio
 	protected function checkExtension($filename, $marker) {
 		$fileInfo = pathinfo($filename);
 		if (!isset($fileInfo['extension']) || !t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
+			$this->setIsValid(FALSE);
 			$this->addError('upload_extension', $marker);
-			$this->isValid = FALSE;
 			return FALSE;
 		}
 		return TRUE;
