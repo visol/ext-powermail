@@ -117,7 +117,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			// Powermail sendpost
 //			$this->div->sendPost($field, $this->conf, $this->configurationManager);
 		} else {
-			$this->sendConfirmationMail($field, $newMail);
+//			$this->sendConfirmationMail($field, $newMail);
 		}
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($mail, $this));
@@ -168,9 +168,9 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		if ($this->settings['receiver']['enable']) {
 			$this->sendReceiverMail($mail);
 		}
-//		if ($this->settings['sender']['enable'] && $this->div->getSenderMailFromArguments($field)) {
-//			$this->sendSenderMail($mail);
-//		}
+		if ($this->settings['sender']['enable'] && $this->div->getSenderMailFromArguments($mail)) {
+			$this->sendSenderMail($mail);
+		}
 	}
 
 	/**
@@ -190,20 +190,19 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			$this->settings['receiver']['fe_group']
 		);
 		foreach ($receivers as $receiver) {
-			$email = array();
-			$email['template'] = 'Mail/ReceiverMail';
-			$email['receiverEmail'] = $receiver;
-			$email['receiverName'] = $this->settings['receiver']['name'] ? $this->settings['receiver']['name'] : 'Powermail';
-			$email['senderEmail'] = $this->div->getSenderMailFromArguments($mail);
-			$email['senderName'] = $this->div->getSenderNameFromArguments($mail);
-			$email['subject'] = $this->settings['receiver']['subject'];
-			$email['rteBody'] = $this->settings['receiver']['body'];
-			$email['format'] = $this->settings['receiver']['mailformat'];
-
+			$email = array(
+				'template' => 'Mail/ReceiverMail',
+				'receiverEmail' => $receiver,
+				'receiverName' => $this->settings['receiver']['name'] ? $this->settings['receiver']['name'] : 'Powermail',
+				'senderEmail' => $this->div->getSenderMailFromArguments($mail),
+				'senderName' => $this->div->getSenderNameFromArguments($mail),
+				'subject' => $this->settings['receiver']['subject'],
+				'rteBody' => $this->settings['receiver']['body'],
+				'format' => $this->settings['receiver']['mailformat']
+			);
 			$this->div->overwriteValueFromTypoScript($email['receiverName'], $this->conf['receiver.']['overwrite.'], 'name');
 			$this->div->overwriteValueFromTypoScript($email['senderName'], $this->conf['receiver.']['overwrite.'], 'senderName');
 			$this->div->overwriteValueFromTypoScript($email['senderEmail'], $this->conf['receiver.']['overwrite.'], 'senderEmail');
-
 			$sent = $this->div->sendTemplateEmail($email, $mail, $this->settings, 'receiver');
 
 			if (!$sent) {
@@ -224,28 +223,21 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	 */
 	protected function sendSenderMail(Tx_Powermail_Domain_Model_Mail $mail) {
 		// Send Mail to sender
-		$mail = array();
-		$mail['receiverName'] = $this->div->getSenderNameFromArguments($field) ? $this->div->getSenderNameFromArguments($field) : 'Powermail';
-		$mail['receiverEmail'] = $this->div->getSenderMailFromArguments($field);
-		$mail['senderName'] = $this->settings['sender']['name'];
-		$mail['senderEmail'] = $this->settings['sender']['email'];
-		$mail['subject'] = $this->settings['sender']['subject'];
-		$mail['template'] = 'Mail/SenderMail';
-		$mail['rteBody'] = $this->settings['sender']['body'];
-		$mail['format'] = $this->settings['sender']['mailformat'];
-		if ($this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['email'], $this->conf['sender.']['overwrite.']['email.'])) { // overwrite from typoscript
-			$mail['receiverEmail'] = $this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['email'], $this->conf['sender.']['overwrite.']['email.']);
-		}
-		if ($this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['name'], $this->conf['sender.']['overwrite.']['name.'])) { // overwrite from typoscript
-			$mail['receiverName'] = $this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['name'], $this->conf['sender.']['overwrite.']['name.']);
-		}
-		if ($this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['senderName'], $this->conf['sender.']['overwrite.']['senderName.'])) { // overwrite from typoscript
-			$mail['senderName'] = $this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['senderName'], $this->conf['sender.']['overwrite.']['senderName.']);
-		}
-		if ($this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['senderEmail'], $this->conf['sender.']['overwrite.']['senderEmail.'])) { // overwrite from typoscript
-			$mail['senderEmail'] = $this->cObj->cObjGetSingle($this->conf['sender.']['overwrite.']['senderEmail'], $this->conf['sender.']['overwrite.']['senderEmail.']);
-		}
-		$this->div->sendTemplateEmail($mail, $field, $this->settings, 'sender', $this->objectManager, $this->configurationManager);
+		$email = array(
+			'template' => 'Mail/SenderMail',
+			'receiverName' => $this->div->getSenderNameFromArguments($mail) ? $this->div->getSenderNameFromArguments($mail) : 'Powermail',
+			'receiverEmail' => $this->div->getSenderMailFromArguments($mail),
+			'senderName' => $this->settings['sender']['name'],
+			'senderEmail' => $this->settings['sender']['email'],
+			'subject' => $this->settings['sender']['subject'],
+			'rteBody' => $this->settings['sender']['body'],
+			'format' => $this->settings['sender']['mailformat']
+		);
+		$this->div->overwriteValueFromTypoScript($email['receiverEmail'], $this->conf['sender.']['overwrite.'], 'email');
+		$this->div->overwriteValueFromTypoScript($email['receiverName'], $this->conf['sender.']['overwrite.'], 'name');
+		$this->div->overwriteValueFromTypoScript($email['senderName'], $this->conf['sender.']['overwrite.'], 'senderName');
+		$this->div->overwriteValueFromTypoScript($email['senderEmail'], $this->conf['sender.']['overwrite.'], 'senderEmail');
+		$this->div->sendTemplateEmail($email, $mail, $this->settings, 'sender');
 	}
 
 	/**
