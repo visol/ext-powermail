@@ -37,7 +37,6 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	 * formRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_FormRepository
-	 *
 	 * @inject
 	 */
 	protected $formRepository;
@@ -46,7 +45,6 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	 * mailRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_MailRepository
-	 *
 	 * @inject
 	 */
 	protected $mailRepository;
@@ -55,17 +53,23 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	 * answerRepository
 	 *
 	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
-	 *
 	 * @inject
 	 */
 	protected $answerRepository;
 
 	/**
 	 * @var Tx_Extbase_SignalSlot_Dispatcher
-	 *
 	 * @inject
 	 */
 	protected $signalSlotDispatcher;
+
+	/**
+	 * Instance for Misc Functions
+	 *
+	 * @var Tx_Powermail_Utility_Div
+	 * @inject
+	 */
+	protected $div;
 
 	/**
 	 * cObj
@@ -80,15 +84,6 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	 * @var array
 	 */
 	protected $conf;
-
-	/**
-	 * Instance for Misc Functions
-	 *
-	 * @var Tx_Powermail_Utility_Div
-	 *
-	 * @inject
-	 */
-	protected $div;
 
 	/**
 	 * message Class
