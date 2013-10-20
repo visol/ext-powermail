@@ -42,11 +42,11 @@ class Tx_Powermail_ViewHelpers_Misc_VariablesViewHelper extends Tx_Fluid_Core_Vi
 	 * @return string Changed string
 	 */
 	public function render($variablesMarkers = array(), Tx_Powermail_Domain_Model_Mail $mail, $type = 'web') {
-		$parseObject = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+		$parseObject = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$parseObject->setTemplateSource($this->renderChildren());
 		$parseObject->assignMultiple($this->div->htmlspecialcharsOnArray($variablesMarkers));
 
-		$powermailAll = $this->div->powermailAll($mail, $this->configurationManager, $this->objectManager, $type, $this->settings);
+		$powermailAll = $this->div->powermailAll($mail, $type, $this->settings);
 		$parseObject->assign('powermail_all', $powermailAll);
 
 		return html_entity_decode($parseObject->render());

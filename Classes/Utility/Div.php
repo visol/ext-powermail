@@ -180,15 +180,13 @@ class Tx_Powermail_Utility_Div {
 	 * This functions renders the powermail_all Template to use in Mails and Other views
 	 *
 	 * @param Tx_Powermail_Domain_Model_Mail $mail
-	 * @param object $configurationManager Configuration Manager
-	 * @param object $objectManager Object Manager
 	 * @param string $section Choose a section (web or mail)
 	 * @param array $settings TypoScript Settings
 	 * @return string content parsed from powermailAll HTML Template
 	 */
-	public function powermailAll(Tx_Powermail_Domain_Model_Mail $mail, $configurationManager, $objectManager, $section = 'web', $settings = array()) {
-		$powermailAll = $objectManager->create('Tx_Fluid_View_StandaloneView');
-		$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(
+	public function powermailAll(Tx_Powermail_Domain_Model_Mail $mail, $section = 'web', $settings = array()) {
+		$powermailAll = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
 			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
 		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . 'Form/PowermailAll.html';
@@ -369,7 +367,7 @@ class Tx_Powermail_Utility_Div {
 	 * @return string Parsed string
 	 */
 	public function fluidParseString($string, $variables = array()) {
-		$parseObject = $this->objectManager->create('Tx_Fluid_View_StandaloneView');
+		$parseObject = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$parseObject->setTemplateSource($string);
 		$parseObject->assignMultiple($variables);
 		return $parseObject->render();
@@ -930,52 +928,47 @@ class Tx_Powermail_Utility_Div {
 		}
 
 		// generate mail body
-		$extbaseFrameworkConfiguration = $configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . $email['template'] . '.html';
-		$emailView = $objectManager->create('Tx_Fluid_View_StandaloneView');
-		$emailView->getRequest()->setControllerExtensionName('Powermail'); // extension name for translate viewhelper
-		$emailView->getRequest()->setPluginName('Pi1');
-		$emailView->getRequest()->setControllerName('Form');
-		$emailView->setFormat('html');
-		$emailView->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailView->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
-		$emailView->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$templatePathAndFilename .= $email['template'] . '.html';
+		$emailBody = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		$emailBody->getRequest()->setControllerExtensionName('Powermail');
+		$emailBody->getRequest()->setPluginName('Pi1');
+		$emailBody->getRequest()->setControllerName('Form');
+		$emailBody->setFormat('html');
+		$emailBody->setTemplatePathAndFilename($templatePathAndFilename);
+		$emailBody->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
+		$emailBody->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
 
 		// get variables
 		// additional variables
 		if (isset($email['variables']) && is_array($email['variables'])) {
-			$emailView->assignMultiple($email['variables']);
+			$emailBody->assignMultiple($email['variables']);
 		}
 		// markers in HTML Template
-		$variablesWithMarkers = $this->getVariablesWithMarkers($fields);
-		$emailView->assign('variablesWithMarkers', $this->htmlspecialcharsOnArray($variablesWithMarkers));
-		$emailView->assignMultiple($variablesWithMarkers);
-		// powermail_all
-		$variables = $this->getVariablesWithLabels($fields);
-		$content = $this->powermailAll($variables, $configurationManager, $objectManager, 'mail', $settings);
-		$emailView->assign('powermail_all', $content);
+		$variablesWithMarkers = $this->getVariablesWithMarkers($mail);
+		$emailBody->assign('variablesWithMarkers', $this->htmlspecialcharsOnArray($variablesWithMarkers));
+		$emailBody->assignMultiple($variablesWithMarkers);
+		$emailBody->assign('powermail_all', $this->powermailAll($mail, 'mail', $settings));
 		// from rte
-		$emailView->assign('powermail_rte', $email['rteBody']);
-		$variablesWithLabels = $this->getVariablesWithLabels($fields);
-		$emailView->assign('variablesWithLabels', $variablesWithLabels);
-		$emailView->assign('marketingInfos', self::getMarketingInfos());
-		$emailBody = $emailView->render();
+		$emailBody->assign('powermail_rte', $email['rteBody']);
+		$emailBody->assign('marketingInfos', self::getMarketingInfos());
+		$emailBody->assign('mail', $mail);
+		$emailBody = $emailBody->render();
 
 
 		/*****************
 		 * generate mail
 		 ****************/
 		$message = t3lib_div::makeInstance('t3lib_mail_Message');
+		$this->overwriteValueFromTypoScript($email['subject'], $this->conf[$type . '.']['overwrite.'], 'subject');
 		$message
 			->setTo(array($email['receiverEmail'] => $email['receiverName']))
 			->setFrom(array($email['senderEmail'] => $email['senderName']))
 			->setSubject($email['subject'])
 			->setCharset($GLOBALS['TSFE']->metaCharset);
-
-		// overwrite subject
-		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['subject'], $conf[$type . '.']['overwrite.']['subject.'])) {
-			$message->setSubject($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['subject'], $conf[$type . '.']['overwrite.']['subject.']));
-		}
 
 		// add cc receivers
 		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.'])) {
@@ -1020,7 +1013,7 @@ class Tx_Powermail_Utility_Div {
 			}
 		}
 
-		// add attachments from typoscript
+		// add attachments from TypoScript
 		if ($cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.'])) {
 			$files = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']), 1);
 			foreach ($files as $file) {

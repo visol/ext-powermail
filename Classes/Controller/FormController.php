@@ -210,7 +210,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			if (!$sent) {
 				$this->flashMessageContainer->add(
 					Tx_Extbase_Utility_Localization::translate('error_mail_not_created',
-						'powermail')
+					'powermail')
 				);
 				$this->messageClass = 'error';
 			}
@@ -310,7 +310,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		$this->view->assignMultiple($variablesWithMarkers);
 
 		// powermail_all
-		$content = $this->div->powermailAll($mail, $this->configurationManager, $this->objectManager, 'web', $this->settings);
+		$content = $this->div->powermailAll($mail, 'web', $this->settings);
 		$this->view->assign('powermail_all', $content);
 	}
 
