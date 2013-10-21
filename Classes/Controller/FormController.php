@@ -34,11 +34,12 @@
 class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_AbstractController {
 
 	/**
-	  * action show form for creating new mails
-	  *
-	  * @return void
-	  */
-	public function formAction() {
+	 * action show form for creating new mails
+	 *
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @return void
+	 */
+	public function formAction(Tx_Powermail_Domain_Model_Mail $mail = NULL) {
 		if (!isset($this->settings['main']['form']) || !$this->settings['main']['form']) {
 			return;
 		}
@@ -47,6 +48,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 		$forms = $this->formRepository->findByUids($this->settings['main']['form']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($forms, $this));
 		$this->view->assign('forms', $forms);
+		$this->view->assign('mail', $mail);
 		$this->view->assign('messageClass', $this->messageClass);
 		$this->view->assign('action', ($this->settings['main']['confirmation'] ? 'confirmation' : 'create'));
 
@@ -70,17 +72,29 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			'mail' => $arguments['mail']
 		);
 
+		$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
+		$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
+		Tx_Extbase_Utility_Debugger::var_dump($this->arguments);
+
+		$i = 0;
 		foreach ((array) $arguments['field'] as $marker => $value) {
 			if (substr($marker, 0, 2) === '__') { // ignore internal fields (honeypod)
 				continue;
 			}
-			$newArguments['mail']['answers'][] = array(
-				'field' => $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']),
+
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i . '.field');
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i . '.field');
+
+			$newArguments['mail']['answers'][$i] = array(
+//				'field' => $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']),
 				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
 				'valueType' => Tx_Powermail_Utility_Div::getDataTypeFromFieldType(
 					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
 				)
 			);
+			$i++;
 		}
 		$this->request->setArguments($newArguments);
 		$this->request->setArgument('field', NULL);
@@ -89,7 +103,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 	/**
 	 * Action create entry
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail New mail object
+	 * @param Tx_Powermail_Domain_Model_Mail $mail
 	 * @validate $mail Tx_Powermail_Domain_Validator_UploadValidator
 	 * @validate $mail Tx_Powermail_Domain_Validator_MandatoryValidator
 	 * validate $mail Tx_Powermail_Domain_Validator_StringValidator

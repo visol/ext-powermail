@@ -7,6 +7,9 @@ plugin.tx_powermail {
 		partialRootPath = {$plugin.tx_powermail.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_powermail.view.layoutRootPath}
 	}
+	features {
+		rewrittenPropertyMapper = 1
+	}
 	settings {
 		setup {
 

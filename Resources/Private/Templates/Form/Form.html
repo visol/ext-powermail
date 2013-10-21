@@ -20,7 +20,7 @@ Render Powermail Form
 						class="powermail_form powermail_form_{form.uid} {form.css} {vh:Misc.MorestepClass(activate: '{settings.main.moresteps}', class: 'powermail_morestep')}">
 
 					<h3>{form.title}</h3>
-					<f:render partial="FormError" arguments="{error}" />
+					<f:render partial="FormError" arguments="{_all}" />
 
 					<f:for each="{form.pages}" as="page">
 						<fieldset class="powermail_fieldset powermail_fieldset_{page.uid} {page.css}">

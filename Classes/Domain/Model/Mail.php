@@ -113,8 +113,9 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 
 	/**
 	 * Powermail Answers
+	 * 		Note: Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Answer> don't work with the new property mapper :(
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Answer>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Powermail_Domain_Model_Answer>
 	 * @lazy
 	 */
 	protected $answers = NULL;
