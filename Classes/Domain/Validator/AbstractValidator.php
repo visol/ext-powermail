@@ -40,6 +40,11 @@ abstract class Tx_Powermail_Domain_Validator_AbstractValidator extends Tx_Extbas
 	protected $isValid = TRUE;
 
 	/**
+	 * TypoScript Setup for powermail Pi1
+	 */
+	protected $settings;
+
+	/**
 	 * @param boolean $isValid
 	 */
 	public function setIsValid($isValid) {
@@ -51,6 +56,29 @@ abstract class Tx_Powermail_Domain_Validator_AbstractValidator extends Tx_Extbas
 	 */
 	public function getIsValid() {
 		return $this->isValid;
+	}
+
+	/**
+	 * Set Error
+	 *
+	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param string $label
+	 * @return void
+	 */
+	protected function setErrorAndMessage(Tx_Powermail_Domain_Model_Field $field, $label) {
+		$this->setIsValid(FALSE);
+		$this->addError($label, $field->getMarker());
+	}
+
+	/**
+	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @return void
+	 */
+	public function injectTypoScript(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+		$typoScriptSetup = $configurationManager->getConfiguration(
+			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
+		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 	}
 
 }

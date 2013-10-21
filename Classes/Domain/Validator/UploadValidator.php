@@ -38,18 +38,6 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 	public $basicFileFunctions;
 
 	/**
-	 * TS
-	 */
-	public $settings;
-
-	/**
-	 * Return variable
-	 *
-	 * @var bool
-	 */
-	protected $isValid = TRUE;
-
-	/**
 	 * Validation of given Mail Params
 	 *
 	 * @param Tx_Powermail_Domain_Model_Mail $mail
@@ -61,32 +49,37 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 			$uploadSession = array();
 			Tx_Powermail_Utility_Div::setSessionValue('upload', array(), TRUE); // clean old session before
 
-			foreach ($_FILES['tx_powermail_pi1']['name']['field'] as $marker => $filename) {
+			foreach ($mail->getAnswers() as $answer) {
+				if ($answer->getField()->getType() != 'upload') {
+					continue;
+				}
+
+				$fileName = $_FILES['tx_powermail_pi1']['name']['field'][$answer->getField()->getMarker()];
+				$tmpName = $_FILES['tx_powermail_pi1']['tmp_name']['field'][$answer->getField()->getMarker()];
 
 				// if no file given
-				if (empty($filename)) {
+				if (!$answer->getValue() || empty($fileName)) {
 					continue;
 				}
 
 				// Check extension
-				if (!$this->checkExtension($filename, $marker)) {
+				if (!$this->checkExtension($fileName, $answer->getField())) {
 					continue;
 				}
 
 				// Check filesize
-				if (!$this->checkFilesize($marker)) {
+				if (!$this->checkFilesize($tmpName, $answer->getField())) {
 					continue;
 				}
 
 				// create new filename with absolute path
 				$newFile = $this->basicFileFunctions->getUniqueName(
-					$filename,
+					$fileName,
 					t3lib_div::getFileAbsFileName($this->settings['misc.']['file.']['folder'])
 				);
 				$uploadSession[] = $newFile; // create array for upload session
-				if (!t3lib_div::upload_copy_move($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker], $newFile)) {
-					$this->setIsValid(FALSE);
-					$this->addError('upload_error', $marker);
+				if (!t3lib_div::upload_copy_move($tmpName, $newFile)) {
+					$this->setErrorAndMessage($answer->getField(), 'upload_error');
 				}
 			}
 
@@ -95,49 +88,37 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 		}
 
 		return $this->getIsValid();
-  	}
-
-	/**
-	 * Is filesize small enough?
-	 *
-	 * @param string $marker Marker string like {upload}
-	 * @return bool
-	 */
-	protected function checkFilesize($marker) {
-		if (filesize($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker]) > $this->settings['misc.']['file.']['size']) {
-			$this->setIsValid(FALSE);
-			$this->addError('upload_size', $marker);
-			return FALSE;
-		}
-		return TRUE;
 	}
 
 	/**
 	 * Is file-extension allowed for uploading?
 	 *
 	 * @param string $filename Filename like (upload.txt)
-	 * @param string $marker Marker string like {upload}
+	 * @param Tx_Powermail_Domain_Model_Field $field
 	 * @return bool
 	 */
-	protected function checkExtension($filename, $marker) {
+	protected function checkExtension($filename, Tx_Powermail_Domain_Model_Field $field) {
 		$fileInfo = pathinfo($filename);
 		if (!isset($fileInfo['extension']) || !t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
-			$this->setIsValid(FALSE);
-			$this->addError('upload_extension', $marker);
+			$this->setErrorAndMessage($field, 'upload_extension');
 			return FALSE;
 		}
 		return TRUE;
 	}
 
 	/**
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
-	 * @return void
+	 * Is filesize small enough?
+	 *
+	 * @param string $tmpName
+	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @return bool
 	 */
-	public function injectTypoScript(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$typoScriptSetup = $configurationManager->getConfiguration(
-			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-		);
-		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
+	protected function checkFilesize($tmpName, Tx_Powermail_Domain_Model_Field $field) {
+		if (filesize($tmpName) > $this->settings['misc.']['file.']['size']) {
+			$this->setErrorAndMessage($field, 'upload_size');
+			return FALSE;
+		}
+		return TRUE;
 	}
 
 	/**

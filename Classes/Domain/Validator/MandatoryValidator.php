@@ -17,8 +17,7 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Powermail_Doma
 				}
 
 				if (!$this->isValueSet($field, $mail)) {
-					$this->setIsValid(FALSE);
-					$this->addError('mandatory', $field->getMarker());
+					$this->setErrorAndMessage($field, 'mandatory');
 				}
 			}
 		}
