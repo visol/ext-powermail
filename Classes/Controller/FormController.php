@@ -72,9 +72,9 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			'mail' => $arguments['mail']
 		);
 
+		// allow subvalues in new property mapper
 		$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
 		$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
-		Tx_Extbase_Utility_Debugger::var_dump($this->arguments);
 
 		$i = 0;
 		foreach ((array) $arguments['field'] as $marker => $value) {
@@ -82,13 +82,12 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 				continue;
 			}
 
+			// allow subvalues in new property mapper
 			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
 			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i . '.field');
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i . '.field');
 
 			$newArguments['mail']['answers'][$i] = array(
-//				'field' => $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']),
+				'field' => strval($this->div->getFieldUidFromMarker($marker, $arguments['mail']['form'])),
 				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
 				'valueType' => Tx_Powermail_Utility_Div::getDataTypeFromFieldType(
 					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
@@ -96,6 +95,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 			);
 			$i++;
 		}
+
 		$this->request->setArguments($newArguments);
 		$this->request->setArgument('field', NULL);
 	}
