@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Getter;
 
 /**
  * Used in the Backendmodule to get a defined piVar
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Getter_GetPiVarAnswerFieldViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class GetPiVarAnswerFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Used in the Backendmodule to get a defined piVar

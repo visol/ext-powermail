@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -26,12 +27,12 @@
 
 
 /**
- * Form Model
+ * FormModel
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEntity {
+class Form extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * title
@@ -51,14 +52,14 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * pages
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Page>
 	 */
 	protected $pages;
 
 	/**
 	 * formRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 * @var \In2code\Powermail\Domain\Repository\FormRepository
 	 *
 	 * @inject
 	 */
@@ -105,7 +106,7 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Returns the pages
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page> $pages
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Page> $pages
 	 */
 	public function getPages() {
 		// if elementbrowser instead of IRRE (sorting workarround)
@@ -127,10 +128,10 @@ class Tx_Powermail_Domain_Model_Form extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the pages
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Page> $pages
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Page> $pages
 	 * @return void
 	 */
-	public function setPages(Tx_Extbase_Persistence_ObjectStorage $pages) {
+	public function setPages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $pages) {
 		$this->pages = $pages;
 	}
 

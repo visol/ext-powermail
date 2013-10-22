@@ -3,6 +3,8 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+use \TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 /**
  * Get configuration from extension manager
  */
@@ -19,8 +21,8 @@ if ($confArr['enableCaching'] == 1) {
 /**
  * Include Frontend Plugins for Powermail
  */
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+ExtensionUtility::configurePlugin(
+	'In2code.' . $_EXTKEY,
 	'Pi1',
 	array(
 		'Form' => 'form, create, confirmation, optinConfirm'
@@ -29,8 +31,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 		'Form' => $uncachedFormActions
 	)
 );
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+ExtensionUtility::configurePlugin(
+	'In2code.' . $_EXTKEY,
 	'Pi2',
 	array(
 		'Output' => 'list, show, edit, update, export, rss'

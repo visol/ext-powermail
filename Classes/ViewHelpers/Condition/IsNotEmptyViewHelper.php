@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Condition;
 
 /**
  * View helper check if given value is empty (also empty arrays)
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Condition_IsNotEmptyViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class IsNotEmptyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * View helper check if given value is number or not

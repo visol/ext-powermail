@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -32,7 +33,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Utility_CalculatingCaptcha {
+class CalculatingCaptcha {
 
 	/**
 	 * @var 	array		TypoScript
@@ -57,9 +58,9 @@ class Tx_Powermail_Utility_CalculatingCaptcha {
 	/**
 	 * Check if given code is correct
 	 *
-	 * @param	string		$code String to compare
-	 * @param	boolean		$clearSession Flag if session should be cleared or not
-	 * @return	boolean
+	 * @param string $code String to compare
+	 * @param int $clearSession Flag if session should be cleared or not
+	 * @return boolean
 	 */
 	public function validCode($code, $clearSession = 1) {
 		$valid = 0;

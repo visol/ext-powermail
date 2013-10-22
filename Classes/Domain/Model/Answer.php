@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractEntity {
+class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * value
@@ -50,14 +51,14 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * mail
 	 *
-	 * @var Tx_Powermail_Domain_Model_Mail
+	 * @var \In2code\Powermail\Domain\Model\Mail
 	 */
 	protected $mail = NULL;
 
 	/**
 	 * field
 	 *
-	 * @var Tx_Powermail_Domain_Model_Field
+	 * @var \In2code\Powermail\Domain\Model\Field
 	 */
 	protected $field = NULL;
 
@@ -68,7 +69,7 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	public function getValue() {
 		// workarround to get array from database (checkbox values)
-		if (Tx_Powermail_Utility_Div::is_serialized($this->value)) {
+		if (\In2code\Powermail\Utility\Div::is_serialized($this->value)) {
 			return unserialize($this->value);
 		}
 		return $this->value;
@@ -106,7 +107,7 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Returns the mail
 	 *
-	 * @return Tx_Powermail_Domain_Model_Mail $mail
+	 * @return \In2code\Powermail\Domain\Model\Mail $mail
 	 */
 	public function getMail() {
 		return $this->mail;
@@ -115,17 +116,17 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the mail
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function setMail(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function setMail(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$this->mail = $mail;
 	}
 
 	/**
 	 * Returns the field
 	 *
-	 * @return Tx_Powermail_Domain_Model_Field $field
+	 * @return \In2code\Powermail\Domain\Model\Field $field
 	 */
 	public function getField() {
 		return $this->field;
@@ -134,10 +135,10 @@ class Tx_Powermail_Domain_Model_Answer extends Tx_Extbase_DomainObject_AbstractE
 	/**
 	 * Sets the field
 	 *
-	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @return void
 	 */
-	public function setField(Tx_Powermail_Domain_Model_Field $field) {
+	public function setField(\In2code\Powermail\Domain\Model\Field $field) {
 		$this->field = $field;
 	}
 

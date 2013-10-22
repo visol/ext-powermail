@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\String;
 
 /**
  * ViewHelper combines Raw and RemoveXss Methods
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class RawAndRemoveXssViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
@@ -17,7 +18,7 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 	protected $escapingInterceptorEnabled = FALSE;
 
 	/**
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
 	 * @inject
 	 */
 	protected $objectManager;
@@ -29,7 +30,7 @@ class Tx_Powermail_ViewHelpers_String_RawAndRemoveXssViewHelper extends Tx_Fluid
 	 */
 	public function render() {
 		$string = $this->renderChildren();
-		$string = t3lib_div::removeXSS($string);
+		$string = \TYPO3\CMS\Core\Utility\GeneralUtility::removeXSS($string);
 
 		return $string;
 	}

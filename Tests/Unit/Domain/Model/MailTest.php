@@ -36,14 +36,14 @@
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Domain_Model_MailTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Powermail_Domain_Model_Mail
+	 * @var \In2code\Powermail\Domain\Model\Mail
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Mail();
+		$this->fixture = new \In2code\Powermail\Domain\Model\Mail();
 	}
 
 	public function tearDown() {
@@ -302,7 +302,7 @@ class Tx_Powermail_Domain_Model_MailTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 */
 	public function setAnswersForTx_Powermail_Domain_Model_AnswerSetsAnswers() {
-		$dummy = new Tx_Extbase_Persistence_ObjectStorage;
+		$dummy = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 		$this->fixture->setAnswers($dummy);
 		$this->assertSame(
 			$dummy,

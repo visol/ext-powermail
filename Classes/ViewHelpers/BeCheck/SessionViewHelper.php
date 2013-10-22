@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\BeCheck;
 
 /**
  * Backend Check Viewhelper: Check if Session works correct on the server
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_BeCheck_SessionViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class SessionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Session Key
@@ -23,8 +24,8 @@ class Tx_Powermail_ViewHelpers_BeCheck_SessionViewHelper extends Tx_Fluid_ViewHe
 	public function render() {
 		// settings
 		global $TYPO3_CONF_VARS;
-		$userObj = tslib_eidtools::initFeUser();
-		$GLOBALS['TSFE'] = t3lib_div::makeInstance(
+		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
+		$GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 			'tslib_fe',
 			$TYPO3_CONF_VARS,
 			t3lib_div::_GET('id'),

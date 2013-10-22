@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Condition;
 
 /**
  * Is {outer.{inner}} a datetime?
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Condition_IsDateTimeVariableInVariableViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class IsDateTimeVariableInVariableViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Is {outer.{inner}} a datetime?
@@ -16,8 +17,8 @@ class Tx_Powermail_ViewHelpers_Condition_IsDateTimeVariableInVariableViewHelper 
 	 * @return	bool
 	 */
 	public function render($obj, $prop) {
-		if (is_object($obj) && method_exists($obj, 'get' . t3lib_div::underscoredToUpperCamelCase($prop))) {
-			$mixed = $obj->{'get' . t3lib_div::underscoredToUpperCamelCase($prop)}();
+		if (is_object($obj) && method_exists($obj, 'get' . \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($prop))) {
+			$mixed = $obj->{'get' . \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($prop)}();
 		}
 		return method_exists($mixed, 'getTimestamp');
 	}

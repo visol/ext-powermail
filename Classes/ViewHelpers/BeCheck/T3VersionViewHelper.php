@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\BeCheck;
 
 
 /**
@@ -7,7 +8,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_BeCheck_T3VersionViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class T3VersionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Check if TYPO3 Version is correct
@@ -18,12 +19,12 @@ class Tx_Powermail_ViewHelpers_BeCheck_T3VersionViewHelper extends Tx_Fluid_View
 		// settings
 		global $EM_CONF, $_EXTKEY;
 		$_EXTKEY = 'powermail';
-		require_once(t3lib_extMgm::extPath('powermail') . 'ext_emconf.php');
+		require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('powermail') . 'ext_emconf.php');
 		$versionString = $EM_CONF[$_EXTKEY]['constraints']['depends']['typo3'];
 		$versions = explode('-', $versionString);
 
-		$isAboveMinVersion = (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) > t3lib_utility_VersionNumber::convertVersionNumberToInteger($versions[0]));
-		$isBelowMaxVersion = (t3lib_utility_VersionNumber::convertVersionNumberToInteger(TYPO3_version) < t3lib_utility_VersionNumber::convertVersionNumberToInteger($versions[1]));
+		$isAboveMinVersion = (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) > \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger($versions[0]));
+		$isBelowMaxVersion = (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger($versions[1]));
 		if ($isAboveMinVersion && $isBelowMaxVersion) {
 			return TRUE;
 		}

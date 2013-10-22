@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEntity {
+class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * title
@@ -157,7 +158,7 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * pages
 	 *
-	 * @var Tx_Powermail_Domain_Model_Page
+	 * @var \In2code\Powermail\Domain\Model\Page
 	 */
 	protected $pages = NULL;
 
@@ -228,7 +229,7 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	 * @return string
 	 */
 	public function getModifiedSettings() {
-		return Tx_Powermail_Utility_Div::optionArray(
+		return \In2code\Powermail\Utility\Div::optionArray(
 			$this->getSettings(),
 			$this->getCreateFromTyposcript()
 		);
@@ -477,14 +478,14 @@ class Tx_Powermail_Domain_Model_Field extends Tx_Extbase_DomainObject_AbstractEn
 	}
 
 	/**
-	 * @param Tx_Powermail_Domain_Model_Page $pages
+	 * @param \In2code\Powermail\Domain\Model\Page $pages
 	 */
 	public function setPages($pages) {
 		$this->pages = $pages;
 	}
 
 	/**
-	 * @return Tx_Powermail_Domain_Model_Page
+	 * @return \In2code\Powermail\Domain\Model\Page
 	 */
 	public function getPages() {
 		return $this->pages;

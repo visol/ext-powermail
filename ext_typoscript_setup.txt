@@ -1,27 +1,27 @@
 config.tx_extbase {
 	persistence {
 		classes {
-			Tx_Powermail_Domain_Model_Form {
+			In2code\Powermail\Domain\Model\Form {
 				mapping {
-					tableName = tx_powermail_domain_model_form
+					tableName = tx_powermail_domain_model_forms
 				}
 			}
-			Tx_Powermail_Domain_Model_Page {
+			In2code\Powermail\Domain\Model\Page {
 				mapping {
 					tableName = tx_powermail_domain_model_pages
 				}
 			}
-			Tx_Powermail_Domain_Model_Field {
+			In2code\Powermail\Domain\Model\Field {
 				mapping {
 					tableName = tx_powermail_domain_model_fields
 				}
 			}
-			Tx_Powermail_Domain_Model_Mail {
+			In2code\Powermail\Domain\Model\Mail {
 				mapping {
 					tableName = tx_powermail_domain_model_mails
 				}
 			}
-			Tx_Powermail_Domain_Model_Answer {
+			In2code\Powermail\Domain\Model\Answer {
 				mapping {
 					tableName = tx_powermail_domain_model_answers
 				}

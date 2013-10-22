@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\String;
 
 /**
  * View helper to implode objects to a list
@@ -6,12 +7,12 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_String_ImplodeFieldViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class ImplodeFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * View helper to explode a list
 	 *
-	 * @param objects $objects Any objects with submethod getUid()
+	 * @param mixed $objects Any objects with submethod getUid()
 	 * @param string $field Field to use in object
 	 * @param string $separator Separator sign (e.g. ",")
 	 * @return string

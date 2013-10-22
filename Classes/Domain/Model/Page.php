@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -26,12 +27,12 @@
 
 
 /**
- * Page Model
+ * PageModel
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEntity {
+class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * title
@@ -51,14 +52,14 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Powermail Fields
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Field>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Field>
 	 */
 	protected $fields = NULL;
 
 	/**
 	 * Powermail Forms
 	 *
-	 * @var Tx_Powermail_Domain_Model_Form
+	 * @var \In2code\Powermail\Domain\Model\Form
 	 */
 	protected $forms = NULL;
 
@@ -78,7 +79,7 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
 	 *
 	 * @return void
 	 */
@@ -88,7 +89,7 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->fields = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->fields = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -132,27 +133,27 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Adds a Fields
 	 *
-	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @return void
 	 */
-	public function addField(Tx_Powermail_Domain_Model_Field $field) {
+	public function addField(\In2code\Powermail\Domain\Model\Field $field) {
 		$this->fields->attach($field);
 	}
 
 	/**
 	 * Removes a Fields
 	 *
-	 * @param Tx_Powermail_Domain_Model_Field $fieldToRemove The Fields to be removed
+	 * @param \In2code\Powermail\Domain\Model\Field $fieldToRemove The Fields to be removed
 	 * @return void
 	 */
-	public function removeField(Tx_Powermail_Domain_Model_Field $fieldToRemove) {
+	public function removeField(\In2code\Powermail\Domain\Model\Field $fieldToRemove) {
 		$this->fields->detach($fieldToRemove);
 	}
 
 	/**
 	 * Returns the fields
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Field> $fields
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Field> $fields
 	 */
 	public function getFields() {
 //		return $this->fields;
@@ -169,10 +170,10 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the fields
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Field> $fields
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Field> $fields
 	 * @return void
 	 */
-	public function setFields(Tx_Extbase_Persistence_ObjectStorage $fields) {
+	public function setFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $fields) {
 		$this->fields = $fields;
 	}
 
@@ -196,14 +197,14 @@ class Tx_Powermail_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 	/**
-	 * @param Tx_Powermail_Domain_Model_Form $forms
+	 * @param \In2code\Powermail\Domain\Model\Form $forms
 	 */
 	public function setForms($forms) {
 		$this->forms = $forms;
 	}
 
 	/**
-	 * @return Tx_Powermail_Domain_Model_Form
+	 * @return \In2code\Powermail\Domain\Model\Form
 	 */
 	public function getForms() {
 		return $this->forms;

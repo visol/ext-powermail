@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -26,12 +27,12 @@
 
 
 /**
- * Context Model for Tx_Powermail_Domain_Model_Mails without relations
+ * Context Model for \In2code\Powermail\Domain\Model\Mail without relations
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Model_MailsBasic extends Tx_Extbase_DomainObject_AbstractEntity {
+class MailBasic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * senderName

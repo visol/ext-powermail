@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -24,14 +27,13 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-
 /**
  * Div is a class for a collection of misc functions
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Utility_Div {
+class Div {
 
 	/**
 	 * Extension Key
@@ -39,35 +41,35 @@ class Tx_Powermail_Utility_Div {
 	public static $extKey = 'powermail';
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 * @var \In2code\Powermail\Domain\Repository\FormRepository
 	 *
 	 * @inject
 	 */
 	protected $formRepository;
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
 	 *
 	 * @inject
 	 */
 	protected $fieldRepository;
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_UserRepository
+	 * @var \In2code\Powermail\Domain\Repository\UserRepository
 	 *
 	 * @inject
 	 */
 	protected $userRepository;
 
 	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	 *
 	 * @inject
 	 */
 	protected $configurationManager;
 
 	/**
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
 	 *
 	 * @inject
 	 */
@@ -97,10 +99,10 @@ class Tx_Powermail_Utility_Div {
 	/**
 	 * Returns sendername from a couple of arguments
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail Given Params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail Given Params
 	 * @return string Sender Name
 	 */
-	public function getSenderNameFromArguments(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function getSenderNameFromArguments(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$name = '';
 		foreach ($mail->getAnswers() as $answer) {
 			if (method_exists($answer->getField(), 'getUid') && $answer->getField()->getSenderName()) {
@@ -109,7 +111,7 @@ class Tx_Powermail_Utility_Div {
 		}
 
 		if (!$name) {
-			$name = Tx_Extbase_Utility_Localization::translate('error_no_sender_name', 'powermail');
+			$name = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_sender_name', 'powermail');
 		}
 		return trim($name);
 	}
@@ -117,22 +119,22 @@ class Tx_Powermail_Utility_Div {
 	/**
 	 * Returns senderemail from a couple of arguments
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return string Sender Email
 	 */
-	public function getSenderMailFromArguments(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function getSenderMailFromArguments(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$email = '';
 		foreach ($mail->getAnswers() as $answer) {
-			if (method_exists($answer->getField(), 'getUid') && $answer->getField()->getSenderEmail() && t3lib_div::validEmail($answer->getValue())) {
+			if (method_exists($answer->getField(), 'getUid') && $answer->getField()->getSenderEmail() && GeneralUtility::validEmail($answer->getValue())) {
 				$email = $answer->getValue();
 				break;
 			}
 		}
 
 		if (!$email) {
-			$email = Tx_Extbase_Utility_Localization::translate('error_no_sender_email', 'powermail');
+			$email = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_sender_email', 'powermail');
 			$email .= '@';
-			$email .= str_replace('www.', '', t3lib_div::getIndpEnv('TYPO3_HOST_ONLY'));
+			$email .= str_replace('www.', '', GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY'));
 		}
 		return $email;
 	}
@@ -179,19 +181,19 @@ class Tx_Powermail_Utility_Div {
 	/**
 	 * This functions renders the powermail_all Template to use in Mails and Other views
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param string $section Choose a section (web or mail)
 	 * @param array $settings TypoScript Settings
 	 * @return string content parsed from powermailAll HTML Template
 	 */
-	public function powermailAll(Tx_Powermail_Domain_Model_Mail $mail, $section = 'web', $settings = array()) {
+	public function powermailAll(\In2code\Powermail\Domain\Model\Mail $mail, $section = 'web', $settings = array()) {
 		$powermailAll = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
-		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . 'Form/PowermailAll.html';
-		$powermailAll->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
-		$powermailAll->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
+		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . 'Form/PowermailAll.html';
+		$powermailAll->setLayoutRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
+		$powermailAll->setPartialRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
 		$powermailAll->setTemplatePathAndFilename($templatePathAndFilename);
 		$powermailAll->assign('mail', $mail);
 		$powermailAll->assign('section', $section);
@@ -205,10 +207,10 @@ class Tx_Powermail_Utility_Div {
 	 * Generate a new array with markers and their values
 	 * 		firstname => value
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return array new array
 	 */
-	public function getVariablesWithMarkers(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function getVariablesWithMarkers(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$variables = array();
 		foreach ($mail->getAnswers() as $answer) {
 			if (!method_exists($answer, 'getField') || !method_exists($answer->getField(), 'getMarker')) {
@@ -227,10 +229,10 @@ class Tx_Powermail_Utility_Div {
 	 * Generate a new array their labels and respect FE language
 	 * 		Your Firstname: => value
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return array new array
 	 */
-	public function getVariablesWithLabels(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function getVariablesWithLabels(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$variables = array();
 		foreach ($mail->getAnswers() as $answer) {
 			if (!method_exists($answer->getField(), 'getUid')) {
@@ -415,7 +417,7 @@ class Tx_Powermail_Utility_Div {
 		$content = strip_tags($content, '<br><address>'); // 2. remove all tags but not linebreaks and address (<b>bla</b><br /> => bla<br />)
 		$content = preg_replace('/\s+/', ' ', $content); // 3. removes tabs and whitespaces
 		$content = $this->br2nl($content); // 4. <br /> to \n
-		$content = implode("\n", t3lib_div::trimExplode("\n", $content)); // 5. explode and trim each line and implode again (" bla \n blabla " => "bla\nbla")
+		$content = implode("\n", GeneralUtility::trimExplode("\n", $content)); // 5. explode and trim each line and implode again (" bla \n blabla " => "bla\nbla")
 		$content = str_replace($notallowed, '', $content); // 6. remove not allowed signs
 
 		return $content;
@@ -480,11 +482,10 @@ class Tx_Powermail_Utility_Div {
 	 * @return array Array with emails
 	 */
 	public function getEmailsFromFeGroup($uid) {
-		$userRepository = t3lib_div::makeInstance('Tx_Powermail_Domain_Repository_UserRepository');
-		$users = $userRepository->findByUsergroup($uid);
+		$users = $this->userRepository->findByUsergroup($uid);
 		$array = array();
 		foreach ($users as $user) {
-			if (t3lib_div::validEmail($user->getEmail())) {
+			if (GeneralUtility::validEmail($user->getEmail())) {
 				$array[] = $user->getEmail();
 			}
 		}
@@ -500,7 +501,7 @@ class Tx_Powermail_Utility_Div {
 	public function getEmailsFromString($string) {
 		$array = array();
 		$string = str_replace(array("\n", '|', ','), ';', $string);
-		$arr = t3lib_div::trimExplode(';', $string, 1);
+		$arr = GeneralUtility::trimExplode(';', $string, 1);
 		foreach ($arr as $email) {
 			$array[] = $email;
 		}
@@ -518,8 +519,8 @@ class Tx_Powermail_Utility_Div {
 			return '';
 		}
 		$setup = $GLOBALS['TSFE']->tmpl->setup;
-		$contentObject = t3lib_div::makeInstance('tslib_cObj');
-		$pathSegments = t3lib_div::trimExplode('.', $typoScriptObjectPath);
+		$contentObject = GeneralUtility::makeInstance('tslib_cObj');
+		$pathSegments = GeneralUtility::trimExplode('.', $typoScriptObjectPath);
 		$lastSegment = array_pop($pathSegments);
 		foreach ($pathSegments as $segment) {
 			$setup = $setup[$segment . '.'];
@@ -547,9 +548,9 @@ class Tx_Powermail_Utility_Div {
 		}
 		$options = array();
 		$string = str_replace('[\n]', "\n", $string);
-		$settingsField = t3lib_div::trimExplode("\n", $string, 1);
+		$settingsField = GeneralUtility::trimExplode("\n", $string, 1);
 		foreach ($settingsField as $line) {
-			$settings = t3lib_div::trimExplode('|', $line, 0);
+			$settings = GeneralUtility::trimExplode('|', $line, 0);
 			$options[] = array(
 				'label' => $settings[0],
 				'value' => isset($settings[1]) ? $settings[1] : $settings[0],
@@ -759,9 +760,9 @@ class Tx_Powermail_Utility_Div {
 		if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
 			return FALSE;
 		}
-		$usergroups = t3lib_div::trimExplode(',', $GLOBALS['TSFE']->fe_user->user['usergroup'], 1); // array with usergroups of current logged in user
-		$usersSettings = t3lib_div::trimExplode(',', $settings['edit']['feuser'], 1); // array with all allowed users
-		$usergroupsSettings = t3lib_div::trimExplode(',', $settings['edit']['fegroup'], 1); // array with all allowed groups
+		$usergroups = GeneralUtility::trimExplode(',', $GLOBALS['TSFE']->fe_user->user['usergroup'], 1); // array with usergroups of current logged in user
+		$usersSettings = GeneralUtility::trimExplode(',', $settings['edit']['feuser'], 1); // array with all allowed users
+		$usergroupsSettings = GeneralUtility::trimExplode(',', $settings['edit']['fegroup'], 1); // array with all allowed groups
 
 		// replace "_owner" with uid of owner in array with users
 		if (method_exists($mail, 'getFeuser') && is_numeric(array_search('_owner', $usersSettings))) {
@@ -819,9 +820,9 @@ class Tx_Powermail_Utility_Div {
 	 */
 	public static function createOptinHash($string) {
 		if (!empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
-			$hash = t3lib_div::shortMD5($string . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
+			$hash = GeneralUtility::shortMD5($string . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 		} else {
-			$hash = t3lib_div::shortMD5($string);
+			$hash = GeneralUtility::shortMD5($string);
 		}
 		return $hash;
 	}
@@ -887,12 +888,12 @@ class Tx_Powermail_Utility_Div {
 	 * 		$email['template'] = 'PathToTemplate/';
 	 * 		$email['rteBody'] = 'This is the <b>content</b> of the RTE';
 	 * 		$email['format'] = 'both'; // or plain or html
-	 * @param Tx_Powermail_Domain_Model_Mail $mail Mail object with all arguments
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail Mail object with all arguments
 	 * @param array $settings TypoScript Settings
 	 * @param string $type Email to "sender" or "receiver"
 	 * @return boolean Mail was successfully sent?
 	 */
-	public function sendTemplateEmail(array $email, Tx_Powermail_Domain_Model_Mail $mail, $settings, $type = 'receiver') {
+	public function sendTemplateEmail(array $email, \In2code\Powermail\Domain\Model\Mail $mail, $settings, $type = 'receiver') {
 		/*****************
 		 * Settings
 		 ****************/
@@ -918,7 +919,7 @@ class Tx_Powermail_Utility_Div {
 		}
 
 		// stop mail process if receiver or sender email is not valid
-		if (!t3lib_div::validEmail($email['receiverEmail']) || !t3lib_div::validEmail($email['senderEmail'])) {
+		if (!GeneralUtility::validEmail($email['receiverEmail']) || !GeneralUtility::validEmail($email['senderEmail'])) {
 			return FALSE;
 		}
 
@@ -929,9 +930,9 @@ class Tx_Powermail_Utility_Div {
 
 		// generate mail body
 		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
-		$templatePathAndFilename = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
 		$templatePathAndFilename .= $email['template'] . '.html';
 		$emailBody = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
 		$emailBody->getRequest()->setControllerExtensionName('Powermail');
@@ -939,8 +940,8 @@ class Tx_Powermail_Utility_Div {
 		$emailBody->getRequest()->setControllerName('Form');
 		$emailBody->setFormat('html');
 		$emailBody->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailBody->setPartialRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
-		$emailBody->setLayoutRootPath(t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
+		$emailBody->setPartialRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
+		$emailBody->setLayoutRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
 
 		// get variables
 		// additional variables
@@ -962,7 +963,7 @@ class Tx_Powermail_Utility_Div {
 		/*****************
 		 * generate mail
 		 ****************/
-		$message = t3lib_div::makeInstance('t3lib_mail_Message');
+		$message = GeneralUtility::makeInstance('t3lib_mail_Message');
 		$this->overwriteValueFromTypoScript($email['subject'], $this->conf[$type . '.']['overwrite.'], 'subject');
 		$message
 			->setTo(array($email['receiverEmail'] => $email['receiverName']))
@@ -972,13 +973,13 @@ class Tx_Powermail_Utility_Div {
 
 		// add cc receivers
 		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.'])) {
-			$ccArray = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.']), 1);
+			$ccArray = GeneralUtility::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.']), 1);
 			$message->setCc($ccArray);
 		}
 
 		// add bcc receivers
 		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.'])) {
-			$bccArray = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.']), 1);
+			$bccArray = GeneralUtility::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.']), 1);
 			$message->setBcc($bccArray);
 		}
 
@@ -1007,7 +1008,7 @@ class Tx_Powermail_Utility_Div {
 
 		// add attachments from upload fields
 		if ($settings[$type]['attachment']) {
-			$uploadsFromSession = Tx_Powermail_Utility_Div::getSessionValue('upload'); // read upload session
+			$uploadsFromSession = \In2code\Powermail\Utility\Div::getSessionValue('upload'); // read upload session
 			foreach ((array) $uploadsFromSession as $file) {
 				$message->attach(Swift_Attachment::fromPath($file));
 			}
@@ -1015,7 +1016,7 @@ class Tx_Powermail_Utility_Div {
 
 		// add attachments from TypoScript
 		if ($cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.'])) {
-			$files = t3lib_div::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']), 1);
+			$files = GeneralUtility::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']), 1);
 			foreach ($files as $file) {
 				$message->attach(Swift_Attachment::fromPath($file));
 			}

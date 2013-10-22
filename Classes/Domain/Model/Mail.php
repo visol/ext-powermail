@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
@@ -31,7 +32,7 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEntity {
+class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * senderName
@@ -71,7 +72,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * feuser
 	 *
-	 * @var Tx_Powermail_Domain_Model_User
+	 * @var \In2code\Powermail\Domain\Model\User
 	 */
 	protected $feuser = NULL;
 
@@ -106,16 +107,15 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * form
 	 *
-	 * @var Tx_Powermail_Domain_Model_Form
+	 * @var \In2code\Powermail\Domain\Model\Form
 	 * @lazy
 	 */
 	protected $form = NULL;
 
 	/**
 	 * Powermail Answers
-	 * 		Note: Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Answer> don't work with the new property mapper :(
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Powermail_Domain_Model_Answer>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Answer>
 	 * @lazy
 	 */
 	protected $answers = NULL;
@@ -184,12 +184,12 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
 	 *
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		$this->answer = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->answer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -290,7 +290,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Returns the feuser
 	 *
-	 * @return Tx_Powermail_Domain_Model_User $feuser
+	 * @return \In2code\Powermail\Domain\Model\User $feuser
 	 */
 	public function getFeuser() {
 		return $this->feuser;
@@ -299,10 +299,10 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the feuser
 	 *
-	 * @param Tx_Powermail_Domain_Model_User $feuser
+	 * @param \In2code\Powermail\Domain\Model\User $feuser
 	 * @return void
 	 */
-	public function setFeuser(Tx_Powermail_Domain_Model_User $feuser) {
+	public function setFeuser(\In2code\Powermail\Domain\Model\User $feuser) {
 		$this->feuser = $feuser;
 	}
 
@@ -337,7 +337,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the time
 	 *
-	 * @param datetime time
+	 * @param datetime $time
 	 * @return void
 	 */
 	public function setTime($time) {
@@ -385,7 +385,7 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Returns the form
 	 *
-	 * @return Tx_Powermail_Domain_Model_Form $form
+	 * @return \In2code\Powermail\Domain\Model\Form $form
 	 */
 	public function getForm() {
 		return $this->form;
@@ -394,17 +394,17 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the form
 	 *
-	 * @param Tx_Powermail_Domain_Model_Form $form
+	 * @param \In2code\Powermail\Domain\Model\Form $form
 	 * @return void
 	 */
-	public function setForm(Tx_Powermail_Domain_Model_Form $form) {
+	public function setForm(\In2code\Powermail\Domain\Model\Form $form) {
 		$this->form = $form;
 	}
 
 	/**
 	 * Returns the answers
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Answer> $answers
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Answer> $answers
 	 */
 	public function getAnswers() {
 		return $this->answers;
@@ -413,30 +413,30 @@ class Tx_Powermail_Domain_Model_Mail extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Sets the answers
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Powermail_Domain_Model_Answer> $answers
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Answer> $answers
 	 * @return void
 	 */
-	public function setAnswers(Tx_Extbase_Persistence_ObjectStorage $answers) {
+	public function setAnswers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $answers) {
 		$this->answers = $answers;
 	}
 
 	/**
 	 * Adds an answer
 	 *
-	 * @param Tx_Powermail_Domain_Model_Answer $answer
+	 * @param \In2code\Powermail\Domain\Model\Answer $answer
 	 * @return void
 	 */
-	public function addAnswer(Tx_Powermail_Domain_Model_Answer $answer) {
+	public function addAnswer(\In2code\Powermail\Domain\Model\Answer $answer) {
 		$this->answers->attach($answer);
 	}
 
 	/**
 	 * Removes an answer
 	 *
-	 * @param Tx_Powermail_Domain_Model_Answer $answerToRemove The Fields to be removed
+	 * @param \In2code\Powermail\Domain\Model\Answer $answerToRemove The Fields to be removed
 	 * @return void
 	 */
-	public function removeAnswer(Tx_Powermail_Domain_Model_Answer $answerToRemove) {
+	public function removeAnswer(\In2code\Powermail\Domain\Model\Answer $answerToRemove) {
 		$this->answers->detach($answerToRemove);
 	}
 

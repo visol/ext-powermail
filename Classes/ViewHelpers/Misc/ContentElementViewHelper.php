@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Misc;
 
 /**
  * Shows Content Element
@@ -6,10 +7,10 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Misc_ContentElementViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * @var tslib_cObj
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	protected $cObj;
 
@@ -31,10 +32,10 @@ class Tx_Powermail_ViewHelpers_Misc_ContentElementViewHelper extends Tx_Fluid_Co
 	/**
 	 * Injects the content object
 	 *
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
 	*/
-	public function injectContentObject(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectContentObject(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$this->cObj = $configurationManager->getContentObject();
 	}
 

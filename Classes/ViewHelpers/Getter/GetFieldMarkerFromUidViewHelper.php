@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Getter;
 
 /**
  * Read Marker of a field from given UID
@@ -7,12 +8,12 @@
  * @subpackage Fluid
  * @version
  */
-class Tx_Powermail_ViewHelpers_Getter_GetFieldMarkerFromUidViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class GetFieldMarkerFromUidViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * fieldRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
 	 *
 	 * @inject
 	 */

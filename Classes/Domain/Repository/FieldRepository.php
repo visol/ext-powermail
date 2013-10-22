@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -25,12 +26,12 @@
 
 
 /**
- * Field Repository
+ * FieldRepository
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Repository_FieldRepository extends Tx_Extbase_Persistence_Repository {
+class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Return uid from given field marker and form

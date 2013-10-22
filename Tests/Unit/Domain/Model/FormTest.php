@@ -104,7 +104,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 */
 	public function setPagesForTx_Powermail_Domain_Model_PageSetsPages() {
-		$dummyObject = new Tx_Extbase_Persistence_ObjectStorage();
+		$dummyObject = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->fixture->setPages($dummyObject);
 
 		$this->assertSame(

@@ -40,7 +40,7 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 	/**
 	 * Validation of given Mail Params
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
 	public function isValid($mail) {

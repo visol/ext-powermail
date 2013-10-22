@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Form;
 
 /**
  * View helper to generate select field with empty values, preselected, etc...
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Form_SelectFieldViewHelper extends Tx_Fluid_ViewHelpers_Form_SelectViewHelper {
+class SelectFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper {
 
 	/**
 	 * Render the tag.

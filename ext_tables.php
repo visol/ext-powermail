@@ -3,6 +3,9 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+use \TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /**
  * Get configuration from extension manager
  */
@@ -12,13 +15,13 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail'
  * Include Plugins
  */
 	// Pi1
-Tx_Extbase_Utility_Extension::registerPlugin(
+ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Pi1',
 	'Powermail'
 );
 	// Pi2
-Tx_Extbase_Utility_Extension::registerPlugin(
+ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Pi2',
 	'Powermail_Frontend'
@@ -28,8 +31,8 @@ Tx_Extbase_Utility_Extension::registerPlugin(
  * Include Backend Module
  */
 if (TYPO3_MODE === 'BE' && !$confArr['disableBackendModule'] && !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
-	Tx_Extbase_Utility_Extension::registerModule(
-		$_EXTKEY,
+	ExtensionUtility::registerModule(
+		'In2code.' . $_EXTKEY,
 		'web',	 // Make module a submodule of 'web'
 		'm1',	 // Submodule key
 		'',		 // Position
@@ -50,24 +53,24 @@ if (TYPO3_MODE === 'BE' && !$confArr['disableBackendModule'] && !(TYPO3_REQUESTT
 	// Pi1
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi1';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi1.xml');
+ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi1.xml');
 	// Pi2
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi2';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi2.xml');
+ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi2.xml');
 
 /**
  * Include UserFuncs
  */
 if (TYPO3_MODE == 'BE') {
 	// show powermail fields in Pi2 (powermail_frontend)
-	include_once(t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php');
+	include_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php');
 
 	// marker field in Pi1
-	require_once(t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/Marker.php');
+	require_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Marker.php');
 
 	// add options to TCA select fields with itemsProcFunc
-	require_once(t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
+	require_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
 
 	// WizIcon for Pi1
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_powermail_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/WizIcon.php';
@@ -76,17 +79,17 @@ if (TYPO3_MODE == 'BE') {
 /**
  * Include TypoScript
  */
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', 'Main Template');
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Powermail_Frontend', 'Powermail_Frontend');
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/CssBasic', 'Add basic CSS');
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/CssFancy', 'Add fancy CSS');
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Marketing', 'Marketing Information');
+ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', 'Main Template');
+ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Powermail_Frontend', 'Powermail_Frontend');
+ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/CssBasic', 'Add basic CSS');
+ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/CssFancy', 'Add fancy CSS');
+ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Marketing', 'Marketing Information');
 
 /**
  * Settings for Tables
  */
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_forms', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermail_domain_model_forms');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_forms', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xml');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_forms');
 $TCA['tx_powermail_domain_model_forms'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms',
@@ -108,13 +111,13 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Form.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_forms.gif'
+		'dynamicConfigFile' => ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Form.php',
+		'iconfile' => ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_forms.gif'
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_pages', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_pages.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermail_domain_model_pages');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_pages', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_pages.xml');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_pages');
 $TCA['tx_powermail_domain_model_pages'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_pages',
@@ -137,13 +140,13 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Page.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_pages.gif'
+		'dynamicConfigFile' => ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Page.php',
+		'iconfile' => ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_pages.gif'
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_fields', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_fields.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermail_domain_model_fields');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_fields', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_fields.xml');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_fields');
 $TCA['tx_powermail_domain_model_fields'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields',
@@ -167,13 +170,13 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'endtime' => 'endtime',
 		),
 		'requestUpdate' => 'type,own_marker_select',
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Field.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_fields.gif'
+		'dynamicConfigFile' => ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Field.php',
+		'iconfile' => ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_fields.gif'
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_mails', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_mails.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermail_domain_model_mails');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_mails', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_mails.xml');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_mails');
 $TCA['tx_powermail_domain_model_mails'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_mails',
@@ -195,14 +198,14 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Mail.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_mails.gif',
+		'dynamicConfigFile' => ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Mail.php',
+		'iconfile' => ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_mails.gif',
 		'searchFields' => 'sender_mail, sender_name, subject, body'
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_powermail_domain_model_answers', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_answers.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_powermail_domain_model_answers');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_answers', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_answers.xml');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_answers');
 $TCA['tx_powermail_domain_model_answers'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers',
@@ -224,7 +227,7 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Answer.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_answers.gif'
+		'dynamicConfigFile' => ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Answer.php',
+		'iconfile' => ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_answers.gif'
 	),
 );

@@ -1,4 +1,4 @@
-{namespace vh=Tx_Powermail_ViewHelpers}
+{namespace vh=In2code\Powermail\ViewHelpers}
 <f:layout name="Backend"/>
 
 
@@ -54,19 +54,19 @@ Show Backend Module: Powermail List
 										<f:if condition="{0 : piVars.sorting.crdate} == {0 : 'desc'}">
 											<f:then>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {crdate: 'asc'}}}" class="sorting sorting_desc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.date" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.date" />
 												</f:link.action>
 											</f:then>
 											<f:else>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {crdate: 'desc'}}}" class="sorting sorting_asc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.date" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.date" />
 												</f:link.action>
 											</f:else>
 										</f:if>
 									</f:then>
 									<f:else>
 										<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {crdate: 'asc'}}}" class="sorting">
-											<f:translate key="Tx_Powermail_Domain_Model_Mail.date" />
+											<f:translate key="\In2code\Powermail\Domain\Model\Mail.date" />
 										</f:link.action>
 									</f:else>
 								</f:if>
@@ -77,19 +77,19 @@ Show Backend Module: Powermail List
 										<f:if condition="{0 : piVars.sorting.crdate} == {0 : 'desc'}">
 											<f:then>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {crdate: 'asc'}}}" class="sorting">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.datetime" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.datetime" />
 												</f:link.action>
 											</f:then>
 											<f:else>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {crdate: 'desc'}}}" class="sorting">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.datetime" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.datetime" />
 												</f:link.action>
 											</f:else>
 										</f:if>
 									</f:then>
 									<f:else>
 										<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {crdate: 'asc'}}}" class="sorting">
-											<f:translate key="Tx_Powermail_Domain_Model_Mail.datetime" />
+											<f:translate key="\In2code\Powermail\Domain\Model\Mail.datetime" />
 										</f:link.action>
 									</f:else>
 								</f:if>
@@ -100,19 +100,19 @@ Show Backend Module: Powermail List
 										<f:if condition="{0 : piVars.sorting.sender_name} == {0 : 'desc'}">
 											<f:then>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {sender_name: 'asc'}}}" class="sorting sorting_desc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.senderName" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.senderName" />
 												</f:link.action>
 											</f:then>
 											<f:else>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {sender_name: 'desc'}}}" class="sorting sorting_asc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.senderName" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.senderName" />
 												</f:link.action>
 											</f:else>
 										</f:if>
 									</f:then>
 									<f:else>
 										<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {sender_name: 'asc'}}}" class="sorting">
-											<f:translate key="Tx_Powermail_Domain_Model_Mail.senderName" />
+											<f:translate key="\In2code\Powermail\Domain\Model\Mail.senderName" />
 										</f:link.action>
 									</f:else>
 								</f:if>
@@ -123,19 +123,19 @@ Show Backend Module: Powermail List
 										<f:if condition="{0 : piVars.sorting.sender_mail} == {0 : 'desc'}">
 											<f:then>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {sender_mail: 'asc'}}}" class="sorting sorting_desc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.senderMail" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.senderMail" />
 												</f:link.action>
 											</f:then>
 											<f:else>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {sender_mail: 'desc'}}}" class="sorting sorting_asc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.senderMail" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.senderMail" />
 												</f:link.action>
 											</f:else>
 										</f:if>
 									</f:then>
 									<f:else>
 										<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {sender_mail: 'asc'}}}" class="sorting">
-											<f:translate key="Tx_Powermail_Domain_Model_Mail.senderMail" />
+											<f:translate key="\In2code\Powermail\Domain\Model\Mail.senderMail" />
 										</f:link.action>
 									</f:else>
 								</f:if>
@@ -146,19 +146,19 @@ Show Backend Module: Powermail List
 										<f:if condition="{0 : piVars.sorting.subject} == {0 : 'desc'}">
 											<f:then>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {subject: 'asc'}}}" class="sorting sorting_desc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.subject" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.subject" />
 												</f:link.action>
 											</f:then>
 											<f:else>
 												<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {subject: 'desc'}}}" class="sorting sorting_asc">
-													<f:translate key="Tx_Powermail_Domain_Model_Mail.subject" />
+													<f:translate key="\In2code\Powermail\Domain\Model\Mail.subject" />
 												</f:link.action>
 											</f:else>
 										</f:if>
 									</f:then>
 									<f:else>
 										<f:link.action additionalParams="{tx_powermail_web_powermailm1: {sorting: {subject: 'asc'}}}" class="sorting">
-											<f:translate key="Tx_Powermail_Domain_Model_Mail.subject" />
+											<f:translate key="\In2code\Powermail\Domain\Model\Mail.subject" />
 										</f:link.action>
 									</f:else>
 								</f:if>
@@ -260,7 +260,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.spamFactor}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.spamFactor" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.spamFactor" /></strong>
 												</dt>
 												<dd>
 													{mail.spamFactor}
@@ -270,7 +270,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.marketingSearchterm}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.marketingSearchterm" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingSearchterm" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingSearchterm}
@@ -280,7 +280,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.marketingReferer}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.marketingReferer" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingReferer" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingReferer}
@@ -290,7 +290,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.marketingPayedSearchResult}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.marketingPayedSearchResult" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingPayedSearchResult" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingPayedSearchResult}
@@ -300,7 +300,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.marketingLanguage}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.marketingLanguage" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingLanguage" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingLanguage}
@@ -310,7 +310,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.marketingBrowserLanguage}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.marketingBrowserLanguage" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingBrowserLanguage" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingBrowserLanguage}
@@ -320,7 +320,7 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.marketingFunnel}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="Tx_Powermail_Domain_Model_Mail.marketingFunnel" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingFunnel" /></strong>
 												</dt>
 												<dd>
 													<f:for each="{mail.marketingFunnel}" as="page" iteration="index">

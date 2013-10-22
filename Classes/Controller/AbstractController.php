@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -31,12 +32,12 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controller_ActionController {
+class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * formRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 * @var \In2code\Powermail\Domain\Repository\FormRepository
 	 * @inject
 	 */
 	protected $formRepository;
@@ -44,7 +45,7 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	/**
 	 * mailRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_MailRepository
+	 * @var \In2code\Powermail\Domain\Repository\MailRepository
 	 * @inject
 	 */
 	protected $mailRepository;
@@ -52,13 +53,15 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	/**
 	 * answerRepository
 	 *
-	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
+	 * @var \In2code\Powermail\Domain\Repository\AnswerRepository
 	 * @inject
 	 */
 	protected $answerRepository;
 
 	/**
-	 * @var Tx_Extbase_SignalSlot_Dispatcher
+	 * SignalSlot Dispatcher
+	 *
+	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
 	 * @inject
 	 */
 	protected $signalSlotDispatcher;
@@ -66,7 +69,7 @@ class Tx_Powermail_Controller_AbstractController extends Tx_Extbase_MVC_Controll
 	/**
 	 * Instance for Misc Functions
 	 *
-	 * @var Tx_Powermail_Utility_Div
+	 * @var \In2code\Powermail\Utility\Div
 	 * @inject
 	 */
 	protected $div;

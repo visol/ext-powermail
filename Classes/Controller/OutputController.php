@@ -113,10 +113,10 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	/**
 	  * Show mails in a list
 	  *
-	  * @param Tx_Powermail_Domain_Model_Mail $mail
+	  * @param \In2code\Powermail\Domain\Model\Mail $mail
 	  * @return void
 	  */
-	public function showAction(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function showAction(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$this->view->assign('mail', $mail);
 
 		// get field array for output
@@ -142,10 +142,10 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	/**
 	  * Edit mail
 	  *
-	  * @param Tx_Powermail_Domain_Model_Mail $mail
+	  * @param \In2code\Powermail\Domain\Model\Mail $mail
 	  * @return void
 	  */
-	public function editAction(Tx_Powermail_Domain_Model_Mail $mail) {
+	public function editAction(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$this->view->assign('mail', $mail);
 
 		// get field array for output
@@ -174,22 +174,22 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	/**
 	  * Update mail
 	  *
-	  * @param Tx_Powermail_Domain_Model_Mail $mail
+	  * @param \In2code\Powermail\Domain\Model\Mail $mail
 	  * @param array $field Field Array with changes
 	  * @dontvalidate $mail
 	  * @dontvalidate $field
 	  * @return void
 	  */
-	public function updateAction(Tx_Powermail_Domain_Model_Mail $mail, $field = array()) {
+	public function updateAction(\In2code\Powermail\Domain\Model\Mail $mail, $field = array()) {
 		if ($this->div->isAllowedToEdit($this->settings, $mail)) {
 			foreach ((array) $field as $fieldUid => $value) { // one loop for every received field
 				$answer = $this->answerRepository->findByFieldAndMail($fieldUid, $mail);
 				$answer->setValue($value);
 				$this->answerRepository->update($answer);
 			}
-			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('PowermailFrontendEditConfirm', 'powermail'));
+			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail'));
 		} else {
-			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('PowermailFrontendEditFailed', 'powermail'));
+			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail'));
 		}
 
 		$this->redirect('edit', NULL, NULL, array('mail' => $mail));
@@ -283,7 +283,7 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 
 		// check if ts is included
 		if (!isset($this->settings['staticTemplate'])) {
-			$this->flashMessageContainer->add(Tx_Extbase_Utility_Localization::translate('error_no_typoscript_pi2', 'powermail'));
+			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail'));
 		}
 	}
 

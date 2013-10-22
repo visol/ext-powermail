@@ -1,6 +1,7 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Condition;
 
-class Tx_Powermail_ViewHelpers_Condition_OrViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class OrViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * OR viewhelper for if widget in fluid

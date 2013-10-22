@@ -4,7 +4,7 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Powermail_Doma
 	/**
 	 * Mandatory Validation of given answers
 	 *
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
 	public function isValid($mail) {
@@ -27,11 +27,11 @@ class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Powermail_Doma
 	/**
 	 * Check if there is a value in mail.answers.x.field for every field
 	 *
-	 * @param Tx_Powermail_Domain_Model_Field $field
-	 * @param Tx_Powermail_Domain_Model_Mail $mail
+	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
-	protected function isValueSet(Tx_Powermail_Domain_Model_Field $field, Tx_Powermail_Domain_Model_Mail $mail) {
+	protected function isValueSet(\In2code\Powermail\Domain\Model\Field $field, \In2code\Powermail\Domain\Model\Mail $mail) {
 		foreach ($mail->getAnswers() as $answer) {
 			if ($answer->getField()->getUid() === $field->getUid()) {
 				if (!is_array($answer->getValue())) { // default fields

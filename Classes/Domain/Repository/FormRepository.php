@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Domain\Repository;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -30,7 +33,7 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Repository_FormRepository extends Tx_Extbase_Persistence_Repository {
+class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Find Form objects by its given uids
@@ -44,7 +47,7 @@ class Tx_Powermail_Domain_Repository_FormRepository extends Tx_Extbase_Persisten
 		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
 
 		$query->matching(
-			$query->in('uid', t3lib_div::trimExplode(',', $uids, 1))
+			$query->in('uid', GeneralUtility::trimExplode(',', $uids, 1))
 		);
 
 		$result = $query->execute();

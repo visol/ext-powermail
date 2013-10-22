@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -25,13 +26,12 @@
 
 
 /**
- *
+ * PageRepository
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
  */
-class Tx_Powermail_Domain_Repository_PageRepository extends Tx_Extbase_Persistence_Repository {
+class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Get title from table "pages" in TYPO3

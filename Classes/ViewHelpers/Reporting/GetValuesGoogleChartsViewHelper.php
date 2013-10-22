@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Reporting;
 
 /**
  * View helper check if given value is array or not
@@ -6,7 +7,7 @@
  * @package TYPO3
  * @subpackage Fluid
  */
-class Tx_Powermail_ViewHelpers_Reporting_GetValuesGoogleChartsViewHelper extends Tx_Fluid_ViewHelpers_Form_AbstractFormFieldViewHelper {
+class GetValuesGoogleChartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * View helper check if given value is array or not
@@ -23,7 +24,7 @@ class Tx_Powermail_ViewHelpers_Reporting_GetValuesGoogleChartsViewHelper extends
 		}
 
 		// create string
-		foreach ((array) $answers[$field] as $value => $amount) {
+		foreach ((array) $answers[$field] as $amount) {
 			$string .= $amount;
 			$string .= $separator;
 		}

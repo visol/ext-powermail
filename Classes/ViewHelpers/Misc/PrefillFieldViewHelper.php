@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Misc;
 
 /**
  * Prefill a field with variables
@@ -7,10 +8,10 @@
  * @subpackage Fluid
  * @version
  */
-class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * @var Tx_Extbase_Configuration_ConfigurationManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	 */
 	protected $configurationManager;
 
@@ -25,7 +26,7 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 	protected $piVars;
 
 	/**
-	 * @var tslib_cObj Object
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	protected $cObj;
 
@@ -80,7 +81,7 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 			// if prefill value (from typoscript)
 			elseif ($this->settings['prefill.'][$marker]) {
 				if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) { // Parse cObject
-					$data =  Tx_Extbase_Reflection_ObjectAccess::getGettableProperties($field); // make array from object
+					$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field); // make array from object
 					$this->cObj->start($data); // push to ts
 					$value = $this->cObj->cObjGetSingle($this->settings['prefill.'][$marker], $this->settings['prefill.'][$marker . '.']); // parse
 				} else { // Use String only
@@ -150,7 +151,7 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 			// if prefill value (from typoscript)
 			elseif ($this->settings['prefill.'][$marker]) {
 				if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) { // Parse cObject
-					$data =  Tx_Extbase_Reflection_ObjectAccess::getGettableProperties($field); // make array from object
+					$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field); // make array from object
 					$this->cObj->start($data); // push to ts
 					if (
 						$this->cObj->cObjGetSingle($this->settings['prefill.'][$marker], $this->settings['prefill.'][$marker . '.']) == $options[$index]['value'] ||
@@ -172,13 +173,15 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 	}
 
 	/**
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */
-	public function injectConfigurationManager(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 		$this->cObj = $this->configurationManager->getContentObject();
-		$typoScriptSetup = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$typoScriptSetup = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
 		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 	}
 
@@ -188,6 +191,6 @@ class Tx_Powermail_ViewHelpers_Misc_PrefillFieldViewHelper extends Tx_Fluid_Core
 	 * @return void
 	 */
 	public function initializeObject() {
-		$this->piVars = t3lib_div::_GP('tx_powermail_pi1');
+		$this->piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_powermail_pi1');
 	}
 }

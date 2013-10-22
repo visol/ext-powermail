@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
@@ -25,12 +26,12 @@
 
 
 /**
- * FE_User Repository
+ * UserRepository
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Repository_UserRepository extends Tx_Extbase_Persistence_Repository {
+class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Find FE_Users by their group

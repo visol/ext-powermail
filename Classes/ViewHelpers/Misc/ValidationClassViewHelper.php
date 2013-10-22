@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Misc;
 
 /**
  * Returns CSS Classes for JS Validator
@@ -7,7 +8,7 @@
  * @subpackage Fluid
  * @version
  */
-class Tx_Powermail_ViewHelpers_Misc_ValidationClassViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class ValidationClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Validation array

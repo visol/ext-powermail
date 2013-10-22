@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\ViewHelpers\Misc;
 
 /**
  * Returns Error Class if Error in form
@@ -7,7 +8,7 @@
  * @subpackage Fluid
  * @version
  */
-class Tx_Powermail_ViewHelpers_Misc_ErrorClassViewHelper extends Tx_Fluid_Core_ViewHelper_AbstractViewHelper {
+class ErrorClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * Prefill string for fields
