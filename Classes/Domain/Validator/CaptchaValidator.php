@@ -1,104 +1,83 @@
 <?php
-class Tx_Powermail_Domain_Validator_CaptchaValidator extends Tx_Powermail_Domain_Validator_AbstractValidator {
+namespace In2code\Powermail\Domain\Validator;
+
+class CaptchaValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
 	/**
-	 * fieldRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_FieldRepository
+	 * @var \In2code\Powermail\Utility\CalculatingCaptcha
 	 *
 	 * @inject
 	 */
-	protected $fieldRepository;
-
-	/**
-	 * formRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
-	 *
-	 * @inject
-	 */
-	protected $formRepository;
+	protected $captchaEngine;
 
 	/**
 	 * Captcha Session clean (only if mail is out)
 	 *
 	 * @var bool
 	 */
-	protected $clearSession;
+	protected $clearSession = TRUE;
 
 	/**
-	 * Return variable
+	 * Captcha arguments found
 	 *
 	 * @var bool
 	 */
-	protected $isValid = TRUE;
+	protected $captchaArgumentFound = FALSE;
 
 	/**
-	 * Captcha Field found
+	 * Validation of given Params
 	 *
-	 * @var bool
-	 */
-	protected $captchaFound = FALSE;
-
-	/**
-	 * Validation of given Captcha fields
-	 *
-	 * @param array $params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
-	public function isValid($params) {
-		if (!$this->formHasCaptcha($params['__identity'])) {
-			return $this->isValid;
+	public function isValid($mail) {
+		// stop check if form has no captcha field
+		if (!$this->formHasCaptcha($mail->getForm())) {
+			return TRUE;
 		}
 
-		foreach ((array) $params as $uid => $value) {
-			// get current field values
-			$field = $this->fieldRepository->findByUid($uid);
-			if (!method_exists($field, 'getUid')) {
+		foreach ($mail->getAnswers() as $answer) {
+			if ($answer->getField()->getType() !== 'captcha') {
 				continue;
 			}
 
-			// if not a captcha field
-			if ($field->getType() != 'captcha') {
-				continue;
-			}
+			// Captcha Arguments found
+			$this->captchaArgumentFound = TRUE;
 
 			// if field wrong code given - set error
-			$captcha = $this->objectManager->get('Tx_Powermail_Utility_CalculatingCaptcha');
-			if (!$captcha->validCode($value, $this->clearSession)) {
-				$this->addError('captcha', $uid);
-				$this->isValid = FALSE;
+			if (!$this->captchaEngine->validCode($answer->getValue(), $this->clearSession)) {
+				$this->addError('captcha', 0);
+				$this->setIsValid(FALSE);
 			}
 
-			// Captcha field found
-			$this->captchaFound = TRUE;
 		}
 
-		if ($this->captchaFound) {
-			return $this->isValid;
-		} else {
-			// if no captcha vars given
+		// if no captcha arguments given (captcha field could be deleted from DOM with firebug e.g.)
+		if (!$this->captchaArgumentFound) {
 			$this->addError('captcha', 0);
-			return FALSE;
+			$this->setIsValid(FALSE);
 		}
-  	}
+
+		return $this->getIsValid();
+
+	}
 
 	/**
 	 * Checks if given form has a captcha
 	 *
-	 * @param int $formUid
-	 * @return int
+	 * @param \In2code\Powermail\Domain\Model\Form $form
+	 * @return boolean
 	 */
-	protected function formHasCaptcha($formUid) {
-		$form = $this->formRepository->hasCaptcha($formUid);
-		return count($form);
+	protected function formHasCaptcha(\In2code\Powermail\Domain\Model\Form $form) {
+		$form = $this->formRepository->hasCaptcha($form);
+		return count($form) ? TRUE : FALSE;
 	}
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
-		$piVars = t3lib_div::_GET('tx_powermail_pi1');
+		$piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('tx_powermail_pi1');
 		$this->clearSession = ($piVars['action'] == 'create' ? TRUE : FALSE); // clear captcha on create action
 	}
 }

@@ -48,7 +48,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 */
 	protected function isValidString(\In2code\Powermail\Domain\Model\Field $field, \In2code\Powermail\Domain\Model\Mail $mail) {
 		foreach ($mail->getAnswers() as $answer) {
-			if ($answer->getField()->getUid() === $field->getUid()) {
+			if ($answer->getField()->getUid() === $field->getUid() && $answer->getValue()) {
 				if (is_numeric($this->regEx[$field->getValidation()])) { // filter
 					if (filter_var($answer->getValue(), $this->regEx[$field->getValidation()]) === FALSE) { // check failed
 						$this->setErrorAndMessage($field, 'validation');

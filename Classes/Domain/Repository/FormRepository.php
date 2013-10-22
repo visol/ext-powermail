@@ -57,23 +57,22 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Returns form with captcha from given UID
 	 *
-	 * @param int $uid Form Uid
+	 * @param \In2code\Powermail\Domain\Model\Form $form
 	 * @return Tx_Extbase_Persistence_QueryResult
 	 */
-	public function hasCaptcha($uid) {
+	public function hasCaptcha(\In2code\Powermail\Domain\Model\Form $form) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
 
 		$and = array(
-			$query->equals('uid', $uid),
+			$query->equals('uid', $form->getUid()),
 			$query->equals('pages.fields.type', 'captcha')
 		);
 
 		$constraint = $query->logicalAnd($and); // create where object with AND
 		$query->matching($constraint); // use constraint
 
-		$result = $query->execute();
-		return $result;
+		return $query->execute();
 	}
 
 	/**

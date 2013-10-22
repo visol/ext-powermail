@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\Utility;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -86,10 +88,10 @@ class CalculatingCaptcha {
 	 */
 	protected function createImage($content) {
 		$subfolder = '';
-		if (t3lib_div::getIndpEnv('TYPO3_REQUEST_HOST') . '/' != t3lib_div::getIndpEnv('TYPO3_SITE_URL')) { // if request_host is different to site_url (TYPO3 runs in a subfolder)
-			$subfolder = str_replace(t3lib_div::getIndpEnv('TYPO3_REQUEST_HOST') . '/', '', t3lib_div::getIndpEnv('TYPO3_SITE_URL')); // get the folder (like "subfolder/")
+		if (GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' != GeneralUtility::getIndpEnv('TYPO3_SITE_URL')) { // if request_host is different to site_url (TYPO3 runs in a subfolder)
+			$subfolder = str_replace(GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/', '', GeneralUtility::getIndpEnv('TYPO3_SITE_URL')); // get the folder (like "subfolder/")
 		}
-		$startimage = t3lib_div::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']); // background image
+		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']); // background image
 
 		if (!is_file($startimage)) { // if file is correct
 			return 'Error: No Image found';
@@ -99,16 +101,16 @@ class CalculatingCaptcha {
 		$config = array();
 		$config['color_rgb'] = sscanf($this->conf['captcha.']['default.']['textColor'], '#%2x%2x%2x'); // change HEX color to RGB
 		$config['color'] = ImageColorAllocate($img, $config['color_rgb'][0], $config['color_rgb'][1], $config['color_rgb'][2]); // Font color
-		$config['font'] = t3lib_div::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']); // fontfile
+		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']); // fontfile
 		$config['fontsize'] = $this->conf['captcha.']['default.']['textSize']; // Fontsize
-		$config['angle'] = t3lib_div::trimExplode(',', $this->conf['captcha.']['default.']['textAngle'], 1); // give me the angles for the font
+		$config['angle'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['textAngle'], 1); // give me the angles for the font
 		$config['fontangle'] = mt_rand($config['angle'][0], $config['angle'][1]); // random angle
-		$config['distance_hor'] = t3lib_div::trimExplode(',', $this->conf['captcha.']['default.']['distanceHor'], 1); // give me the horizontal distances
+		$config['distance_hor'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceHor'], 1); // give me the horizontal distances
 		$config['fontdistance_hor'] = mt_rand($config['distance_hor'][0], $config['distance_hor'][1]); // random distance
-		$config['distance_vert'] = t3lib_div::trimExplode(',', $this->conf['captcha.']['default.']['distanceVer'], 1); // give me the vertical distances
+		$config['distance_vert'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceVer'], 1); // give me the vertical distances
 		$config['fontdistance_vert'] = mt_rand($config['distance_vert'][0], $config['distance_vert'][1]); // random distance
 		imagettftext($img, $config['fontsize'], $config['fontangle'], $config['fontdistance_hor'], $config['fontdistance_vert'], $config['color'], $config['font'], $content); // add text to image
-		imagepng($img, t3lib_div::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)); // save image file
+		imagepng($img, GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)); // save image file
 		imagedestroy($img); // delete temp image
 
 		return $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage) . '?hash=' . time(); // path to new image
