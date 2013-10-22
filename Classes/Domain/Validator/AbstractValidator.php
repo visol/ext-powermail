@@ -43,6 +43,13 @@ abstract class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator
 	protected $formRepository;
 
 	/**
+	 * @var \In2code\Powermail\Utility\Div
+	 *
+	 * @inject
+	 */
+	protected $div;
+
+	/**
 	 * Return variable
 	 *
 	 * @var bool

@@ -1,5 +1,10 @@
 <?php
-class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+namespace In2code\Powermail\Domain\Validator;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Utility\Div;
+
+class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
 	/**
 	 * Spam indication start value
@@ -16,13 +21,6 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	protected $settings;
 
 	/**
-	 * @var Tx_Powermail_Utility_Div
-	 *
-	 * @inject
-	 */
-	protected $div;
-
-	/**
 	 * Referrer action
 	 *
 	 * @var string
@@ -30,32 +28,39 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	protected $referrer;
 
 	/**
+	 * Plugin arguments
+	 *
+	 * @var array
+	 */
+	protected $piVars;
+
+	/**
 	 * Error messages for email to admin
 	 *
 	 * @var array
 	 */
-	protected $msg = array();
+	protected $messages = array();
 
 	/**
 	 * Spam-Validation of given Params
 	 * 		see powermail/doc/SpamDetection for formula
 	 *
-	 * @param array $params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
-	public function isValid($params) {
+	public function isValid($mail) {
 		if (!$this->settings['spamshield.']['_enable']) {
-			return TRUE;
+			return $this->getIsValid();
 		}
 		$spamFactor = $this->settings['spamshield.']['factor'] / 100;
 
 		// Different checks to increase spam indicator
-		$this->honeypodCheck($params, $this->settings['spamshield.']['indicator.']['honeypod']);
-		$this->linkCheck($params, $this->settings['spamshield.']['indicator.']['link'], $this->settings['spamshield.']['indicator.']['linkLimit']);
-		$this->nameCheck($params, $this->settings['spamshield.']['indicator.']['name']);
-		$this->sessionCheck($this->settings['spamshield.']['indicator.']['session']);
-		$this->uniqueCheck($params, $this->settings['spamshield.']['indicator.']['unique']);
-		$this->blacklistStringCheck($params, $this->settings['spamshield.']['indicator.']['blacklistString']);
+		$this->honeypodCheck($this->settings['spamshield.']['indicator.']['honeypod']);
+		$this->linkCheck($mail, $this->settings['spamshield.']['indicator.']['link'], $this->settings['spamshield.']['indicator.']['linkLimit']);
+		$this->nameCheck($mail, $this->settings['spamshield.']['indicator.']['name']);
+		$this->sessionCheck($mail, $this->settings['spamshield.']['indicator.']['session']);
+		$this->uniqueCheck($mail, $this->settings['spamshield.']['indicator.']['unique']);
+		$this->blacklistStringCheck($mail, $this->settings['spamshield.']['indicator.']['blacklistString']);
 		$this->blacklistIpCheck($this->settings['spamshield.']['indicator.']['blacklistIp']);
 
 		// spam formula with asymptote 1 (100%)
@@ -71,53 +76,65 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 
 		// Spam debugging
 		if ($this->settings['debug.']['spamshield']) {
-			t3lib_utility_Debug::debug($this->msg, 'powermail debug: Show Spamchecks - Spamfactor ' . $this->formatSpamFactor($thisSpamFactor));
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug(
+				$this->getMessages(),
+				'powermail debug: Show Spamchecks - Spamfactor ' . $this->formatSpamFactor($thisSpamFactor)
+			);
 		}
 
 		// if spam
 		if ($thisSpamFactor >= $spamFactor) {
 			$this->addError('spam_details', $this->formatSpamFactor($thisSpamFactor));
+			$this->setIsValid(FALSE);
 
 			// Send notification email to admin
-			if (t3lib_div::validEmail($this->settings['spamshield.']['email'])) {
+			if (GeneralUtility::validEmail($this->settings['spamshield.']['email'])) {
 				$subject = 'Spam in powermail form recognized';
 				$message = 'Possible spam in powermail form on page with PID ' . $GLOBALS['TSFE']->id;
 				$message .= "\n\n";
 				$message .= 'Spamfactor of this mail: ' . $this->formatSpamFactor($thisSpamFactor) . "\n";
 				$message .= "\n\n";
 				$message .= 'Failed Spamchecks:' . "\n";
-				$message .= Tx_Powermail_Utility_Div::viewPlainArray($this->msg);
+				$message .= Div::viewPlainArray($this->getMessages());
 				$message .= "\n\n";
 				$message .= 'Given Form variables:' . "\n";
-				$message .= Tx_Powermail_Utility_Div::viewPlainArray($params);
+				foreach ($mail->getAnswers() as $answer) {
+					$message .= $answer->getField()->getTitle();
+					$message .= ': ';
+					$message .= $answer->getValue();
+					$message .= "\n";
+				}
 				$header  = 'MIME-Version: 1.0' . "\r\n";
 				$header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-				$header .= 'From: powermail@' . t3lib_div::getIndpEnv('TYPO3_HOST_ONLY') . "\r\n";
-				t3lib_div::plainMailEncoded($this->settings['spamshield.']['email'], $subject, $message, $header);
+				$header .= 'From: powermail@' . GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY') . "\r\n";
+				GeneralUtility::plainMailEncoded(
+					$this->settings['spamshield.']['email'],
+					$subject,
+					$message,
+					$header
+				);
 			}
 
-			return FALSE;
 		}
 
-		return TRUE;
+		return $this->getIsValid();
 	}
 
 	/**
 	 * Honeypod Check: Spam recognized if Honeypod field is filled
 	 *
-	 * @param array $params Given params
 	 * @param float $indication Indication if check fails
 	 * @return void
 	 */
-	protected function honeypodCheck($params, $indication = 1.0) {
+	protected function honeypodCheck($indication = 1.0) {
 		if (!$indication) {
 			return;
 		}
 
-		// if check failes
-		if (isset($params['hp']) && !empty($params['hp'])) {
-			$this->spamIndicator += $indication;
-			$this->msg[] = __FUNCTION__ . ' failed';
+		// if honeypod was filled
+		if (!empty($this->piVars['field']['__hp'])) {
+			$this->increaseSpamIndicator($indication);
+			$this->addMessage(__FUNCTION__ . ' failed');
 		}
 		return;
 	}
@@ -125,32 +142,32 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	/**
 	 * Link Check: Counts numbers of links in message
 	 *
-	 * @param array $params Given params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param float $indication Indication if check fails
 	 * @param integer $limit Limit of allowed links in mail
 	 * @return void
 	 */
-	protected function linkCheck($params, $indication = 1.0, $limit = 2) {
+	protected function linkCheck(\In2code\Powermail\Domain\Model\Mail $mail, $indication = 1.0, $limit = 2) {
 		if (!$indication) {
 			return;
 		}
 
 		// check numbers of links
 		$linkAmount = 0;
-		foreach ((array) $params as $value) {
-			if (is_array($value)) {
+		foreach ($mail->getAnswers() as $answer) {
+			if (is_array($answer->getValue())) {
 				continue;
 			}
-			preg_match_all('@http://|https://|ftp.@', $value, $result);
+			preg_match_all('@http://|https://|ftp.@', $answer->getValue(), $result);
 			if (isset($result[0])) {
 				$linkAmount += count($result[0]); // add numbers of http://
 			}
 		}
 
-		// if check failes
+		// check if number of failes are too high
 		if ($linkAmount > $limit) {
-			$this->spamIndicator += $indication;
-			$this->msg[] = __FUNCTION__ . ' failed';
+			$this->increaseSpamIndicator($indication);
+			$this->addMessage(__FUNCTION__ . ' failed');
 		}
 		return;
 	}
@@ -158,11 +175,11 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	/**
 	 * Name Check: Compares first- and lastname (shouldn't be the same)
 	 *
-	 * @param array $params Given params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param float $indication Indication if check fails
 	 * @return void
 	 */
-	protected function nameCheck($params, $indication = 1.0) {
+	protected function nameCheck(\In2code\Powermail\Domain\Model\Mail $mail, $indication = 1.0) {
 		if (!$indication) {
 			return;
 		}
@@ -181,24 +198,23 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 		);
 
 		// find out first- and lastname (marker should be {firstname} and {lastname}
-		foreach ((array) $params as $field => $value) {
-			if (is_array($value)) {
+		foreach ($mail->getAnswers() as $answer) {
+			if (is_array($answer->getValue())) {
 				continue;
 			}
-			$marker = $this->div->getMarkerFromField($field);
-			if (in_array($marker, $keys_firstname)) {
-				$firstname = $value;
+			if (in_array($answer->getField()->getMarker(), $keys_firstname)) {
+				$firstname = $answer->getValue();
 			}
-			if (in_array($marker, $keys_lastname)) {
-				$lastname = $value;
+			if (in_array($answer->getField()->getMarker(), $keys_lastname)) {
+				$lastname = $answer->getValue();
 			}
 		}
 
 		// if check failes
 		if (isset($firstname) && isset($lastname)) {
 			if ($firstname && $firstname == $lastname) {
-				$this->spamIndicator += $indication;
-				$this->msg[] = __FUNCTION__ . ' failed';
+				$this->increaseSpamIndicator($indication);
+				$this->addMessage(__FUNCTION__ . ' failed');
 				return;
 			}
 		}
@@ -207,22 +223,21 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	/**
 	 * Session Check: Checks if session was started correct on form delivery
 	 *
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param float $indication Indication if check fails
 	 * @return void
 	 */
-	protected function sessionCheck($indication = 1.0) {
+	protected function sessionCheck(\In2code\Powermail\Domain\Model\Mail $mail, $indication = 1.0) {
 		// Stop sessionCheck if indicator was turned to 0 OR if last action was optinConfirm
 		if (!$indication || $this->referrer == 'optinConfirm') {
 			return;
 		}
-		$gp = t3lib_div::_GP('tx_powermail_pi1');
-		$formUid = $gp['form'];
-		$time = Tx_Powermail_Utility_Div::getFormStartFromSession($formUid);
+		$time = Div::getFormStartFromSession($mail->getForm()->getUid());
 
 		// if check failes
 		if (!isset($time) || !$time) {
-			$this->spamIndicator += $indication;
-			$this->msg[] = __FUNCTION__ . ' failed';
+			$this->increaseSpamIndicator($indication);
+			$this->addMessage(__FUNCTION__ . ' failed');
 		}
 		return;
 	}
@@ -230,32 +245,32 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	/**
 	 * Unique Check: Checks if values in given params are different
 	 *
-	 * @param array $params Given params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param float $indication Indication if check fails
 	 * @return void
 	 */
-	protected function uniqueCheck($params, $indication = 1.0) {
+	protected function uniqueCheck(\In2code\Powermail\Domain\Model\Mail $mail, $indication = 1.0) {
 		if (!$indication) {
 			return;
 		}
 
 		$arr = array();
-		foreach ((array) $params as $value) {
+		foreach ($mail->getAnswers() as $answer) {
 
 			// don't want values in second level (from checkboxes e.g.)
-			if (is_array($value)) {
+			if (is_array($answer->getValue())) {
 				continue;
 			}
 
-			if (!empty($value)) {
-				$arr[] = $value;
+			if ($answer->getValue()) {
+				$arr[] = $answer->getValue();
 			}
 		}
 
 		// if check failes
 		if (count($arr) != count(array_unique($arr))) {
-			$this->spamIndicator += $indication;
-			$this->msg[] = __FUNCTION__ . ' failed';
+			$this->increaseSpamIndicator($indication);
+			$this->addMessage(__FUNCTION__ . ' failed');
 			return;
 		}
 	}
@@ -263,25 +278,25 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	/**
 	 * Blacklist String Check: Check if a blacklisted word is in given values
 	 *
-	 * @param array $params Given params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param float $indication Indication if check fails
 	 * @return void
 	 */
-	protected function blacklistStringCheck($params, $indication = 1.0) {
+	protected function blacklistStringCheck(\In2code\Powermail\Domain\Model\Mail $mail, $indication = 1.0) {
 		if (!$indication) {
 			return;
 		}
-		$blacklist = t3lib_div::trimExplode(',', $this->settings['spamshield.']['indicator.']['blacklistStringValues'], 1);
+		$blacklist = GeneralUtility::trimExplode(',', $this->settings['spamshield.']['indicator.']['blacklistStringValues'], 1);
 
 		// if check failes
-		foreach ((array) $params as $value) {
+		foreach ($mail->getAnswers() as $answer) {
+			if (is_array($answer->getValue())) {
+				continue;
+			}
 			foreach ((array) $blacklist as $blackword) {
-				if (is_array($value)) {
-					continue;
-				}
-				if (stristr($value, $blackword)) {
-					$this->spamIndicator += $indication;
-					$this->msg[] = __FUNCTION__ . ' failed';
+				if (stristr($answer->getValue(), $blackword)) {
+					$this->increaseSpamIndicator($indication);
+					$this->addMessage(__FUNCTION__ . ' failed');
 					return;
 				}
 			}
@@ -299,12 +314,12 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 		if (!$indication) {
 			return;
 		}
-		$blacklist = t3lib_div::trimExplode(',', $this->settings['spamshield.']['indicator.']['blacklistIpValues'], 1);
+		$blacklist = GeneralUtility::trimExplode(',', $this->settings['spamshield.']['indicator.']['blacklistIpValues'], 1);
 
 		// if check failes
-		if (in_array(t3lib_div::getIndpEnv('REMOTE_ADDR'), $blacklist)) {
-			$this->spamIndicator += $indication;
-			$this->msg[] = __FUNCTION__ . ' failed';
+		if (in_array(GeneralUtility::getIndpEnv('REMOTE_ADDR'), $blacklist)) {
+			$this->increaseSpamIndicator($indication);
+			$this->addMessage(__FUNCTION__ . ' failed');
 			return;
 		}
 	}
@@ -323,17 +338,56 @@ class Tx_Powermail_Domain_Validator_SpamShieldValidator extends Tx_Extbase_Valid
 	 * Constructor
 	 */
 	public function __construct() {
-		$piVars = t3lib_div::_GP('tx_powermail_pi1');
-		$this->referrer = $piVars['__referrer']['actionName'];
+		$this->piVars = GeneralUtility::_GP('tx_powermail_pi1');
+		$this->referrer = $this->piVars['__referrer']['@action'];
 	}
 
 	/**
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
-	 * @return void
+	 * @param int $spamIndicator
 	 */
-	public function injectTypoScript(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
-		$typoScriptSetup = $configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
+	public function setSpamIndicator($spamIndicator) {
+		$this->spamIndicator = $spamIndicator;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getSpamIndicator() {
+		return $this->spamIndicator;
+	}
+
+	/**
+	 * Increase Global Indicator
+	 *
+	 * @param int $indication
+	 */
+	public function increaseSpamIndicator($indication) {
+		$this->setSpamIndicator($this->getSpamIndicator() + $indication);
+	}
+
+	/**
+	 * @param array $messages
+	 */
+	public function setMessages($messages) {
+		$this->messages = $messages;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getMessages() {
+		return $this->messages;
+	}
+
+	/**
+	 * Add $message
+	 *
+	 * @param $message
+	 */
+	public function addMessage($message) {
+		$messages = $this->getMessages();
+		$messages[] = $message;
+		$this->setMessages($messages);
 	}
 
 }

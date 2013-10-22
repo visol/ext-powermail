@@ -58,7 +58,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		// open session
 		if (method_exists($forms->getFirst(), 'getUid')) {
-			\In2code\Powermail\Utility\Div::saveFormStartInSession($forms->getFirst()->getUid());
+			Div::saveFormStartInSession($forms->getFirst()->getUid());
 		}
 	}
 
@@ -112,7 +112,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @validate $mail In2code\Powermail\Domain\Validator\MandatoryValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\StringValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\CaptchaValidator
-	 * validate $mail In2code\Powermail\Domain\Validator\SpamShieldValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\SpamShieldValidator
 	 * validate $mail In2code\Powermail\Domain\Validator\CustomValidator
 	 * @return void
 	 */
@@ -124,7 +124,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		// Debug Output
 		if ($this->settings['debug']['variables']) {
-			Tx_Extbase_Utility_Debugger::var_dump($mail);
+			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($mail);
 		}
 
 		// Save Mail to DB
@@ -446,7 +446,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 						'actionName' => 'optinConfirm'
 					)
 				);
-				$_POST['tx_powermail_pi1']['__referrer']['actionName'] = 'optinConfirm'; // workarround to set the referrer and call it again in the validator
+				$_POST['tx_powermail_pi1']['__referrer']['@action'] = 'optinConfirm'; // workarround to set the referrer and call it again in the validator
 				$this->forward('create', NULL, NULL, $arguments);
 			}
 		}
