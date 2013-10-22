@@ -1,4 +1,9 @@
 <?php
+namespace In2code\Powermail\Domain\Validator;
+
+use \In2code\Powermail\Utility\Div;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -30,7 +35,7 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_Validator_AbstractValidator {
+class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
 	/**
 	 * BasicFileFunctions
@@ -47,7 +52,7 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
 			// session stuff
 			$uploadSession = array();
-			Tx_Powermail_Utility_Div::setSessionValue('upload', array(), TRUE); // clean old session before
+			Div::setSessionValue('upload', array(), TRUE); // clean old session before
 
 			foreach ($mail->getAnswers() as $answer) {
 				if ($answer->getField()->getType() != 'upload') {
@@ -75,16 +80,16 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 				// create new filename with absolute path
 				$newFile = $this->basicFileFunctions->getUniqueName(
 					$fileName,
-					t3lib_div::getFileAbsFileName($this->settings['misc.']['file.']['folder'])
+					GeneralUtility::getFileAbsFileName($this->settings['misc.']['file.']['folder'])
 				);
 				$uploadSession[] = $newFile; // create array for upload session
-				if (!t3lib_div::upload_copy_move($tmpName, $newFile)) {
+				if (!GeneralUtility::upload_copy_move($tmpName, $newFile)) {
 					$this->setErrorAndMessage($answer->getField(), 'upload_error');
 				}
 			}
 
 			// save uploaded filenames to session (to attach it later)
-			Tx_Powermail_Utility_Div::setSessionValue('upload', $uploadSession, TRUE);
+			Div::setSessionValue('upload', $uploadSession, TRUE);
 		}
 
 		return $this->getIsValid();
@@ -94,12 +99,12 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 	 * Is file-extension allowed for uploading?
 	 *
 	 * @param string $filename Filename like (upload.txt)
-	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @return bool
 	 */
-	protected function checkExtension($filename, Tx_Powermail_Domain_Model_Field $field) {
+	protected function checkExtension($filename, \In2code\Powermail\Domain\Model\Field $field) {
 		$fileInfo = pathinfo($filename);
-		if (!isset($fileInfo['extension']) || !t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
+		if (!isset($fileInfo['extension']) || !GeneralUtility::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
 			$this->setErrorAndMessage($field, 'upload_extension');
 			return FALSE;
 		}
@@ -110,10 +115,10 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 	 * Is filesize small enough?
 	 *
 	 * @param string $tmpName
-	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @return bool
 	 */
-	protected function checkFilesize($tmpName, Tx_Powermail_Domain_Model_Field $field) {
+	protected function checkFilesize($tmpName, \In2code\Powermail\Domain\Model\Field $field) {
 		if (filesize($tmpName) > $this->settings['misc.']['file.']['size']) {
 			$this->setErrorAndMessage($field, 'upload_size');
 			return FALSE;
@@ -125,6 +130,6 @@ class Tx_Powermail_Domain_Validator_UploadValidator extends Tx_Powermail_Domain_
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->basicFileFunctions = t3lib_div::makeInstance('t3lib_basicFileFunctions');
+		$this->basicFileFunctions = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
 	}
 }

@@ -1,4 +1,6 @@
 <?php
+namespace In2code\Powermail\Domain\Validator;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -23,10 +25,10 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-abstract class Tx_Powermail_Domain_Validator_AbstractValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+abstract class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 
 	/**
-	 * @var Tx_Extbase_Object_ObjectManagerInterface
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
 	 *
 	 * @inject
 	 */
@@ -61,22 +63,22 @@ abstract class Tx_Powermail_Domain_Validator_AbstractValidator extends Tx_Extbas
 	/**
 	 * Set Error
 	 *
-	 * @param Tx_Powermail_Domain_Model_Field $field
+	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @param string $label
 	 * @return void
 	 */
-	protected function setErrorAndMessage(Tx_Powermail_Domain_Model_Field $field, $label) {
+	protected function setErrorAndMessage(\In2code\Powermail\Domain\Model\Field $field, $label) {
 		$this->setIsValid(FALSE);
 		$this->addError($label, $field->getMarker());
 	}
 
 	/**
-	 * @param Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager
+	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */
-	public function injectTypoScript(Tx_Extbase_Configuration_ConfigurationManagerInterface $configurationManager) {
+	public function injectTypoScript(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
 		$typoScriptSetup = $configurationManager->getConfiguration(
-			Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
 		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 	}

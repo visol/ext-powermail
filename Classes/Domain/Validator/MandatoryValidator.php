@@ -1,5 +1,7 @@
 <?php
-class Tx_Powermail_Domain_Validator_MandatoryValidator extends Tx_Powermail_Domain_Validator_AbstractValidator {
+namespace In2code\Powermail\Domain\Validator;
+
+class MandatoryValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
 	/**
 	 * Mandatory Validation of given answers
