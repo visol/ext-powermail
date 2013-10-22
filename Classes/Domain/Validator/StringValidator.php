@@ -1,14 +1,7 @@
 <?php
-class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+namespace In2code\Powermail\Domain\Validator;
 
-	/**
-	 * fieldRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_FieldRepository
-	 *
-	 * @inject
-	 */
-	protected $fieldRepository;
+class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
 	/**
 	 * regEx and filter array
@@ -25,55 +18,49 @@ class Tx_Powermail_Domain_Validator_StringValidator extends Tx_Extbase_Validatio
 	);
 
 	/**
-	 * Return variable
-	 *
-	 * @var bool
-	 */
-	protected $isValid = TRUE;
-
-	/**
 	 * Validation of given Params
 	 *
-	 * @param $params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
-	public function isValid($params) {
+	public function isValid($mail) {
+		foreach ($mail->getForm()->getPages() as $page) { // every page in current form
+			foreach ($page->getFields() as $field) { // every field in current page
 
-		foreach ((array) $params as $uid => $value) {
-			// get current field values
-			$field = $this->fieldRepository->findByUid($uid);
-			if (!method_exists($field, 'getUid')) {
-				continue;
-			}
-
-			// if validation of field or value empty
-			if (empty($value) || !$field->getValidation()) {
-				continue;
-			}
-
-			// if regex or filter found
-			if (isset($this->regEx[$field->getValidation()])) {
-
-				if (is_numeric($this->regEx[$field->getValidation()])) { // filter
-
-					if (filter_var($value, $this->regEx[$field->getValidation()]) === FALSE) { // check failed
-						$this->addError('validation', $uid);
-						$this->isValid = FALSE;
-					}
-
-				} else { // regex
-
-					if (preg_replace($this->regEx[$field->getValidation()], '', $value) != $value) { // check failed
-						$this->addError('validation', $uid);
-						$this->isValid = FALSE;
-					}
-
+				// if validation of field or value empty
+				if (!$field->getValidation()) {
+					continue;
 				}
-			}
 
+				$this->isValidString($field, $mail);
+			}
 		}
 
-		return $this->isValid;
+		return $this->getIsValid();
+	}
+
+	/**
+	 * Check if there is a value in mail.answers.x.field for every field
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @return bool
+	 */
+	protected function isValidString(\In2code\Powermail\Domain\Model\Field $field, \In2code\Powermail\Domain\Model\Mail $mail) {
+		foreach ($mail->getAnswers() as $answer) {
+			if ($answer->getField()->getUid() === $field->getUid()) {
+				if (is_numeric($this->regEx[$field->getValidation()])) { // filter
+					if (filter_var($answer->getValue(), $this->regEx[$field->getValidation()]) === FALSE) { // check failed
+						$this->setErrorAndMessage($field, 'validation');
+					}
+				} else { // regex
+					if (preg_replace($this->regEx[$field->getValidation()], '', $answer->getValue()) !== $answer->getValue()) { // check failed
+						$this->setErrorAndMessage($field, 'validation');
+					}
+				}
+			}
+		}
+		return TRUE;
 	}
 
 }

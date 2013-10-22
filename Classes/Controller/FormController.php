@@ -108,12 +108,12 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * Action create entry
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
-	 * @validate $mail Tx_Powermail_Domain_Validator_UploadValidator
-	 * @validate $mail Tx_Powermail_Domain_Validator_MandatoryValidator
-	 * validate $mail Tx_Powermail_Domain_Validator_StringValidator
-	 * validate $mail Tx_Powermail_Domain_Validator_CaptchaValidator
-	 * validate $mail Tx_Powermail_Domain_Validator_SpamShieldValidator
-	 * validate $mail Tx_Powermail_Domain_Validator_CustomValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\UploadValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\MandatoryValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\StringValidator
+	 * validate $mail In2code\Powermail\Domain\Validator\CaptchaValidator
+	 * validate $mail In2code\Powermail\Domain\Validator\SpamShieldValidator
+	 * validate $mail In2code\Powermail\Domain\Validator\CustomValidator
 	 * @return void
 	 */
 	public function createAction(\In2code\Powermail\Domain\Model\Mail $mail = NULL) {
