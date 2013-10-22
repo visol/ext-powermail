@@ -84,7 +84,7 @@ class Tx_Powermail_Controller_FormController extends Tx_Powermail_Controller_Abs
 
 			// allow subvalues in new property mapper
 			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers.' . $i);
 
 			$newArguments['mail']['answers'][$i] = array(
 				'field' => strval($this->div->getFieldUidFromMarker($marker, $arguments['mail']['form'])),
