@@ -13,11 +13,6 @@ jQuery(document).ready(function($) {
 	// Read baseURL
 	baseurl = getBaseUrl();
 
-	// Form validation
-	if ($.fn.validationEngine) {
-		$('.powermail_form').validationEngine();
-	}
-
 	// Tabs
 	if ($.fn.powermailTabs) {
 		$('.powermail_morestep').powermailTabs();

@@ -4,7 +4,6 @@
 Render Powermail Form
 {forms} 			All Forms with their Pages and their Fields
 
-additionalAttributes="{data-validate: 'parsley'}"
 
 <f:section name="main">
 
@@ -18,6 +17,7 @@ additionalAttributes="{data-validate: 'parsley'}"
 						controller="Form"
 						name="field"
 						enctype="multipart/form-data"
+						additionalAttributes="{data-validate: 'parsley'}"
 						class="powermail_form powermail_form_{form.uid} {form.css} {vh:Misc.MorestepClass(activate: '{settings.main.moresteps}', class: 'powermail_morestep')}">
 
 					<h3>{form.title}</h3>

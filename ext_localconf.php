@@ -13,9 +13,9 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail'
 /**
  * Enable caching for show action in form controller
  */
-$uncachedFormActions = 'form, create, confirmation, optinConfirm';
+$uncachedFormActions = 'form, create, confirmation, optinConfirm, validateAjax';
 if ($confArr['enableCaching'] == 1) {
-	$uncachedFormActions = 'create, confirmation, optinConfirm';
+	$uncachedFormActions = 'create, confirmation, optinConfirm, validateAjax';
 }
 
 /**
@@ -25,7 +25,7 @@ ExtensionUtility::configurePlugin(
 	'In2code.' . $_EXTKEY,
 	'Pi1',
 	array(
-		'Form' => 'form, create, confirmation, optinConfirm'
+		'Form' => 'form, create, confirmation, optinConfirm, validateAjax'
 	),
 	array(
 		'Form' => $uncachedFormActions
@@ -58,6 +58,11 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
  * eID to get location from geo coordinates
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidGetLocation'] = 'EXT:powermail/Classes/Utility/EidGetLocation.php';
+
+/**
+ * eID to validate form fields
+ */
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] = 'EXT:powermail/Classes/Utility/EidValidator.php';
 
 /**
  * Extra evaluation of TCA fields

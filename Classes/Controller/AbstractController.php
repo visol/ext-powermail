@@ -96,6 +96,20 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $messageClass = 'error';
 
 	/**
+	 * Validate field
+	 *
+	 * @return void
+	 */
+	public function validateAjaxAction() {
+		header("Content-Type: application/json");
+		$result = array(
+			'error' => 'Messagetext'
+		);
+		echo json_encode($result);
+		exit;
+	}
+
+	/**
 	 * Deactivate errormessages in flashmessages
 	 *
 	 * @return bool

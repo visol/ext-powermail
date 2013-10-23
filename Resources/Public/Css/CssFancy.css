@@ -188,7 +188,9 @@ div.error {
 	background-color: #FFCA4B;
 	border: 1px solid #FF8100;
 }
-.powermail_field_error {
+.powermail_field_error,
+.parsley-error,
+.powermail_form .parsley-error:focus {
 	background-color: #FFCA4B;
 	border: 1px solid #FF8100;
 }
@@ -380,154 +382,14 @@ dl.powermail_all dd {
 /**
  * JS Form Validation
  */
-
-
-
-
-/* Z-INDEX */
-.formError { z-index: 990; }
-.formError .formErrorContent { z-index: 991; }
-.formError .formErrorArrow { z-index: 996; }
-.formErrorInsideDialog.formError { z-index: 5000; }
-.formErrorInsideDialog.formError .formErrorContent { z-index: 5001; }
-.formErrorInsideDialog.formError .formErrorArrow { z-index: 5006; }
-.inputContainer {
-	position: relative;
-	float: left;
+.parsley-error-list {
+	padding-left: 200px;
+	margin: 0 0 20px;
 }
-.formError {
-	font-family: Calibri, Arial, sans-serif;
-	position: absolute;
-	top: 300px;
-	left: 300px;
-	display: block;
-	cursor: pointer;
-}
-.ajaxSubmit {
-	padding: 20px;
-	background: #55ea55;
-	border: 1px solid #999;
-	display: none
-}
-.formError .formErrorContent {
-	width: 100%;
-	position:relative;
-	color: #fff;
-	width: 150px;
-	font-size: 11px;
-	border: 2px solid #ddd;
-	box-shadow: 0 0 6px #000;
-	-moz-box-shadow: 0 0 6px #000;
-	-webkit-box-shadow: 0 0 6px #000;
-	padding: 4px 10px 4px 10px;
-	border-radius: 6px;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-
-	background: rgb(30,87,153); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(50%,rgba(41,137,216,1)), color-stop(51%,rgba(32,124,202,1)), color-stop(100%,rgba(125,185,232,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Opera11.10+ */
-	background: -ms-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* IE10+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
-	background: linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C */
-}
-.greenPopup .formErrorContent {
-	background: #33be40;
-}
-.blackPopup .formErrorContent {
-	background: #393939;
-	color: #FFF;
-}
-.formError .formErrorArrow {
-	width: 15px;
-	margin: -2px 0 0 13px;
-	position:relative;
-}
-body[dir='rtl'] .formError .formErrorArrow,
-body.rtl .formError .formErrorArrow {
-	margin: -2px 13px 0 0;
-}
-.formError .formErrorArrowBottom {
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-	margin: 0px 0 0 12px;
-	top:2px;
-}
-.formError .formErrorArrow div {
-	border-left: 2px solid #ddd;
-	border-right: 2px solid #ddd;
-	box-shadow: 0 2px 3px #444;
-	-moz-box-shadow: 0 2px 3px #444;
-	-webkit-box-shadow: 0 2px 3px #444;
-	font-size: 0px;
-	height: 1px;
-	margin: 0 auto;
-	line-height: 0;
-	font-size: 0;
-	display: block;
-
-	background: rgb(30,87,153); /* Old browsers */
-	background: -moz-linear-gradient(top, rgba(30,87,153,1) 0%, rgba(41,137,216,1) 50%, rgba(32,124,202,1) 51%, rgba(125,185,232,1) 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(50%,rgba(41,137,216,1)), color-stop(51%,rgba(32,124,202,1)), color-stop(100%,rgba(125,185,232,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* Opera11.10+ */
-	background: -ms-linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* IE10+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
-	background: linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C */
-}
-.formError .formErrorArrowBottom div {
-	box-shadow: none;
-	-moz-box-shadow: none;
-	-webkit-box-shadow: none;
-}
-.greenPopup .formErrorArrow div {
-	background: #33be40;
-}
-.blackPopup .formErrorArrow div {
-	background: #393939;
-	color: #FFF;
-}
-.formError .formErrorArrow .line10 {
-	width: 15px;
-	border: none;
-}
-.formError .formErrorArrow .line9 {
-	width: 13px;
-	border: none;
-}
-.formError .formErrorArrow .line8 {
-	width: 11px;
-}
-.formError .formErrorArrow .line7 {
-	width: 9px;
-}
-.formError .formErrorArrow .line6 {
-	width: 7px;
-}
-.formError .formErrorArrow .line5 {
-	width: 5px;
-}
-.formError .formErrorArrow .line4 {
-	width: 3px;
-}
-.formError .formErrorArrow .line3 {
-	width: 1px;
-	border-left: 2px solid #ddd;
-	border-right: 2px solid #ddd;
-	border-bottom: 0 solid #ddd;
-}
-.formError .formErrorArrow .line2 {
-	width: 3px;
-	border: none;
-	background: #ddd;
-}
-.formError .formErrorArrow .line1 {
-	width: 1px;
-	border: none;
-	background: #ddd;
+.parsley-error-list > li {
+	padding: 0;
+	color: #FF8100;
+	font-weight: bold;
 }
 
 /**

@@ -8,8 +8,8 @@
 		id="powermail_field_{field.marker}"
 		property="{field.marker}"
 		value="{vh:Misc.PrefillField(field: '{field}')}"
-		additionalAttributes="{data-required: 'true'}"
-		class="powermail_field powermail_input {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}" />
+		class="powermail_field powermail_input {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
+		additionalAttributes="{data-remote: '{f:uri.page(additionalParams:\'{eID:\"powermailEidValidator\"}\', absolute:1)}', data-trigger:'change', data-required:'true'}" />
 
 	<!--<f:if condition="{field.mandatory}">-->
 		<!--<f:then>-->
