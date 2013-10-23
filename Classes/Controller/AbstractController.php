@@ -101,12 +101,20 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function validateAjaxAction() {
-		header("Content-Type: application/json");
-		$result = array(
-			'error' => 'Messagetext'
-		);
-		echo json_encode($result);
-		exit;
+//		header("Content-Type: application/json");
+//		$result = array(
+//			'error' => 'Messagetext'
+//		);
+//		echo json_encode($result);
+//		exit;
+	}
+
+	/**
+	 * Assigns all values, which should be available in all views
+	 */
+	protected function assignForAll() {
+		$this->view->assign('languageUid', ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0));
+		$this->view->assign('Pid', $GLOBALS['TSFE']->id);
 	}
 
 	/**

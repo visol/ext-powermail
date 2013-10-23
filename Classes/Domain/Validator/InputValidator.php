@@ -24,6 +24,9 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\Input\StringVal
 				// String Checks
 				switch ($field->getValidation()) {
 					case 1:
+						if (!$this->validateEmail($field, $mail)) {
+							$this->setErrorAndMessage($field, 'validation');
+						}
 						break;
 
 					case 2:

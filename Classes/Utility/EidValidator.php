@@ -55,6 +55,7 @@ class EidValidator {
 	 * @return \string		rendered action
 	 */
 	public function run() {
+		print_r($_REQUEST);
 		return $this->bootstrap->run('', $this->configuration);
 	}
 

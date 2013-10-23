@@ -55,6 +55,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		$this->view->assign('mail', $mail);
 		$this->view->assign('messageClass', $this->messageClass);
 		$this->view->assign('action', ($this->settings['main']['confirmation'] ? 'confirmation' : 'create'));
+		$this->assignForAll();
 
 		// open session
 		if (method_exists($forms->getFirst(), 'getUid')) {
@@ -108,6 +109,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($mail, $this));
 		$this->view->assign('optinActive', (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail) ? 0 : 1));
+		$this->assignForAll();
 
 		$this->showThx($mail);
 	}
