@@ -18,23 +18,15 @@ class ErrorClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 	 * @return 	string		Changed string
 	 */
 	public function render($field, $class) {
-
-		// get all errors
-		// @TODO remove the deprecated method call
-		$errors = $this->controllerContext->getRequest()->getErrors();
-		foreach ($errors as $key => $error) {
-			if ($key != 'field') {
-				continue;
-			}
-
-			// we want the field errors
-			$fieldErrors = $error->getErrors();
-			foreach ($fieldErrors as $fieldError) {
-				if ($field->getUid() == $fieldError->getCode()) {
+		$validationResults = $this->controllerContext->getRequest()->getOriginalRequestMappingResults();
+		$errors = $validationResults->getFlattenedErrors();
+		foreach ($errors as $error) {
+			foreach ((array) $error as $singleError) {
+				if ($field->getMarker() === $singleError->getCode()) {
 					return $class;
 				}
 			}
 		}
-
+		return '';
 	}
 }

@@ -114,9 +114,10 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @validate $mail In2code\Powermail\Domain\Validator\CaptchaValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\SpamShieldValidator
 	 * validate $mail In2code\Powermail\Domain\Validator\CustomValidator
+	 * @required $mail
 	 * @return void
 	 */
-	public function createAction(\In2code\Powermail\Domain\Model\Mail $mail = NULL) {
+	public function createAction(\In2code\Powermail\Domain\Model\Mail $mail) {
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
 		$this->ignoreWrongForm($mail);
 

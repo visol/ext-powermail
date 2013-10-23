@@ -465,16 +465,26 @@ config.tx_extbase.persistence.classes {
 ############################
 # JavaScript and CSS section
 ############################
+
+# add jQuery if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_powermail.settings.javascript.addJQueryFromGoogle}]
+page.includeJSFooterlibs.powermailJQuery = {$plugin.tx_powermail.settings.javascript.powermailJQuery}
+page.includeJSFooterlibs.powermailJQuery.external = 1
+[end]
+
+# add jQuery if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_powermail.settings.javascript.addJQueryFromGoogle}]
+page.includeJSFooterlibs.powermailJQueryUi = {$plugin.tx_powermail.settings.javascript.powermailJQueryUi}
+page.includeJSFooterlibs.powermailJQueryUi.external = 1
+[end]
+
+# add jQuery if it was turned on in the constants
+[globalVar = LIT:0 < {$plugin.tx_powermail.settings.javascript.addAdditionalJavaScript}]
 page {
 	# Inlude JavaScript files
 	includeJSFooterlibs {
-		powermailJQuery = {$plugin.tx_powermail.settings.javascript.powermailJQuery}
-		powermailJQuery.external = 1
-		powermailJQueryUi = {$plugin.tx_powermail.settings.javascript.powermailJQueryUi}
-		powermailJQueryUi.external = 1
 		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/Js/jquery.ui.datepicker.min.js
-		powermailJQueryFormValidationLanguage = EXT:powermail/Resources/Public/Js/jquery.validationEngine-en.js
-		powermailJQueryFormValidation = EXT:powermail/Resources/Public/Js/jquery.validationEngine.js
+		powermailJQueryFormValidation = EXT:powermail/Resources/Public/Js/parsley.min.js
 		powermailJQueryTabs = EXT:powermail/Resources/Public/Js/tabs.js
 	}
 	includeJSFooter {
@@ -487,7 +497,9 @@ page {
 		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/Css/jquery.ui.datepicker.css
 	}
 }
+[end]
 
+/*
 page.1000 = COA
 page.1000 {
 	wrap = <script type="text/javascript">|</script>
@@ -540,3 +552,4 @@ page.1000 {
 		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckLetters
 	}
 }
+*/

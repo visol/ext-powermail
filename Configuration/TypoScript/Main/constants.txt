@@ -137,10 +137,10 @@ plugin.tx_powermail {
 		}
 
 		db {
-			# cat=powermail_main/enable/0600; type=boolean; label= Storage Mails enabled: Store Mails in database
+			# cat=powermail_main/enable/0600; type=boolean; label= Mail Storage enabled: Store Mails in database
 			enable = 1
 
-			# cat=powermail_additional//0610; type=boolean; label= Storage Hidden Mails: Add mails with hidden flag (e.g. 1)
+			# cat=powermail_additional//0610; type=boolean; label= Hidden Mails in Storage: Add mails with hidden flag (e.g. 1)
 			hidden = 0
 		}
 
@@ -228,11 +228,20 @@ plugin.tx_powermail {
 		}
 
 		javascript {
-			# cat=powermail_additional//1000; type=text; label= jQuery Source: Change jQuery Source - per default it will be loaded from googleapis.com
-			powermailJQuery = https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js
+			# cat=powermail_main//1000; type=boolean; label= Include jQuery From Google: Add jQuery JavaScript (will be loaded from ajax.googleapis.com)
+			addJQueryFromGoogle = 0
 
-			# cat=powermail_additional//1010; type=text; label= jQuery UI Source: Change jQuery UI Source - per default it will be loaded from googleapis.com
-			powermailJQueryUi = https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js
+			# cat=powermail_main//1000; type=boolean; label= Include jQuery UI From Google: Add jQuery JavaScript (will be loaded from ajax.googleapis.com)
+			addJQueryUiFromGoogle = 0
+
+			# cat=powermail_additional//1000; type=boolean; label= Include additional JavaScrpt: Add additional JavaScript and CSS Files (form validation, datepicker, etc...)
+			addAdditionalJavaScript = 1
+
+			# cat=powermail_additional//1030; type=text; label= jQuery Source: Change jQuery Source - per default it will be loaded from googleapis.com
+			powermailJQuery = //ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js
+
+			# cat=powermail_additional//1040; type=text; label= jQuery UI Source: Change jQuery UI Source - per default it will be loaded from googleapis.com
+			powermailJQueryUi = //ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js
 		}
 
 	}
