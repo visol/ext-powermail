@@ -10,6 +10,7 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\Input\StringVal
 	 * @return bool
 	 */
 	public function isValid($mail) {
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($mail);
 		// iterate through all fields of current form
 		foreach ($mail->getForm()->getPages() as $page) { // every page
 			foreach ($page->getFields() as $field) { // every field
@@ -24,9 +25,9 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\Input\StringVal
 				// String Checks
 				switch ($field->getValidation()) {
 					case 1:
-						if (!$this->validateEmail($field, $mail)) {
-							$this->setErrorAndMessage($field, 'validation');
-						}
+//						if (!$this->validateEmail($field, $mail)) {
+//							$this->setErrorAndMessage($field, 'validation');
+//						}
 						break;
 
 					case 2:

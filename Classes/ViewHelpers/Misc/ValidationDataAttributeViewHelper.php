@@ -29,7 +29,11 @@ class ValidationDataAttributeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 				->setArguments(
 					array(
 						 'L' => $languageUid,
-						 'field' => $field->getUid(),
+						 'tx_powermail_pi1' => array(
+							 'mail' => array(
+								'form' => $field->getPages()->getForms()->getUid()
+							 ),
+						 ),
 						 'eID' => 'powermailEidValidator'
 					)
 				)

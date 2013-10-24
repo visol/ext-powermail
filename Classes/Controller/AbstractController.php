@@ -1,6 +1,9 @@
 <?php
 namespace In2code\Powermail\Controller;
 
+use \In2code\Powermail\Utility\Div;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -96,17 +99,80 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $messageClass = 'error';
 
 	/**
-	 * Validate field
+	 * Reformat Array
 	 *
 	 * @return void
 	 */
-	public function validateAjaxAction() {
+	public function initializeValidateAjaxAction() {
+		$this->reformatParamsForAction();
+	}
+
+	/**
+	 * Validate field
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @return void
+	 */
+	public function validateAjaxAction(\In2code\Powermail\Domain\Model\Mail $mail) {
+//		foreach ($mail->getAnswers() as $answer) {
+//			$field = $answer->getField();
+//			$value = $answer->getValue();
+//			break;
+//		}
+//		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($field);
+//		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($value);
+		$inputValidator = $this->objectManager->get('\In2code\Powermail\Domain\Validator\InputValidator');
+		$isValid = $inputValidator->isValid($mail);
+//		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($inputValidator);
+
 //		header("Content-Type: application/json");
 //		$result = array(
 //			'error' => 'Messagetext'
 //		);
 //		echo json_encode($result);
 //		exit;
+	}
+
+	/**
+	 * Reformat array for createAction
+	 *
+	 * @return void
+	 */
+	protected function reformatParamsForAction() {
+		$arguments = $this->request->getArguments();
+		if (!isset($arguments['field'])) {
+			return;
+		}
+		$newArguments = array(
+			'mail' => $arguments['mail']
+		);
+
+		// allow subvalues in new property mapper
+		$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
+		$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
+
+		$i = 0;
+		foreach ((array) $arguments['field'] as $marker => $value) {
+			if (substr($marker, 0, 2) === '__') { // ignore internal fields (honeypod)
+				continue;
+			}
+
+			// allow subvalues in new property mapper
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
+			$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers.' . $i);
+
+			$newArguments['mail']['answers'][$i] = array(
+				'field' => strval($this->div->getFieldUidFromMarker($marker, $arguments['mail']['form'])),
+				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
+				'valueType' => Div::getDataTypeFromFieldType(
+						$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
+					)
+			);
+			$i++;
+		}
+
+		$this->request->setArguments($newArguments);
+		$this->request->setArgument('field', NULL);
 	}
 
 	/**

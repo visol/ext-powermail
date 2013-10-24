@@ -120,40 +120,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	public function initializeCreateAction() {
-		$arguments = $this->request->getArguments();
-		if (!isset($arguments['field'])) {
-			return;
-		}
-		$newArguments = array(
-			'mail' => $arguments['mail']
-		);
-
-		// allow subvalues in new property mapper
-		$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
-		$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
-
-		$i = 0;
-		foreach ((array) $arguments['field'] as $marker => $value) {
-			if (substr($marker, 0, 2) === '__') { // ignore internal fields (honeypod)
-				continue;
-			}
-
-			// allow subvalues in new property mapper
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers.' . $i);
-
-			$newArguments['mail']['answers'][$i] = array(
-				'field' => strval($this->div->getFieldUidFromMarker($marker, $arguments['mail']['form'])),
-				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
-				'valueType' => Div::getDataTypeFromFieldType(
-					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
-				)
-			);
-			$i++;
-		}
-
-		$this->request->setArguments($newArguments);
-		$this->request->setArgument('field', NULL);
+		$this->reformatParamsForAction();
 	}
 
 	/**
