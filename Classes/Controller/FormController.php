@@ -174,7 +174,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function sendReceiverMail(\In2code\Powermail\Domain\Model\Mail $mail) {
+	protected function sendReceiverMail(Mail $mail) {
 		$receiverString = $this->div->fluidParseString(
 			$this->settings['receiver']['email'],
 			$this->div->getVariablesWithMarkers($mail)
@@ -216,7 +216,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function sendSenderMail(\In2code\Powermail\Domain\Model\Mail $mail) {
+	protected function sendSenderMail(Mail $mail) {
 		// Send Mail to sender
 		$email = array(
 			'template' => 'Mail/SenderMail',
