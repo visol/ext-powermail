@@ -71,7 +71,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @validate $mail In2code\Powermail\Domain\Validator\InputValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\CaptchaValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\SpamShieldValidator
-	 * validate $mail In2code\Powermail\Domain\Validator\CustomValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\CustomValidator
 	 * @required $mail
 	 * @return void
 	 */

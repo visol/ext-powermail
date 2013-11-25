@@ -1,39 +1,18 @@
 <?php
-class Tx_Powermail_Domain_Validator_CustomValidator extends Tx_Extbase_Validation_Validator_AbstractValidator {
+namespace In2code\Powermail\Domain\Validator;
+
+class CustomValidator extends \In2code\Powermail\Domain\Validator\StringValidator {
 
 	/**
-	 * @var Tx_Extbase_SignalSlot_Dispatcher
+	 * Custom validation of given Params
 	 *
-	 * @inject
-	 */
-	protected $signalSlotDispatcher;
-
-	/**
-	 * Return variable
-	 *
-	 * @var bool
-	 */
-	public $isValid = TRUE;
-
-	/**
-	 * Validation of given fields with a SignalSlot
-	 *
-	 * @param $params
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
-	public function isValid($params) {
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, array($params, $this));
-		return $this->isValid;
-	}
+	public function isValid($mail) {
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__, array($mail, $this));
 
-	/**
-	 * Function can be called from slot to set an error message
-	 *
-	 * @param $message
-	 * @param $code
-	 */
-	public function setError($message, $code) {
-		$this->addError($message, $code);
+		return $this->getIsValid();
 	}
 
 }

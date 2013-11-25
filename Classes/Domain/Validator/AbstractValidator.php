@@ -50,6 +50,14 @@ abstract class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator
 	protected $div;
 
 	/**
+	 * SignalSlot Dispatcher
+	 *
+	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+	 * @inject
+	 */
+	protected $signalSlotDispatcher;
+
+	/**
 	 * Return variable
 	 *
 	 * @var bool
