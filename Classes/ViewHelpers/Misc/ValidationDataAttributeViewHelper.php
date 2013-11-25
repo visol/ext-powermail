@@ -20,9 +20,14 @@ class ValidationDataAttributeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		$dataArray = array();
 		if ($field->getMandatory()) {
+			$request = $this->controllerContext->getRequest();
+			$extensionName = $this->arguments['extensionName'] === NULL ? $request->getControllerExtensionName() : $this->arguments['extensionName'];
+			$message = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('validationerror_mandatory', $extensionName);
+			//$dataArray['required'] = 'required';
 			$dataArray['data-required'] = 'true';
+			$dataArray['data-error-message'] = $message;
 		}
-		if ($field->getValidation() > 0) {
+		if ($field->getValidation()) {
 			$languageUid = ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0);
 			$uri = $uriBuilder
 				->setCreateAbsoluteUri(TRUE)

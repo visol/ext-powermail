@@ -13,7 +13,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 */
 	protected function validateMandatory($value) {
 		if (!is_array($value)) { // default fields
-			if (empty($value)) {
+			if (!empty($value)) {
 				return TRUE;
 			}
 		} else { // checkboxes
