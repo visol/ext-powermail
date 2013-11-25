@@ -333,7 +333,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail = NULL
 	 * @return void
 	 */
-	protected function saveMail(\In2code\Powermail\Domain\Model\Mail &$mail = NULL) {
+	protected function saveMail(Mail &$mail = NULL) {
 		$marketingInfos = Div::getMarketingInfos();
 		$mail->setPid(
 			Div::getStoragePage($this->settings['main']['pid'])
@@ -450,7 +450,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function ignoreWrongForm(\In2code\Powermail\Domain\Model\Mail $mail) {
+	protected function ignoreWrongForm(Mail $mail) {
 		$pluginHasThisAssignedForms = GeneralUtility::intExplode(',', $this->settings['main']['form']);
 		if (!in_array($mail->getForm()->getUid(), $pluginHasThisAssignedForms)) {
 			$this->forward('form');
