@@ -2,12 +2,13 @@
 <f:layout name="Default" />
 
 Show Confirmation Page
-{field} 			All Field values with their uids
-{powermail_all}		All Field values with their markers
+{powermail_rte}					Variable is filled with values from RTE in backend (from thx page)
+{powermail_all}					Outputs all fields
+{marker1}, {firstname}, etc..	Outputs a field
+{mail}							Complete Mail Object
 
 
 <f:section name="main">
-
 	<div class="powermail_confirmation">
 		<h4><f:translate key="confirmation_message" /></h4>
 
@@ -18,20 +19,13 @@ Show Confirmation Page
 		<f:comment>
 			Link: Back to form
 		</f:comment>
-		<f:form action="form" controller="Form" enctype="multipart/form-data" class="powermail_form">
-			<f:for each="{field}" as="value" key="uid">
-				<f:if condition="{vh:Condition.IsArray(val: '{value}')}">
-					<f:then>
-						<f:for each="{value}" as="value2" key="uid2">
-							<f:form.hidden name="field[{uid}][{uid2}]" value="{value2}" />
-						</f:for>
-					</f:then>
-					<f:else>
-						<f:form.hidden name="field[{uid}]" value="{value}" />
-					</f:else>
-				</f:if>
-			</f:for>
-			<f:form.hidden name="form" value="{form}" />
+		<f:form
+				action="form"
+				name="field"
+				enctype="multipart/form-data"
+				class="powermail_form">
+
+			<f:render section="HiddenFields" arguments="{_all}" />
 
 			<f:form.submit value="{f:translate(key: 'confirmation_prev')}" class="powermail_confirmation_form" />
 		</f:form>
@@ -40,25 +34,36 @@ Show Confirmation Page
 		<f:comment>
 			Link: Submit form
 		</f:comment>
-		<f:form action="create" controller="Form" enctype="multipart/form-data" class="powermail_form">
-			<f:for each="{field}" as="value" key="uid">
-				<f:if condition="{vh:Condition.IsArray(val: '{value}')}">
-					<f:then>
-						<f:for each="{value}" as="value2" key="uid2">
-							<f:form.hidden name="field[{uid}][{uid2}]" value="{value2}" />
-						</f:for>
-					</f:then>
-					<f:else>
-						<f:form.hidden name="field[{uid}]" value="{value}" />
-					</f:else>
-				</f:if>
-			</f:for>
-			<f:form.hidden name="form" value="{form}" />
+		<f:form
+				action="create"
+				name="field"
+				enctype="multipart/form-data"
+				class="powermail_form">
+
+			<f:render section="HiddenFields" arguments="{_all}" />
 
 			<f:form.submit value="{f:translate(key: 'confirmation_next')}" class="powermail_confirmation_submit" />
 		</f:form>
 
 		<div class="clear"></div>
 	</div>
+</f:section>
 
+
+
+<f:section name="HiddenFields">
+	<f:for each="{mail.answers}" as="answer">
+		<f:if condition="{vh:Condition.IsArray(val: '{answer.value}')}">
+			<f:then>
+				<f:for each="{answer.value}" as="subvalue" iteration="i">
+					<f:form.hidden property="{answer.field.marker}.{i.index}" value="{subvalue}" />
+				</f:for>
+			</f:then>
+			<f:else>
+				<f:form.hidden property="{answer.field.marker}" value="{answer.value}" />
+			</f:else>
+		</f:if>
+	</f:for>
+
+	<f:form.hidden name="mail[form]" value="{mail.form.uid}" class="powermail_form_uid" />
 </f:section>

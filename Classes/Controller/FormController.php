@@ -3,6 +3,7 @@ namespace In2code\Powermail\Controller;
 
 use \In2code\Powermail\Utility\Div;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Domain\Model\Mail;
 
 /***************************************************************
  *  Copyright notice
@@ -43,7 +44,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function formAction(\In2code\Powermail\Domain\Model\Mail $mail = NULL) {
+	public function formAction(Mail $mail = NULL) {
 		if (!isset($this->settings['main']['form']) || !$this->settings['main']['form']) {
 			return;
 		}
@@ -64,6 +65,15 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	}
 
 	/**
+	 * Rewrite Arguments to receive a clean mail object in createAction
+	 *
+	 * @return void
+	 */
+	public function initializeCreateAction() {
+		$this->reformatParamsForAction();
+	}
+
+	/**
 	 * Action create entry
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
@@ -75,7 +85,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @required $mail
 	 * @return void
 	 */
-	public function createAction(\In2code\Powermail\Domain\Model\Mail $mail) {
+	public function createAction(Mail $mail) {
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
 		$this->ignoreWrongForm($mail);
 
@@ -114,44 +124,33 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	}
 
 	/**
-	 * Rewrite Arguments to receive a clean mail object in createAction
+	 * Rewrite Arguments to receive a clean mail object in confirmationAction
 	 *
 	 * @return void
 	 */
-	public function initializeCreateAction() {
+	public function initializeConfirmationAction() {
 		$this->reformatParamsForAction();
 	}
 
 	/**
 	 * Show Confirmation message after submit (if view is activated)
 	 *
-	 * @param array $field Field values
-	 * @param integer $form Form UID
-	 * @validate $field Tx_Powermail_Domain_Validator_UploadValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_MandatoryValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_StringValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_CaptchaValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_SpamShieldValidator
-	 * @validate $field Tx_Powermail_Domain_Validator_CustomValidator
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @validate $mail In2code\Powermail\Domain\Validator\UploadValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\InputValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\CaptchaValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\SpamShieldValidator
+	 * @validate $mail In2code\Powermail\Domain\Validator\CustomValidator
+	 * @required $mail
 	 * @return void
 	 */
-	public function confirmationAction(array $field = array(), $form = NULL) {
-		// forward back to formAction if wrong form
-		$this->ignoreWrongForm($form);
+	public function confirmationAction(Mail $mail) {
+		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
+		$this->ignoreWrongForm($mail);
 
-		Div::addUploadsToFields($field); // add upload fields
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($field, $form, $this));
-		$this->view->assign('field', $field);
-		$this->view->assign('form', $form);
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
 
-		// markers
-		$variablesWithMarkers = $this->div->getVariablesWithMarkers($field);
-		$this->view->assignMultiple($variablesWithMarkers);
-
-		// powermail_all
-		$variables = $this->div->getVariablesWithLabels($field);
-		$content = $this->div->powermailAll($variables, $this->configurationManager, $this->objectManager, 'web', $this->settings);
-		$this->view->assign('powermail_all', $content);
+		$this->showThx($mail);
 	}
 
 	/**
@@ -160,7 +159,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function sendMailPreflight(\In2code\Powermail\Domain\Model\Mail $mail) {
+	protected function sendMailPreflight(Mail $mail) {
 		if ($this->settings['receiver']['enable']) {
 			$this->sendReceiverMail($mail);
 		}
@@ -282,7 +281,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function showThx(\In2code\Powermail\Domain\Model\Mail $mail) {
+	protected function showThx(Mail $mail) {
 		$this->redirectToTarget();
 
 		// assign
