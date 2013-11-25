@@ -3,6 +3,8 @@ namespace In2code\Powermail\Controller;
 
 use \In2code\Powermail\Utility\Div;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Domain\Model\Mail;
+use \In2code\Powermail\Domain\Model\Field;
 
 /***************************************************************
  *  Copyright notice
@@ -113,24 +115,14 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function validateAjaxAction(\In2code\Powermail\Domain\Model\Mail $mail) {
-//		foreach ($mail->getAnswers() as $answer) {
-//			$field = $answer->getField();
-//			$value = $answer->getValue();
-//			break;
-//		}
-//		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($field);
-//		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($value);
+	public function validateAjaxAction(Mail $mail) {
+		$pluginVariables = GeneralUtility::_GET('tx_powermail_pi1');
+		$value = array_shift($pluginVariables['field']); // get value
 		$inputValidator = $this->objectManager->get('\In2code\Powermail\Domain\Validator\InputValidator');
-		$isValid = $inputValidator->isValid($mail);
-//		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($inputValidator);
+		$isValid = $inputValidator->isValid($mail, $value);
 
-//		header("Content-Type: application/json");
-//		$result = array(
-//			'error' => 'Messagetext'
-//		);
-//		echo json_encode($result);
-//		exit;
+		$this->view->assign('isValid', $isValid);
+		$this->view->assign('errors', $inputValidator->getErrors());
 	}
 
 	/**

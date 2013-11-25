@@ -49,6 +49,11 @@
 			<label index="validationerror_mandatory">This field must be filled!</label>
 			<label index="validationerror_captcha">Wrong captcha code entered - please try again!</label>
 			<label index="validationerror_validation">Your input is not allowed!</label>
+			<label index="validationerror_validation.1">This is not a valid email address!</label>
+			<label index="validationerror_validation.2">This is not a valid URL!</label>
+			<label index="validationerror_validation.3">This is not a valid Phone Number!</label>
+			<label index="validationerror_validation.4">Please insert numbers only!</label>
+			<label index="validationerror_validation.5">Please insert letters only!</label>
 			<label index="validationerror_upload_extension">It's not allowed to upload a file with this extension!</label>
 			<label index="validationerror_upload_size">The file, that you want to upload is too large!</label>
 			<label index="validationerror_upload_error">Upload failed, please check permissons on the server!</label>
@@ -202,6 +207,11 @@
 			<label index="validationerror_mandatory">Dieses Feld muss ausgefüllt werden!</label>
 			<label index="validationerror_captcha">Falscher Captcha Code eingetragen, bitte erneut versuchen!</label>
 			<label index="validationerror_validation">Ihre Eingabe ist nicht erlaubt!</label>
+			<label index="validationerror_validation.1">Keine gültige E-Mail-Adresse!</label>
+			<label index="validationerror_validation.2">Keine gültige URL!</label>
+			<label index="validationerror_validation.3">Keine gültige Telefonnummer!</label>
+			<label index="validationerror_validation.4">Bitte nur Nummern eintragen!</label>
+			<label index="validationerror_validation.5">Bitte nur Buchstaben eintragen!</label>
 			<label index="validationerror_upload_extension">Der Dateityp ist nicht erlaubt, bitte versuchen Sie einen anderen Typ!</label>
 			<label index="validationerror_upload_size">Die hochgeladene Datei ist zu groß!</label>
 			<label index="validationerror_upload_error">Upload fehlgeschlagen, bitte Berechtigungen auf Server überprüfen!</label>
