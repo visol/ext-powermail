@@ -4,7 +4,6 @@ namespace In2code\Powermail\Controller;
 use \In2code\Powermail\Utility\Div;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \In2code\Powermail\Domain\Model\Mail;
-use \In2code\Powermail\Domain\Model\Field;
 
 /***************************************************************
  *  Copyright notice
