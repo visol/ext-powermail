@@ -726,7 +726,7 @@ class Div {
 	 */
 	public static function getAbcArray() {
 		$arr = array();
-		for ($a=A; $a != AA; $a++) { // ABC loop
+		for ($a = A; $a != AA; $a++) { // ABC loop
 			$arr[] = $a;
 		}
 		return $arr;

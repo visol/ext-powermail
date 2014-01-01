@@ -40,14 +40,14 @@ class Form extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var string
 	 * @validate NotEmpty
 	 */
-	protected $title ='';
+	protected $title = '';
 
 	/**
 	 * css
 	 *
 	 * @var string
 	 */
-	protected $css ='';
+	protected $css = '';
 
 	/**
 	 * pages

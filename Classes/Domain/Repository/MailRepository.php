@@ -84,7 +84,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 					// Hidden Filter
 					elseif ($field == 'hidden' && !empty($value)) {
-						$and[] = $query->equals($field, ($value-1));
+						$and[] = $query->equals($field, ($value - 1));
 					}
 
 					// Other Fields

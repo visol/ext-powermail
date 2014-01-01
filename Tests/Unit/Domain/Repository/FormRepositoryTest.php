@@ -67,12 +67,12 @@ class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Test
 	public function findByUidsReturnsCorrectCountForString() {
 		$uidArray = array();
 
-		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
-		$uidArray[]=$this->testDatabase>createRecord('tx_powermail_domain_model_forms',array());
+		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
+		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
+		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
+		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
+		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
 
-		$this->assertSame(5,$this->fixture->findByUids(implode(',',$uidArray))->count());
+		$this->assertSame(5, $this->fixture->findByUids(implode(',', $uidArray))->count());
 	}
 }
