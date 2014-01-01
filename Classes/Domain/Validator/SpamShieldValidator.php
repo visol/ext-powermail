@@ -187,12 +187,12 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 		if (!$indication) {
 			return;
 		}
-		$keys_firstname = array(
+		$keysFirstName = array(
 			'first_name',
 			'firstname',
 			'vorname'
 		);
-		$keys_lastname = array(
+		$keysLastName = array(
 			'last_name',
 			'lastname',
 			'sur_name',
@@ -206,10 +206,10 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 			if (is_array($answer->getValue())) {
 				continue;
 			}
-			if (in_array($answer->getField()->getMarker(), $keys_firstname)) {
+			if (in_array($answer->getField()->getMarker(), $keysFirstName)) {
 				$firstname = $answer->getValue();
 			}
-			if (in_array($answer->getField()->getMarker(), $keys_lastname)) {
+			if (in_array($answer->getField()->getMarker(), $keysLastName)) {
 				$lastname = $answer->getValue();
 			}
 		}

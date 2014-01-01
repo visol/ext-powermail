@@ -1042,30 +1042,30 @@ class Div {
 	 */
 	public static function mergeTypoScript2FlexForm(&$settings, $typoScriptLevel = 'setup') {
 		// config
-		$tmp_settings = array();
+		$temporarySettings = array();
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail']);
 
 		if (isset($settings[$typoScriptLevel]) && is_array($settings[$typoScriptLevel])) {
-			$tmp_settings = $settings[$typoScriptLevel]; // copy typoscript part to conf part
+			$temporarySettings = $settings[$typoScriptLevel]; // copy typoscript part to conf part
 		}
 
 		if (isset($settings['flexform']) && is_array($settings['flexform'])) {
-			$tmp_settings = array_merge((array) $tmp_settings, (array) $settings['flexform']); // copy flexform part to conf part
+			$temporarySettings = array_merge((array) $temporarySettings, (array) $settings['flexform']); // copy flexform part to conf part
 		}
 
 		// merge ts and ff (loop every flexform)
-		foreach ($tmp_settings as $key1 => $value1) {
+		foreach ($temporarySettings as $key1 => $value1) {
 			if (!is_array($value1)) { // 1. level
 				if (isset($settings[$typoScriptLevel][$key1]) && isset($settings['flexform'][$key1])) { // only if this key exists in ff and ts
 					if ($settings[$typoScriptLevel][$key1] && !$settings['flexform'][$key1]) { // only if ff is empty and ts not
-						$tmp_settings[$key1] = $settings[$typoScriptLevel][$key1]; // overwrite with typoscript settings
+						$temporarySettings[$key1] = $settings[$typoScriptLevel][$key1]; // overwrite with typoscript settings
 					}
 				}
 			} else {
 				foreach ($value1 as $key2 => $value2) { // 2. level
 					if (isset($settings[$typoScriptLevel][$key1][$key2]) && isset($settings['flexform'][$key1][$key2])) { // only if this key exists in ff and ts
 						if ($settings[$typoScriptLevel][$key1][$key2] && !$settings['flexform'][$key1][$key2]) { // only if ff is empty and ts not
-							$tmp_settings[$key1][$key2] = $settings[$typoScriptLevel][$key1][$key2]; // overwrite with typoscript settings
+							$temporarySettings[$key1][$key2] = $settings[$typoScriptLevel][$key1][$key2]; // overwrite with typoscript settings
 						}
 					}
 				}
@@ -1076,22 +1076,22 @@ class Div {
 		foreach ((array) $settings[$typoScriptLevel] as $key1 => $value1) {
 			if (!is_array($value1)) { // 1. level
 				if (isset($settings[$typoScriptLevel][$key1]) && !isset($settings['flexform'][$key1])) { // only if this key exists in ts and not in ff
-					$tmp_settings[$key1] = $value1; // set value from ts
+					$temporarySettings[$key1] = $value1; // set value from ts
 				}
 			} else {
 				foreach ($value1 as $key2 => $value2) { // 2. level
 					if (isset($settings[$typoScriptLevel][$key1][$key2]) && !isset($settings['flexform'][$key1][$key2])) { // only if this key exists in ts and not in ff
-						$tmp_settings[$key1][$key2] = $value2; // set value from ts
+						$temporarySettings[$key1][$key2] = $value2; // set value from ts
 					}
 				}
 			}
 		}
 
 		// add global config
-		$tmp_settings['global'] = $confArr;
+		$temporarySettings['global'] = $confArr;
 
-		$settings = $tmp_settings;
-		unset($tmp_settings);
+		$settings = $temporarySettings;
+		unset($temporarySettings);
 	}
 
 }
