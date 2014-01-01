@@ -51,7 +51,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php'][
 /**
  * Hooking for first fill of marker field in backend
  */
-$GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
 	'EXT:' . $_EXTKEY . '/Classes/Utility/InitialMarker.php:Tx_Powermail_Utility_InitialMarker';
 
 /**
