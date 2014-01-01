@@ -54,7 +54,7 @@ class ValidationClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
 		}
 
 		if ($field->getValidation()) {
-			$cssString .= 'custom['. $this->validationArray[$field->getValidation()] . ']';
+			$cssString .= 'custom[' . $this->validationArray[$field->getValidation()] . ']';
 		}
 
 		$cssString .= ']';
