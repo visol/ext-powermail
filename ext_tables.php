@@ -64,7 +64,7 @@ ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $
  */
 if (TYPO3_MODE == 'BE') {
 	// show powermail fields in Pi2 (powermail_frontend)
-	include_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php');
+	require_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php');
 
 	// marker field in Pi1
 	require_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Marker.php');
