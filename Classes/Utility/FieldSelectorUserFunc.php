@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2012 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -69,7 +69,7 @@ class Tx_Powermail_Utility_FieldSelectorUserFunc {
 			);
 		}
 	}
-	
+
 	/**
 	 * Return Form Uid from Flexform settings
 	 * 
