@@ -30,6 +30,6 @@ class IsAllowedToEditViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
 			return TRUE;
 		}
 		return FALSE;
-    }
+	}
 
 }

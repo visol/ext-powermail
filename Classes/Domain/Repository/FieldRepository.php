@@ -46,8 +46,8 @@ class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$query->matching(
 			$query->logicalAnd(
 				array(
-					 $query->equals('marker', $marker),
-					 $query->equals('pages.forms.uid', $formUid)
+					$query->equals('marker', $marker),
+					$query->equals('pages.forms.uid', $formUid)
 				)
 			)
 		);

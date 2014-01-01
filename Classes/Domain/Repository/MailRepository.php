@@ -158,7 +158,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				 'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
 			)
 		);
 
@@ -210,7 +210,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				 'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
 			)
 		);
 		foreach ((array) $sorting as $field => $order) {
@@ -311,7 +311,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				 'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
 			)
 		);
 

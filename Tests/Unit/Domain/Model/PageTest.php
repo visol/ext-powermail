@@ -115,7 +115,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 		$this->assertSame(
 			array(
-				 42 => $field,
+				42 => $field,
 			),
 			$this->fixture->getFields()
 		);
@@ -131,7 +131,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 		$this->assertSame(
 			array(
-				 42 => $field,
+				42 => $field,
 			),
 			$this->fixture->getFields()
 		);
@@ -147,7 +147,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 		$this->assertSame(
 			array(
-				 42 => $field,
+				42 => $field,
 			),
 			$this->fixture->getFields()
 		);

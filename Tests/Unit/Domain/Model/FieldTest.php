@@ -72,12 +72,12 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 * @test
 	 */
 	public function getTypeReturnsInitialValueForSting() {
-        $this->fixture->setType('Conceived at T3CON10');
+		$this->fixture->setType('Conceived at T3CON10');
 
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getType()
-        );
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getType()
+		);
 	}
 
 	/**
@@ -145,12 +145,12 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 * @test
 	 */
 	public function setCssForStringSetsCss() {
-        $this->fixture->setCss('Conceived at T3CON10');
+		$this->fixture->setCss('Conceived at T3CON10');
 
-        $this->assertSame(
-            'Conceived at T3CON10',
-            $this->fixture->getCss()
-        );
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getCss()
+		);
 	}
 
 	/**

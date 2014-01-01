@@ -33,13 +33,13 @@ class ValidationDataAttributeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 				->setCreateAbsoluteUri(TRUE)
 				->setArguments(
 					array(
-						 'L' => $languageUid,
-						 'tx_powermail_pi1' => array(
-							 'mail' => array(
+						'L' => $languageUid,
+						'tx_powermail_pi1' => array(
+							'mail' => array(
 								'form' => $field->getPages()->getForms()->getUid()
-							 ),
-						 ),
-						 'eID' => 'powermailEidValidator'
+							),
+						),
+						'eID' => 'powermailEidValidator'
 					)
 				)
 				->build();
