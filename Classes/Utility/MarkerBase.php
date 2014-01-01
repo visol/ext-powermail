@@ -143,7 +143,7 @@ class Tx_Powermail_Utility_MarkerBase {
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 		if ($res) {
 			$array = array();
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 				$array['_' . $row['uid']] = $row['marker'];
 			}
 			$result = $array;

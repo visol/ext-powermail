@@ -804,7 +804,7 @@ class Div {
 		$limit = 1000;
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 		if ($res) {
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) { // One loop for every entry
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) { // One loop for every entry
 				$groups[] = $row['uid'];
 			}
 		}

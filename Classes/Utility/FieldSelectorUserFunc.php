@@ -111,7 +111,7 @@ class Tx_Powermail_Utility_FieldSelectorUserFunc {
 
 		$array = array();
 		if ($res) {
-			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 				$array[] = $row;
 			}
 		}
