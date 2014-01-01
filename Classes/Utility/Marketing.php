@@ -22,6 +22,10 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+/**
+ * @package powermail
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ */
 class Tx_Powermail_Utility_Marketing {
 
 	/**
