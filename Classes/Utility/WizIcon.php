@@ -54,12 +54,12 @@ class tx_powermail_pi1_wizicon {
 	function proc($wizardItems)	{
 		global $LANG;
 
-		$LL = $this->includeLocalLang();
+		$ll = $this->includeLocalLang();
 
 		$wizardItems['plugins_tx_powermail_pi1'] = array(
 			'icon' => t3lib_extMgm::extRelPath('powermail') . 'Resources/Public/Icons/ce_wiz.gif',
-			'title' => $LANG->getLLL('pi1_title', $LL),
-			'description' => $LANG->getLLL('pi1_plus_wiz_description', $LL),
+			'title' => $LANG->getLLL('pi1_title', $ll),
+			'description' => $LANG->getLLL('pi1_plus_wiz_description', $ll),
 			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=powermail_pi1',
 			'tt_content_defValues' => array(
 				'CType' => 'list',

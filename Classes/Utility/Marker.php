@@ -41,17 +41,17 @@ class Tx_Powermail_Utility_Marker {
 	 * @param	object	Parent Object
 	 * @return	string	String to render
 	 */
-	public function createMarker($PA, $fobj) {
+	public function createMarker($pa, $fobj) {
 		$content = '';
 
 		// if entry in db
-		if (isset($PA['row']['marker']) && !empty($PA['row']['marker'])) {
-			$marker = $PA['row']['marker'];
+		if (isset($pa['row']['marker']) && !empty($pa['row']['marker'])) {
+			$marker = $pa['row']['marker'];
 		} else { // no entry
 			$marker = 'Error: Marker is empty';
 		}
 
-		if (stristr($PA['row']['uid'], 'NEW')) { // field just generated
+		if (stristr($pa['row']['uid'], 'NEW')) { // field just generated
 			$content .= '<div style="background-color: #F4DA5C; padding: 5px 10px;">';
 			$content .= 'Please save before...';
 			$content .= '</div>';
@@ -59,7 +59,7 @@ class Tx_Powermail_Utility_Marker {
 			$content .= '<div style="background-color: #ddd; padding: 5px 10px;" />';
 			$content .= '{' . strtolower($marker) . '}';
 			$content .= '</div>';
-			$content .= '<input type="hidden" name="data[tx_powermail_domain_model_fields][' . $PA['row']['uid'] . '][marker]" value="' . strtolower($marker) . '" />';
+			$content .= '<input type="hidden" name="data[tx_powermail_domain_model_fields][' . $pa['row']['uid'] . '][marker]" value="' . strtolower($marker) . '" />';
 		}
 
 		return $content;
@@ -72,7 +72,7 @@ class Tx_Powermail_Utility_Marker {
 	 * @param	object	Parent Object
 	 * @return	empty string
 	 */
-	public function doNothing($PA, $fobj) {
+	public function doNothing($pa, $fobj) {
 		return '';
 	}
 }

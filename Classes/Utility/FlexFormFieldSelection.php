@@ -24,10 +24,10 @@ class Tx_Powermail_Utility_FlexFormFieldSelection {
 	 * @return void
 	 */
 	public function addOptions(&$params, &$pObj) {
-		$TSConfig = t3lib_BEfunc::getPagesTSconfig($this->getPid());
+		$typoScriptConfiguration = t3lib_BEfunc::getPagesTSconfig($this->getPid());
 
-		if (!empty($TSConfig[$this->extension . '.']['flexForm.'][$params['config']['itemsProcFuncFieldName'] . '.']['addFieldOptions.'])) {
-			$options = $TSConfig[$this->extension . '.']['flexForm.'][$params['config']['itemsProcFuncFieldName'] . '.']['addFieldOptions.'];
+		if (!empty($typoScriptConfiguration[$this->extension . '.']['flexForm.'][$params['config']['itemsProcFuncFieldName'] . '.']['addFieldOptions.'])) {
+			$options = $typoScriptConfiguration[$this->extension . '.']['flexForm.'][$params['config']['itemsProcFuncFieldName'] . '.']['addFieldOptions.'];
 			foreach ((array) $options as $value => $label) {
 				$params['items'][] = array(
 					$label,
