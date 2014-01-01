@@ -28,7 +28,9 @@ class GetFieldLabelFromUidViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Ab
 	public function render($uid) {
 		$field = $this->fieldRepository->findByUid($uid);
 		if (method_exists($field, 'getTitle')) {
-			return $field->getTitle();
+			$result = $field->getTitle();
 		}
+
+		return $result;
 	}
 }

@@ -17,14 +17,16 @@ class IsNotEmptyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 	 */
 	public function render($val) {
 		if (!is_array($val)) {
-			return !empty($val);
+			$result = !empty($val);
 		} else {
 			foreach ((array) $val as $subValue) {
 				if (!empty($subValue)) {
-					return TRUE;
+					$result = TRUE;
 				}
 			}
-			return FALSE;
+			$result = FALSE;
 		}
+
+		return $result;
 	}
 }

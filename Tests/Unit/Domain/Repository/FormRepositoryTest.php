@@ -44,11 +44,17 @@ class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Test
 	 */
 	protected $testDatabase = NULL;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		$this->fixture = new Tx_Powermail_Domain_Repository_FormRepository();
 		$this->testDatabase = new Tx_Phpunit_Framework('tx_powermail_domain_model_forms');
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		$this->testDatabase->cleanUp();
 		unset($this->fixture,$this->testDatabase);
@@ -56,6 +62,7 @@ class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Test
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function findByUidsReturnsCorrectCountForString() {
 		$uidArray = array();

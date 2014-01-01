@@ -18,7 +18,9 @@ class GetPiVarAnswerFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
 	 */
 	public function render($fieldUid, $piVars) {
 		if (isset($piVars['filter']['answer'][$fieldUid])) {
-			return htmlspecialchars($piVars['filter']['answer'][$fieldUid]);
+			$result = htmlspecialchars($piVars['filter']['answer'][$fieldUid]);
 		}
+
+		return $result;
 	}
 }

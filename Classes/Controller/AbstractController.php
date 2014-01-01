@@ -168,6 +168,8 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 	/**
 	 * Assigns all values, which should be available in all views
+	 *
+	 * @return void
 	 */
 	protected function assignForAll() {
 		$this->view->assign('languageUid', ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0));

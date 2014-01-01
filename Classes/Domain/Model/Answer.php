@@ -92,6 +92,7 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param int $valueType
+	 * @return void
 	 */
 	public function setValueType($valueType) {
 		$this->valueType = $valueType;

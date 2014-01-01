@@ -382,7 +382,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param string $hash Given Hash String
 	 * @dontvalidate $mail
 	 * @dontvalidate $hash
-	 * return void
+	 * @return void
 	 */
 	public function optinConfirmAction($mail = NULL, $hash = NULL) {
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));

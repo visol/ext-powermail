@@ -198,6 +198,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param \In2code\Powermail\Domain\Model\Form $forms
+	 * @return void
 	 */
 	public function setForms($forms) {
 		$this->forms = $forms;

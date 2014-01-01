@@ -42,10 +42,16 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 */
 	protected $fixture;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		$this->fixture = new Tx_Powermail_Domain_Model_Field();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
@@ -53,11 +59,13 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getTitleReturnsInitialValueForString() { }
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
@@ -70,6 +78,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getTypeReturnsInitialValueForSting() {
 		$this->fixture->setType('Conceived at T3CON10');
@@ -82,6 +91,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setTypeForIntegerSetsType() {
 		$this->fixture->setType(12);
@@ -94,11 +104,13 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getPrefillValueReturnsInitialValueForString() { }
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setPrefillValueForStringSetsPrefillValue() {
 		$this->fixture->setPrefillValue('Conceived at T3CON10');
@@ -111,6 +123,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getValidationReturnsInitialValueForInteger() {
 		$this->assertSame(
@@ -121,6 +134,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setValidationForIntegerSetsValidation() {
 		$this->fixture->setValidation(12);
@@ -133,6 +147,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getCssReturnsInitialValueForString() {
 		$this->assertSame(
@@ -143,6 +158,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setCssForStringSetsCss() {
 		$this->fixture->setCss('Conceived at T3CON10');
@@ -155,6 +171,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getFeuserValueReturnsInitialValueForString() {
 		$this->assertSame(
@@ -165,6 +182,7 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setFeuserValueForStringSetsFeuserValue() {
 		$this->fixture->setFeuserValue('my FrontendUser');

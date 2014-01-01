@@ -32,6 +32,7 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @param \mixed $value
 	 * @param $field
+	 * @return void
 	 */
 	public function isValidField(Field $field, $value) {
 

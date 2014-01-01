@@ -313,6 +313,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $createFromTyposcript
+	 * @return void
 	 */
 	public function setCreateFromTyposcript($createFromTyposcript) {
 		$this->createFromTyposcript = $createFromTyposcript;
@@ -479,6 +480,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param \In2code\Powermail\Domain\Model\Page $pages
+	 * @return void
 	 */
 	public function setPages($pages) {
 		$this->pages = $pages;

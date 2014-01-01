@@ -89,6 +89,8 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 
 	/**
 	 * Must be there because of the interface
+	 *
+	 * @return void
 	 */
 	public function isValid($value) {
 		parent::isValid($value);

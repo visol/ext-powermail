@@ -71,6 +71,7 @@ class MailBasic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $subject
+	 * @return void
 	 */
 	public function setSubject($subject) {
 		$this->subject = $subject;
@@ -85,6 +86,7 @@ class MailBasic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $body
+	 * @return void
 	 */
 	public function setBody($body) {
 		$this->body = $body;
@@ -99,6 +101,7 @@ class MailBasic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $receiverMail
+	 * @return void
 	 */
 	public function setReceiverMail($receiverMail) {
 		$this->receiverMail = $receiverMail;
@@ -113,6 +116,7 @@ class MailBasic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $senderMail
+	 * @return void
 	 */
 	public function setSenderMail($senderMail) {
 		$this->senderMail = $senderMail;
@@ -127,6 +131,7 @@ class MailBasic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @param string $senderName
+	 * @return void
 	 */
 	public function setSenderName($senderName) {
 		$this->senderName = $senderName;

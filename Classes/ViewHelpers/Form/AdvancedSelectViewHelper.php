@@ -27,6 +27,8 @@ class AdvancedSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectV
 
 	/**
 	 * Initialize
+	 *
+	 * @return void
 	 */
 	public function initializeArguments() {
 		parent::initializeArguments();

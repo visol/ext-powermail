@@ -71,6 +71,7 @@ abstract class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator
 
 	/**
 	 * @param boolean $isValid
+	 * @return void
 	 */
 	public function setIsValid($isValid) {
 		$this->isValid = $isValid;

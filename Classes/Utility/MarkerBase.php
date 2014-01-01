@@ -84,16 +84,18 @@ class Tx_Powermail_Utility_MarkerBase {
 		// if form is given in GET params (open form and pages and fields via IRRE)
 		if (isset($data['tx_powermail_domain_model_forms'])) {
 			foreach ((array) $this->data['tx_powermail_domain_model_forms'] as $uid => $field) {
-				return $uid;
+				$result = $uid;
 			}
 		}
 
 		// if field is directly opened (no IRRE OR opened pages with their fields via IRRE)
 		foreach ((array) $this->data['tx_powermail_domain_model_fields'] as $uid => $field) {
 			if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['marker'])) {
-				return $this->getFormUidFromFieldUid($uid);
+				$result = $this->getFormUidFromFieldUid($uid);
 			}
 		}
+
+		return $result;
 	}
 
 	/**
@@ -116,8 +118,10 @@ class Tx_Powermail_Utility_MarkerBase {
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 		if ($res) {
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-			return $row['uid'];
+			$result = $row['uid'];
 		}
+
+		return $result;
 	}
 
 	/**
@@ -142,8 +146,10 @@ class Tx_Powermail_Utility_MarkerBase {
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
 				$array['_' . $row['uid']] = $row['marker'];
 			}
-			return $array;
+			$result = $array;
 		}
+
+		return $result;
 	}
 
 	/**
@@ -175,7 +181,7 @@ class Tx_Powermail_Utility_MarkerBase {
 	/**
 	 * Get marker values
 	 *
-	 * @return array $markers
+	 * @return void
 	 */
 	protected function getMarkers() {
 		$this->marker = array();

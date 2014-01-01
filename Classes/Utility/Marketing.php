@@ -53,7 +53,7 @@ class Tx_Powermail_Utility_Marketing {
 		$this->storeInSession($info);
 	}
 
-	/*
+	/**
 	 * Store info array into session
 	 *
 	 * @param	array		Info Array

@@ -344,6 +344,7 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 
 	/**
 	 * @param int $spamIndicator
+	 * @return void
 	 */
 	public function setSpamIndicator($spamIndicator) {
 		$this->spamIndicator = $spamIndicator;
@@ -360,6 +361,7 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 	 * Increase Global Indicator
 	 *
 	 * @param int $indication
+	 * @return void
 	 */
 	public function increaseSpamIndicator($indication) {
 		$this->setSpamIndicator($this->getSpamIndicator() + $indication);
@@ -367,6 +369,7 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 
 	/**
 	 * @param array $messages
+	 * @return void
 	 */
 	public function setMessages($messages) {
 		$this->messages = $messages;
@@ -383,6 +386,7 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 	 * Add $message
 	 *
 	 * @param $message
+	 * @return void
 	 */
 	public function addMessage($message) {
 		$messages = $this->getMessages();

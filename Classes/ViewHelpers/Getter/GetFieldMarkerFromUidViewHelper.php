@@ -28,8 +28,10 @@ class GetFieldMarkerFromUidViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
 	public function render($uid) {
 		$field = $this->fieldRepository->findByUid($uid);
 		if (method_exists($field, 'getMarker')) {
-			return $field->getMarker();
+			$result = $field->getMarker();
 		}
+
+		return $result;
 	}
 
 }

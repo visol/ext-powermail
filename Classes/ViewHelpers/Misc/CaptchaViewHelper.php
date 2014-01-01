@@ -39,6 +39,8 @@ class CaptchaViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 
 	/**
 	 * Object initialization
+	 *
+	 * @return void
 	 */
 	public function initializeObject() {
 		$typoScriptSetup = $this->configurationManager->getConfiguration(

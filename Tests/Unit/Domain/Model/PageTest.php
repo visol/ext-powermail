@@ -42,10 +42,16 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 */
 	protected $fixture;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		$this->fixture = new Tx_Powermail_Domain_Model_Page();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
@@ -53,11 +59,13 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getTitleReturnsInitialValueForString() { }
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
@@ -70,6 +78,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getCssReturnsInitialValueForString() {
 		$this->assertSame(
@@ -80,6 +89,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setCssForStringSetsCss() {
 		$this->fixture->setCss('my CSS');
@@ -92,6 +102,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getFieldsReturnsInitialValueForObjectStorageContainingTx_Powermail_Domain_Model_Field() {
 		#$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -103,6 +114,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setFieldsForObjectStorageContainingTx_Powermail_Domain_Model_FieldSetsFields() {
 		$objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -123,6 +135,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function addFieldToObjectStorageHoldingFields() {
 		$field = new Tx_Powermail_Domain_Model_Field();
@@ -139,6 +152,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function removeFieldFromObjectStorageHoldingFields() {
 		$field = new Tx_Powermail_Domain_Model_Field();

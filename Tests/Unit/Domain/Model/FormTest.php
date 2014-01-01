@@ -42,22 +42,29 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 */
 	protected $fixture;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
 		$this->fixture = new Tx_Powermail_Domain_Model_Form();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
 
-
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getTitleReturnsInitialValueForString() { }
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
@@ -70,6 +77,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getCssReturnsInitialValueForString() {
 		$this->assertSame(
@@ -80,6 +88,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setCssForStringSetsCss() {
 		$this->fixture->setCss('my CSS');
@@ -92,6 +101,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getPagesReturnsInitialValueForTx_Powermail_Domain_Model_Page() {
 		$this->assertEquals(
@@ -102,6 +112,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setPagesForTx_Powermail_Domain_Model_PageSetsPages() {
 		$dummyObject = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
