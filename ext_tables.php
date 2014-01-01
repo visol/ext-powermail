@@ -33,9 +33,9 @@ ExtensionUtility::registerPlugin(
 if (TYPO3_MODE === 'BE' && !$confArr['disableBackendModule'] && !(TYPO3_REQUESTTYPE & TYPO3_REQUESTTYPE_INSTALL)) {
 	ExtensionUtility::registerModule(
 		'In2code.' . $_EXTKEY,
-		'web',	 // Make module a submodule of 'web'
-		'm1',	 // Submodule key
-		'',		 // Position
+		'web',
+		'm1',
+		'',
 		array(
 			'Module' => 'listBe, checkBe, exportBe, reportingBe, reportingFormBe, reportingMarketingBe'
 		),
