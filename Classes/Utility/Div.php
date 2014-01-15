@@ -739,7 +739,7 @@ class Div {
 	 * @param string $val Any String
 	 * @return bool
 	 */
-	public static function is_serialized($val) {
+	public static function isSerialized($val) {
 		if (!is_string($val) || trim($val) == '') {
 			return FALSE;
 		}

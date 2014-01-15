@@ -103,7 +103,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 * @return void
 	 */
-	public function getPagesReturnsInitialValueForTx_Powermail_Domain_Model_Page() {
+	public function getPagesReturnsInitialValueForTxPowermailDomainModelPage() {
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getPages()
@@ -114,7 +114,7 @@ class Tx_Powermail_Domain_Model_FormTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 * @return void
 	 */
-	public function setPagesForTx_Powermail_Domain_Model_PageSetsPages() {
+	public function setPagesForTxPowermailDomainModelPageSetsPages() {
 		$dummyObject = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->fixture->setPages($dummyObject);
 

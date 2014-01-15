@@ -279,7 +279,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	/**
 	 * @test
 	 */
-	public function setFormForTx_Powermail_Domain_Model_FormSetsForm() {
+	public function setFormForTxPowermailDomainModelFormSetsForm() {
 		$form = new Tx_Powermail_Domain_Model_Form;
 		$this->fixture->setForm($form);
 		$this->assertSame(
@@ -302,7 +302,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	/**
 	 * @test
 	 */
-	public function setAnswersForTx_Powermail_Domain_Model_AnswerSetsAnswers() {
+	public function setAnswersForTxPowermailDomainModelAnswerSetsAnswers() {
 		$dummy = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 		$this->fixture->setAnswers($dummy);
 		$this->assertSame(

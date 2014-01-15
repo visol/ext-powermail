@@ -69,7 +69,7 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getValue() {
 		// workarround to get array from database (checkbox values)
-		if (\In2code\Powermail\Utility\Div::is_serialized($this->value)) {
+		if (\In2code\Powermail\Utility\Div::isSerialized($this->value)) {
 			return unserialize($this->value);
 		}
 		return $this->value;

@@ -104,7 +104,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 * @return void
 	 */
-	public function getFieldsReturnsInitialValueForObjectStorageContainingTx_Powermail_Domain_Model_Field() {
+	public function getFieldsReturnsInitialValueForObjectStorageContainingTxPowermailDomainModelField() {
 		#$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertSame(
 			array(),
@@ -116,7 +116,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 * @return void
 	 */
-	public function setFieldsForObjectStorageContainingTx_Powermail_Domain_Model_FieldSetsFields() {
+	public function setFieldsForObjectStorageContainingTxPowermailDomainModelFieldSetsFields() {
 		$objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 
 		$field = new Tx_Powermail_Domain_Model_Field();

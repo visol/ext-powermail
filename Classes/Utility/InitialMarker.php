@@ -44,7 +44,7 @@ class Tx_Powermail_Utility_InitialMarker extends Tx_Powermail_Utility_MarkerBase
 	 * @param	array		$this obj
 	 * @return	an updated $fieldArray
 	 */
-	public function processDatamap_postProcessFieldArray($status, $table, $uid, &$fieldArray, $pObj) {
+	public function processDatamapPostProcessFieldArray($status, $table, $uid, &$fieldArray, $pObj) {
 		if ($table != 'tx_powermail_domain_model_fields') { // stop if not powermail field table
 			return $fieldArray;
 		}
