@@ -61,7 +61,9 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @test
 	 * @return void
 	 */
-	public function getTitleReturnsInitialValueForString() { }
+	public function getTitleReturnsInitialValueForString() {
+
+	}
 
 	/**
 	 * @test

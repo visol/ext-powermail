@@ -61,7 +61,9 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 * @test
 	 * @return void
 	 */
-	public function getTitleReturnsInitialValueForString() { }
+	public function getTitleReturnsInitialValueForString() {
+
+	}
 
 	/**
 	 * @test
@@ -106,7 +108,9 @@ class Tx_Powermail_Domain_Model_FieldTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 * @test
 	 * @return void
 	 */
-	public function getPrefillValueReturnsInitialValueForString() { }
+	public function getPrefillValueReturnsInitialValueForString() {
+
+	}
 
 	/**
 	 * @test
