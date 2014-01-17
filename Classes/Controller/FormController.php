@@ -401,12 +401,14 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		// check if ts is included
 		if (!isset($this->settings['staticTemplate'])) {
-			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_typoscript', 'powermail'));
+			$this->flashMessageContainer->add(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_typoscript', 'powermail')
+			);
 		}
 
 		// Debug Output
-		if ($this->settings['debug']['settings']) {
-			t3lib_utility_Debug::debug($this->settings, 'powermail debug: Show Settings');
+		if ($this->settings['debug']['settings'] || 1) {
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings, 'powermail debug: Show Settings');
 		}
 	}
 
