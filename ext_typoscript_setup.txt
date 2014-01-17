@@ -1,6 +1,16 @@
 config.tx_extbase {
 	persistence {
 		classes {
+			In2code\Powermail\Domain\Model\User {
+				mapping {
+					tableName = fe_users
+				}
+			}
+			In2code\Powermail\Domain\Model\UserGroup {
+				mapping {
+					tableName = fe_groups
+				}
+			}
 			In2code\Powermail\Domain\Model\Form {
 				mapping {
 					tableName = tx_powermail_domain_model_forms

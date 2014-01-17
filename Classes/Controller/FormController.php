@@ -77,6 +77,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * Action create entry
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @param \string $hash
 	 * @validate $mail In2code\Powermail\Domain\Validator\UploadValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\InputValidator
 	 * @validate $mail In2code\Powermail\Domain\Validator\CaptchaValidator
@@ -85,11 +86,11 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @required $mail
 	 * @return void
 	 */
-	public function createAction(Mail $mail) {
+	public function createAction(Mail $mail, $hash = NULL) {
 		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
 		$this->ignoreWrongForm($mail);
 
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
 
 		// Debug Output
 		if ($this->settings['debug']['variables']) {
@@ -97,13 +98,14 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		}
 
 		// Save Mail to DB
-		if ($this->settings['db']['enable']) { // todo don't save if optin
+		if ($this->settings['db']['enable'] && $hash !== NULL) {
 //			$dbField = $this->div->rewriteDateInFields($field); // todo check datepicker with optin
 			$this->saveMail($mail);
 			$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterMailDbSaved', array($mail, $this));
 		}
 
-		if (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail)) { // todo go in if you come from optin
+		// If no optin, send mail
+		if (!$this->settings['main']['optin'] || Div::checkOptinHash($hash, $mail)) {
 			$this->sendMailPreflight($mail);
 
 			// Save to other tables
@@ -113,13 +115,12 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			// Powermail sendpost
 //			$this->div->sendPost($field, $this->conf, $this->configurationManager);
 		} else {
-//			$this->sendConfirmationMail($field, $newMail);
+			$this->sendConfirmationMail($mail);
+			$this->view->assign('optinActive', TRUE);
 		}
 
-		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($mail, $this));
-		$this->view->assign('optinActive', (!$this->settings['main']['optin'] || ($this->settings['main']['optin'] && $mail) ? 0 : 1));
+		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($mail, $hash, $this));
 		$this->assignForAll();
-
 		$this->showThx($mail);
 	}
 
@@ -236,43 +237,32 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	}
 
 	/**
-	 * Send Optin Confirmation Mail
+	 * Send Optin Confirmation Mail to user
 	 *
-	 * @param array $field array with field values
-	 * @param \In2code\Powermail\Domain\Model\Mail $newMail new mail object from db
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function sendConfirmationMail($field, $newMail) {
-		// Send Mail to sender
-		$mail = array();
-		$mail['receiverName'] = 'Powermail';
-		if ($this->div->getSenderNameFromArguments($field)) {
-			$mail['receiverName'] = $this->div->getSenderNameFromArguments($field);
-		}
-		if ($this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['name'], $this->conf['optin.']['overwrite.']['name.'])) { // overwrite from typoscript
-			$mail['receiverName'] = $this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['name'], $this->conf['optin.']['overwrite.']['name.']);
-		}
-		$mail['receiverEmail'] = $this->div->getSenderMailFromArguments($field);
-		if ($this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['email'], $this->conf['optin.']['overwrite.']['email.'])) { // overwrite from typoscript
-			$mail['receiverEmail'] = $this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['email'], $this->conf['optin.']['overwrite.']['email.']);
-		}
-		$mail['senderName'] = $this->settings['sender']['name'];
-		if ($this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['senderName'], $this->conf['optin.']['overwrite.']['senderName.'])) { // overwrite from typoscript
-			$mail['senderName'] = $this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['senderName'], $this->conf['optin.']['overwrite.']['senderName.']);
-		}
-		$mail['senderEmail'] = $this->settings['sender']['email'];
-		if ($this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['senderEmail'], $this->conf['optin.']['overwrite.']['senderEmail.'])) { // overwrite from typoscript
-			$mail['senderEmail'] = $this->cObj->cObjGetSingle($this->conf['optin.']['overwrite.']['senderEmail'], $this->conf['optin.']['overwrite.']['senderEmail.']);
-		}
-		$mail['subject'] = $this->cObj->cObjGetSingle($this->conf['optin.']['subject'], $this->conf['optin.']['subject.']);
-		$mail['template'] = 'Mail/OptinMail';
-		$mail['rteBody'] = '';
-		$mail['format'] = $this->settings['sender']['mailformat'];
-		$mail['variables'] = array(
-			'optinHash' => Div::createOptinHash($newMail->getUid() . $newMail->getPid() . $newMail->getForm()),
-			'mail' => $newMail->getUid()
+	protected function sendConfirmationMail(Mail $mail) {
+		// Send Mail to sender with hashed link
+		$email = array(
+			'template' => 'Mail/OptinMail',
+			'receiverName' => $this->div->getSenderNameFromArguments($mail) ? $this->div->getSenderNameFromArguments($mail) : 'Powermail',
+			'receiverEmail' => $this->div->getSenderMailFromArguments($mail),
+			'senderName' => $this->settings['sender']['name'],
+			'senderEmail' => $this->settings['sender']['email'],
+			'subject' => $this->cObj->cObjGetSingle($this->conf['optin.']['subject'], $this->conf['optin.']['subject.']),
+			'rteBody' => '',
+			'format' => $this->settings['sender']['mailformat'],
+			'variables' => array(
+				'hash' => Div::createOptinHash($mail),
+				'mail' => $mail
+			)
 		);
-		$this->div->sendTemplateEmail($mail, $field, $this->settings, 'optin', $this->objectManager, $this->configurationManager);
+		$this->div->overwriteValueFromTypoScript($email['receiverName'], $this->conf['optin.']['overwrite.'], 'name');
+		$this->div->overwriteValueFromTypoScript($email['receiverEmail'], $this->conf['optin.']['overwrite.'], 'email');
+		$this->div->overwriteValueFromTypoScript($email['senderName'], $this->conf['optin.']['overwrite.'], 'senderName');
+		$this->div->overwriteValueFromTypoScript($email['senderEmail'], $this->conf['optin.']['overwrite.'], 'senderEmail');
+		$this->div->sendTemplateEmail($email, $mail, $this->settings, 'optin');
 	}
 
 	/**
@@ -371,51 +361,27 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			);
 		}
 		$this->mailRepository->add($mail);
-		$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager');
-		$persistenceManager->persistAll();
+		$this->persistenceManager->persistAll();
 	}
 
 	/**
 	 * Confirm Double Optin
 	 *
-	 * @param int $mail Mail Uid
+	 * @param \int $mail
 	 * @param string $hash Given Hash String
-	 * @dontvalidate $mail
-	 * @dontvalidate $hash
 	 * @return void
 	 */
-	public function optinConfirmAction($mail = NULL, $hash = NULL) {
+	public function optinConfirmAction($mail, $hash) {
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
 		$mail = $this->mailRepository->findByUid($mail);
 
-		if (
-			!empty($hash) &&
-			$mail instanceof \In2code\Powermail\Domain\Model\Mail &&
-			$hash == Div::createOptinHash($mail->getUid() . $mail->getPid() . $mail->getForm()->getUid())
-		) {
-			// only if hidden = 0
-			if ($mail->getHidden() == 1) {
-				$mail->setHidden(0);
-
+		if (Div::checkOptinHash($hash, $mail)) {
+			if ($mail->getHidden()) {
+				$mail->setHidden(FALSE);
 				$this->mailRepository->update($mail);
-				$persistenceManager = $this->objectManager->get('Tx_Extbase_Persistence_Manager');
-				$persistenceManager->persistAll();
+				$this->persistenceManager->persistAll();
 
-				// call create action
-				$fields = array();
-				foreach ($mail->getAnswers() as $answer) {
-					$fields[$answer->getField()] = $answer->getValue();
-				}
-				$arguments = array(
-					'field' => $fields,
-					'form' => $mail->getForm()->getUid(),
-					'mail' => $mail->getUid(),
-					'__referrer' => array(
-						'actionName' => 'optinConfirm'
-					)
-				);
-				$_POST['tx_powermail_pi1']['__referrer']['@action'] = 'optinConfirm'; // workarround to set the referrer and call it again in the validator
-				$this->forward('create', NULL, NULL, $arguments);
+				$this->forward('create', NULL, NULL, array('mail' => $mail, 'hash' => $hash));
 			}
 		}
 	}

@@ -2,6 +2,7 @@
 namespace In2code\Powermail\Utility;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Domain\Model\Mail;
 
 /***************************************************************
  *  Copyright notice
@@ -332,7 +333,7 @@ class Div {
 	 * Add uploads fields and rewrite date fields
 	 *
 	 * @param array $fields Field array
-	 * @return void
+	 * @return array
 	 */
 	public function rewriteDateInFields($fields) {
 		// rewrite datetime
@@ -813,12 +814,37 @@ class Div {
 	}
 
 	/**
+	 * Check if given Hash is the correct Optin Hash
+	 *
+	 * @param \string $hash
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @return \string
+	 */
+	public static function checkOptinHash($hash, Mail $mail) {
+		$newHash = self::createHash($mail->getUid() . $mail->getPid() . $mail->getForm()->getUid());
+		if ($newHash === $hash && !empty($hash)) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
+	 * Create Hash for Optin Mail
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @return \string
+	 */
+	public static function createOptinHash(Mail $mail) {
+		return self::createHash($mail->getUid() . $mail->getPid() . $mail->getForm()->getUid());
+	}
+
+	/**
 	 * Create Hash from String and TYPO3 Encryption Key
 	 *
 	 * @param string $string Any String
 	 * @return string Hashed String
 	 */
-	public static function createOptinHash($string) {
+	public static function createHash($string) {
 		if (!empty($GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'])) {
 			$hash = GeneralUtility::shortMD5($string . $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey']);
 		} else {

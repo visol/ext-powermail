@@ -177,10 +177,19 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return	Query Object
 	 */
 	public function findByUid($uid) {
-		$query = $this->createQuery(); // initialize query
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
-		$query->getQuerySettings()->setRespectEnableFields(FALSE); // show also hidden
-		return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+
+		$and = array(
+			$query->equals('uid', $uid),
+			$query->equals('deleted', 0)
+		);
+		$query->matching(
+			$query->logicalAnd($and)
+		);
+
+		return $query->execute()->getFirst();
 	}
 
 	/**

@@ -71,6 +71,14 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $signalSlotDispatcher;
 
 	/**
+	 * SignalSlot Dispatcher
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+	 * @inject
+	 */
+	protected $persistenceManager;
+
+	/**
 	 * Instance for Misc Functions
 	 *
 	 * @var \In2code\Powermail\Utility\Div
