@@ -407,7 +407,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		}
 
 		// Debug Output
-		if ($this->settings['debug']['settings'] || 1) {
+		if ($this->settings['debug']['settings']) {
 			\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings, 'powermail debug: Show Settings');
 		}
 	}
