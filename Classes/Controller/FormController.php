@@ -111,11 +111,11 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		) {
 			$this->sendMailPreflight($mail);
 
-			// Save to other tables
+			// todo Save to other tables
 //			$saveToTable = $this->objectManager->get('Tx_Powermail_Utility_SaveToTable');
 //			$saveToTable->main($this->div->getVariablesWithMarkers($field), $this->conf, $this->cObj);
 
-			// Powermail sendpost
+			// todo Powermail sendpost
 //			$this->div->sendPost($field, $this->conf, $this->configurationManager);
 		} else {
 			$this->sendConfirmationMail($mail);
