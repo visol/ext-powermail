@@ -47,8 +47,8 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 		if ($cycle == 0) {
 
 			// if GET/POST with marker (&tx_powermail_pi1[mail][marker]=value)
-			if (isset($this->piVars['mail'][$marker])) {
-				$value = $this->piVars['mail'][$marker];
+			if (isset($this->piVars['field'][$marker])) {
+				$value = $this->piVars['field'][$marker];
 			}
 
 			// if GET/POST with marker (&tx_powermail_pi1[marker]=value)
@@ -100,9 +100,9 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 			$index = $cycle - 1;
 			$options = $field->getModifiedSettings();
 
-			// if GET/POST with marker (&tx_powermail_pi1[mail][marker]=value)
-			if (isset($this->piVars['mail'][$marker])) {
-				if ($this->piVars['mail'][$marker] == $options[$index]['value'] || $this->piVars['mail'][$marker] == $options[$index]['label']) {
+			// if GET/POST with marker (&tx_powermail_pi1[field][marker]=value)
+			if (isset($this->piVars['field'][$marker])) {
+				if ($this->piVars['field'][$marker] == $options[$index]['value'] || $this->piVars['field'][$marker] == $options[$index]['label']) {
 					$selected = 1;
 				}
 			}

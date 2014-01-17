@@ -164,8 +164,8 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				'field' => strval($this->div->getFieldUidFromMarker($marker, $arguments['mail']['form'])),
 				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
 				'valueType' => Div::getDataTypeFromFieldType(
-						$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
-					)
+					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
+				)
 			);
 			$i++;
 		}

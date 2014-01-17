@@ -41,24 +41,21 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	/**
 	 * action show form for creating new mails
 	 *
-	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function formAction(Mail $mail = NULL) {
+	public function formAction() {
 		if (!isset($this->settings['main']['form']) || !$this->settings['main']['form']) {
 			return;
 		}
-
 		// get forms
 		$forms = $this->formRepository->findByUids($this->settings['main']['form']);
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($forms, $this));
 		$this->view->assign('forms', $forms);
-		$this->view->assign('mail', $mail);
 		$this->view->assign('messageClass', $this->messageClass);
 		$this->view->assign('action', ($this->settings['main']['confirmation'] ? 'confirmation' : 'create'));
 		$this->assignForAll();
 
-		// open session
+		// create session
 		if (method_exists($forms->getFirst(), 'getUid')) {
 			Div::saveFormStartInSession($forms->getFirst()->getUid());
 		}
