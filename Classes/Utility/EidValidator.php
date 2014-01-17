@@ -99,4 +99,3 @@ class EidValidator {
 global $TYPO3_CONF_VARS;
 $eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\EidValidator', $TYPO3_CONF_VARS);
 echo $eid->run(); // print content
-?>
