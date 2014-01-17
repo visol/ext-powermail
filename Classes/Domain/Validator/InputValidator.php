@@ -3,6 +3,10 @@ namespace In2code\Powermail\Domain\Validator;
 
 use \In2code\Powermail\Domain\Model\Field;
 
+/**
+ * @package powermail
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ */
 class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator {
 
 	/**

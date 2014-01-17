@@ -75,11 +75,11 @@ class Tx_Powermail_Utility_EvaluateEmail {
 	 * Server valuation
 	 *
 	 * @param 	$value		The field value to be evaluated.
-	 * @param 	$is_in		The "is_in" value of the field configuration from TCA
+	 * @param 	$isIn		The "isIn" value of the field configuration from TCA
 	 * @param 	$set		Boolean defining if the value is written to the database or not. Must be passed by reference and changed if needed.
 	 * @return 	string		Value
 	 */
-	public function evaluateFieldValue($value, $is_in, &$set) {
+	public function evaluateFieldValue($value, $isIn, &$set) {
 		if (t3lib_div::validEmail($value)) {
 			$set = 1;
 		} else {
