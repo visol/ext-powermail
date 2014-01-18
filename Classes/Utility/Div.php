@@ -255,7 +255,9 @@ class Div {
 	 * @return string Marker name
 	 */
 	public function getMarkerFromField($uid) {
-		$field = $this->fieldRepository->findByUid($uid); // get field
+		// get field
+		$field = $this->fieldRepository->findByUid($uid);
+
 		$marker = NULL;
 		if (method_exists($field, 'getMarker')) {
 			$marker = $field->getMarker();
@@ -385,7 +387,9 @@ class Div {
 	 */
 	protected function makePlain($content) {
 		// config
-		$htmltagarray = array ( // This tags will be added with linebreaks
+
+		// This tags will be added with linebreaks
+		$htmltagarray = array (
 			'</p>',
 			'</tr>',
 			'</li>',
@@ -401,7 +405,8 @@ class Div {
 			'</dd>',
 			'</dt>'
 		);
-		$notallowed = array ( // This array contains not allowed signs which will be removed
+		// This array contains not allowed signs which will be removed
+		$notallowed = array (
 			'&nbsp;',
 			'&szlig;',
 			'&Uuml;',
@@ -414,12 +419,18 @@ class Div {
 
 		// let's go
 		$content = nl2br($content);
-		$content = str_replace($htmltagarray, $htmltagarray[0] . '<br />', $content); // 1. add linebreaks on some parts (</p> => </p><br />)
-		$content = strip_tags($content, '<br><address>'); // 2. remove all tags but not linebreaks and address (<b>bla</b><br /> => bla<br />)
-		$content = preg_replace('/\s+/', ' ', $content); // 3. removes tabs and whitespaces
-		$content = $this->br2nl($content); // 4. <br /> to \n
-		$content = implode("\n", GeneralUtility::trimExplode("\n", $content)); // 5. explode and trim each line and implode again (" bla \n blabla " => "bla\nbla")
-		$content = str_replace($notallowed, '', $content); // 6. remove not allowed signs
+		// 1. add linebreaks on some parts (</p> => </p><br />)
+		$content = str_replace($htmltagarray, $htmltagarray[0] . '<br />', $content);
+		// 2. remove all tags but not linebreaks and address (<b>bla</b><br /> => bla<br />)
+		$content = strip_tags($content, '<br><address>');
+		// 3. removes tabs and whitespaces
+		$content = preg_replace('/\s+/', ' ', $content);
+		// 4. <br /> to \n
+		$content = $this->br2nl($content);
+		// 5. explode and trim each line and implode again (" bla \n blabla " => "bla\nbla")
+		$content = implode("\n", GeneralUtility::trimExplode("\n", $content));
+		// 6. remove not allowed signs
+		$content = str_replace($notallowed, '', $content);
 
 		return $content;
 	}
@@ -437,7 +448,8 @@ class Div {
 			'<br/>',
 			'<br />'
 		);
-		$content = str_replace($array, "\n", $content); // replacer
+		// replacer
+		$content = str_replace($array, "\n", $content);
 
 		return $content;
 	}
@@ -727,7 +739,8 @@ class Div {
 	 */
 	public static function getAbcArray() {
 		$arr = array();
-		for ($a = A; $a != AA; $a++) { // ABC loop
+		// ABC loop
+		for ($a = A; $a != AA; $a++) {
 			$arr[] = $a;
 		}
 		return $arr;
@@ -761,9 +774,12 @@ class Div {
 		if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
 			return FALSE;
 		}
-		$usergroups = GeneralUtility::trimExplode(',', $GLOBALS['TSFE']->fe_user->user['usergroup'], 1); // array with usergroups of current logged in user
-		$usersSettings = GeneralUtility::trimExplode(',', $settings['edit']['feuser'], 1); // array with all allowed users
-		$usergroupsSettings = GeneralUtility::trimExplode(',', $settings['edit']['fegroup'], 1); // array with all allowed groups
+		// array with usergroups of current logged in user
+		$usergroups = GeneralUtility::trimExplode(',', $GLOBALS['TSFE']->fe_user->user['usergroup'], 1);
+		// array with all allowed users
+		$usersSettings = GeneralUtility::trimExplode(',', $settings['edit']['feuser'], 1);
+		// array with all allowed groups
+		$usergroupsSettings = GeneralUtility::trimExplode(',', $settings['edit']['fegroup'], 1);
 
 		// replace "_owner" with uid of owner in array with users
 		if (method_exists($mail, 'getFeuser') && is_numeric(array_search('_owner', $usersSettings))) {
@@ -771,9 +787,12 @@ class Div {
 		}
 
 		// add owner groups to allowed groups (if "_owner")
-		if (method_exists($mail, 'getFeuser') && is_numeric(array_search('_owner', $usergroupsSettings))) { // if one entry is "_ownergroup"
-			$usergroupsFromOwner = $this->getUserGroupsFromUser($mail->getFeuser()); // get usergroups of owner user
-			$usergroupsSettings = array_merge((array) $usergroupsSettings, (array) $usergroupsFromOwner); // add owner usergroups to allowed usergroups array
+		// if one entry is "_ownergroup"
+		if (method_exists($mail, 'getFeuser') && is_numeric(array_search('_owner', $usergroupsSettings))) {
+			// get usergroups of owner user
+			$usergroupsFromOwner = $this->getUserGroupsFromUser($mail->getFeuser());
+			// add owner usergroups to allowed usergroups array
+			$usergroupsSettings = array_merge((array) $usergroupsSettings, (array) $usergroupsFromOwner);
 		}
 
 		// 1. check user
@@ -782,7 +801,8 @@ class Div {
 		}
 
 		// 2. check usergroup
-		if (count(array_intersect($usergroups, $usergroupsSettings))) { // if there is one of the groups allowed
+		// if there is one of the groups allowed
+		if (count(array_intersect($usergroups, $usergroupsSettings))) {
 			return TRUE;
 		}
 
@@ -805,7 +825,8 @@ class Div {
 		$limit = 1000;
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 		if ($res) {
-			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) { // One loop for every entry
+			// One loop for every entry
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
 				$groups[] = $row['uid'];
 			}
 		}
@@ -877,8 +898,10 @@ class Div {
 	 */
 	public static function setSessionValue($name, $values, $overwrite = 0) {
 		if (!$overwrite) {
-			$oldValues = self::getSessionValue($name); // read existing values
-			$values = array_merge((array) $oldValues, (array) $values); // merge old values with new
+			// read existing values
+			$oldValues = self::getSessionValue($name);
+			// merge old values with new
+			$values = array_merge((array) $oldValues, (array) $values);
 		}
 		$newValues = array(
 			$name => $values
@@ -1034,7 +1057,8 @@ class Div {
 
 		// add attachments from upload fields
 		if ($settings[$type]['attachment']) {
-			$uploadsFromSession = \In2code\Powermail\Utility\Div::getSessionValue('upload'); // read upload session
+			// read upload session
+			$uploadsFromSession = \In2code\Powermail\Utility\Div::getSessionValue('upload');
 			foreach ((array) $uploadsFromSession as $file) {
 				$message->attach(Swift_Attachment::fromPath($file));
 			}
@@ -1072,26 +1096,36 @@ class Div {
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail']);
 
 		if (isset($settings[$typoScriptLevel]) && is_array($settings[$typoScriptLevel])) {
-			$temporarySettings = $settings[$typoScriptLevel]; // copy typoscript part to conf part
+			// copy typoscript part to conf part
+			$temporarySettings = $settings[$typoScriptLevel];
 		}
 
 		if (isset($settings['flexform']) && is_array($settings['flexform'])) {
-			$temporarySettings = array_merge((array) $temporarySettings, (array) $settings['flexform']); // copy flexform part to conf part
+			// copy flexform part to conf part
+			$temporarySettings = array_merge((array) $temporarySettings, (array) $settings['flexform']);
 		}
 
 		// merge ts and ff (loop every flexform)
 		foreach ($temporarySettings as $key1 => $value1) {
-			if (!is_array($value1)) { // 1. level
-				if (isset($settings[$typoScriptLevel][$key1]) && isset($settings['flexform'][$key1])) { // only if this key exists in ff and ts
-					if ($settings[$typoScriptLevel][$key1] && !$settings['flexform'][$key1]) { // only if ff is empty and ts not
-						$temporarySettings[$key1] = $settings[$typoScriptLevel][$key1]; // overwrite with typoscript settings
+			// 1. level
+			if (!is_array($value1)) {
+				// only if this key exists in ff and ts
+				if (isset($settings[$typoScriptLevel][$key1]) && isset($settings['flexform'][$key1])) {
+					// only if ff is empty and ts not
+					if ($settings[$typoScriptLevel][$key1] && !$settings['flexform'][$key1]) {
+						// overwrite with typoscript settings
+						$temporarySettings[$key1] = $settings[$typoScriptLevel][$key1];
 					}
 				}
 			} else {
-				foreach ($value1 as $key2 => $value2) { // 2. level
-					if (isset($settings[$typoScriptLevel][$key1][$key2]) && isset($settings['flexform'][$key1][$key2])) { // only if this key exists in ff and ts
-						if ($settings[$typoScriptLevel][$key1][$key2] && !$settings['flexform'][$key1][$key2]) { // only if ff is empty and ts not
-							$temporarySettings[$key1][$key2] = $settings[$typoScriptLevel][$key1][$key2]; // overwrite with typoscript settings
+				// 2. level
+				foreach ($value1 as $key2 => $value2) {
+					// only if this key exists in ff and ts
+					if (isset($settings[$typoScriptLevel][$key1][$key2]) && isset($settings['flexform'][$key1][$key2])) {
+						// only if ff is empty and ts not
+						if ($settings[$typoScriptLevel][$key1][$key2] && !$settings['flexform'][$key1][$key2]) {
+							// overwrite with typoscript settings
+							$temporarySettings[$key1][$key2] = $settings[$typoScriptLevel][$key1][$key2];
 						}
 					}
 				}
@@ -1100,14 +1134,20 @@ class Div {
 
 		// merge ts and ff (loop every typoscript)
 		foreach ((array) $settings[$typoScriptLevel] as $key1 => $value1) {
-			if (!is_array($value1)) { // 1. level
-				if (isset($settings[$typoScriptLevel][$key1]) && !isset($settings['flexform'][$key1])) { // only if this key exists in ts and not in ff
-					$temporarySettings[$key1] = $value1; // set value from ts
+			// 1. level
+			if (!is_array($value1)) {
+				// only if this key exists in ts and not in ff
+				if (isset($settings[$typoScriptLevel][$key1]) && !isset($settings['flexform'][$key1])) {
+					// set value from ts
+					$temporarySettings[$key1] = $value1;
 				}
 			} else {
-				foreach ($value1 as $key2 => $value2) { // 2. level
-					if (isset($settings[$typoScriptLevel][$key1][$key2]) && !isset($settings['flexform'][$key1][$key2])) { // only if this key exists in ts and not in ff
-						$temporarySettings[$key1][$key2] = $value2; // set value from ts
+				// 2. level
+				foreach ($value1 as $key2 => $value2) {
+					// only if this key exists in ts and not in ff
+					if (isset($settings[$typoScriptLevel][$key1][$key2]) && !isset($settings['flexform'][$key1][$key2])) {
+						// set value from ts
+						$temporarySettings[$key1][$key2] = $value2;
 					}
 				}
 			}

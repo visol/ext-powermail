@@ -41,8 +41,10 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return	Query Object
 	 */
 	public function findByFieldAndMail($fieldUid, $mailUid) {
-		$query = $this->createQuery(); // initialize query
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
+		// initialize query
+		$query = $this->createQuery();
+		// disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
 		$and = array(
 			$query->equals('mail', $mailUid),

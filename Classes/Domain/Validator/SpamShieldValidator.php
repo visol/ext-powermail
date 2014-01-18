@@ -164,7 +164,8 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 			}
 			preg_match_all('@http://|https://|ftp.@', $answer->getValue(), $result);
 			if (isset($result[0])) {
-				$linkAmount += count($result[0]); // add numbers of http://
+				// add numbers of http://
+				$linkAmount += count($result[0]);
 			}
 		}
 

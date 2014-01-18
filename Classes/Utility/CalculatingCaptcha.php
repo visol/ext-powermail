@@ -43,17 +43,21 @@ class CalculatingCaptcha {
 	protected $conf;
 
 	/**
+	 * Path to captcha image
+	 *
 	 * @var 	string		New Image Path
 	 */
-	public $captchaImage = 'EXT:powermail/Resources/Public/Image/captcha.png'; // Path to captcha image
+	public $captchaImage = 'EXT:powermail/Resources/Public/Image/captcha.png';
 
 	/**
 	 * Render Link to Captcha Image
 	 */
 	public function render($conf) {
 		$this->conf = $conf;
-		$string = $this->getString(); // get random string for captcha
-		$content = $this->createImage($string); // create image
+		// get random string for captcha
+		$string = $this->getString();
+		// create image
+		$content = $this->createImage($string);
 		return $content;
 	}
 
@@ -66,7 +70,8 @@ class CalculatingCaptcha {
 	 */
 	public function validCode($code, $clearSession = 1) {
 		$valid = 0;
-		if (intval($code) == $GLOBALS['TSFE']->fe_user->sesData['powermail_captcha_value'] && !empty($code)) { // if code is set and equal to session value
+		// if code is set and equal to session value
+		if (intval($code) == $GLOBALS['TSFE']->fe_user->sesData['powermail_captcha_value'] && !empty($code)) {
 
 			// clear session
 			if ($clearSession) {
@@ -88,32 +93,51 @@ class CalculatingCaptcha {
 	 */
 	protected function createImage($content) {
 		$subfolder = '';
-		if (GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' != GeneralUtility::getIndpEnv('TYPO3_SITE_URL')) { // if request_host is different to site_url (TYPO3 runs in a subfolder)
-			$subfolder = str_replace(GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/', '', GeneralUtility::getIndpEnv('TYPO3_SITE_URL')); // get the folder (like "subfolder/")
+		// if request_host is different to site_url (TYPO3 runs in a subfolder)
+		if (GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' != GeneralUtility::getIndpEnv('TYPO3_SITE_URL')) {
+			// get the folder (like "subfolder/")
+			$subfolder = str_replace(GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/', '', GeneralUtility::getIndpEnv('TYPO3_SITE_URL'));
 		}
-		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']); // background image
+		// background image
+		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']);
 
-		if (!is_file($startimage)) { // if file is correct
+		// if file is correct
+		if (!is_file($startimage)) {
 			return 'Error: No Image found';
 		}
 
-		$img = ImageCreateFromPNG($startimage); // Backgroundimage
+		// Backgroundimage
+		$img = ImageCreateFromPNG($startimage);
 		$config = array();
-		$config['color_rgb'] = sscanf($this->conf['captcha.']['default.']['textColor'], '#%2x%2x%2x'); // change HEX color to RGB
-		$config['color'] = ImageColorAllocate($img, $config['color_rgb'][0], $config['color_rgb'][1], $config['color_rgb'][2]); // Font color
-		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']); // fontfile
-		$config['fontsize'] = $this->conf['captcha.']['default.']['textSize']; // Fontsize
-		$config['angle'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['textAngle'], 1); // give me the angles for the font
-		$config['fontangle'] = mt_rand($config['angle'][0], $config['angle'][1]); // random angle
-		$config['distance_hor'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceHor'], 1); // give me the horizontal distances
-		$config['fontdistance_hor'] = mt_rand($config['distance_hor'][0], $config['distance_hor'][1]); // random distance
-		$config['distance_vert'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceVer'], 1); // give me the vertical distances
-		$config['fontdistance_vert'] = mt_rand($config['distance_vert'][0], $config['distance_vert'][1]); // random distance
-		imagettftext($img, $config['fontsize'], $config['fontangle'], $config['fontdistance_hor'], $config['fontdistance_vert'], $config['color'], $config['font'], $content); // add text to image
-		imagepng($img, GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)); // save image file
-		imagedestroy($img); // delete temp image
+		// change HEX color to RGB
+		$config['color_rgb'] = sscanf($this->conf['captcha.']['default.']['textColor'], '#%2x%2x%2x');
+		// Font color
+		$config['color'] = ImageColorAllocate($img, $config['color_rgb'][0], $config['color_rgb'][1], $config['color_rgb'][2]);
+		// fontfile
+		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']);
+		// Fontsize
+		$config['fontsize'] = $this->conf['captcha.']['default.']['textSize'];
+		// give me the angles for the font
+		$config['angle'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['textAngle'], 1);
+		// random angle
+		$config['fontangle'] = mt_rand($config['angle'][0], $config['angle'][1]);
+		// give me the horizontal distances
+		$config['distance_hor'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceHor'], 1);
+		// random distance
+		$config['fontdistance_hor'] = mt_rand($config['distance_hor'][0], $config['distance_hor'][1]);
+		// give me the vertical distances
+		$config['distance_vert'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceVer'], 1);
+		// random distance
+		$config['fontdistance_vert'] = mt_rand($config['distance_vert'][0], $config['distance_vert'][1]);
+		// add text to image
+		imagettftext($img, $config['fontsize'], $config['fontangle'], $config['fontdistance_hor'], $config['fontdistance_vert'], $config['color'], $config['font'], $content);
+		// save image file
+		imagepng($img, GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage));
+		// delete temp image
+		imagedestroy($img);
 
-		return $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage) . '?hash=' . time(); // path to new image
+		// path to new image
+		return $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage) . '?hash=' . time();
 	}
 
 	/**
@@ -124,41 +148,54 @@ class CalculatingCaptcha {
 	protected function getString() {
 		// config
 		// 1. Get random numbers
-		$op = mt_rand(0, 1); // operator +/-
-		for ($i = 0; $i < 100; $i++) { // loop max. 100 times
-			$number1 = mt_rand(0, 15); // random number 1
-			$number2 = mt_rand(0, 15); // random number 2
+		// operator +/-
+		$op = mt_rand(0, 1);
+		// loop max. 100 times
+		for ($i = 0; $i < 100; $i++) {
+			// random number 1
+			$number1 = mt_rand(0, 15);
+			// random number 2
+			$number2 = mt_rand(0, 15);
 
 			// don't want negative numbers
 			if ($op != 1 || $number1 > $number2) {
 				break;
 			}
 		}
-		switch ($op) { // give me the operator
+		// give me the operator
+		switch ($op) {
 			case 0:
-				$operator = '+'; // operator
-				$result = $number1 + $number2; // result
+				// operator
+				$operator = '+';
+				// result
+				$result = $number1 + $number2;
 				break;
 
 			case 1:
 				$operator = '-';
-				$result = $number1 - $number2; // result
+				// result
+				$result = $number1 - $number2;
 				break;
 
 			case 2:
 				$operator = 'x';
-				$result = $number1 * $number2; // result
+				// result
+				$result = $number1 * $number2;
 				break;
 
 			case 3:
 				$operator = ':';
-				$result = $number1 / $number2; // result
+				// result
+				$result = $number1 / $number2;
 				break;
 		}
 
 		// Save result to session
-		$GLOBALS['TSFE']->fe_user->setKey('ses', 'powermail_captcha_value', $result); // Generate Session with result
-		$GLOBALS['TSFE']->storeSessionData(); // Save session
+
+		// Generate Session with result
+		$GLOBALS['TSFE']->fe_user->setKey('ses', 'powermail_captcha_value', $result);
+		// Save session
+		$GLOBALS['TSFE']->storeSessionData();
 
 		return $number1 . ' ' . $operator . ' ' . $number2;
 	}

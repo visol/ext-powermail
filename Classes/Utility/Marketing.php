@@ -100,7 +100,8 @@ class Tx_Powermail_Utility_Marketing {
 	 * return	string		URL of the last page (if different domain)
 	 */
 	protected function getExternalReferer() {
-		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER'))); // every part of the referer in an own array
+		// every part of the referer in an own array
+		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER')));
 
 		// if this domain is different to referer domain
 		if (t3lib_div::getIndpEnv('HTTP_HOST') != $url['host']) {
@@ -115,15 +116,19 @@ class Tx_Powermail_Utility_Marketing {
 	 * return	string		Searchterm
 	 */
 	protected function getSearchTerm() {
-		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER'))); // every part of the referer in an own array
+		// every part of the referer in an own array
+		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER')));
 
-		if (!isset($url['query'])) { // if GET params is set
+		// if GET params is set
+		if (!isset($url['query'])) {
 			return FALSE;
 		}
 
-		preg_match('/q=([^&]+)(&amp;)?/', $url['query'], $output); // give me only the &q="searchword" part
+		// give me only the &q="searchword" part
+		preg_match('/q=([^&]+)(&amp;)?/', $url['query'], $output);
 
-		if ($output[1]) { // only if GET param &q= was set
+		// only if GET param &q= was set
+		if ($output[1]) {
 			return urldecode($output[1]);
 		}
 
@@ -136,9 +141,11 @@ class Tx_Powermail_Utility_Marketing {
 	 * return	bool
 	 */
 	protected function fromAdwords() {
-		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER'))); // every part of the referer in an own array
+		// every part of the referer in an own array
+		$url = parse_url(htmlentities(t3lib_div::getIndpEnv('HTTP_REFERER')));
 
-		preg_match('/adurl=([^&]+)(&amp;)?/', $url['query'], $output); // give me only the &q="searchword" part
+		// give me only the &q="searchword" part
+		preg_match('/adurl=([^&]+)(&amp;)?/', $url['query'], $output);
 		if ($output[1]) {
 			return 1;
 		}

@@ -47,15 +47,18 @@ class Tx_Powermail_Utility_Marker {
 		// if entry in db
 		if (isset($pa['row']['marker']) && !empty($pa['row']['marker'])) {
 			$marker = $pa['row']['marker'];
-		} else { // no entry
+		// no entry
+		} else {
 			$marker = 'Error: Marker is empty';
 		}
 
-		if (stristr($pa['row']['uid'], 'NEW')) { // field just generated
+		// field just generated
+		if (stristr($pa['row']['uid'], 'NEW')) {
 			$content .= '<div style="background-color: #F4DA5C; padding: 5px 10px;">';
 			$content .= 'Please save before...';
 			$content .= '</div>';
-		} else { // was saved before
+			// was saved before
+		} else {
 			$content .= '<div style="background-color: #ddd; padding: 5px 10px;" />';
 			$content .= '{' . strtolower($marker) . '}';
 			$content .= '</div>';

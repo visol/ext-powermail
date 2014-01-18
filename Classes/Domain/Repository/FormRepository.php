@@ -62,15 +62,18 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function hasCaptcha(\In2code\Powermail\Domain\Model\Form $form) {
 		$query = $this->createQuery();
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
+		// disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
 		$and = array(
 			$query->equals('uid', $form->getUid()),
 			$query->equals('pages.fields.type', 'captcha')
 		);
 
-		$constraint = $query->logicalAnd($and); // create where object with AND
-		$query->matching($constraint); // use constraint
+		// create where object with AND
+		$constraint = $query->logicalAnd($and);
+		// use constraint
+		$query->matching($constraint);
 
 		return $query->execute();
 	}

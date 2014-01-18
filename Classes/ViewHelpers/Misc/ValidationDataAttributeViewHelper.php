@@ -43,8 +43,11 @@ class ValidationDataAttributeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 					)
 				)
 				->build();
-			$dataArray['data-remote'] = $uri; // sending url for AJAX request
-			$dataArray['data-trigger'] = 'change'; // must be change because of a bug in parsley.js with async remote validation
+
+			// sending url for AJAX request
+			$dataArray['data-remote'] = $uri;
+			// must be change because of a bug in parsley.js with async remote validation
+			$dataArray['data-trigger'] = 'change';
 		}
 		return $dataArray;
 	}

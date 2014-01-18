@@ -79,9 +79,10 @@ class Tx_Powermail_Utility_SaveToTable {
 	 * Preflight method to store values to any db table
 	 */
 	public function main($allArguments, $conf, $cObj, $ok = 1) {
-		$this->cObj = $cObj; // cObject
-		$this->conf = $conf; // conf
-		$this->allArguments = $allArguments; // sessionvalues
+		$this->cObj = $cObj;
+		$this->conf = $conf;
+		// sessionvalues
+		$this->allArguments = $allArguments;
 
 		if (!$ok || !isset($this->conf['dbEntry.']) || !is_array($this->conf['dbEntry.'])) {
 			return;
@@ -95,38 +96,51 @@ class Tx_Powermail_Utility_SaveToTable {
 			}
 
 			// 1. Array for first db entry
-			foreach ((array) $this->conf['dbEntry.'][$table] as $field => $value2) { // One loop for every field to insert in current table
-				if ($field[0] == '_' || substr($field, -1) == '.') { // if fieldname is _enable or _mm and not with . at the end
-					continue; // go to next loop
+			// One loop for every field to insert in current table
+			foreach ((array) $this->conf['dbEntry.'][$table] as $field => $value2) {
+				// if fieldname is _enable or _mm and not with . at the end
+				if ($field[0] == '_' || substr($field, -1) == '.') {
+					// go to next loop
+					continue;
 				}
 
-				if ($this->fieldExists($field, $this->removeDot($table))) { // if db table and field exists
-					$this->cObj->start($allArguments); // push to ts
-					$this->dbValues[$table][$field] = $this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table][$field], $this->conf['dbEntry.'][$table][$field . '.']); // write current TS value to array
+				// if db table and field exists
+				if ($this->fieldExists($field, $this->removeDot($table))) {
+					// push to ts
+					$this->cObj->start($allArguments);
+					// write current TS value to array
+					$this->dbValues[$table][$field] = $this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table][$field], $this->conf['dbEntry.'][$table][$field . '.']);
 				}
 			}
 
 			// 2. DB insert
-			$this->dbUpdate($this->removeDot($table), $this->dbValues[$table]); // Main DB entry for every table
+			// Main DB entry for every table
+			$this->dbUpdate($this->removeDot($table), $this->dbValues[$table]);
 
 			// 2.1 db entry for mm tables if set
-			if (count($this->conf['dbEntry.'][$table]['_mm.']) > 0) { // if mm entry enabled
-				foreach ($this->conf['dbEntry.'][$table]['_mm.'] as $keyMm => $valueMm) { // One loop for every mm db insert
-					if (substr($keyMm, -1) == '.') { // We want the array
+			// if mm entry enabled
+			if (count($this->conf['dbEntry.'][$table]['_mm.']) > 0) {
+				// One loop for every mm db insert
+				foreach ($this->conf['dbEntry.'][$table]['_mm.'] as $keyMm => $valueMm) {
+					// We want the array
+					if (substr($keyMm, -1) == '.') {
+						// 1. is db table && 2. is db table && 3. is a number
 						if (
 							$this->fieldExists('uid_local', $this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['1'], $this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['1.']))
 							&&
 							$this->fieldExists('uid', $this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['2'], $this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['2.']))
 							&&
 							is_numeric($this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['3'], $this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['3.']))
-						) { // 1. is db table && 2. is db table && 3. is a number
-							if ($this->uid[str_replace('.', '', $table)] > 0) { // if uid_local exists
+						) {
+							// if uid_local exists
+							if ($this->uid[str_replace('.', '', $table)] > 0) {
 								$this->db_values_mm[$table] = array (
 									'uid_local' => $this->uid[str_replace('.', '', $table)],
 									'uid_foreign' => $this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['3'], $this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['3.'])
 								);
 							}
-							if (count($this->db_values_mm[$table]) > 0) { // DB entry for every table
+							// DB entry for every table
+							if (count($this->db_values_mm[$table]) > 0) {
 								$this->dbUpdate($this->cObj->cObjGetSingle($this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['1'], $this->conf['dbEntry.'][$table]['_mm.'][$keyMm]['1.']), $this->db_values_mm[$table]);
 							}
 						}
@@ -146,20 +160,27 @@ class Tx_Powermail_Utility_SaveToTable {
 	 * @return	void
 	 */
 	protected function dbUpdate($table, $values) {
-		if (count($values) == 0) { // if there are values
+		// if there are values
+		if (count($values) == 0) {
 			return;
 		}
-		if (!isset($this->conf['dbEntry.'][$table . '.']['_ifUnique.']) || $this->conf['dbEntry.'][$table . '.']['_ifUnique.'] == 'disable') { // no unique values
-			if ($this->dbInsert) { // if allowed
-				$GLOBALS['TYPO3_DB']->exec_INSERTquery($table, $values); // DB entry for every table
-				$this->uid[$table] = $GLOBALS['TYPO3_DB']->sql_insert_id(); // Get uid of current db entry
+		// no unique values
+		if (!isset($this->conf['dbEntry.'][$table . '.']['_ifUnique.']) || $this->conf['dbEntry.'][$table . '.']['_ifUnique.'] == 'disable') {
+			// if allowed
+			if ($this->dbInsert) {
+				// DB entry for every table
+				$GLOBALS['TYPO3_DB']->exec_INSERTquery($table, $values);
+				// Get uid of current db entry
+				$this->uid[$table] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 			}
-
-		} else { // unique values
-
-			$uniqueField = key($this->conf['dbEntry.'][$table . '.']['_ifUnique.']); // get first entry of this array
-			$mode = $this->conf['dbEntry.'][$table . '.']['_ifUnique.'][$uniqueField]; // mode could be "none" or "update"
-			if ($this->fieldExists('uid', $table)) { // check if field uid exists in table
+		// unique values
+		} else {
+			// get first entry of this array
+			$uniqueField = key($this->conf['dbEntry.'][$table . '.']['_ifUnique.']);
+			// mode could be "none" or "update"
+			$mode = $this->conf['dbEntry.'][$table . '.']['_ifUnique.'][$uniqueField];
+			// check if field uid exists in table
+			if ($this->fieldExists('uid', $table)) {
 				// get uid of existing value
 				$select = 'uid';
 				$from = $table;
@@ -175,26 +196,27 @@ class Tx_Powermail_Utility_SaveToTable {
 				}
 			}
 
-			if ($row['uid'] > 0) { // there is already an entry in the database
+			// there is already an entry in the database
+			if ($row['uid'] > 0) {
 				switch ($mode) {
-					case 'update': // mode is update
-						$GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, 'uid = ' . intval($row['uid']), $values); // update old entry with new values
-							// Make row uid global
+					case 'update':
+						// update old entry with new values
+						$GLOBALS['TYPO3_DB']->exec_UPDATEquery($table, 'uid = ' . intval($row['uid']), $values);
+						// Make row uid global
 						$this->uid[$table] = $row['uid'];
 						break;
-
-					case 'none': // mode is none
+					case 'none':
 					default:
 						// do nothing
 						$this->dbValues = 'Entry already exists, won\'t be overwritten';
 						break;
 				}
-
-			} else { // there is no entry in the database
-
-				$GLOBALS['TYPO3_DB']->exec_INSERTquery($table, $values); // New DB entry
-				$this->uid[$table] = $GLOBALS['TYPO3_DB']->sql_insert_id(); // Get uid of current db entry
-
+			// there is no entry in the database
+			} else {
+				// New DB entry
+				$GLOBALS['TYPO3_DB']->exec_INSERTquery($table, $values);
+				// Get uid of current db entry
+				$this->uid[$table] = $GLOBALS['TYPO3_DB']->sql_insert_id();
 			}
 
 		}
@@ -216,23 +238,29 @@ class Tx_Powermail_Utility_SaveToTable {
 		$allTables = $GLOBALS['TYPO3_DB']->admin_get_tables();
 		$tableInfo = $allTables[$table];
 		if (is_array($tableInfo)) {
-			$allFields = $GLOBALS['TYPO3_DB']->admin_get_fields($table); // check if field exist (if table is wront - errormessage)
+			// check if field exist (if table is wront - errormessage)
+			$allFields = $GLOBALS['TYPO3_DB']->admin_get_fields($table);
+
 			$fieldInfo = $allFields[$field];
 		}
 
 		// debug values
 		if (!is_array($tableInfo)) {
-			$this->debugArray['ERROR'][] = 'Table "' . $table . '" don\'t exists in db'; // errormessage if table don't exits
+			// errormessage if table don't exits
+			$this->debugArray['ERROR'][] = 'Table "' . $table . '" don\'t exists in db';
 		}
 		if (is_array($tableInfo) && !is_array($fieldInfo)) {
-			$this->debugArray['ERROR'][] = 'Field "' . $field . '" don\'t exists in db table "' . $table . '"'; // errormessage if field don't exits
+			// errormessage if field don't exits
+			$this->debugArray['ERROR'][] = 'Field "' . $field . '" don\'t exists in db table "' . $table . '"';
 		}
 
 		// return true or false
 		if (is_array($tableInfo) && is_array($fieldInfo)) {
-			return 1; // table and field exist
+			// table and field exist
+			return 1;
 		} else {
-			return 0; // table or field don't exist
+			// table or field don't exist
+			return 0;
 		}
 	}
 
@@ -253,8 +281,12 @@ class Tx_Powermail_Utility_SaveToTable {
 	 */
 	protected function debug() {
 		// Debug Output
-		$this->debugArray['Main Table'] = $this->dbValues; // array for debug view
-		$this->debugArray['MM Table'] = (count($this->db_values_mm) > 0 ? $this->db_values_mm : 'no values or entry already exists'); // array for debug view
+
+		// array for debug view
+		$this->debugArray['Main Table'] = $this->dbValues;
+		// array for debug view
+		$this->debugArray['MM Table'] = (count($this->db_values_mm) > 0 ? $this->db_values_mm : 'no values or entry already exists');
+
 		if ($this->conf['debug.']['saveToTable']) {
 			t3lib_utility_Debug::debug($this->debugArray, 'powermail debug: Show Values from "SaveToTable" Function');
 		}

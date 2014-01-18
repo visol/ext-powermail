@@ -82,6 +82,7 @@ class CaptchaValidator extends \In2code\Powermail\Domain\Validator\AbstractValid
 	 */
 	public function __construct() {
 		$piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('tx_powermail_pi1');
-		$this->clearSession = ($piVars['action'] == 'create' ? TRUE : FALSE); // clear captcha on create action
+		// clear captcha on create action
+		$this->clearSession = ($piVars['action'] == 'create' ? TRUE : FALSE);
 	}
 }

@@ -52,7 +52,8 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
 			// session stuff
 			$uploadSession = array();
-			Div::setSessionValue('upload', array(), TRUE); // clean old session before
+			// clean old session before
+			Div::setSessionValue('upload', array(), TRUE);
 
 			foreach ($mail->getAnswers() as $answer) {
 				if ($answer->getField()->getType() != 'upload') {
@@ -82,7 +83,8 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 					$fileName,
 					GeneralUtility::getFileAbsFileName($this->settings['misc.']['file.']['folder'])
 				);
-				$uploadSession[] = $newFile; // create array for upload session
+				// create array for upload session
+				$uploadSession[] = $newFile;
 				if (!GeneralUtility::upload_copy_move($tmpName, $newFile)) {
 					$this->setErrorAndMessage($answer->getField(), 'upload_error');
 				}

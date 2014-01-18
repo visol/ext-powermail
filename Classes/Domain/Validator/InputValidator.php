@@ -17,9 +17,12 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 	 */
 	public function isValid($mail) {
 		// iterate through all fields of current form
-		foreach ($mail->getForm()->getPages() as $page) { // every page
-			foreach ($page->getFields() as $field) { // every field
-				foreach ($mail->getAnswers() as $answer) { // iterate through answers of given mail object
+		// every page
+		foreach ($mail->getForm()->getPages() as $page) {
+			// every field
+			foreach ($page->getFields() as $field) {
+				// iterate through answers of given mail object
+				foreach ($mail->getAnswers() as $answer) {
 					if ($answer->getField()->getUid() === $field->getUid()) {
 						$this->isValidField($field, $answer->getValue());
 					}
@@ -90,7 +93,8 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 				$validation = $field->getValidation();
 				if (method_exists($this, 'validate' . ucfirst($validation))) {
 					if (!$this->{'validate' . ucfirst($validation)}($value)) {
-						$this->setErrorAndMessage($field, $validation); // message from locallang - "validationerror_custom"
+						// message from locallang - "validationerror_custom"
+						$this->setErrorAndMessage($field, $validation);
 					}
 				}
 				break;

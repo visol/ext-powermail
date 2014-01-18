@@ -45,17 +45,20 @@ class Tx_Powermail_Utility_InitialMarker extends Tx_Powermail_Utility_MarkerBase
 	 * @return	an updated $fieldArray
 	 */
 	public function processDatamapPostProcessFieldArray($status, $table, $uid, &$fieldArray, $pObj) {
-		if ($table != 'tx_powermail_domain_model_fields') { // stop if not powermail field table
+		// stop if not powermail field table
+		if ($table != 'tx_powermail_domain_model_fields') {
 			return $fieldArray;
 		}
 
 		// get large array with markers (from db and new)
 		$markers = array_merge((array) $this->existingMarkers, (array) $this->marker);
-		$this->makeUniqueValueInArray($markers); // get array with unique markers
+		// get array with unique markers
+		$this->makeUniqueValueInArray($markers);
 
 		// marker should be changed OR this is a new field
 		if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['marker']) || stristr($uid, 'NEW')) {
-			$fieldArray['marker'] = $markers['_' . $uid]; // rewrite
+			// rewrite
+			$fieldArray['marker'] = $markers['_' . $uid];
 		}
 
 		return $fieldArray;

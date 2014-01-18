@@ -16,11 +16,11 @@ class ValidationClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
 	 * @var validation
 	 */
 	protected $validationArray = array(
-		1 => 'email', // email
-		2 => 'url', // url
-		3 => 'phone', // phone
-		4 => 'integer', // numbers
-		5 => 'onlyLetterSp', // letters
+		1 => 'email',
+		2 => 'url',
+		3 => 'phone',
+		4 => 'integer',
+		5 => 'onlyLetterSp',
 	);
 
 	/**
@@ -42,12 +42,14 @@ class ValidationClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
 		$cssString .= 'validate[';
 
 		if ($field->getMandatory()) {
-			if ($field->getType() != 'check') { // normal fields
+			// normal fields
+			if ($field->getType() != 'check') {
 				$cssString .= 'required';
 				if ($field->getValidation()) {
 					$cssString .= ',';
 				}
-			} else { // checkbox
+			// checkbox
+			} else {
 //				$cssString .= 'minCheckbox[1]';
 				$cssString .= 'funcCall[checkCheckboxes]';
 			}

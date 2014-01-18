@@ -124,7 +124,10 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	public function validateAjaxAction(Mail $mail) {
 		$pluginVariables = GeneralUtility::_GET('tx_powermail_pi1');
-		$value = array_shift($pluginVariables['field']); // get value
+
+		// get value
+		$value = array_shift($pluginVariables['field']);
+
 		$inputValidator = $this->objectManager->get('\In2code\Powermail\Domain\Validator\InputValidator');
 		$isValid = $inputValidator->isValid($mail, $value);
 
@@ -152,7 +155,8 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		$i = 0;
 		foreach ((array) $arguments['field'] as $marker => $value) {
-			if (substr($marker, 0, 2) === '__') { // ignore internal fields (honeypod)
+			// ignore internal fields (honeypod)
+			if (substr($marker, 0, 2) === '__') {
 				continue;
 			}
 

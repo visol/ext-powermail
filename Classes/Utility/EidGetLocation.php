@@ -70,5 +70,7 @@ class eidGetLocation {
 	}
 }
 
-$eid = t3lib_div::makeInstance('eidGetLocation'); // make instance
-echo $eid->main(); // print content
+// make instance
+$eid = t3lib_div::makeInstance('eidGetLocation');
+// print content
+echo $eid->main();

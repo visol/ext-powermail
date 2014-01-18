@@ -21,7 +21,7 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 	 * @return 	string		Parsed Content Element
 	 */
 	public function render($uid) {
-		$conf = array( // config
+		$conf = array(
 			'tables' => 'tt_content',
 			'source' => $uid,
 			'dontCheckPid' => 1

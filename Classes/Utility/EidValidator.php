@@ -77,8 +77,10 @@ class EidValidator {
 			),
 			'settings' => array()
 		);
-		$_POST['tx_powermail_pi1']['action'] = 'validateAjax'; // set action
-		$_POST['tx_powermail_pi1']['controller'] = 'Form'; // set action
+		// set action
+		$_POST['tx_powermail_pi1']['action'] = 'validateAjax';
+		// set action
+		$_POST['tx_powermail_pi1']['controller'] = 'Form';
 
 		$this->bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 
@@ -98,4 +100,5 @@ class EidValidator {
 
 global $TYPO3_CONF_VARS;
 $eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\EidValidator', $TYPO3_CONF_VARS);
-echo $eid->run(); // print content
+// print content
+echo $eid->run();

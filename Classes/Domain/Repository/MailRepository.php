@@ -43,9 +43,12 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function findAllInPid($pid = 0, $settings = array(), $piVars = array()) {
 		// settings
-		$query = $this->createQuery(); // initialize query
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
-		$query->getQuerySettings()->setRespectEnableFields(FALSE); // show also hidden
+		// initialize query
+		$query = $this->createQuery();
+		// disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		// show also hidden
+		$query->getQuerySettings()->setRespectEnableFields(FALSE);
 
 		// initial filter
 		$and = array(
@@ -141,9 +144,12 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function findFirstInPid($pid = 0) {
 		// settings
-		$query = $this->createQuery(); // initialize query
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
-		$query->getQuerySettings()->setRespectEnableFields(FALSE); // show also hidden
+		// initialize query
+		$query = $this->createQuery();
+		// disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		// show also hidden
+		$query->getQuerySettings()->setRespectEnableFields(FALSE);
 
 		// initial filter
 		$and = array(
@@ -202,9 +208,12 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByUidList($uidList, $sorting = array()) {
 		// settings
 		$uids = t3lib_div::trimExplode(',', $uidList, 1);
-		$query = $this->createQuery(); // initialize query
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
-		$query->getQuerySettings()->setRespectEnableFields(FALSE); // show also hidden
+		// initialize query
+		$query = $this->createQuery();
+		// disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		// show also hidden
+		$query->getQuerySettings()->setRespectEnableFields(FALSE);
 
 		// initial filter
 		$and = array(
@@ -248,8 +257,10 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return	void
 	 */
 	public function findListBySettings($settings, $piVars) {
-		$query = $this->createQuery(); // initialize query
-		$query->getQuerySettings()->setRespectStoragePage(FALSE); // disable storage pid
+		// initialize query
+		$query = $this->createQuery();
+		// disable storage pid
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
 
 		/**
@@ -287,12 +298,11 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		// FILTER: field
 		if (isset($piVars['filter'])) {
-			if (isset($piVars['filter']['_all'])) { // fulltext
-
+			// fulltext
+			if (isset($piVars['filter']['_all'])) {
 				$and[] = $query->like('answers.value', '%' . $piVars['filter']['_all'] . '%');
-
-			} else { // or single field search
-
+			// or single field search
+			} else {
 				$filter = array();
 				foreach ((array) $piVars['filter'] as $field => $value) {
 					if (is_numeric($field) && !empty($value)) {
@@ -305,7 +315,8 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				}
 
 				if (count($filter) > 0) {
-					$and[] = $query->logicalOr($filter); // TODO AND
+					// TODO AND
+					$and[] = $query->logicalOr($filter);
 				}
 
 			}

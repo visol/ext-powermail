@@ -182,7 +182,8 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	 */
 	public function updateAction(\In2code\Powermail\Domain\Model\Mail $mail, $field = array()) {
 		if ($this->div->isAllowedToEdit($this->settings, $mail)) {
-			foreach ((array) $field as $fieldUid => $value) { // one loop for every received field
+			// one loop for every received field
+			foreach ((array) $field as $fieldUid => $value) {
 				$answer = $this->answerRepository->findByFieldAndMail($fieldUid, $mail);
 				$answer->setValue($value);
 				$this->answerRepository->update($answer);
@@ -279,7 +280,8 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function initializeObject() {
-		Tx_Powermail_Utility_Div::mergeTypoScript2FlexForm($this->settings, 'Pi2'); // merge typoscript to flexform
+		// merge typoscript to flexform
+		Tx_Powermail_Utility_Div::mergeTypoScript2FlexForm($this->settings, 'Pi2');
 
 		// check if ts is included
 		if (!isset($this->settings['staticTemplate'])) {

@@ -165,7 +165,8 @@ class Tx_Powermail_Utility_MarkerBase {
 				$newArray[$key] = $value;
 			} else {
 				for ($i = 1; $i < 100; $i++) {
-					$value = preg_replace('/_[0-9][0-9]$/', '', $value); // remove appendix "_xx"
+					// remove appendix "_xx"
+					$value = preg_replace('/_[0-9][0-9]$/', '', $value);
 					$value .= '_' . str_pad($i, 2, '0', STR_PAD_LEFT);
 					if (!in_array($value, $newArray)) {
 						$newArray[$key] = $value;

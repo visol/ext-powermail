@@ -68,7 +68,8 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 
 			// if field should be filled with FE_User values
 			elseif ($field->getFeuserValue()) {
-				if (intval($GLOBALS['TSFE']->fe_user->user['uid']) !== 0) { // if fe_user is logged in
+				// if fe_user is logged in
+				if (intval($GLOBALS['TSFE']->fe_user->user['uid']) !== 0) {
 					$value = $GLOBALS['TSFE']->fe_user->user[$field->getFeuserValue()];
 				}
 			}
@@ -80,11 +81,16 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 
 			// if prefill value (from typoscript)
 			elseif ($this->settings['prefill.'][$marker]) {
-				if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) { // Parse cObject
-					$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field); // make array from object
-					$this->cObj->start($data); // push to ts
-					$value = $this->cObj->cObjGetSingle($this->settings['prefill.'][$marker], $this->settings['prefill.'][$marker . '.']); // parse
-				} else { // Use String only
+				// Parse cObject
+				if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) {
+					// make array from object
+					$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field);
+					// push to ts
+					$this->cObj->start($data);
+					// parse
+					$value = $this->cObj->cObjGetSingle($this->settings['prefill.'][$marker], $this->settings['prefill.'][$marker . '.']);
+				// Use String only
+				} else {
 					$value = $this->settings['prefill.'][$marker];
 				}
 
@@ -138,7 +144,8 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 
 			// if field should be filled with FE_User values
 			elseif ($field->getFeuserValue() && intval($GLOBALS['TSFE']->fe_user->user['uid']) !== 0) {
-				if ($GLOBALS['TSFE']->fe_user->user[$field->getFeuserValue()] == $options[$index]['value'] || $GLOBALS['TSFE']->fe_user->user[$field->getFeuserValue()] == $options[$index]['label']) { // if fe_user is logged in
+				// if fe_user is logged in
+				if ($GLOBALS['TSFE']->fe_user->user[$field->getFeuserValue()] == $options[$index]['value'] || $GLOBALS['TSFE']->fe_user->user[$field->getFeuserValue()] == $options[$index]['label']) {
 					$selected = 1;
 				}
 			}
@@ -150,16 +157,20 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 
 			// if prefill value (from typoscript)
 			elseif ($this->settings['prefill.'][$marker]) {
-				if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) { // Parse cObject
-					$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field); // make array from object
-					$this->cObj->start($data); // push to ts
+				// Parse cObject
+				if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) {
+					// make array from object
+					$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field);
+					// push to ts
+					$this->cObj->start($data);
 					if (
 						$this->cObj->cObjGetSingle($this->settings['prefill.'][$marker], $this->settings['prefill.'][$marker . '.']) == $options[$index]['value'] ||
 						$this->cObj->cObjGetSingle($this->settings['prefill.'][$marker], $this->settings['prefill.'][$marker . '.']) == $options[$index]['label']
 					) {
 						$selected = 1;
 					}
-				} else { // Use String only
+				// Use String only
+				} else {
 					if ($this->settings['prefill.'][$marker] == $options[$index]['value'] || $this->settings['prefill.'][$marker] == $options[$index]['label']) {
 						$selected = 1;
 					}
