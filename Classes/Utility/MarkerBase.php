@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -29,10 +32,10 @@
  * Base Class for Backend-Marker functions
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Utility_MarkerBase {
+class MarkerBase {
 
 	/**
 	 * Array with all GET/POST params to save
@@ -81,15 +84,19 @@ class Tx_Powermail_Utility_MarkerBase {
 	 * return int		form uid
 	 */
 	protected function getFormUid() {
+		$result = NULL;
+
 		// if form is given in GET params (open form and pages and fields via IRRE)
 		if (isset($data['tx_powermail_domain_model_forms'])) {
 			foreach ((array) $this->data['tx_powermail_domain_model_forms'] as $uid => $field) {
+				$field = NULL;
 				$result = $uid;
 			}
 		}
 
-		// if field is directly opened (no IRRE OR opened pages with their fields via IRRE)
+		// if field is directly opened (no IRRE OR opened pages with their IRRE fields)
 		foreach ((array) $this->data['tx_powermail_domain_model_fields'] as $uid => $field) {
+			$field = NULL;
 			if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['marker'])) {
 				$result = $this->getFormUidFromFieldUid($uid);
 			}
@@ -136,7 +143,8 @@ class Tx_Powermail_Utility_MarkerBase {
 			LEFT JOIN tx_powermail_domain_model_pages ON tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
 			LEFT JOIN tx_powermail_domain_model_fields ON tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid
 		';
-		$where = 'tx_powermail_domain_model_forms.uid = ' . intval($this->formUid) . ' and tx_powermail_domain_model_fields.deleted = 0';
+		$where = 'tx_powermail_domain_model_forms.uid = ' . intval($this->formUid) .
+			' and tx_powermail_domain_model_fields.deleted = 0';
 		$groupBy = '';
 		$orderBy = '';
 		$limit = 1000;
@@ -188,7 +196,8 @@ class Tx_Powermail_Utility_MarkerBase {
 		$this->marker = array();
 		foreach ((array) $this->data['tx_powermail_domain_model_fields'] as $fieldUid => $fieldValues) {
 			if (!empty($fieldValues['title'])) {
-				$this->marker['_' . $fieldUid] = (isset($fieldValues['marker']) ? $fieldValues['marker'] : $this->cleanString($fieldValues['title']));
+				$this->marker['_' . $fieldUid] =
+					(isset($fieldValues['marker']) ? $fieldValues['marker'] : $this->cleanString($fieldValues['title']));
 			}
 		}
 	}
@@ -197,7 +206,7 @@ class Tx_Powermail_Utility_MarkerBase {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->data = t3lib_div::_GP('data');
+		$this->data = GeneralUtility::_GP('data');
 		$this->getMarkers();
 		$this->formUid = $this->getFormUid();
 		$this->existingMarkers = $this->getFieldMarkersFromForm();

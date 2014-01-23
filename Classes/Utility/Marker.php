@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -29,10 +30,10 @@
  * Class to extend Pi1 field marker e.g. {firstname}
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Utility_Marker {
+class Marker {
 
 	/**
 	 * Create individual marker for powermail field
@@ -62,7 +63,8 @@ class Tx_Powermail_Utility_Marker {
 			$content .= '<div style="background-color: #ddd; padding: 5px 10px;" />';
 			$content .= '{' . strtolower($marker) . '}';
 			$content .= '</div>';
-			$content .= '<input type="hidden" name="data[tx_powermail_domain_model_fields][' . $pa['row']['uid'] . '][marker]" value="' . strtolower($marker) . '" />';
+			$content .= '<input type="hidden" name="data[tx_powermail_domain_model_fields][' . $pa['row']['uid'] . '][marker]"
+			value="' . strtolower($marker) . '" />';
 		}
 
 		return $content;

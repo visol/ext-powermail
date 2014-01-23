@@ -53,11 +53,17 @@ if (TYPO3_MODE === 'BE' && !$confArr['disableBackendModule'] && !(TYPO3_REQUESTT
 	// Pi1
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi1';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi1.xml');
+ExtensionManagementUtility::addPiFlexFormValue(
+	$pluginSignature,
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi1.xml'
+);
 	// Pi2
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi2';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi2.xml');
+ExtensionManagementUtility::addPiFlexFormValue(
+	$pluginSignature,
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi2.xml'
+);
 
 /**
  * Include UserFuncs
@@ -73,7 +79,8 @@ if (TYPO3_MODE == 'BE') {
 	require_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
 
 	// WizIcon for Pi1
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_powermail_pi1_wizicon'] = t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/WizIcon.php';
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_powermail_pi1_wizicon'] =
+		t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/WizIcon.php';
 }
 
 /**
@@ -88,7 +95,10 @@ ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Ma
 /**
  * Settings for Tables
  */
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_forms', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xml');
+ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_powermail_domain_model_forms',
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xml'
+);
 ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_forms');
 $TCA['tx_powermail_domain_model_forms'] = array(
 	'ctrl' => array(
@@ -116,7 +126,10 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 	),
 );
 
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_pages', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_pages.xml');
+ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_powermail_domain_model_pages',
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_pages.xml'
+);
 ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_pages');
 $TCA['tx_powermail_domain_model_pages'] = array(
 	'ctrl' => array(
@@ -145,7 +158,10 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 	),
 );
 
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_fields', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_fields.xml');
+ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_powermail_domain_model_fields',
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_fields.xml'
+);
 ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_fields');
 $TCA['tx_powermail_domain_model_fields'] = array(
 	'ctrl' => array(
@@ -175,7 +191,10 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 	),
 );
 
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_mails', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_mails.xml');
+ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_powermail_domain_model_mails',
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_mails.xml'
+);
 ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_mails');
 $TCA['tx_powermail_domain_model_mails'] = array(
 	'ctrl' => array(
@@ -204,7 +223,10 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 	),
 );
 
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_powermail_domain_model_answers', 'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_answers.xml');
+ExtensionManagementUtility::addLLrefForTCAdescr(
+	'tx_powermail_domain_model_answers',
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_answers.xml'
+);
 ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_answers');
 $TCA['tx_powermail_domain_model_answers'] = array(
 	'ctrl' => array(

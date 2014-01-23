@@ -5,8 +5,11 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \In2code\Powermail\Utility\Div;
 
 /**
+ * SpamShieldValidator
+ *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * GNU Lesser General Public License, version 3 or later
  */
 class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 

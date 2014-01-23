@@ -24,13 +24,14 @@
 ***************************************************************/
 
 /**
- * This class could called with AJAX via eID and returns a location from geo coordinates
+ * This class could called with AJAX via eID and
+ * returns a location from geo coordinates
  *
  * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.
  * @package	TYPO3
  * @subpackage	eidGetLocation
  */
-class eidGetLocation {
+class EidGetLocation {
 
 	/**
 	 * Generates the output
@@ -59,7 +60,9 @@ class eidGetLocation {
 	 */
 	protected function getAddressFromGeo($lat, $lng) {
 		$result = array();
-		$json = t3lib_div::getUrl('https://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=de&latlng=' . urlencode($lat . ',' . $lng));
+		$json = t3lib_div::getUrl(
+			'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=de&latlng=' . urlencode($lat . ',' . $lng)
+		);
 		$jsonDecoded = json_decode($json, TRUE);
 		if (!empty($jsonDecoded['results'])) {
 			foreach ((array) $jsonDecoded['results'][0]['address_components'] as $values) {
@@ -71,6 +74,6 @@ class eidGetLocation {
 }
 
 // make instance
-$eid = t3lib_div::makeInstance('eidGetLocation');
+$eid = t3lib_div::makeInstance('EidGetLocation');
 // print content
 echo $eid->main();

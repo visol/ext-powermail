@@ -32,7 +32,8 @@ use \In2code\Powermail\Domain\Model\Mail;
  * Div is a class for a collection of misc functions
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class Div {
 

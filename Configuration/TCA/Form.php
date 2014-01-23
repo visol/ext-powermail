@@ -9,7 +9,12 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, css, pages',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'title, pages, --div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1, css, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
+		'1' => array(
+			'showitem' =>
+				'title, pages,
+				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1,
+				css, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
+				l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -38,7 +43,8 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermail_domain_model_forms',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_forms.pid=###CURRENT_PID### AND tx_powermail_domain_model_forms.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_forms.pid=###CURRENT_PID### AND tx_powermail_domain_model_forms.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -139,10 +145,12 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_powermail_domain_model_pages',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_pages.deleted = 1 AND tx_powermail_domain_model_pages.hidden = 0 and tx_powermail_domain_model_pages.sys_language_uid = 0',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_pages.deleted = 1 AND tx_powermail_domain_model_pages.hidden = 0
+					and tx_powermail_domain_model_pages.sys_language_uid = 0',
 				'foreign_field' => 'forms',
 				'foreign_sortby' => 'sorting',
-				'maxitems'      => 1000,
+				'maxitems' => 1000,
 				'appearance' => array(
 					'collapseAll' => 1,
 					'expandSingle' => 1,

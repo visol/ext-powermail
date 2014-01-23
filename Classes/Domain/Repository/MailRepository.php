@@ -29,7 +29,8 @@ namespace In2code\Powermail\Domain\Repository;
  * MailRepository
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -116,11 +117,11 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		// set sorting
 		$sortby = ($settings['sortby'] ? $settings['sortby'] : 'crdate');
-		$order = ($settings['order'] == 'asc' ? Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING : Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING);
+		$order = ($settings['order'] == 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING);
 		if (isset($piVars['sorting'])) {
 			foreach ((array) $piVars['sorting'] as $key => $value) {
 				$sortby = $key;
-				$order = ($value == 'asc' ? Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING : Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING);
+				$order = ($value == 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING);
 				break;
 			}
 		}
@@ -164,7 +165,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
 			)
 		);
 
@@ -228,7 +229,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
 			)
 		);
 		foreach ((array) $sorting as $field => $order) {
@@ -239,7 +240,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$field = preg_replace('/[^a-zA-Z0-9_-]/', '', $field);
 			$query->setOrderings(
 				array(
-					$field => ($order == 'asc' ? Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING : Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING)
+					$field => ($order == 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
 				)
 			);
 		}
@@ -331,7 +332,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_DESCENDING
+				'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
 			)
 		);
 

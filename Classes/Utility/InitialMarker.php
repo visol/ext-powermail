@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -29,20 +30,21 @@
  * Class to extend Pi1 field marker e.g. {firstname}
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Utility_InitialMarker extends Tx_Powermail_Utility_MarkerBase {
+class InitialMarker extends \In2code\Powermail\Utility\MarkerBase {
 
 	/**
 	 * Initialy filling of marker field
 	 *
-	 * @param	string		$status mode of change
-	 * @param	string		$table the table which gets changed
-	 * @param	string		$uid uid of the record
-	 * @param	array		$fieldArray the updateArray
-	 * @param	array		$this obj
-	 * @return	an updated $fieldArray
+	 * @param \string $status mode of change
+	 * @param \string $table the table which gets changed
+	 * @param \string $uid uid of the record
+	 * @param \array $fieldArray the updateArray
+	 * @param \array $pObj
+	 * @return an updated $fieldArray
 	 */
 	public function processDatamapPostProcessFieldArray($status, $table, $uid, &$fieldArray, $pObj) {
 		// stop if not powermail field table

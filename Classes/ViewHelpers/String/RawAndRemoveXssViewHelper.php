@@ -10,7 +10,7 @@ namespace In2code\Powermail\ViewHelpers\String;
 class RawAndRemoveXssViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * Disable the escaping interceptor because otherwise the child nodes would be escaped before this view helper
+	 * Disable the escaping because otherwise the child nodes would be escaped before
 	 * can decode the text's entities.
 	 *
 	 * @var boolean

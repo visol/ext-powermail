@@ -26,8 +26,11 @@ namespace In2code\Powermail\Domain\Validator;
  ***************************************************************/
 
 /**
+ * AbstractValidator
+ *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 abstract class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
 

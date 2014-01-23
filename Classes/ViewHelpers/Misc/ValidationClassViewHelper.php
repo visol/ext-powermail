@@ -26,8 +26,10 @@ class ValidationClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
 	/**
 	 * Returns CSS Class for JS validation
 	 * e.g. validate[required,custom[email]]
-	 * http://www.position-relative.net/creation/formValidator/demos/demoValidators.html
-	 * http://www.position-absolute.com/articles/jquery-form-validator-because-form-validation-is-a-mess/
+	 * http://www.position-relative.net/creation/
+	 * 		formValidator/demos/demoValidators.html
+	 * http://www.position-absolute.com/articles/
+	 * 		jquery-form-validator-because-form-validation-is-a-mess/
 	 *
 	 * @param 	object		Current field
 	 * @return 	string		CSS Class

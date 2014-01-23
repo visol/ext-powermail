@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -28,10 +31,10 @@
  * Show Plugin Info below Plugin
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Utility_PluginInfo {
+class PluginInfo {
 
 	/**
 	 * Params
@@ -59,28 +62,37 @@ class Tx_Powermail_Utility_PluginInfo {
 		// settings
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail']);
 		if ($confArr['disablePluginInformation']) {
-			return;
+			return '';
 		}
 		$this->params = $params;
 
 		// let's go
 		$array = array(
-			$GLOBALS['LANG']->sL($this->locallangPath . 'receiverEmail') => $this->getFieldFromFlexform('receiver', 'settings.flexform.receiver.email'),
-			$GLOBALS['LANG']->sL($this->locallangPath . 'receiverName') => $this->getFieldFromFlexform('receiver', 'settings.flexform.receiver.name'),
-			$GLOBALS['LANG']->sL($this->locallangPath . 'subject') => $this->getFieldFromFlexform('receiver', 'settings.flexform.receiver.subject'),
-			$GLOBALS['LANG']->sL($this->locallangPath . 'form') => $this->getFormTitle($this->getFieldFromFlexform('main', 'settings.flexform.main.form')),
-//			$GLOBALS['LANG']->sL($this->locallangPath . 'savePid') => $this->getFieldFromFlexform('main', 'settings.flexform.main.form'),
-			$GLOBALS['LANG']->sL($this->locallangPath . 'confirmationPage') => $this->getFieldFromFlexform('main', 'settings.flexform.main.confirmation') ?
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />' :
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />',
-			$GLOBALS['LANG']->sL($this->locallangPath . 'optin') => $this->getFieldFromFlexform('main', 'settings.flexform.main.optin') ?
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />' :
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />',
+			$GLOBALS['LANG']->sL($this->locallangPath . 'receiverEmail') =>
+				$this->getFieldFromFlexform('receiver', 'settings.flexform.receiver.email'),
+			$GLOBALS['LANG']->sL($this->locallangPath . 'receiverName') =>
+				$this->getFieldFromFlexform('receiver', 'settings.flexform.receiver.name'),
+			$GLOBALS['LANG']->sL($this->locallangPath . 'subject') =>
+				$this->getFieldFromFlexform('receiver', 'settings.flexform.receiver.subject'),
+			$GLOBALS['LANG']->sL($this->locallangPath . 'form') =>
+				$this->getFormTitle($this->getFieldFromFlexform('main', 'settings.flexform.main.form')),
+			$GLOBALS['LANG']->sL($this->locallangPath . 'confirmationPage') =>
+				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />',
+			$GLOBALS['LANG']->sL($this->locallangPath . 'optin') =>
+				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />',
 		);
+		if (!$this->getFieldFromFlexform('main', 'settings.flexform.main.confirmation')) {
+			$array[$GLOBALS['LANG']->sL($this->locallangPath . 'confirmationPage')] =
+				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />';
+		}
+		if (!$this->getFieldFromFlexform('main', 'settings.flexform.main.optin')) {
+			$array[$GLOBALS['LANG']->sL($this->locallangPath . 'optin')] =
+				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />';
+		}
 		if ($this->showTable) {
 			return $this->createOutput($array);
 		}
-		return FALSE;
+		return '';
 	}
 
 	/**
@@ -90,7 +102,10 @@ class Tx_Powermail_Utility_PluginInfo {
 	 * @return 	string		Form Title
 	 */
 	protected function getFormTitle($uid) {
-		$row = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('title', 'tx_powermail_domain_model_forms', 'uid=' . intval($uid));
+		$select = 'title';
+		$from = 'tx_powermail_domain_model_forms';
+		$where = 'uid=' . intval($uid);
+		$row = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow($select, $from, $where);
 		return $row['title'];
 	}
 
@@ -125,7 +140,7 @@ class Tx_Powermail_Utility_PluginInfo {
 	 * @return 	string		value if found
 	 */
 	protected function getFieldFromFlexform($sheet, $key) {
-		$flexform = t3lib_div::xml2array($this->params['row']['pi_flexform']);
+		$flexform = GeneralUtility::xml2array($this->params['row']['pi_flexform']);
 
 		if (
 			is_array($flexform)

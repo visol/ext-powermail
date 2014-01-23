@@ -2,8 +2,11 @@
 namespace In2code\Powermail\Domain\Validator;
 
 /**
+ * CaptchaValidator
+ *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * GNU Lesser General Public License, version 3 or later
  */
 class CaptchaValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
@@ -56,7 +59,7 @@ class CaptchaValidator extends \In2code\Powermail\Domain\Validator\AbstractValid
 
 		}
 
-		// if no captcha arguments given (captcha field could be deleted from DOM with firebug e.g.)
+		// if no captcha arguments given (captcha field could be deleted from DOM)
 		if (!$this->captchaArgumentFound) {
 			$this->addError('captcha', 0);
 			$this->setIsValid(FALSE);

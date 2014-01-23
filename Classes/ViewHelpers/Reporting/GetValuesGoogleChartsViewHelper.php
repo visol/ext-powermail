@@ -12,15 +12,15 @@ class GetValuesGoogleChartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
 	/**
 	 * View helper check if given value is array or not
 	 *
-	 * @param 	array 		Grouped Answers
-	 * @param 	int 		Field UID
-	 * @param 	string 		Separator
-	 * @return 	string		"label1|label2|label3"
+	 * @param array $answers Grouped Answers
+	 * @param int $field Field UID
+	 * @param string $separator Separator
+	 * @return string "label1|label2|label3"
 	 */
 	public function render($answers, $field, $separator = ',') {
 		$string = '';
 		if (!isset($answers[$field])) {
-			return;
+			return '';
 		}
 
 		// create string

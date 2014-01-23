@@ -29,7 +29,8 @@ namespace In2code\Powermail\Domain\Repository;
  * UserRepository
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 

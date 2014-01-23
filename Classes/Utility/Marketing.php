@@ -1,4 +1,6 @@
 <?php
+namespace In2code\Powermail\Utility;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -23,10 +25,13 @@
 ***************************************************************/
 
 /**
+ * Marketing Class
+ *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Utility_Marketing {
+class Marketing {
 
 	/**
 	 * Session Prefix
@@ -47,7 +52,9 @@ class Tx_Powermail_Utility_Marketing {
 			'marketingSearchterm' => $this->getSearchTerm(),
 			'marketingReferer' => $this->getExternalReferer(),
 			'marketingPayedSearchResult' => $this->fromAdwords(),
-			'marketingLanguage' => ($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ? $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0),
+			'marketingLanguage' =>
+				($GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ?
+					$GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0),
 			'marketingBrowserLanguage' => $_SERVER['HTTP_ACCEPT_LANGUAGE'],
 			'marketingFunnel' => array(
 				$GLOBALS['TSFE']->id

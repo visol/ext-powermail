@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\ViewHelpers\BeCheck;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Backend Check Viewhelper: Check if Session works correct on the server
  *
@@ -23,12 +25,11 @@ class SessionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	 */
 	public function render() {
 		// settings
-		global $TYPO3_CONF_VARS;
 		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
-		$GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
 			'tslib_fe',
-			$TYPO3_CONF_VARS,
-			t3lib_div::_GET('id'),
+			$GLOBALS['TYPO3_CONF_VARS'],
+			GeneralUtility::_GET('id'),
 			0,
 			TRUE
 		);

@@ -38,7 +38,9 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermail_domain_model_answers',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_answers.pid=###CURRENT_PID### AND tx_powermail_domain_model_answers.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_answers.pid=###CURRENT_PID### AND
+					tx_powermail_domain_model_answers.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(

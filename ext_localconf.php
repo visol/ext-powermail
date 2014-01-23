@@ -46,13 +46,13 @@ ExtensionUtility::configurePlugin(
  * Hooking for PluginInfo
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info'][$_EXTKEY . '_pi1'][$_EXTKEY] =
-	'EXT:' . $_EXTKEY . '/Classes/Utility/PluginInfo.php:Tx_Powermail_Utility_PluginInfo->getInfo';
+	'EXT:' . $_EXTKEY . '/Classes/Utility/PluginInfo.php:In2code\Powermail\Utility\PluginInfo->getInfo';
 
 /**
  * Hooking for first fill of marker field in backend
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
-	'EXT:' . $_EXTKEY . '/Classes/Utility/InitialMarker.php:Tx_Powermail_Utility_InitialMarker';
+	'EXT:' . $_EXTKEY . '/Classes/Utility/InitialMarker.php:In2code\Powermail\Utility\InitialMarker';
 
 /**
  * eID to get location from geo coordinates
@@ -67,4 +67,5 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] = 'EXT
 /**
  * Extra evaluation of TCA fields
  */
-$TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['Tx_Powermail_Utility_EvaluateEmail'] = 'EXT:powermail/Classes/Utility/EvaluateEmail.php';
+$TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['Tx_Powermail_Utility_EvaluateEmail'] =
+	'EXT:powermail/Classes/Utility/EvaluateEmail.php';

@@ -31,7 +31,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * FormRepository
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -79,7 +80,9 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
-	 * This function is a workarround to get the field value of "pages" in the table "forms" (only relevant if IRRE was replaced by Element Browser)
+	 * This function is a workarround to get the field value of
+	 * "pages" in the table "forms"
+	 * (only relevant if IRRE was replaced by Element Browser)
 	 *
 	 * @param int $uid Form UID
 	 * @return string

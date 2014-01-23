@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Tests;
 
 /***************************************************************
  *  Copyright notice
@@ -29,29 +30,37 @@
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage powermail
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Controller_FormControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class FormControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Powermail_Domain_Model_Form
+	 * @var \In2code\Powermail\Domain\Model\Form
 	 */
 	protected $fixture;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Form();
+		$this->fixture = new \In2code\Powermail\Domain\Model\Form();
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function dummyMethod() {
 		$this->markTestIncomplete();

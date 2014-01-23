@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\ViewHelpers\Condition;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Is {outer.{inner}} a datetime?
  *
@@ -17,8 +19,9 @@ class IsDateTimeVariableInVariableViewHelper extends \TYPO3\CMS\Fluid\Core\ViewH
 	 * @return	bool
 	 */
 	public function render($obj, $prop) {
-		if (is_object($obj) && method_exists($obj, 'get' . \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($prop))) {
-			$mixed = $obj->{'get' . \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($prop)}();
+		$mixed = NULL;
+		if (is_object($obj) && method_exists($obj, 'get' . GeneralUtility::underscoredToUpperCamelCase($prop))) {
+			$mixed = $obj->{'get' . GeneralUtility::underscoredToUpperCamelCase($prop)}();
 		}
 		return method_exists($mixed, 'getTimestamp');
 	}

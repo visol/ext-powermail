@@ -1,4 +1,8 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -27,10 +31,11 @@
  * Adds a new eval possibility to TCA of TYPO3
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Utility_EvaluateEmail {
+class EvaluateEmail {
 
 	/**
 	 * Adds new JavaScript function for evaluation of the TCA fields in backend
@@ -76,11 +81,11 @@ class Tx_Powermail_Utility_EvaluateEmail {
 	 *
 	 * @param 	$value		The field value to be evaluated.
 	 * @param 	$isIn		The "isIn" value of the field configuration from TCA
-	 * @param 	$set		Boolean defining if the value is written to the database or not. Must be passed by reference and changed if needed.
+	 * @param 	$set		Boolean defining if the value is written to the database or not.
 	 * @return 	string		Value
 	 */
 	public function evaluateFieldValue($value, $isIn, &$set) {
-		if (t3lib_div::validEmail($value)) {
+		if (GeneralUtility::validEmail($value)) {
 			$set = 1;
 		} else {
 			$set = 0;

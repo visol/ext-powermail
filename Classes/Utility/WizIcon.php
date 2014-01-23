@@ -25,7 +25,8 @@
 /**
  * Plugin 'Powermail' for the 'powermail' extension.
  *
- * @author	2010 powermail development team (details on http://forge.typo3.org/projects/show/extension-powermail)
+ * @author	2010 powermail development team
+ * (details on http://forge.typo3.org/projects/show/extension-powermail)
  * @package	TYPO3
  * @subpackage	tx_powermail
  */

@@ -30,7 +30,8 @@ namespace In2code\Powermail\Domain\Model;
  * FormModel
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class Form extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 

@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Tests;
 
 /***************************************************************
  *  Copyright notice
@@ -29,14 +30,15 @@
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage powermail
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
 	 * @var Tx_Powermail_Domain_Model_Page
 	 */
@@ -107,7 +109,7 @@ class Tx_Powermail_Domain_Model_PageTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 * @return void
 	 */
 	public function getFieldsReturnsInitialValueForObjectStorageContainingTxPowermailDomainModelField() {
-		#$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		//$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertSame(
 			array(),
 			$this->fixture->getFields()

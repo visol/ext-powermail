@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Controller;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -28,19 +31,10 @@
  * Controller for powermail list views (BE and FE)
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller_ActionController {
-
-	/**
-	 * mailRepository
-	 *
-	 * @var Tx_Powermail_Domain_Repository_MailRepository
-	 *
-	 * @inject
-	 */
-	protected $mailRepository;
+class ModuleController extends \In2code\Powermail\Controller\AbstractController {
 
 	/**
 	 * Request arguments
@@ -50,26 +44,19 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	protected $piVars;
 
 	/**
-	 * div
-	 *
-	 * @var Tx_Powermail_Utility_Div
-	 */
-	protected $div;
-
-	/**
 	 * List View Backend
 	 *
 	 * @return void
 	 */
 	public function listBeAction() {
-		$mails = $this->mailRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
-		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
+		$mails = $this->mailRepository->findAllInPid(GeneralUtility::_GP('id'), $this->settings, $this->piVars);
+		$firstMail = $this->mailRepository->findFirstInPid(GeneralUtility::_GP('id'));
 
 		$this->view->assign('mails', $mails);
 		$this->view->assign('firstMail', $firstMail);
 		$this->view->assign('piVars', $this->piVars);
-		$this->view->assign('pid', t3lib_div::_GP('id'));
-		$this->view->assign('token', t3lib_BEfunc::getUrlToken('tceAction'));
+		$this->view->assign('pid', GeneralUtility::_GP('id'));
+		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
 		$this->view->assign('perPage', ($this->settings['perPage'] ? $this->settings['perPage'] : 10));
 	}
 
@@ -80,10 +67,10 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function checkBeAction($email = NULL) {
-		$this->view->assign('pid', t3lib_div::_GP('id'));
+		$this->view->assign('pid', GeneralUtility::_GP('id'));
 
 		if ($email) {
-			if (t3lib_div::validEmail($email)) {
+			if (GeneralUtility::validEmail($email)) {
 				$body = 'New <b>Test Email</b> from User ' . $GLOBALS['BE_USER']->user['username'] . ' (' . t3lib_div::getIndpEnv('HTTP_HOST') . ')';
 
 				$message = t3lib_div::makeInstance('t3lib_mail_Message');
@@ -121,16 +108,16 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function reportingFormBeAction() {
-		$mails = $this->mailRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
-		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
+		$mails = $this->mailRepository->findAllInPid(GeneralUtility::_GP('id'), $this->settings, $this->piVars);
+		$firstMail = $this->mailRepository->findFirstInPid(GeneralUtility::_GP('id'));
 		$groupedAnswers = Tx_Powermail_Utility_Div::getGroupedMailAnswers($mails);
 
 		$this->view->assign('groupedAnswers', $groupedAnswers);
 		$this->view->assign('mails', $mails);
 		$this->view->assign('firstMail', $firstMail);
 		$this->view->assign('piVars', $this->piVars);
-		$this->view->assign('pid', t3lib_div::_GP('id'));
-		$this->view->assign('token', t3lib_BEfunc::getUrlToken('tceAction'));
+		$this->view->assign('pid', GeneralUtility::_GP('id'));
+		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
 		$this->view->assign('perPage', ($this->settings['perPage'] ? $this->settings['perPage'] : 10));
 	}
 
@@ -140,7 +127,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	 * @return void
 	 */
 	public function reportingMarketingBeAction() {
-		$mails = $this->mailRepository->findAllInPid(t3lib_div::_GP('id'), $this->settings, $this->piVars);
+		$mails = $this->mailRepository->findAllInPid(GeneralUtility::_GP('id'), $this->settings, $this->piVars);
 		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
 		$groupedMarketingStuff = Tx_Powermail_Utility_Div::getGroupedMarketingStuff($mails);
 
@@ -148,8 +135,8 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 		$this->view->assign('mails', $mails);
 		$this->view->assign('firstMail', $firstMail);
 		$this->view->assign('piVars', $this->piVars);
-		$this->view->assign('pid', t3lib_div::_GP('id'));
-		$this->view->assign('token', t3lib_BEfunc::getUrlToken('tceAction'));
+		$this->view->assign('pid', GeneralUtility::_GP('id'));
+		$this->view->assign('token', \TYPO3\CMS\Backend\Utility\BackendUtility::getUrlToken('tceAction'));
 		$this->view->assign('perPage', ($this->settings['perPage'] ? $this->settings['perPage'] : 10));
 	}
 
@@ -175,7 +162,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	public function exportXlsBeAction(array $export = array()) {
 		$mails = $this->mailRepository->findByUidList($export['mails'], $export['sorting']);
 		$this->view->assign('mails', $mails);
-		$this->view->assign('fields', t3lib_div::trimExplode(',', $export['fields'], 1));
+		$this->view->assign('fields', GeneralUtility::trimExplode(',', $export['fields'], 1));
 
 		header('Content-Type: application/vnd.ms-excel');
 		header('Content-Disposition: inline; filename="' . ($this->settings['export']['filenameXls'] ? $this->settings['export']['filenameXls'] : 'export.xls') . '"');
@@ -191,7 +178,7 @@ class Tx_Powermail_Controller_ModuleController extends Tx_Extbase_MVC_Controller
 	public function exportCsvBeAction(array $export = array()) {
 		$mails = $this->mailRepository->findByUidList($export['mails'], $export['sorting']);
 		$this->view->assign('mails', $mails);
-		$this->view->assign('fields', t3lib_div::trimExplode(',', $export['fields'], 1));
+		$this->view->assign('fields', GeneralUtility::trimExplode(',', $export['fields'], 1));
 
 		header('Content-Type: text/x-csv');
 		header('Content-Disposition: attachment; filename="' . ($this->settings['export']['filenameCsv'] ? $this->settings['export']['filenameCsv'] : 'export.csv') . '"');

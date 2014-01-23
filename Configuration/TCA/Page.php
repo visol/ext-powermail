@@ -9,7 +9,12 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, css, fields',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'title, fields,  --div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1, css, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, forms,sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
+		'1' => array(
+			'showitem' =>
+				'title, fields,
+				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1,
+				css, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, forms,sys_language_uid;;;;1-1-1,
+				l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array(),
@@ -38,7 +43,8 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermail_domain_model_pages',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_pages.pid=###CURRENT_PID### AND tx_powermail_domain_model_pages.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_pages.pid=###CURRENT_PID### AND tx_powermail_domain_model_pages.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -169,7 +175,8 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermail_domain_model_forms',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_forms.pid=###CURRENT_PID### AND tx_powermail_domain_model_forms.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_forms.pid=###CURRENT_PID### AND tx_powermail_domain_model_forms.sys_language_uid IN (-1,0)',
 			),
 		),
 		'sorting' => array(

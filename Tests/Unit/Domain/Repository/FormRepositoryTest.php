@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Tests;
 
 /***************************************************************
  *  Copyright notice
@@ -29,13 +30,13 @@
  * FormRepository Tests
  * 
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- *
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
-class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class FormRepositoryTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
+	 * @var \In2code\Powermail\Domain\Repository\FormRepository
 	 */
 	protected $fixture;
 
@@ -48,7 +49,7 @@ class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Test
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Repository_FormRepository();
+		$this->fixture = new \In2code\Powermail\Domain\Repository\FormRepository();
 		$this->testDatabase = new Tx_Phpunit_Framework('tx_powermail_domain_model_forms');
 	}
 
@@ -57,7 +58,7 @@ class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Test
 	 */
 	public function tearDown() {
 		$this->testDatabase->cleanUp();
-		unset($this->fixture,$this->testDatabase);
+		unset($this->fixture, $this->testDatabase);
 	}
 
 	/**
@@ -67,11 +68,11 @@ class Tx_Powermail_Domain_Repository_FormRepositoryTests extends Tx_Extbase_Test
 	public function findByUidsReturnsCorrectCountForString() {
 		$uidArray = array();
 
-		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
-		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
-		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
-		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
-		$uidArray[] = $this->testDatabase > createRecord('tx_powermail_domain_model_forms', array());
+		$uidArray[] = $this->testDatabase > createRecord('\In2code\Powermail\Domain\Model\Form', array());
+		$uidArray[] = $this->testDatabase > createRecord('\In2code\Powermail\Domain\Model\Form', array());
+		$uidArray[] = $this->testDatabase > createRecord('\In2code\Powermail\Domain\Model\Form', array());
+		$uidArray[] = $this->testDatabase > createRecord('\In2code\Powermail\Domain\Model\Form', array());
+		$uidArray[] = $this->testDatabase > createRecord('\In2code\Powermail\Domain\Model\Form', array());
 
 		$this->assertSame(5, $this->fixture->findByUids(implode(',', $uidArray))->count());
 	}

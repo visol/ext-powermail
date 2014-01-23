@@ -6,10 +6,21 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_powermail_domain_model_fields'] = array(
 	'ctrl' => $TCA['tx_powermail_domain_model_fields']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings, path, content_element, text, prefill_value, create_from_typoscript, mandatory, validation, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
+		'showRecordFieldList' =>
+			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
+			path, content_element, text, prefill_value, create_from_typoscript, mandatory,
+			validation, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'title, type, settings, path, content_element, text, --palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.palette1;1, --div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1, validation_title, --palette--;Validation;2, prefill_title, --palette--;Prefill;3, css, marker_title, --palette--;Variables;4,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, pages, sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
+		'1' => array(
+			'showitem' =>
+				'title, type, settings, path, content_element, text,
+				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.palette1;1,
+				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1,
+				validation_title, --palette--; Validation;2, prefill_title, --palette--;
+				Prefill;3, css, marker_title, --palette--;Variables;4,
+				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, pages, sys_language_uid;;;;1-1-1,
+				l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => 'sender_email, sender_name'),
@@ -42,7 +53,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermail_domain_model_fields',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_fields.pid=###CURRENT_PID### AND tx_powermail_domain_model_fields.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_fields.pid=###CURRENT_PID### AND tx_powermail_domain_model_fields.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -197,7 +209,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => 'required',
-				'itemsProcFunc' => 'Tx_Powermail_Utility_FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'type'
 			),
 			'displayCond' => 'FIELD:sys_language_uid:=:0',
@@ -269,7 +281,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation_title',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'Tx_Powermail_Utility_Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio'
 		),
@@ -317,7 +329,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'itemsProcFunc' => 'Tx_Powermail_Utility_FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'validation'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea'
@@ -326,7 +338,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.prefill_title',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'Tx_Powermail_Utility_Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,hidden'
 		),
@@ -395,14 +407,15 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'itemsProcFunc' => 'Tx_Powermail_Utility_FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'feUserProperty'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden'
 		),
 		'create_from_typoscript' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.create_from_typoscript',
+			'label' =>
+				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.create_from_typoscript',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -445,7 +458,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.marker_title',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'Tx_Powermail_Utility_Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
 			),
 		),
 		'auto_marker' => array(
@@ -454,7 +467,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.auto_marker',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'Tx_Powermail_Utility_Marker->createMarker'
+				'userFunc' => 'In2code\Powermail\Utility\Marker->createMarker'
 			),
 			'displayCond' => 'FIELD:own_marker_select:REQ:false'
 		),
@@ -488,7 +501,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					array('', 0),
 				),
 				'foreign_table' => 'tx_powermail_domain_model_pages',
-				'foreign_table_where' => 'AND tx_powermail_domain_model_pages.pid=###CURRENT_PID### AND tx_powermail_domain_model_pages.sys_language_uid IN (-1,0)',
+				'foreign_table_where' =>
+					'AND tx_powermail_domain_model_pages.pid=###CURRENT_PID### AND tx_powermail_domain_model_pages.sys_language_uid IN (-1,0)',
 			),
 		),
 		'sorting' => array(

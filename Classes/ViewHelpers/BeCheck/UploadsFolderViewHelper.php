@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\ViewHelpers\BeCheck;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Backend Check Viewhelper: Check if uploads folder exists
  *
@@ -22,6 +24,6 @@ class UploadsFolderViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 	 * @return 	boolean
 	 */
 	public function render() {
-		return file_exists(\TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($this->folder));
+		return file_exists(GeneralUtility::getFileAbsFileName($this->folder));
 	}
 }
