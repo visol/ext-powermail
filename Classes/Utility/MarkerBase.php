@@ -81,27 +81,55 @@ class MarkerBase {
 	/**
 	 * Read Form Uid from GET params
 	 *
-	 * return int		form uid
+	 * @return int form uid
 	 */
 	protected function getFormUid() {
-		$result = NULL;
+		$formUid = 0;
 
 		// if form is given in GET params (open form and pages and fields via IRRE)
-		if (isset($data['tx_powermail_domain_model_forms'])) {
+		if (isset($this->data['tx_powermail_domain_model_forms'])) {
 			foreach ((array) $this->data['tx_powermail_domain_model_forms'] as $uid => $field) {
 				$field = NULL;
-				$result = $uid;
+				$formUid = $uid;
 			}
 		}
 
 		// if field is directly opened (no IRRE OR opened pages with their IRRE fields)
 		foreach ((array) $this->data['tx_powermail_domain_model_fields'] as $uid => $field) {
 			$field = NULL;
-			if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['marker'])) {
-				$result = $this->getFormUidFromFieldUid($uid);
+			if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['pages'])) {
+				$formUid = $this->getFormUidFromRelatedPage(
+					$this->data['tx_powermail_domain_model_fields'][$uid]['pages']
+				);
 			}
 		}
 
+		return $formUid;
+	}
+
+	/**
+	 * Get From Uid from related Page
+	 *
+	 * @param $pageUid
+	 * @return int
+	 */
+	protected function getFormUidFromRelatedPage($pageUid) {
+		$result = 0;
+		$select = 'tx_powermail_domain_model_forms.uid';
+		$from = '
+			tx_powermail_domain_model_forms
+			LEFT JOIN tx_powermail_domain_model_pages ON tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
+			LEFT JOIN tx_powermail_domain_model_fields ON tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid
+		';
+		$where = 'tx_powermail_domain_model_pages.uid = ' . intval($pageUid);
+		$groupBy = '';
+		$orderBy = '';
+		$limit = 1;
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+		if ($res) {
+			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+			$result = $row['uid'];
+		}
 		return $result;
 	}
 
@@ -137,6 +165,7 @@ class MarkerBase {
 	 * @return array
 	 */
 	protected function getFieldMarkersFromForm() {
+		$result = array();
 		$select = 'tx_powermail_domain_model_fields.marker, tx_powermail_domain_model_fields.uid';
 		$from = '
 			tx_powermail_domain_model_forms
@@ -150,11 +179,9 @@ class MarkerBase {
 		$limit = 1000;
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
 		if ($res) {
-			$array = array();
 			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-				$array['_' . $row['uid']] = $row['marker'];
+				$result['_' . $row['uid']] = $row['marker'];
 			}
-			$result = $array;
 		}
 
 		return $result;

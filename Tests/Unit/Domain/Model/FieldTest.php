@@ -39,6 +39,7 @@ namespace In2code\Powermail\Tests;
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
 class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+
 	/**
 	 * @var Tx_Powermail_Domain_Model_Field
 	 */

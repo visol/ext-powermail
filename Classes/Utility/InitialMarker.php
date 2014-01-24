@@ -37,32 +37,31 @@ namespace In2code\Powermail\Utility;
 class InitialMarker extends \In2code\Powermail\Utility\MarkerBase {
 
 	/**
-	 * Initialy filling of marker field
+	 * Initially fill the marker field from title
 	 *
 	 * @param \string $status mode of change
 	 * @param \string $table the table which gets changed
 	 * @param \string $uid uid of the record
 	 * @param \array $fieldArray the updateArray
 	 * @param \array $pObj
-	 * @return an updated $fieldArray
+	 * @return void
 	 */
-	public function processDatamapPostProcessFieldArray($status, $table, $uid, &$fieldArray, $pObj) {
+	public function processDatamap_postProcessFieldArray($status, $table, $uid, &$fieldArray, $pObj) {
+
 		// stop if not powermail field table
 		if ($table != 'tx_powermail_domain_model_fields') {
-			return $fieldArray;
+			return;
 		}
 
 		// get large array with markers (from db and new)
 		$markers = array_merge((array) $this->existingMarkers, (array) $this->marker);
+
 		// get array with unique markers
 		$this->makeUniqueValueInArray($markers);
 
 		// marker should be changed OR this is a new field
 		if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['marker']) || stristr($uid, 'NEW')) {
-			// rewrite
 			$fieldArray['marker'] = $markers['_' . $uid];
 		}
-
-		return $fieldArray;
 	}
 }

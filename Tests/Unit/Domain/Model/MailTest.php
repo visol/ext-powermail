@@ -38,6 +38,7 @@
  */
 
 class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+
 	/**
 	 * @var \In2code\Powermail\Domain\Model\Mail
 	 */

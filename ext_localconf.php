@@ -57,12 +57,14 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 /**
  * eID to get location from geo coordinates
  */
-$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidGetLocation'] = 'EXT:powermail/Classes/Utility/EidGetLocation.php';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidGetLocation'] =
+	'EXT:powermail/Classes/Utility/EidGetLocation.php';
 
 /**
  * eID to validate form fields
  */
-$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] = 'EXT:powermail/Classes/Utility/EidValidator.php';
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] =
+	'EXT:powermail/Classes/Utility/EidValidator.php';
 
 /**
  * Extra evaluation of TCA fields
