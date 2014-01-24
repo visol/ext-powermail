@@ -80,14 +80,14 @@ class Div {
 	/**
 	 * Get Field Uid List from given Form Uid
 	 *
-	 * @param integer $formUid Form Uid
-	 * @return array
+	 * @param \integer $formUid Form Uid
+	 * @return \array
 	 */
 	public function getFieldsFromForm($formUid) {
 		$fields = array();
 		$form = $this->formRepository->findByUid($formUid);
 		if (!method_exists($form, 'getPages')) {
-			return;
+			return array();
 		}
 		foreach ($form->getPages() as $page) {
 			foreach ($page->getFields() as $field) {

@@ -85,7 +85,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	public function createAction(Mail $mail, $hash = NULL) {
-		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
+		// forward back to formAction if wrong form - relevant if forms on one page
 		$this->ignoreWrongForm($mail);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
@@ -147,7 +147,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	public function confirmationAction(Mail $mail) {
-		// forward back to formAction if wrong form (only relevant if there are more powermail forms on one page)
+		// forward back to formAction if wrong form - relevant if forms on one page
 		$this->ignoreWrongForm($mail);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
@@ -305,8 +305,12 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		}
 
 		// redirect from TypoScript cObject
-		if ($this->cObj->cObjGetSingle($this->conf['thx.']['overwrite.']['redirect'], $this->conf['thx.']['overwrite.']['redirect.'])) {
-			$target = $this->cObj->cObjGetSingle($this->conf['thx.']['overwrite.']['redirect'], $this->conf['thx.']['overwrite.']['redirect.']);
+		$targetFromTypoScript = $this->cObj->cObjGetSingle(
+			$this->conf['thx.']['overwrite.']['redirect'],
+			$this->conf['thx.']['overwrite.']['redirect.']
+		);
+		if (!empty($targetFromTypoScript)) {
+			$target = $targetFromTypoScript;
 		}
 
 		// if redirect target
@@ -315,7 +319,6 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$link = $this->uriBuilder->build();
 			$this->redirectToUri($link);
 		}
-		return;
 	}
 
 	/**
@@ -394,10 +397,12 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 */
 	public function initializeObject() {
 		$this->cObj = $this->configurationManager->getContentObject();
-		$typoScriptSetup = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+		$typoScriptSetup = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+		);
 		$this->conf = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 
-		// merge typoscript to flexform (if flexform field also exists and is empty, take typoscript part)
+		// merge extension manager settings and typoscript and flexform
 		Div::mergeTypoScript2FlexForm($this->settings);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'Settings', array($this));

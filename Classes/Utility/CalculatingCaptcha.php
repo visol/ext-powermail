@@ -96,10 +96,15 @@ class CalculatingCaptcha {
 		// if request_host is different to site_url (TYPO3 runs in a subfolder)
 		if (GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' != GeneralUtility::getIndpEnv('TYPO3_SITE_URL')) {
 			// get the folder (like "subfolder/")
-			$subfolder = str_replace(GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/', '', GeneralUtility::getIndpEnv('TYPO3_SITE_URL'));
+			$subfolder = str_replace(
+				GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/',
+				'',
+				GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
+			);
 		}
 		// background image
-		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']);
+		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder;
+		$startimage .= $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']);
 
 		// if file is correct
 		if (!is_file($startimage)) {
@@ -114,7 +119,8 @@ class CalculatingCaptcha {
 		// Font color
 		$config['color'] = ImageColorAllocate($img, $config['color_rgb'][0], $config['color_rgb'][1], $config['color_rgb'][2]);
 		// fontfile
-		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']);
+		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder;
+		$config['font'] .= $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']);
 		// Fontsize
 		$config['fontsize'] = $this->conf['captcha.']['default.']['textSize'];
 		// give me the angles for the font
@@ -130,9 +136,20 @@ class CalculatingCaptcha {
 		// random distance
 		$config['fontdistance_vert'] = mt_rand($config['distance_vert'][0], $config['distance_vert'][1]);
 		// add text to image
-		imagettftext($img, $config['fontsize'], $config['fontangle'], $config['fontdistance_hor'], $config['fontdistance_vert'], $config['color'], $config['font'], $content);
+		imagettftext(
+			$img,
+			$config['fontsize'],
+			$config['fontangle'],
+			$config['fontdistance_hor'],
+			$config['fontdistance_vert'],
+			$config['color'],
+			$config['font'],
+			$content
+		);
 		// save image file
-		imagepng($img, GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage));
+		imagepng($img,
+			GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)
+		);
 		// delete temp image
 		imagedestroy($img);
 
@@ -165,6 +182,7 @@ class CalculatingCaptcha {
 		// give me the operator
 		switch ($op) {
 			case 0:
+			default:
 				// operator
 				$operator = '+';
 				// result
