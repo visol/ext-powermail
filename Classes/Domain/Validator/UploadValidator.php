@@ -33,7 +33,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * Class for uploading files and check if they are valid
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 

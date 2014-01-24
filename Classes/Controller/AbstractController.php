@@ -34,7 +34,8 @@ use \In2code\Powermail\Domain\Model\Mail;
  * Abstract Controller for powermail
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 

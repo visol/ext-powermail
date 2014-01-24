@@ -12,7 +12,7 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 	/**
 	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
-	protected $cObj;
+	protected $contentObject;
 
 	/**
 	 * Parse a content element
@@ -34,9 +34,9 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 	 *
 	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
 	 * @return void
-	*/
+	 */
 	public function injectContentObject(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
-		$this->cObj = $configurationManager->getContentObject();
+		$this->contentObject = $configurationManager->getContentObject();
 	}
 
 }

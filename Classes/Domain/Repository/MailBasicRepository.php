@@ -32,5 +32,5 @@ namespace In2code\Powermail\Domain\Repository;
  * @license http://www.gnu.org/licenses/lgpl.html
  * 			GNU Lesser General Public License, version 3 or later
  */
-class MailsBasicRepository extends \In2code\Powermail\Domain\Repository\MailRepository {
+class MailBasicRepository extends \In2code\Powermail\Domain\Repository\MailRepository {
 }

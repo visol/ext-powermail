@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\Domain\Repository;
 
+use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -117,11 +119,11 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		// set sorting
 		$sortby = ($settings['sortby'] ? $settings['sortby'] : 'crdate');
-		$order = ($settings['order'] == 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING);
+		$order = ($settings['order'] == 'asc' ? QueryInterface::ORDER_ASCENDING : QueryInterface::ORDER_DESCENDING);
 		if (isset($piVars['sorting'])) {
 			foreach ((array) $piVars['sorting'] as $key => $value) {
 				$sortby = $key;
-				$order = ($value == 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING);
+				$order = ($value == 'asc' ? QueryInterface::ORDER_ASCENDING : QueryInterface::ORDER_DESCENDING);
 				break;
 			}
 		}
@@ -165,7 +167,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+				'crdate' => QueryInterface::ORDER_DESCENDING
 			)
 		);
 
@@ -229,7 +231,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+				'crdate' => QueryInterface::ORDER_DESCENDING
 			)
 		);
 		foreach ((array) $sorting as $field => $order) {
@@ -239,8 +241,10 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 			$field = preg_replace('/[^a-zA-Z0-9_-]/', '', $field);
 			$query->setOrderings(
-				array(
-					$field => ($order == 'asc' ? \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING : \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING)
+				array (
+					$field => (
+						$order == 'asc' ? QueryInterface::ORDER_ASCENDING : QueryInterface::ORDER_DESCENDING
+					)
 				)
 			);
 		}
@@ -253,9 +257,9 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Query for Pi2
 	 *
-	 * @param	array		$settings TypoScript Settings
-	 * @param	array		$piVars Plugin Variables
-	 * @return	void
+	 * @param \array $settings TypoScript Settings
+	 * @param \array $piVars Plugin Variables
+	 * @return object storage
 	 */
 	public function findListBySettings($settings, $piVars) {
 		// initialize query
@@ -332,7 +336,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// sorting
 		$query->setOrderings(
 			array(
-				'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+				'crdate' => QueryInterface::ORDER_DESCENDING
 			)
 		);
 

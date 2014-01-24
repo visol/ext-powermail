@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -32,51 +33,8 @@
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html
  * 			GNU Lesser General Public License, version 3 or later
- *
  */
-class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller_ActionController {
-
-	/**
-	 * @var Tx_Powermail_Domain_Repository_MailRepository
-	 *
-	 * @inject
-	 */
-	protected $mailRepository;
-
-	/**
-	 * @var Tx_Powermail_Domain_Repository_FormRepository
-	 *
-	 * @inject
-	 */
-	protected $formRepository;
-
-	/**
-	 * @var Tx_Powermail_Domain_Repository_FieldRepository
-	 *
-	 * @inject
-	 */
-	protected $fieldRepository;
-
-	/**
-	 * @var Tx_Powermail_Domain_Repository_AnswerRepository
-	 *
-	 * @inject
-	 */
-	protected $answerRepository;
-
-	/**
-	 * @var Tx_Powermail_Utility_Div
-	 *
-	 * @inject
-	 */
-	protected $div;
-
-	/**
-	 * Request arguments
-	 *
-	 * @var array
-	 */
-	protected $piVars;
+class OutputController extends \In2code\Powermail\Controller\AbstractController {
 
 	/**
 	 * Show mails in a list
@@ -190,9 +148,13 @@ class Tx_Powermail_Controller_OutputController extends Tx_Extbase_MVC_Controller
 				$answer->setValue($value);
 				$this->answerRepository->update($answer);
 			}
-			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail'));
+			$this->flashMessageContainer->add(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail')
+			);
 		} else {
-			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail'));
+			$this->flashMessageContainer->add(
+				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail')
+			);
 		}
 
 		$this->redirect('edit', NULL, NULL, array('mail' => $mail));

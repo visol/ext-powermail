@@ -1,5 +1,6 @@
 <?php
 namespace In2code\Powermail\Utility;
+
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -61,7 +62,7 @@ class EidValidator {
 	/**
 	 * Initialize Extbase
 	 *
-	 * @param \array $TYPO3_CONF_VARS 			The global $TYPO3_CONF_VARS array. Will be set internally in ->TYPO3_CONF_VARS
+	 * @param \array $TYPO3_CONF_VARS The global array. Will be set internally
 	 */
 	public function __construct($TYPO3_CONF_VARS) {
 		$this->configuration = array(
@@ -77,16 +78,20 @@ class EidValidator {
 			),
 			'settings' => array()
 		);
-		// set action
 		$_POST['tx_powermail_pi1']['action'] = 'validateAjax';
-		// set action
 		$_POST['tx_powermail_pi1']['controller'] = 'Form';
 
 		$this->bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 
 		$userObj = \TYPO3\CMS\Frontend\Utility\EidUtility::initFeUser();
 		$pid = (GeneralUtility::_GET('id') ? GeneralUtility::_GET('id') : 1);
-		$GLOBALS['TSFE'] = GeneralUtility::makeInstance('TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController', $TYPO3_CONF_VARS, $pid, 0, TRUE);
+		$GLOBALS['TSFE'] = GeneralUtility::makeInstance(
+			'TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController',
+			$TYPO3_CONF_VARS,
+			$pid,
+			0,
+			TRUE
+		);
 		$GLOBALS['TSFE']->connectToDB();
 		$GLOBALS['TSFE']->fe_user = $userObj;
 		$GLOBALS['TSFE']->id = $pid;
@@ -98,7 +103,5 @@ class EidValidator {
 	}
 }
 
-global $TYPO3_CONF_VARS;
-$eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\EidValidator', $TYPO3_CONF_VARS);
-// print content
+$eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\EidValidator', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

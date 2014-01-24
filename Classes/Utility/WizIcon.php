@@ -1,4 +1,9 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -30,21 +35,7 @@
  * @package	TYPO3
  * @subpackage	tx_powermail
  */
-
-/**
- * [CLASS/FUNCTION INDEX of SCRIPT]
- *
- *
- *
- *   49: class tx_powermail_pi1_wizicon
- *   57:     function proc($wizardItems)
- *   80:     function includeLocalLang()
- *
- * TOTAL FUNCTIONS: 2
- * (This index is automatically created/updated by the extension "extdeveval")
- *
- */
-class tx_powermail_pi1_wizicon {
+class WizIcon {
 
 	/**
 	 * Processing the wizard items array
@@ -52,15 +43,13 @@ class tx_powermail_pi1_wizicon {
 	 * @param	array		$wizardItems: The wizard items
 	 * @return	array		array with wizard items
 	 */
-	function proc($wizardItems)	{
-		global $LANG;
-
+	public function proc($wizardItems) {
 		$ll = $this->includeLocalLang();
 
 		$wizardItems['plugins_tx_powermail_pi1'] = array(
-			'icon' => t3lib_extMgm::extRelPath('powermail') . 'Resources/Public/Icons/ce_wiz.gif',
-			'title' => $LANG->getLLL('pi1_title', $ll),
-			'description' => $LANG->getLLL('pi1_plus_wiz_description', $ll),
+			'icon' => ExtensionManagementUtility::extRelPath('powermail') . 'Resources/Public/Icons/ce_wiz.gif',
+			'title' => $GLOBALS['LANG']->getLLL('pi1_title', $ll),
+			'description' => $GLOBALS['LANG']->getLLL('pi1_plus_wiz_description', $ll),
 			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=powermail_pi1',
 			'tt_content_defValues' => array(
 				'CType' => 'list',
@@ -71,14 +60,14 @@ class tx_powermail_pi1_wizicon {
 	}
 
 	/**
-	 * Reads the [extDir]/locallang.xml and returns the \$LOCAL_LANG array found in that file.
+	 * Reads the [extDir]/locallang.xml and returns the \$LOCAL_LANG array
 	 *
-	 * @return	The array with language labels
+	 * @return The array with language labels
 	 */
-	function includeLocalLang() {
-		$locallangXmlParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
+	protected function includeLocalLang() {
+		$locallangXmlParser = GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');
 		$parsedRepresentationOfXmlFile = $locallangXmlParser->getParsedData(
-			t3lib_extMgm::extPath('powermail') . 'Resources/Private/Language/locallang.xml',
+			ExtensionManagementUtility::extPath('powermail') . 'Resources/Private/Language/locallang.xml',
 			$GLOBALS['LANG']->lang
 		);
 

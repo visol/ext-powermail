@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -33,7 +36,7 @@
  * 			GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Powermail_Utility_FieldSelectorUserFunc {
+class FieldSelectorUserFunc {
 
 	/**
 	 * Crazy Query Limit
@@ -79,7 +82,7 @@ class Tx_Powermail_Utility_FieldSelectorUserFunc {
 	 */
 	protected function getFormFromFlexform($params) {
 		$xml = $params['row']['pi_flexform'];
-		$flexform = t3lib_div::xml2array($xml);
+		$flexform = GeneralUtility::xml2array($xml);
 		if (is_array($flexform) && isset($flexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'])) {
 			return $flexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
 		}

@@ -34,7 +34,8 @@ use \In2code\Powermail\Domain\Model\Mail;
  * Controller for powermail forms
  *
  * @package powermail
- * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/lgpl.html
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class FormController extends \In2code\Powermail\Controller\AbstractController {
 
@@ -109,7 +110,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$this->sendMailPreflight($mail);
 
 			// todo Save to other tables
-//			$saveToTable = $this->objectManager->get('Tx_Powermail_Utility_SaveToTable');
+//			$saveToTable = $this->objectManager->get('\In2code\Powermail\Utility\SaveToTable');
 //			$saveToTable->main($this->div->getVariablesWithMarkers($field), $this->conf, $this->cObj);
 
 			// todo Powermail sendpost

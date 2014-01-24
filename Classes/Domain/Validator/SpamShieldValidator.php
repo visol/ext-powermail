@@ -63,7 +63,10 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 
 		// Different checks to increase spam indicator
 		$this->honeypodCheck($this->settings['spamshield.']['indicator.']['honeypod']);
-		$this->linkCheck($mail, $this->settings['spamshield.']['indicator.']['link'], $this->settings['spamshield.']['indicator.']['linkLimit']);
+		$this->linkCheck(
+			$mail, $this->settings['spamshield.']['indicator.']['link'],
+			$this->settings['spamshield.']['indicator.']['linkLimit']
+		);
 		$this->nameCheck($mail, $this->settings['spamshield.']['indicator.']['name']);
 		$this->sessionCheck($mail, $this->settings['spamshield.']['indicator.']['session']);
 		$this->uniqueCheck($mail, $this->settings['spamshield.']['indicator.']['unique']);

@@ -44,7 +44,7 @@ class SelectFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectView
 	 * Check if option is selected
 	 *
 	 * @param array $option Current option
-	 * @return boolean TRUE if the value should be marked a s selected; FALSE otherwise
+	 * @return boolean TRUE if the value marked a s selected; FALSE otherwise
 	 */
 	protected function isSelectedAlternative($option) {
 		if (

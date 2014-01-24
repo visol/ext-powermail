@@ -79,7 +79,7 @@ if (TYPO3_MODE == 'BE') {
 	require_once(ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
 
 	// WizIcon for Pi1
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_powermail_pi1_wizicon'] =
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['In2code\Powermail\Utility\WizIcon'] =
 		t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/WizIcon.php';
 }
 

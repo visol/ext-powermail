@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Powermail\Controller;
 
+use \In2code\Powermail\Utility\Div;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -71,9 +72,10 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 
 		if ($email) {
 			if (GeneralUtility::validEmail($email)) {
-				$body = 'New <b>Test Email</b> from User ' . $GLOBALS['BE_USER']->user['username'] . ' (' . t3lib_div::getIndpEnv('HTTP_HOST') . ')';
+				$body = 'New <b>Test Email</b> from User ';
+				$body .= $GLOBALS['BE_USER']->user['username'] . ' (' . GeneralUtility::getIndpEnv('HTTP_HOST') . ')';
 
-				$message = t3lib_div::makeInstance('t3lib_mail_Message');
+				$message = GeneralUtility::makeInstance('t3lib_mail_Message');
 				$message
 					->setTo(array($email => 'Receiver'))
 					->setFrom(array('powermail@domain.net' => 'powermail'))
@@ -110,7 +112,7 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	public function reportingFormBeAction() {
 		$mails = $this->mailRepository->findAllInPid(GeneralUtility::_GP('id'), $this->settings, $this->piVars);
 		$firstMail = $this->mailRepository->findFirstInPid(GeneralUtility::_GP('id'));
-		$groupedAnswers = Tx_Powermail_Utility_Div::getGroupedMailAnswers($mails);
+		$groupedAnswers = Div::getGroupedMailAnswers($mails);
 
 		$this->view->assign('groupedAnswers', $groupedAnswers);
 		$this->view->assign('mails', $mails);
@@ -128,8 +130,8 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	 */
 	public function reportingMarketingBeAction() {
 		$mails = $this->mailRepository->findAllInPid(GeneralUtility::_GP('id'), $this->settings, $this->piVars);
-		$firstMail = $this->mailRepository->findFirstInPid(t3lib_div::_GP('id'));
-		$groupedMarketingStuff = Tx_Powermail_Utility_Div::getGroupedMarketingStuff($mails);
+		$firstMail = $this->mailRepository->findFirstInPid(GeneralUtility::_GP('id'));
+		$groupedMarketingStuff = Div::getGroupedMarketingStuff($mails);
 
 		$this->view->assign('groupedMarketingStuff', $groupedMarketingStuff);
 		$this->view->assign('mails', $mails);
@@ -164,8 +166,9 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		$this->view->assign('mails', $mails);
 		$this->view->assign('fields', GeneralUtility::trimExplode(',', $export['fields'], 1));
 
+		$fileName = ($this->settings['export']['filenameXls'] ? $this->settings['export']['filenameXls'] : 'export.xls');
 		header('Content-Type: application/vnd.ms-excel');
-		header('Content-Disposition: inline; filename="' . ($this->settings['export']['filenameXls'] ? $this->settings['export']['filenameXls'] : 'export.xls') . '"');
+		header('Content-Disposition: inline; filename="' . $fileName . '"');
 		header('Pragma: no-cache');
 	}
 
@@ -180,8 +183,9 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		$this->view->assign('mails', $mails);
 		$this->view->assign('fields', GeneralUtility::trimExplode(',', $export['fields'], 1));
 
+		$fileName = ($this->settings['export']['filenameCsv'] ? $this->settings['export']['filenameCsv'] : 'export.csv');
 		header('Content-Type: text/x-csv');
-		header('Content-Disposition: attachment; filename="' . ($this->settings['export']['filenameCsv'] ? $this->settings['export']['filenameCsv'] : 'export.csv') . '"');
+		header('Content-Disposition: attachment; filename="' . $fileName . '"');
 		header('Pragma: no-cache');
 	}
 
