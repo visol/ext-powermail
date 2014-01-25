@@ -316,10 +316,11 @@ plugin.tx_powermail {
 					google_conversion_format = 3
 				}
 
-				# Send Form values to CRM like salesforce or eloqua
+				# Send Form values to a third party software (like a CRM - e.g. salesforce or eloqua)
 				sendPost {
 					# Activate sendPost (0/1)
-					_enable = 0
+					_enable = TEXT
+					_enable.value = 0
 
 					# Target URL for POST values (like http://www.target.com/target.php)
 					targetUrl = http://eloqua.com/e/f.aspx
@@ -349,7 +350,7 @@ plugin.tx_powermail {
 						}
 					}
 
-					# activate debug mode - shows all configuration from curl settings
+					# activate debug - log all configuration from curl settings to devlog (use extension devlog to view this values)
 					debug = 0
 				}
 			}
@@ -405,7 +406,6 @@ plugin.tx_powermail {
 
 
 
-
 				##############################################################
 				### EXAMPLE for adding values to table tt_address_group_mm ###
 				### Add relation to an existing address group with uid 123 ###
@@ -427,7 +427,7 @@ plugin.tx_powermail {
 
 
 
-			# Switch on or off Debug mode
+			# Switch on or off Debug mode (use extension devlog to view this values)
 			debug {
 				# All views: Show Settings from TypoScript, Flexform and Extension Manager
 				settings = {$plugin.tx_powermail.settings.misc.debugSettings}
@@ -435,7 +435,7 @@ plugin.tx_powermail {
 				# Create view: Show submitted variables
 				variables = {$plugin.tx_powermail.settings.misc.debugVariables}
 
-				# Create view: Show mail arrays
+				# Create view: Show complete mail settings
 				mail = {$plugin.tx_powermail.settings.misc.debugMail}
 
 				# Create view: Show saveToTable array

@@ -117,8 +117,8 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			// Save to other tables if activated
 			$this->div->saveToAnyTable($mail, $this->conf);
 
-			// todo Powermail sendpost
-//			$this->div->sendPost($field, $this->conf, $this->configurationManager);
+			// Send values to a third party software (like a CRM)
+			$this->div->sendPost($mail, $this->conf);
 		} else {
 			$this->sendConfirmationMail($mail);
 			$this->view->assign('optinActive', TRUE);

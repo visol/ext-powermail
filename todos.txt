@@ -1,8 +1,10 @@
-- cleaning up fields (use fluid for select, use marker instead of uid for name, use property)
-- creating select, check and radio out of typoscript
-- adding a new js validation
+- done: cleaning up fields (use fluid for select, use marker instead of uid for name, use property)
+- done: creating select, check and radio out of typoscript
+- done: adding a new js validation
+- done: Debug output to devlog
+- done: SendPost with cObject parsing
+- done: Rewritten SaveToAnyTable function for even more flexibility
 - ajax form submit
 - Marketing Tracking via JavaScript (going away from USER_INT to enable static filecache)
 - adding Unit Tests
 - Adding RST Documentation
-- debug output to devlog

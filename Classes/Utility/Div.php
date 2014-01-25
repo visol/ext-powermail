@@ -704,29 +704,40 @@ class Div {
 	}
 
 	/**
-	 * Powermail SendPost - Send values via curl to target
+	 * Powermail SendPost - Send values via curl to a third party software
 	 *
-	 * @param array $fields Params from User
-	 * @param array $conf TypoScript Settings
-	 * @param object $configurationManager Configuration Manager
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @param \array $conf TypoScript Configuration
 	 * @return void
 	 */
-	public function sendPost($fields, $conf, $configurationManager) {
-		if (!$conf['marketing.']['sendPost.']['_enable']) {
+	public function sendPost($mail, $conf) {
+		$contentObject = $this->configurationManager->getContentObject();
+
+		// switch of if disabled
+		$enable = $contentObject->cObjGetSingle(
+			$conf['marketing.']['sendPost.']['_enable'],
+			$conf['marketing.']['sendPost.']['_enable.']
+		);
+		if (!$enable) {
 			return;
 		}
-		$fields = $this->getVariablesWithMarkers($fields);
-		$cObj = $configurationManager->getContentObject();
-		$cObj->start($fields);
-		$curl = array(
+
+		$contentObject->start(
+			$this->getVariablesWithMarkers($mail)
+		);
+		$parameters = $contentObject->cObjGetSingle(
+			$conf['marketing.']['sendPost.']['values'],
+			$conf['marketing.']['sendPost.']['values.']
+		);
+		$curlSettings = array(
 			'url' => $conf['marketing.']['sendPost.']['targetUrl'],
-			'params' => $cObj->cObjGetSingle($conf['marketing.']['sendPost.']['values'], $conf['marketing.']['sendPost.']['values.'])
+			'params' => $parameters
 		);
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $curl['url']);
+		curl_setopt($ch, CURLOPT_URL, $curlSettings['url']);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $curl['params']);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $curlSettings['params']);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 		curl_exec($ch);
 		curl_close($ch);
@@ -737,7 +748,7 @@ class Div {
 				'SendPost Values',
 				'powermail',
 				0,
-				$curl
+				$curlSettings
 			);
 		}
 	}
