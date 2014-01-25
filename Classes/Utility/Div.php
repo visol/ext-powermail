@@ -1151,6 +1151,8 @@ class Div {
 			$storeObject = $this->objectManager->get('In2code\Powermail\Utility\SaveToAnyTable');
 			$storeObject->setTable($table);
 			$contentObject->start($startArray);
+
+			// if unique was set
 			if (!empty($conf['dbEntry.'][$table . '.']['_ifUnique.'])) {
 				$uniqueFields = array_keys($conf['dbEntry.'][$table . '.']['_ifUnique.']);
 				$storeObject->setMode($conf['dbEntry.'][$table . '.']['_ifUnique.'][$uniqueFields[0]]);

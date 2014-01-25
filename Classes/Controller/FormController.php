@@ -114,7 +114,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		) {
 			$this->sendMailPreflight($mail);
 
-			// Save to other tables
+			// Save to other tables if activated
 			$this->div->saveToAnyTable($mail, $this->conf);
 
 			// todo Powermail sendpost

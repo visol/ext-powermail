@@ -79,8 +79,11 @@ class SaveToAnyTable {
 	public function execute() {
 		switch ($this->getMode()) {
 			case 'update':
+				// case with "update" or "none"
+			case 'none':
 				$uid = $this->update();
 				break;
+
 			case 'insert':
 			default:
 				$uid = $this->insert();
@@ -129,12 +132,15 @@ class SaveToAnyTable {
 			return $this->insert();
 		}
 
-		// update existing entry
-		$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-			$this->getTable(),
-			'uid = ' . intval($row['uid']),
-			$this->getProperties()
-		);
+		// update existing entry (only if mode is not "none")
+		if ($this->getMode() !== 'none') {
+			$GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+				$this->getTable(),
+				'uid = ' . intval($row['uid']),
+				$this->getProperties()
+			);
+		}
+
 		return $row['uid'];
 	}
 
@@ -211,7 +217,8 @@ class SaveToAnyTable {
 	public function setMode($mode) {
 		$possibleModes = array(
 			'insert',
-			'update'
+			'update',
+			'none'
 		);
 		if (in_array($mode, $possibleModes)) {
 			$this->mode = $mode;
@@ -241,16 +248,6 @@ class SaveToAnyTable {
 	}
 
 	/**
-	 * Remove not allowed signs
-	 *
-	 * @param $string
-	 * @return void
-	 */
-	protected function removeNotAllowedSigns(&$string) {
-		$string = preg_replace('/[^a-zA-Z0-9_-]/', '', $string);
-	}
-
-	/**
 	 * @param boolean $devLog
 	 * @return void
 	 */
@@ -263,6 +260,16 @@ class SaveToAnyTable {
 	 */
 	public function getDevLog() {
 		return $this->devLog;
+	}
+
+	/**
+	 * Remove not allowed signs
+	 *
+	 * @param $string
+	 * @return void
+	 */
+	protected function removeNotAllowedSigns(&$string) {
+		$string = preg_replace('/[^a-zA-Z0-9_-]/', '', $string);
 	}
 
 	/**
