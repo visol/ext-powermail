@@ -103,7 +103,6 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		// Save Mail to DB
 		if ($this->settings['db']['enable'] && $hash === NULL) {
-//			$dbField = $this->div->rewriteDateInFields($field); // todo check datepicker with optin
 			$this->saveMail($mail);
 			$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterMailDbSaved', array($mail, $this));
 		}

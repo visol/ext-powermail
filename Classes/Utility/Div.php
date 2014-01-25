@@ -333,23 +333,6 @@ class Div {
 	}
 
 	/**
-	 * Add uploads fields and rewrite date fields
-	 *
-	 * @param array $fields Field array
-	 * @return array
-	 */
-	public function rewriteDateInFields($fields) {
-		// rewrite datetime
-		foreach ((array) $fields as $uid => $value) {
-			$field = $this->fieldRepository->findByUid($uid);
-			if (method_exists($field, 'getType') && $field->getType() == 'date') {
-				$fields[$uid] = strtotime($value);
-			}
-		}
-		return $fields;
-	}
-
-	/**
 	 * Overwrite a string if a TypoScript cObject is available
 	 *
 	 * @param string $string Value to overwrite
