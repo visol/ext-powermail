@@ -561,7 +561,7 @@ class Div {
 			$settings = GeneralUtility::trimExplode('|', $line, 0);
 			$options[] = array(
 				'label' => $settings[0],
-				'value' => isset($settings[1]) ? $settings[1] : $settings[0],
+				'value' => (isset($settings[1]) ? $settings[1] : $settings[0]),
 				'selected' => isset($settings[2]) ? 1 : 0
 			);
 		}
@@ -595,11 +595,15 @@ class Div {
 
 		// sort desc
 		foreach ($arr as $key => $value) {
+			$value = NULL;
+
 			arsort($arr[$key]);
 		}
 
 		// if too much values
 		foreach ((array) $arr as $key => $array) {
+			$array = NULL;
+
 			if (count($arr[$key]) >= $max) {
 				$i = 0;
 				foreach ($arr[$key] as $value => $amount) {
@@ -640,6 +644,8 @@ class Div {
 		);
 		foreach ($mails as $mail) {
 			foreach ($arr as $key => $v) {
+				$v = NULL;
+
 				$value = $mail->{'get' . ucfirst($key)}();
 				if (is_array($value)) {
 					$value = implode(',', $value);
@@ -657,11 +663,15 @@ class Div {
 
 		// sort desc
 		foreach ($arr as $key => $value) {
+			$value = NULL;
+
 			arsort($arr[$key]);
 		}
 
 		// if too much values
 		foreach ($arr as $key => $array) {
+			$array = NULL;
+
 			if (count($arr[$key]) >= $max) {
 				$i = 0;
 				foreach ($arr[$key] as $value => $amount) {
@@ -723,7 +733,12 @@ class Div {
 
 		// Debug Output
 		if ($conf['marketing.']['sendPost.']['debug']) {
-			t3lib_utility_Debug::debug($curl, 'powermail debug: Show SendPost Values');
+			GeneralUtility::devLog(
+				'SendPost Values',
+				'powermail',
+				0,
+				$curl
+			);
 		}
 	}
 
@@ -814,7 +829,10 @@ class Div {
 		$groups = array();
 		$select = 'fe_groups.uid';
 		$from = 'fe_users, fe_groups, sys_refindex';
-		$where = 'sys_refindex.tablename = "fe_users" AND sys_refindex.ref_table = "fe_groups" AND fe_users.uid = sys_refindex.recuid AND fe_groups.uid = sys_refindex.ref_uid AND fe_users.uid = ' . intval($uid);
+		$where = 'sys_refindex.tablename = "fe_users"';
+		$where .= ' AND sys_refindex.ref_table = "fe_groups"';
+		$where .= ' AND fe_users.uid = sys_refindex.recuid AND fe_groups.uid = sys_refindex.ref_uid';
+		$where .= ' AND fe_users.uid = ' . intval($uid);
 		$groupBy = '';
 		$orderBy = '';
 		$limit = 1000;
@@ -926,13 +944,13 @@ class Div {
 	 * @param array $email Array with all needed mail information
 	 * 		$email['receiverName'] = 'Name';
 	 * 		$email['receiverEmail'] = 'receiver@mail.com';
-	 *		$email['senderName'] = 'Name';
+	 * 		$email['senderName'] = 'Name';
 	 * 		$email['senderEmail'] = 'sender@mail.com';
 	 * 		$email['subject'] = 'Subject line';
 	 * 		$email['template'] = 'PathToTemplate/';
 	 * 		$email['rteBody'] = 'This is the <b>content</b> of the RTE';
 	 * 		$email['format'] = 'both'; // or plain or html
-	 * @param \In2code\Powermail\Domain\Model\Mail $mail Mail object with all arguments
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param array $settings TypoScript Settings
 	 * @param string $type Email to "sender" or "receiver"
 	 * @return boolean Mail was successfully sent?
@@ -945,7 +963,7 @@ class Div {
 		$typoScriptService = $this->objectManager->get('Tx_Extbase_Service_TypoScriptService');
 		$conf = $typoScriptService->convertPlainArrayToTypoScriptArray($settings);
 
-		// parsing variables with fluid engine to allow viewhelpers and variables in some flexform fields
+		// parsing variables with fluid engine to allow viewhelpers in flexform
 		$parse = array(
 			'receiverName',
 			'receiverEmail',
@@ -960,8 +978,8 @@ class Div {
 		// Debug Output
 		if ($settings['debug']['mail']) {
 			GeneralUtility::devLog(
-				'powermail debug: Show Mail',
-				$this->extensionName,
+				'Mail properties',
+				'powermail',
 				0,
 				$email
 			);
@@ -1022,19 +1040,32 @@ class Div {
 
 		// add cc receivers
 		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.'])) {
-			$ccArray = GeneralUtility::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'], $conf[$type . '.']['overwrite.']['cc.']), 1);
+			$ccArray = GeneralUtility::trimExplode(
+				',',
+				$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['cc'],
+				$conf[$type . '.']['overwrite.']['cc.']),
+				1
+			);
 			$message->setCc($ccArray);
 		}
 
 		// add bcc receivers
 		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.'])) {
-			$bccArray = GeneralUtility::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'], $conf[$type . '.']['overwrite.']['bcc.']), 1);
+			$bccArray = GeneralUtility::trimExplode(
+				',',
+				$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['bcc'],
+				$conf[$type . '.']['overwrite.']['bcc.']),
+				1
+			);
 			$message->setBcc($bccArray);
 		}
 
 		// add Return Path
 		if ($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'], $conf[$type . '.']['overwrite.']['returnPath.'])) {
-			$message->setReturnPath($cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'], $conf[$type . '.']['overwrite.']['returnPath.']));
+			$message->setReturnPath(
+				$cObj->cObjGetSingle($conf[$type . '.']['overwrite.']['returnPath'],
+				$conf[$type . '.']['overwrite.']['returnPath.'])
+			);
 		}
 
 		// add Reply Addresses
@@ -1058,7 +1089,7 @@ class Div {
 		// add attachments from upload fields
 		if ($settings[$type]['attachment']) {
 			// read upload session
-			$uploadsFromSession = \In2code\Powermail\Utility\Div::getSessionValue('upload');
+			$uploadsFromSession = self::getSessionValue('upload');
 			foreach ((array) $uploadsFromSession as $file) {
 				$message->attach(Swift_Attachment::fromPath($file));
 			}
@@ -1066,7 +1097,11 @@ class Div {
 
 		// add attachments from TypoScript
 		if ($cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.'])) {
-			$files = GeneralUtility::trimExplode(',', $cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']), 1);
+			$files = GeneralUtility::trimExplode(
+				',',
+				$cObj->cObjGetSingle($conf[$type . '.']['addAttachment'], $conf[$type . '.']['addAttachment.']),
+				1
+			);
 			foreach ($files as $file) {
 				$message->attach(Swift_Attachment::fromPath($file));
 			}
@@ -1083,12 +1118,69 @@ class Div {
 	}
 
 	/**
-	 * Merges Flexform and TypoScript Settings (up to 2 levels) and add Global Config from ext_conf_template.txt
-	 * 		Why: It's not possible to have the same field in TypoScript and Flexform and if FF value is empty, we want the TypoScript value instead
+	 * Save values to any table in TYPO3 database
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @param \array $conf TypoScript Configuration
+	 * @return void
+	 */
+	public function saveToAnyTable($mail, $conf) {
+		if (empty($conf['dbEntry.'])) {
+			return;
+		}
+		$contentObject = $this->configurationManager->getContentObject();
+
+		// one loop per table
+		foreach ((array) $conf['dbEntry.'] as $table => $settings) {
+			$settings = NULL;
+
+			// remove ending .
+			$table = substr($table, 0, -1);
+
+			// skip this table if disabled
+			$enable = $contentObject->cObjGetSingle(
+				$conf['dbEntry.'][$table . '.']['_enable'],
+				$conf['dbEntry.'][$table . '.']['_enable.']
+			);
+			if (!$enable) {
+				continue;
+			}
+
+			/* @var $storeObject \In2code\Powermail\Utility\SaveToAnyTable */
+			$storeObject = $this->objectManager->get('In2code\Powermail\Utility\SaveToAnyTable');
+			$storeObject->setTable($table);
+			$contentObject->start(
+				$this->getVariablesWithMarkers($mail)
+			);
+
+			// one loop per field
+			foreach ((array) $conf['dbEntry.'][$table . '.'] as $field => $settingsInner) {
+				$settingsInner = NULL;
+
+				// skip if key. or if it starts with _
+				if (stristr($field, '.') || $field[0] === '_') {
+					continue;
+				}
+
+				// read from TypoScript
+				$value = $contentObject->cObjGetSingle(
+					$conf['dbEntry.'][$table . '.'][$field],
+					$conf['dbEntry.'][$table . '.'][$field . '.']
+				);
+				$storeObject->addProperty($field, $value);
+			}
+			$storeObject->execute();
+		}
+	}
+
+	/**
+	 * Merges Flexform, TypoScript and Extension Manager Settings (up to 2 levels)
+	 * 		Note: It's not possible to have the same field in TypoScript and Flexform
+	 * 		and if FF value is empty, we want the TypoScript value instead
 	 *
 	 * @param array $settings All settings
 	 * @param string $typoScriptLevel Startpoint
-	 * @return array Merged settings
+	 * @return void
 	 */
 	public static function mergeTypoScript2FlexForm(&$settings, $typoScriptLevel = 'setup') {
 		// config
@@ -1120,6 +1212,8 @@ class Div {
 			} else {
 				// 2. level
 				foreach ($value1 as $key2 => $value2) {
+					$value2 = NULL;
+
 					// only if this key exists in ff and ts
 					if (isset($settings[$typoScriptLevel][$key1][$key2]) && isset($settings['flexform'][$key1][$key2])) {
 						// only if ff is empty and ts not
