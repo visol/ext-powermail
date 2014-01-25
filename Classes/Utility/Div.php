@@ -1129,6 +1129,7 @@ class Div {
 			return;
 		}
 		$contentObject = $this->configurationManager->getContentObject();
+		$startArray = $this->getVariablesWithMarkers($mail);
 
 		// one loop per table
 		foreach ((array) $conf['dbEntry.'] as $table => $settings) {
@@ -1149,9 +1150,7 @@ class Div {
 			/* @var $storeObject \In2code\Powermail\Utility\SaveToAnyTable */
 			$storeObject = $this->objectManager->get('In2code\Powermail\Utility\SaveToAnyTable');
 			$storeObject->setTable($table);
-			$contentObject->start(
-				$this->getVariablesWithMarkers($mail)
-			);
+			$contentObject->start($startArray);
 			if (!empty($conf['dbEntry.'][$table . '.']['_ifUnique.'])) {
 				$uniqueFields = array_keys($conf['dbEntry.'][$table . '.']['_ifUnique.']);
 				$storeObject->setMode($conf['dbEntry.'][$table . '.']['_ifUnique.'][$uniqueFields[0]]);
@@ -1177,7 +1176,13 @@ class Div {
 			if (!empty($conf['debug.']['saveToTable'])) {
 				$storeObject->setDevLog(TRUE);
 			}
-			$storeObject->execute();
+			$uid = $storeObject->execute();
+
+			// add this uid to startArray for using in TypoScript
+			$startArray = array_merge(
+				$startArray,
+				array('uid_' . $table => $uid)
+			);
 		}
 	}
 
