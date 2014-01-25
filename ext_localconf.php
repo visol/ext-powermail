@@ -13,10 +13,11 @@ $confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail'
 /**
  * Enable caching for show action in form controller
  */
-$uncachedFormActions = 'form, create, confirmation, optinConfirm, validateAjax';
+$uncachedFormActions = 'form';
 if ($confArr['enableCaching'] == 1) {
-	$uncachedFormActions = 'create, confirmation, optinConfirm, validateAjax';
+	$uncachedFormActions = '';
 }
+$uncachedFormActions .= ', create, confirmation, optinConfirm, validateAjax, marketing';
 
 /**
  * Include Frontend Plugins for Powermail
@@ -25,7 +26,7 @@ ExtensionUtility::configurePlugin(
 	'In2code.' . $_EXTKEY,
 	'Pi1',
 	array(
-		'Form' => 'form, create, confirmation, optinConfirm, validateAjax'
+		'Form' => 'form, create, confirmation, optinConfirm, validateAjax, marketing'
 	),
 	array(
 		'Form' => $uncachedFormActions
@@ -65,6 +66,12 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidGetLocation'] =
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] =
 	'EXT:powermail/Classes/Utility/EidValidator.php';
+
+/**
+ * eID to store marketing information
+ */
+$GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidMarketing'] =
+	'EXT:powermail/Classes/Utility/EidMarketing.php';
 
 /**
  * Extra evaluation of TCA fields

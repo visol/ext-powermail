@@ -476,12 +476,12 @@ page.includeJSFooterlibs.powermailJQueryUi.external = 1
 page {
 	# Inlude JavaScript files
 	includeJSFooterlibs {
-		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/Js/jquery.ui.datepicker.min.js
-		powermailJQueryFormValidation = EXT:powermail/Resources/Public/Js/parsley.min.js
-		powermailJQueryTabs = EXT:powermail/Resources/Public/Js/tabs.js
+		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/JavaScripts/jquery.ui.datepicker.min.js
+		powermailJQueryFormValidation = EXT:powermail/Resources/Public/JavaScripts/parsley.min.js
+		powermailJQueryTabs = EXT:powermail/Resources/Public/JavaScripts/tabs.js
 	}
 	includeJSFooter {
-		powermailForm = EXT:powermail/Resources/Public/Js/form.js
+		powermailForm = EXT:powermail/Resources/Public/JavaScripts/form.js
 	}
 
 	# Include CSS files
@@ -491,58 +491,3 @@ page {
 	}
 }
 [end]
-
-/*
-page.1000 = COA
-page.1000 {
-	wrap = <script type="text/javascript">|</script>
-
-	10 = TEXT
-	10 {
-		wrap = var JsValidationCheckCheckboxes = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckCheckboxes
-	}
-
-	20 = TEXT
-	20 {
-		wrap = var JsValidationCheckInteger = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckInteger
-	}
-
-	30 = TEXT
-	30 {
-		wrap = var JsValidationCheckRequired = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckRequired
-	}
-
-	40 = TEXT
-	40 {
-		wrap = var JsValidationCheckRequiredOption = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckRequiredOption
-	}
-
-	50 = TEXT
-	50 {
-		wrap = var JsValidationCheckEmail = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckEmail
-	}
-
-	60 = TEXT
-	60 {
-		wrap = var JsValidationCheckUrl = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckUrl
-	}
-
-	70 = TEXT
-	70 {
-		wrap = var JsValidationCheckPhone = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckPhone
-	}
-
-	80 = TEXT
-	80 {
-		wrap = var JsValidationCheckLetters = '|';
-		data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:JsValidationCheckLetters
-	}
-}
-*/

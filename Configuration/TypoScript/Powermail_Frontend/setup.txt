@@ -105,6 +105,6 @@ page {
 		powermailJQuery.external = 1
 	}
 	includeJSFooter {
-		powermail_frontend = EXT:powermail/Resources/Public/Js/powermail_frontend.js
+		powermail_frontend = EXT:powermail/Resources/Public/JavaScripts/powermail_frontend.js
 	}
 }

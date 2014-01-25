@@ -416,13 +416,13 @@ class Div {
 		$content = nl2br($content);
 		// 1. add linebreaks on some parts (</p> => </p><br />)
 		$content = str_replace($htmltagarray, $htmltagarray[0] . '<br />', $content);
-		// 2. remove all tags but not linebreaks and address (<b>bla</b><br /> => bla<br />)
+		// 2. remove all tags (<b>bla</b><br /> => bla<br />)
 		$content = strip_tags($content, '<br><address>');
 		// 3. removes tabs and whitespaces
 		$content = preg_replace('/\s+/', ' ', $content);
 		// 4. <br /> to \n
 		$content = $this->br2nl($content);
-		// 5. explode and trim each line and implode again (" bla \n blabla " => "bla\nbla")
+		// 5. explode and trim and implode again (" bla \n blabla " => "bla\nbla")
 		$content = implode("\n", GeneralUtility::trimExplode("\n", $content));
 		// 6. remove not allowed signs
 		$content = str_replace($notallowed, '', $content);
@@ -913,14 +913,69 @@ class Div {
 	}
 
 	/**
+	 * Store Marketing Information in Session
+	 *
+	 * @param \string $referer Referer
+	 * @param \int $language Frontend Language Uid
+	 * @param \int $pid Page Id
+	 * @return void
+	 */
+	public static function storeMarketingInformation($referer = NULL, $language = 0, $pid = 0) {
+		$storedMarketingInfo = self::getSessionValue('powermail_marketing');
+		$marketingInfo = array(
+			'referer' => $referer,
+			'language' => $language,
+			'searchTerm' => self::getSearchTermFromGoogleUri($referer),
+			'payedSearch' => '',
+			'browserLanguage' => '',
+			'funnel' => array($pid)
+		);
+		$newMarketingInfo = array_merge($marketingInfo, (array) $storedMarketingInfo);
+
+		// add current pid to funnel
+		$newMarketingInfo['funnel'][] = $pid;
+
+		self::setSessionValue('powermail_marketing', $newMarketingInfo, TRUE);
+
+		$x = self::getSessionValue('powermail_marketing');
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug($x, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+	}
+
+	/**
+	 * Checks searchterm from url
+	 *
+	 * @param \string $referer
+	 * @return \string Searchterm
+	 */
+	public static function getSearchTermFromGoogleUri($referer) {
+		// every part of the referer in an own array
+		$url = parse_url(htmlentities($referer));
+
+		// if GET params is set
+		if (!isset($url['query'])) {
+			return FALSE;
+		}
+
+		// give me only the &q="searchword" part
+		preg_match('/q=([^&]+)(&amp;)?/', $url['query'], $output);
+
+		// only if GET param &q= was set
+		if ($output[1]) {
+			return urldecode($output[1]);
+		}
+
+		return '';
+	}
+
+	/**
 	 * Set a powermail session (don't overwrite existing sessions)
 	 *
 	 * @param string $name A session name
 	 * @param array $values Values to save
-	 * @param int $overwrite Overwrite existing values
+	 * @param \bool $overwrite Overwrite existing values
 	 * @return void
 	 */
-	public static function setSessionValue($name, $values, $overwrite = 0) {
+	public static function setSessionValue($name, $values, $overwrite = FALSE) {
 		if (!$overwrite) {
 			// read existing values
 			$oldValues = self::getSessionValue($name);

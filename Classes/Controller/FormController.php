@@ -395,6 +395,18 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	}
 
 	/**
+	 * Marketing Tracking Action
+	 *
+	 * @param \string $referer Referer
+	 * @param \int $language Frontend Language Uid
+	 * @param \int $pid Page Id
+	 * @return void
+	 */
+	public function marketingAction($referer = NULL, $language = 0, $pid = 0) {
+		Div::storeMarketingInformation($referer, $language, $pid);
+	}
+
+	/**
 	 * Initializes this object
 	 *
 	 * @return void
