@@ -86,7 +86,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	public function createAction(Mail $mail, $hash = NULL) {
-		// forward back to formAction if wrong form - relevant if forms on one page
+		// forward back to formAction if wrong form - relevant if more forms on one page
 		$this->ignoreWrongForm($mail);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
@@ -119,6 +119,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 			// Send values to a third party software (like a CRM)
 			$this->div->sendPost($mail, $this->conf);
+
 		} else {
 			$this->sendConfirmationMail($mail);
 			$this->view->assign('optinActive', TRUE);
