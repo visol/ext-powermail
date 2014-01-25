@@ -1152,6 +1152,11 @@ class Div {
 			$contentObject->start(
 				$this->getVariablesWithMarkers($mail)
 			);
+			if (!empty($conf['dbEntry.'][$table . '.']['_ifUnique.'])) {
+				$uniqueFields = array_keys($conf['dbEntry.'][$table . '.']['_ifUnique.']);
+				$storeObject->setMode($conf['dbEntry.'][$table . '.']['_ifUnique.'][$uniqueFields[0]]);
+				$storeObject->setUniqueField($uniqueFields[0]);
+			}
 
 			// one loop per field
 			foreach ((array) $conf['dbEntry.'][$table . '.'] as $field => $settingsInner) {
@@ -1169,6 +1174,7 @@ class Div {
 				);
 				$storeObject->addProperty($field, $value);
 			}
+			\TYPO3\CMS\Core\Utility\DebugUtility::debug($storeObject, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
 			$storeObject->execute();
 		}
 	}

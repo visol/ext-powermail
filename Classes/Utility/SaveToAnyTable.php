@@ -96,10 +96,16 @@ class SaveToAnyTable {
 	 */
 	protected function update() {
 		// find existing record in database
+		$searchterm = $GLOBALS['TYPO3_DB']->fullQuoteStr(
+			$this->getProperty(
+				$this->getUniqueField()
+			),
+			$this->getTable()
+		);
 		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 			'uid',
 			$this->getTable(),
-			$this->getUniqueField() . ' = ' . $this->getProperty($this->getUniqueField()) . ' and deleted = 0',
+			$this->getUniqueField() . ' = ' . $searchterm . ' and deleted = 0',
 			'',
 			'',
 			1
