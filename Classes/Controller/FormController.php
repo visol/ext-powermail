@@ -114,9 +114,8 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		) {
 			$this->sendMailPreflight($mail);
 
-			// todo Save to other tables
-//			$saveToTable = $this->objectManager->get('\In2code\Powermail\Utility\SaveToTable');
-//			$saveToTable->main($this->div->getVariablesWithMarkers($field), $this->conf, $this->cObj);
+			// Save to other tables
+			$this->saveToAnyTable($mail, $this->conf);
 
 			// todo Powermail sendpost
 //			$this->div->sendPost($field, $this->conf, $this->configurationManager);
@@ -391,6 +390,38 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 				$this->forward('create', NULL, NULL, array('mail' => $mail, 'hash' => $hash));
 			}
+		}
+	}
+
+	/**
+	 * Save values to any table in TYPO3 database
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @param \array $conf TypoScript Configuration
+	 * @return void
+	 */
+	protected function saveToAnyTable($mail, $conf) {
+		\TYPO3\CMS\Core\Utility\DebugUtility::debug($conf, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+		if (empty($conf['dbEntry.'])) {
+			return;
+		}
+		foreach ((array) $conf['dbEntry.'] as $table => $settings) {
+			$settings = NULL;
+
+			/* @var $storeObject \In2code\Powermail\Utility\SaveToAnyTable */
+			$storeObject = $this->objectManager->get('In2code\Powermail\Utility\SaveToAnyTable');
+			$storeObject->setTable($table);
+			$this->cObj->start(
+				$this->div->getVariablesWithMarkers($mail)
+			);
+			foreach ((array) $conf['dbEntry.'][$table . '.'] as $field => $settingsInner) {
+				$settingsInner = NULL;
+
+				if (stristr($field, '.')) {
+					echo 'x';
+				}
+			}
+			$storeObject->execute();
 		}
 	}
 

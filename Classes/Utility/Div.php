@@ -127,7 +127,11 @@ class Div {
 	public function getSenderMailFromArguments(\In2code\Powermail\Domain\Model\Mail $mail) {
 		$email = '';
 		foreach ($mail->getAnswers() as $answer) {
-			if (method_exists($answer->getField(), 'getUid') && $answer->getField()->getSenderEmail() && GeneralUtility::validEmail($answer->getValue())) {
+			if (
+				method_exists($answer->getField(), 'getUid') &&
+				$answer->getField()->getSenderEmail() &&
+				GeneralUtility::validEmail($answer->getValue())
+			) {
 				$email = $answer->getValue();
 				break;
 			}
@@ -181,7 +185,7 @@ class Div {
 	}
 
 	/**
-	 * This functions renders the powermail_all Template to use in Mails and Other views
+	 * This functions renders the powermail_all Template (e.g. useage in Mails)
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @param string $section Choose a section (web or mail)
@@ -193,9 +197,16 @@ class Div {
 		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
 			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
-		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']) . 'Form/PowermailAll.html';
-		$powermailAll->setLayoutRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
-		$powermailAll->setPartialRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
+		$templatePathAndFilename = GeneralUtility::getFileAbsFileName(
+			$extbaseFrameworkConfiguration['view']['templateRootPath']
+		);
+		$templatePathAndFilename .= 'Form/PowermailAll.html';
+		$powermailAll->setLayoutRootPath(GeneralUtility::getFileAbsFileName(
+			$extbaseFrameworkConfiguration['view']['layoutRootPath'])
+		);
+		$powermailAll->setPartialRootPath(
+			GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath'])
+		);
 		$powermailAll->setTemplatePathAndFilename($templatePathAndFilename);
 		$powermailAll->assign('mail', $mail);
 		$powermailAll->assign('section', $section);
