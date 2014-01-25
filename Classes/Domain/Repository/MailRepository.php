@@ -2,6 +2,7 @@
 namespace In2code\Powermail\Domain\Repository;
 
 use \TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -210,7 +211,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function findByUidList($uidList, $sorting = array()) {
 		// settings
-		$uids = t3lib_div::trimExplode(',', $uidList, 1);
+		$uids = GeneralUtility::trimExplode(',', $uidList, 1);
 		// initialize query
 		$query = $this->createQuery();
 		// disable storage pid

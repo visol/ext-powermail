@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\Controller;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -47,7 +49,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$this->view->assign('mails', $mails);
 
 		// get field array for output
-		$fields = t3lib_div::trimExplode(',', $this->settings['list']['fields'], 1);
+		$fields = GeneralUtility::trimExplode(',', $this->settings['list']['fields'], 1);
 		if (!$fields) {
 			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
@@ -80,7 +82,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$this->view->assign('mail', $mail);
 
 		// get field array for output
-		$fields = t3lib_div::trimExplode(',', $this->settings['detail']['fields'], 1);
+		$fields = GeneralUtility::trimExplode(',', $this->settings['detail']['fields'], 1);
 		if (!$fields) {
 			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
@@ -109,7 +111,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$this->view->assign('mail', $mail);
 
 		// get field array for output
-		$fields = t3lib_div::trimExplode(',', $this->settings['edit']['fields'], 1);
+		$fields = GeneralUtility::trimExplode(',', $this->settings['edit']['fields'], 1);
 		if (!$fields) {
 			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
@@ -174,7 +176,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$mails = $this->mailRepository->findByUidList($export['fields']);
 
 		// get field array for output
-		$fields = t3lib_div::trimExplode(',', $this->settings['list']['fields'], 1);
+		$fields = GeneralUtility::trimExplode(',', $this->settings['list']['fields'], 1);
 		if (!$fields) {
 			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}

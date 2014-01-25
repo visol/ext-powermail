@@ -2,8 +2,9 @@
 namespace In2code\Powermail\Controller;
 
 use \In2code\Powermail\Utility\Div;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \In2code\Powermail\Domain\Model\Mail;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -92,7 +93,12 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		// Debug Output
 		if ($this->settings['debug']['variables']) {
-			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($mail);
+			GeneralUtility::devLog(
+				'Variables',
+				$this->extensionName,
+				0,
+				$_REQUEST
+			);
 		}
 
 		// Save Mail to DB
@@ -204,8 +210,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 			if (!$sent) {
 				$this->flashMessageContainer->add(
-					\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_mail_not_created',
-					'powermail')
+					LocalizationUtility::translate('error_mail_not_created', 'powermail')
 				);
 				$this->messageClass = 'error';
 			}
@@ -410,13 +415,18 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		// check if ts is included
 		if (!isset($this->settings['staticTemplate'])) {
 			$this->flashMessageContainer->add(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_typoscript', 'powermail')
+				LocalizationUtility::translate('error_no_typoscript', 'powermail')
 			);
 		}
 
 		// Debug Output
 		if ($this->settings['debug']['settings']) {
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings, 'powermail debug: Show Settings');
+			GeneralUtility::devLog(
+				'Settings',
+				$this->extensionName,
+				0,
+				$this->settings
+			);
 		}
 	}
 

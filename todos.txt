@@ -2,3 +2,7 @@
 - creating select, check and radio out of typoscript
 - adding a new js validation
 - ajax form submit
+- Marketing Tracking via JavaScript (going away from USER_INT to enable static filecache)
+- adding Unit Tests
+- Adding RST Documentation
+- debug output to devlog

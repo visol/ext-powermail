@@ -1,4 +1,8 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -39,8 +43,8 @@ class EidGetLocation {
 	 * @return string		from action
 	 */
 	public function main() {
-		$lat = t3lib_div::_GP('lat');
-		$lng = t3lib_div::_GP('lng');
+		$lat = GeneralUtility::_GP('lat');
+		$lng = GeneralUtility::_GP('lng');
 
 		$address = $this->getAddressFromGeo($lat, $lng);
 		return $address['route'] . ' ' . $address['street_number'];
@@ -60,7 +64,7 @@ class EidGetLocation {
 	 */
 	protected function getAddressFromGeo($lat, $lng) {
 		$result = array();
-		$json = t3lib_div::getUrl(
+		$json = GeneralUtility::getUrl(
 			'https://maps.googleapis.com/maps/api/geocode/json?sensor=false&region=de&latlng=' . urlencode($lat . ',' . $lng)
 		);
 		$jsonDecoded = json_decode($json, TRUE);
@@ -73,7 +77,5 @@ class EidGetLocation {
 	}
 }
 
-// make instance
-$eid = t3lib_div::makeInstance('EidGetLocation');
-// print content
+$eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\EidGetLocation');
 echo $eid->main();

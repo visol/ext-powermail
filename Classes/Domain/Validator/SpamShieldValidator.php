@@ -86,9 +86,11 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 
 		// Spam debugging
 		if ($this->settings['debug.']['spamshield']) {
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug(
-				$this->getMessages(),
-				'powermail debug: Show Spamchecks - Spamfactor ' . $this->formatSpamFactor($thisSpamFactor)
+			GeneralUtility::devLog(
+				'Spamshield (Spamfactor ' . $this->formatSpamFactor($thisSpamFactor) . ')',
+				'powermail',
+				0,
+				$this->getMessages()
 			);
 		}
 

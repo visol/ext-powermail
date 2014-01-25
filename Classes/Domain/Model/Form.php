@@ -1,5 +1,6 @@
 <?php
 namespace In2code\Powermail\Domain\Model;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -113,7 +114,7 @@ class Form extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		// if elementbrowser instead of IRRE (sorting workarround)
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail']);
 		if ($confArr['replaceIrreWithElementBrowser']) {
-			$formSorting = t3lib_div::trimExplode(',', $this->formRepository->getPagesValue($this->uid), 1);
+			$formSorting = GeneralUtility::trimExplode(',', $this->formRepository->getPagesValue($this->uid), 1);
 			$formSorting = array_flip($formSorting);
 			$pageArray = array();
 			foreach ($this->pages as $page) {

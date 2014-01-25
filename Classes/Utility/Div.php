@@ -965,7 +965,12 @@ class Div {
 
 		// Debug Output
 		if ($settings['debug']['mail']) {
-			t3lib_utility_Debug::debug($email, 'powermail debug: Show Mail');
+			GeneralUtility::devLog(
+				'powermail debug: Show Mail',
+				$this->extensionName,
+				0,
+				$email
+			);
 		}
 
 		// stop mail process if receiver or sender email is not valid

@@ -209,7 +209,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => 'required',
-				'itemsProcFunc' => 'FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'type'
 			),
 			'displayCond' => 'FIELD:sys_language_uid:=:0',
@@ -329,7 +329,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'itemsProcFunc' => 'FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'validation'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea'
@@ -407,7 +407,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'itemsProcFunc' => 'FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'feUserProperty'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden'

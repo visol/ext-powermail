@@ -1,4 +1,7 @@
 <?php
+namespace In2code\Powermail\Utility;
+
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FlexFormFieldSelection allows to add individual options
@@ -24,7 +27,7 @@ class FlexFormFieldSelection {
 	 * @return void
 	 */
 	public function addOptions(&$params, &$pObj) {
-		$typoScriptConfiguration = t3lib_BEfunc::getPagesTSconfig($this->getPid());
+		$typoScriptConfiguration = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig($this->getPid());
 		$extensionConfiguration = $typoScriptConfiguration[$this->extension . '.']['flexForm.'];
 
 		if (!empty($extensionConfiguration[$params['config']['itemsProcFuncFieldName'] . '.']['addFieldOptions.'])) {
@@ -49,8 +52,8 @@ class FlexFormFieldSelection {
 	 */
 	protected function getPid() {
 		$pid = 0;
-		$backUrl = str_replace('?', '&', t3lib_div::_GP('returnUrl'));
-		$urlParts = t3lib_div::trimExplode('&', $backUrl, 1);
+		$backUrl = str_replace('?', '&', GeneralUtility::_GP('returnUrl'));
+		$urlParts = GeneralUtility::trimExplode('&', $backUrl, 1);
 		foreach ($urlParts as $part) {
 			if (stristr($part, 'id=')) {
 				$pid = str_replace('id=', '', $part);
