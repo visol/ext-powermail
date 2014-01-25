@@ -1174,7 +1174,9 @@ class Div {
 				);
 				$storeObject->addProperty($field, $value);
 			}
-			\TYPO3\CMS\Core\Utility\DebugUtility::debug($storeObject, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+			if (!empty($conf['debug.']['saveToTable'])) {
+				$storeObject->setDevLog(TRUE);
+			}
 			$storeObject->execute();
 		}
 	}

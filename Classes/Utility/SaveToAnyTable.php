@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\Utility;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -63,6 +65,13 @@ class SaveToAnyTable {
 	protected $uniqueField = 'uid';
 
 	/**
+	 * Switch on devLog
+	 *
+	 * @var bool
+	 */
+	protected $devLog = FALSE;
+
+	/**
 	 * Executes the storage
 	 *
 	 * @return int uid of inserted record
@@ -76,6 +85,7 @@ class SaveToAnyTable {
 			default:
 				$uid = $this->insert();
 		}
+		$this->writeToDevLog();
 		return $uid;
 	}
 
@@ -238,6 +248,41 @@ class SaveToAnyTable {
 	 */
 	protected function removeNotAllowedSigns(&$string) {
 		$string = preg_replace('/[^a-zA-Z0-9_-]/', '', $string);
+	}
+
+	/**
+	 * @param boolean $devLog
+	 * @return void
+	 */
+	public function setDevLog($devLog) {
+		$this->devLog = $devLog;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getDevLog() {
+		return $this->devLog;
+	}
+
+	/**
+	 * Write settings to devlog
+	 *
+	 * @return void
+	 */
+	protected function writeToDevLog() {
+		if (!$this->getDevLog()) {
+			return;
+		}
+		$subject = 'SaveToAnyTable (Table: ' . $this->getTable();
+		$subject .= ', Mode: ' . $this->getMode();
+		$subject .=  ', UniqueField: ' . $this->getUniqueField() . ')';
+		GeneralUtility::devLog(
+			$subject,
+			'powermail',
+			0,
+			$this->getProperties()
+		);
 	}
 
 }
