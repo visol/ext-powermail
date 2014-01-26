@@ -14,7 +14,7 @@ Show Backend Module: Powermail List
 	<f:comment>
 		<!--Filter Area-->
 	</f:comment>
-	<f:render partial="Module/FilterBe" arguments="{piVars: piVars, mails: mails, mailBasic: mailBasic, firstMail: firstMail}" />
+	<f:render partial="Module/FilterBe" arguments="{_all}" />
 
 
 
@@ -260,75 +260,89 @@ Show Backend Module: Powermail List
 										<f:if condition="{mail.spamFactor}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.spamFactor" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.spamFactor" default="Spamfactor" /></strong>
 												</dt>
 												<dd>
 													{mail.spamFactor}
+													<f:debug>{mail.marketingPageFunnel}</f:debug>
 												</dd>
 											</dl>
 										</f:if>
-										<f:if condition="{mail.marketingSearchterm}">
+										<f:if condition="{mail.marketingRefererDomain}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingSearchterm" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingRefererDomain" default="marketingRefererDomain" /></strong>
 												</dt>
 												<dd>
-													{mail.marketingSearchterm}
+													{mail.marketingRefererDomain}
 												</dd>
 											</dl>
 										</f:if>
 										<f:if condition="{mail.marketingReferer}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingReferer" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingReferer" default="marketingReferer" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingReferer}
 												</dd>
 											</dl>
 										</f:if>
-										<f:if condition="{mail.marketingPayedSearchResult}">
+										<f:if condition="{mail.marketingCountry}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingPayedSearchResult" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingCountry" default="marketingCountry" /></strong>
 												</dt>
 												<dd>
-													{mail.marketingPayedSearchResult}
+													{mail.marketingCountry}
 												</dd>
 											</dl>
 										</f:if>
-										<f:if condition="{mail.marketingLanguage}">
+										<f:if condition="{mail.marketingPageFunnel}">
+											<f:comment>Use marketingPageFunnel as indicator if marketing is switched on in generally - showing "0" is ok</f:comment>
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingLanguage" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingMobileDevice" default="marketingMobileDevice" /></strong>
 												</dt>
 												<dd>
-													{mail.marketingLanguage}
+													{mail.marketingMobileDevice}
+												</dd>
+											</dl>
+										</f:if>
+										<f:if condition="{mail.marketingPageFunnel}">
+											<f:comment>Use marketingPageFunnel as indicator if marketing is switched on in generally - showing "0" is ok</f:comment>
+											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
+												<dt>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingFrontendLanguage" default="marketingFrontendLanguage" /></strong>
+												</dt>
+												<dd>
+													{mail.marketingFrontendLanguage}
 												</dd>
 											</dl>
 										</f:if>
 										<f:if condition="{mail.marketingBrowserLanguage}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingBrowserLanguage" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingBrowserLanguage" default="marketingBrowserLanguage" /></strong>
 												</dt>
 												<dd>
 													{mail.marketingBrowserLanguage}
 												</dd>
 											</dl>
 										</f:if>
-										<f:if condition="{mail.marketingFunnel}">
+										<f:if condition="{mail.marketingPageFunnel}">
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>
-													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingFunnel" /></strong>
+													<strong><f:translate key="\In2code\Powermail\Domain\Model\Mail.marketingPageFunnel" /></strong>
 												</dt>
 												<dd>
-													<f:for each="{mail.marketingFunnel}" as="page" iteration="index">
-														<vh:Getter.GetPageNameFromUid uid="{page}" /> (PID {page})<f:if condition="{index.isLast}"><f:else> &gt; </f:else></f:if>
+													<f:for each="{mail.marketingPageFunnel}" as="page" iteration="index">
+														<span title="id={page}"><vh:Getter.GetPageNameFromUid uid="{page}" /></span> <f:if condition="{index.isLast}"><f:else> &gt; </f:else></f:if>
 													</f:for>
 												</dd>
 											</dl>
 										</f:if>
+										<f:render partial="Misc/MarketingInformation" arguments="{_all}" />
 									</div>
 								</td>
 							</tr>

@@ -2,7 +2,7 @@
 namespace In2code\Powermail\ViewHelpers\String;
 
 /**
- * View helper to implode objects to a list
+ * View helper to implode an array or objects to a list
  *
  * @package TYPO3
  * @subpackage Fluid
@@ -10,7 +10,7 @@ namespace In2code\Powermail\ViewHelpers\String;
 class ImplodeFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
-	 * View helper to explode a list
+	 * View helper to implode an array or objects to a list
 	 *
 	 * @param mixed $objects Any objects with submethod getUid()
 	 * @param string $field Field to use in object
@@ -23,10 +23,14 @@ class ImplodeFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 			return $string;
 		}
 
-		foreach ($objects as $object) {
-			if (method_exists($object, 'get' . ucfirst($field))) {
-				$string .= $object->{'get' . ucfirst($field)}();
-				$string .= $separator;
+		if (is_array($objects)) {
+			$string = implode($separator, $objects);
+		} else {
+			foreach ($objects as $object) {
+				if (method_exists($object, 'get' . ucfirst($field))) {
+					$string .= $object->{'get' . ucfirst($field)}();
+					$string .= $separator;
+				}
 			}
 		}
 		return substr($string, 0, (-1 * strlen($separator)));

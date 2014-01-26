@@ -180,9 +180,9 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * marketingPageFunnel
 	 *
-	 * @var \array
+	 * @var \string
 	 */
-	protected $marketingPageFunnel = array();
+	protected $marketingPageFunnel = '';
 
 	/**
 	 * __construct
@@ -547,7 +547,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @param array $marketingPageFunnel
+	 * @param mixed $marketingPageFunnel
 	 * @return void
 	 */
 	public function setMarketingPageFunnel($marketingPageFunnel) {
@@ -558,7 +558,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @return array
+	 * @return mixed
 	 */
 	public function getMarketingPageFunnel() {
 		if (\In2code\Powermail\Utility\Div::isSerialized($this->marketingPageFunnel)) {

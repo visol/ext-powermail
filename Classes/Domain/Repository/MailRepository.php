@@ -52,7 +52,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 		// show also hidden
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$query->getQuerySettings()->setRespectEnableFields(FALSE); // todo check if this still works
 
 		// initial filter
 		$and = array(
