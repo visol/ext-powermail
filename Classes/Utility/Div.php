@@ -694,16 +694,6 @@ class Div {
 	}
 
 	/**
-	 * Read MarketingInfos from Session
-	 *
-	 * @return array
-	 */
-	public static function getMarketingInfos() {
-		$info = $GLOBALS['TSFE']->fe_user->getKey('ses', 'powermail_marketing');
-		return $info;
-	}
-
-	/**
 	 * Powermail SendPost - Send values via curl to a third party software
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
@@ -914,56 +904,104 @@ class Div {
 
 	/**
 	 * Store Marketing Information in Session
+	 * 		'refererDomain' => domain.org
+	 * 		'referer' => http://domain.org/xyz/test.html
+	 * 		'country' => Germany
+	 * 		'mobileDevice' => 1
+	 * 		'frontendLanguage' => 3
+	 * 		'browserLanguage' => en-us
+	 * 		'feUser' => userAbc
+	 * 		'pageFunnel' => array(2, 5, 1)
 	 *
 	 * @param \string $referer Referer
 	 * @param \int $language Frontend Language Uid
 	 * @param \int $pid Page Id
+	 * @param \int $mobileDevice Is mobile device?
 	 * @return void
 	 */
-	public static function storeMarketingInformation($referer = NULL, $language = 0, $pid = 0) {
-		$storedMarketingInfo = self::getSessionValue('powermail_marketing');
-		$marketingInfo = array(
-			'referer' => $referer,
-			'language' => $language,
-			'searchTerm' => self::getSearchTermFromGoogleUri($referer),
-			'payedSearch' => '',
-			'browserLanguage' => '',
-			'funnel' => array($pid)
-		);
-		$newMarketingInfo = array_merge($marketingInfo, (array) $storedMarketingInfo);
+	public static function storeMarketingInformation($referer = NULL, $language = 0, $pid = 0, $mobileDevice = 0) {
+		$marketingInfo = self::getSessionValue('powermail_marketing');
 
-		// add current pid to funnel
-		$newMarketingInfo['funnel'][] = $pid;
+		// initially create array with marketing info
+		if (!is_array($marketingInfo)) {
+			$marketingInfo = array(
+				'refererDomain' => self::getDomainFromUri($referer),
+				'referer' => $referer,
+				'country' => self::getCountryFromIp(),
+				'mobileDevice' => $mobileDevice,
+				'frontendLanguage' => $language,
+				'browserLanguage' => GeneralUtility::getIndpEnv('HTTP_ACCEPT_LANGUAGE'),
+				'pageFunnel' => array($pid)
+			);
+		} else {
+			// add current pid to funnel
+			$marketingInfo['funnel'][] = $pid;
+		}
 
-		self::setSessionValue('powermail_marketing', $newMarketingInfo, TRUE);
-
-		$x = self::getSessionValue('powermail_marketing');
-		\TYPO3\CMS\Core\Utility\DebugUtility::debug($x, 'in2code Debug: ' . __FILE__ . ' in Line: ' . __LINE__);
+		// store in session
+		self::setSessionValue('powermail_marketing', $marketingInfo, TRUE);
 	}
 
 	/**
-	 * Checks searchterm from url
+	 * Read MarketingInfos from Session
 	 *
-	 * @param \string $referer
-	 * @return \string Searchterm
+	 * @return array
 	 */
-	public static function getSearchTermFromGoogleUri($referer) {
-		// every part of the referer in an own array
-		$url = parse_url(htmlentities($referer));
-
-		// if GET params is set
-		if (!isset($url['query'])) {
-			return FALSE;
+	public static function getMarketingInfos() {
+		$marketingInfo = self::getSessionValue('powermail_marketing');
+		if (!is_array($marketingInfo)) {
+			$marketingInfo = array(
+				'refererDomain' => '',
+				'referer' => '',
+				'country' => '',
+				'mobileDevice' => 0,
+				'frontendLanguage' => 0,
+				'browserLanguage' => '',
+				'pageFunnel' => array()
+			);
 		}
+		return $marketingInfo;
+	}
 
-		// give me only the &q="searchword" part
-		preg_match('/q=([^&]+)(&amp;)?/', $url['query'], $output);
-
-		// only if GET param &q= was set
-		if ($output[1]) {
-			return urldecode($output[1]);
+	/**
+	 * Get Property from currently logged in fe_user
+	 *
+	 * @param \string $propertyName
+	 * @return \string
+	 */
+	public static function getPropertyFromLoggedInFeUser($propertyName = 'uid') {
+		if (!empty($GLOBALS['TSFE']->fe_user->user[$propertyName])) {
+			return $GLOBALS['TSFE']->fe_user->user[$propertyName];
 		}
+		return '';
+	}
 
+	/**
+	 * Read domain from uri
+	 *
+	 * @param \string $uri
+	 * @return \string
+	 */
+	public static function getDomainFromUri($uri) {
+		$uriParts = parse_url($uri);
+		return $uriParts['host'];
+	}
+
+	/**
+	 * Get Country Name out of an IP address
+	 *
+	 * @param \string $ip
+	 * @return \string Countryname
+	 */
+	public static function getCountryFromIp($ip = NULL) {
+		if ($ip === NULL) {
+			$ip = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+		}
+		$json = GeneralUtility::getUrl('http://freegeoip.net/json/' . $ip);
+		$geoInfo = json_decode($json);
+		if (!empty($geoInfo->country_name)) {
+			return $geoInfo->country_name;
+		}
 		return '';
 	}
 
@@ -993,15 +1031,15 @@ class Div {
 	/**
 	 * Read a powermail session
 	 *
-	 * @param string $name A session name
-	 * @return mixed Values from session
+	 * @param \string $name A session name
+	 * @return \string Values from session
 	 */
 	public static function getSessionValue($name = '') {
 		$powermailSession = $GLOBALS['TSFE']->fe_user->getKey('ses', self::$extKey);
-		if ($name && isset($powermailSession[$name])) {
+		if (!empty($name) && isset($powermailSession[$name])) {
 			return $powermailSession[$name];
 		}
-		return $powermailSession;
+		return '';
 	}
 
 	/**
@@ -1156,8 +1194,10 @@ class Div {
 		if ($settings[$type]['attachment']) {
 			// read upload session
 			$uploadsFromSession = self::getSessionValue('upload');
-			foreach ((array) $uploadsFromSession as $file) {
-				$message->attach(Swift_Attachment::fromPath($file));
+			if (is_array($uploadsFromSession)) {
+				foreach ((array) $uploadsFromSession as $file) {
+					$message->attach(\Swift_Attachment::fromPath($file));
+				}
 			}
 		}
 
@@ -1169,7 +1209,7 @@ class Div {
 				1
 			);
 			foreach ($files as $file) {
-				$message->attach(Swift_Attachment::fromPath($file));
+				$message->attach(\Swift_Attachment::fromPath($file));
 			}
 		}
 		if ($email['format'] != 'plain') {

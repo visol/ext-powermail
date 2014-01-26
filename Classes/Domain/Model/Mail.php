@@ -38,35 +38,35 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * senderName
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $senderName = '';
 
 	/**
 	 * senderMail
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $senderMail = '';
 
 	/**
 	 * subject
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $subject = '';
 
 	/**
 	 * receiverMail
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $receiverMail = '';
 
 	/**
 	 * body
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $body = '';
 
@@ -80,28 +80,28 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * senderIp
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $senderIp = '';
 
 	/**
 	 * userAgent
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $userAgent = '';
 
 	/**
 	 * spamFactor
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $spamFactor = '';
 
 	/**
 	 * time
 	 *
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $time = NULL;
 
@@ -124,58 +124,65 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * crdate
 	 *
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $crdate = NULL;
 
 	/**
 	 * hidden
 	 *
-	 * @var bool
+	 * @var \bool
 	 */
 	protected $hidden = FALSE;
 
 	/**
-	 * marketingSearchterm
+	 * marketingRefererDomain
 	 *
-	 * @var string
+	 * @var \string
 	 */
-	protected $marketingSearchterm = '';
+	protected $marketingRefererDomain = '';
 
 	/**
 	 * marketingReferer
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $marketingReferer = '';
 
 	/**
-	 * marketingPayedSearchResult
+	 * marketingCountry
 	 *
-	 * @var string
+	 * @var \string
 	 */
-	protected $marketingPayedSearchResult = '';
+	protected $marketingCountry = '';
 
 	/**
-	 * marketingLanguage
+	 * marketingMobileDevice
 	 *
-	 * @var string
+	 * @var \bool
 	 */
-	protected $marketingLanguage = '';
+	protected $marketingMobileDevice = FALSE;
+
+	/**
+	 * marketingFrontendLanguage
+	 *
+	 * @var \int
+	 */
+	protected $marketingFrontendLanguage = 0;
 
 	/**
 	 * marketingBrowserLanguage
 	 *
-	 * @var string
+	 * @var \string
 	 */
 	protected $marketingBrowserLanguage = '';
 
 	/**
-	 * marketingFunnel
+	 * marketingPageFunnel
 	 *
-	 * @var string
+	 * @var \array
 	 */
-	protected $marketingFunnel = '';
+	protected $marketingPageFunnel = array();
 
 	/**
 	 * __construct
@@ -480,93 +487,6 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the marketingSearchterm
-	 *
-	 * @return string $marketingSearchterm
-	 */
-	public function getMarketingSearchterm() {
-		return $this->marketingSearchterm;
-	}
-
-	/**
-	 * Sets the marketingSearchterm
-	 *
-	 * @param string $marketingSearchterm
-	 * @return void
-	 */
-	public function setMarketingSearchterm($marketingSearchterm) {
-		$this->marketingSearchterm = $marketingSearchterm;
-	}
-
-	/**
-	 * Returns the marketingReferer
-	 *
-	 * @return string $marketingReferer
-	 */
-	public function getMarketingReferer() {
-		return $this->marketingReferer;
-	}
-
-	/**
-	 * Sets the marketingReferer
-	 *
-	 * @param string $marketingReferer
-	 * @return void
-	 */
-	public function setMarketingReferer($marketingReferer) {
-		$this->marketingReferer = $marketingReferer;
-	}
-
-	/**
-	 * Returns the marketingPayedSearchResult
-	 *
-	 * @return string $marketingPayedSearchResult
-	 */
-	public function getMarketingPayedSearchResult() {
-		return $this->marketingPayedSearchResult;
-	}
-
-	/**
-	 * Sets the marketingPayedSearchResult
-	 *
-	 * @param string $marketingPayedSearchResult
-	 * @return void
-	 */
-	public function setMarketingPayedSearchResult($marketingPayedSearchResult) {
-		$this->marketingPayedSearchResult = $marketingPayedSearchResult;
-	}
-
-	/**
-	 * Returns the marketingLanguage
-	 *
-	 * @return string $marketingLanguage
-	 */
-	public function getMarketingLanguage() {
-		return $this->marketingLanguage;
-	}
-
-	/**
-	 * Sets the marketingLanguage
-	 *
-	 * @param string $marketingLanguage
-	 * @return void
-	 */
-	public function setMarketingLanguage($marketingLanguage) {
-		$this->marketingLanguage = $marketingLanguage;
-	}
-
-	/**
-	 * Returns the marketingBrowserLanguage
-	 *
-	 * @return string $marketingBrowserLanguage
-	 */
-	public function getMarketingBrowserLanguage() {
-		return $this->marketingBrowserLanguage;
-	}
-
-	/**
-	 * Sets the marketingBrowserLanguage
-	 *
 	 * @param string $marketingBrowserLanguage
 	 * @return void
 	 */
@@ -575,21 +495,105 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the marketingFunnel
-	 *
-	 * @return string $marketingFunnel
+	 * @return string
 	 */
-	public function getMarketingFunnel() {
-		return unserialize($this->marketingFunnel);
+	public function getMarketingBrowserLanguage() {
+		return $this->marketingBrowserLanguage;
 	}
 
 	/**
-	 * Sets the marketingFunnel
-	 *
-	 * @param string $marketingFunnel
+	 * @param string $marketingCountry
 	 * @return void
 	 */
-	public function setMarketingFunnel($marketingFunnel) {
-		$this->marketingFunnel = serialize($marketingFunnel);
+	public function setMarketingCountry($marketingCountry) {
+		$this->marketingCountry = $marketingCountry;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMarketingCountry() {
+		return $this->marketingCountry;
+	}
+
+	/**
+	 * @param int $marketingFrontendLanguage
+	 * @return void
+	 */
+	public function setMarketingFrontendLanguage($marketingFrontendLanguage) {
+		$this->marketingFrontendLanguage = $marketingFrontendLanguage;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getMarketingFrontendLanguage() {
+		return $this->marketingFrontendLanguage;
+	}
+
+	/**
+	 * @param boolean $marketingMobileDevice
+	 * @return void
+	 */
+	public function setMarketingMobileDevice($marketingMobileDevice) {
+		$this->marketingMobileDevice = $marketingMobileDevice;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getMarketingMobileDevice() {
+		return $this->marketingMobileDevice;
+	}
+
+	/**
+	 * @param array $marketingPageFunnel
+	 * @return void
+	 */
+	public function setMarketingPageFunnel($marketingPageFunnel) {
+		if (is_array($marketingPageFunnel)) {
+			$marketingPageFunnel = serialize($marketingPageFunnel);
+		}
+		$this->marketingPageFunnel = $marketingPageFunnel;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getMarketingPageFunnel() {
+		if (\In2code\Powermail\Utility\Div::isSerialized($this->marketingPageFunnel)) {
+			return unserialize($this->marketingPageFunnel);
+		}
+		return $this->marketingPageFunnel;
+	}
+
+	/**
+	 * @param string $marketingReferer
+	 * @return void
+	 */
+	public function setMarketingReferer($marketingReferer) {
+		$this->marketingReferer = $marketingReferer;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMarketingReferer() {
+		return $this->marketingReferer;
+	}
+
+	/**
+	 * @param string $marketingRefererDomain
+	 * @return void
+	 */
+	public function setMarketingRefererDomain($marketingRefererDomain) {
+		$this->marketingRefererDomain = $marketingRefererDomain;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getMarketingRefererDomain() {
+		return $this->marketingRefererDomain;
 	}
 }

@@ -348,20 +348,25 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		$mail->setSpamFactor($GLOBALS['TSFE']->fe_user->getKey('ses', 'powermail_spamfactor'));
 		$mail->setTime((time() - Div::getFormStartFromSession($mail->getForm()->getUid())));
 		$mail->setUserAgent(GeneralUtility::getIndpEnv('HTTP_USER_AGENT'));
-		$mail->setMarketingSearchterm($marketingInfos['marketingSearchterm']);
-		$mail->setMarketingReferer($marketingInfos['marketingReferer']);
-		$mail->setMarketingPayedSearchResult($marketingInfos['marketingPayedSearchResult']);
-		$mail->setMarketingLanguage($marketingInfos['marketingLanguage']);
-		$mail->setMarketingBrowserLanguage($marketingInfos['marketingBrowserLanguage']);
-		$mail->setMarketingFunnel($marketingInfos['marketingFunnel']);
+		$mail->setMarketingRefererDomain($marketingInfos['refererDomain']);
+		$mail->setMarketingReferer($marketingInfos['referer']);
+		$mail->setMarketingCountry($marketingInfos['country']);
+		$mail->setMarketingMobileDevice($marketingInfos['mobileDevice']);
+		$mail->setMarketingFrontendLanguage($marketingInfos['frontendLanguage']);
+		$mail->setMarketingBrowserLanguage($marketingInfos['browserLanguage']);
+		$mail->setMarketingPageFunnel($marketingInfos['pageFunnel']);
 		if (intval($GLOBALS['TSFE']->fe_user->user['uid']) > 0) {
-			$mail->setFeuser($GLOBALS['TSFE']->fe_user->user['uid']);
+			$mail->setFeuser(
+				Div::getPropertyFromLoggedInFeUser('uid')
+			);
 		}
 		if (isset($this->settings['global']['disableIpLog']) && $this->settings['global']['disableIpLog'] == 0) {
-			$mail->setSenderIp(GeneralUtility::getIndpEnv('REMOTE_ADDR'));
+			$mail->setSenderIp(
+				GeneralUtility::getIndpEnv('REMOTE_ADDR')
+			);
 		}
 		if ($this->settings['main']['optin'] || $this->settings['db']['hidden']) {
-			$mail->setHidden(1);
+			$mail->setHidden(TRUE);
 		}
 		foreach ($mail->getAnswers() as $answer) {
 			$answer->setPid(
@@ -400,10 +405,11 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \string $referer Referer
 	 * @param \int $language Frontend Language Uid
 	 * @param \int $pid Page Id
+	 * @param \int $mobileDevice Is mobile device?
 	 * @return void
 	 */
-	public function marketingAction($referer = NULL, $language = 0, $pid = 0) {
-		Div::storeMarketingInformation($referer, $language, $pid);
+	public function marketingAction($referer = NULL, $language = 0, $pid = 0, $mobileDevice = 0) {
+		Div::storeMarketingInformation($referer, $language, $pid, $mobileDevice);
 	}
 
 	/**
