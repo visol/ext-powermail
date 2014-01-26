@@ -935,7 +935,7 @@ class Div {
 			);
 		} else {
 			// add current pid to funnel
-			$marketingInfo['funnel'][] = $pid;
+			$marketingInfo['pageFunnel'][] = $pid;
 		}
 
 		// store in session
