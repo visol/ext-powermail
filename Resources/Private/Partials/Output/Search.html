@@ -11,7 +11,11 @@
 							<label for="powermail_frontend_search_all">
 								Alle
 							</label>
-							<f:form.textfield property="{field}" id="powermail_frontend_search_all" class="powermail_frontend_search powermail_frontend_search_all" value="{piVars.filter._all}" />
+							<f:form.textfield
+									property="{field}"
+									id="powermail_frontend_search_all"
+									class="powermail_frontend_search powermail_frontend_search_all"
+									value="{piVars.filter._all}" />
 						</div>
 					</f:then>
 					<f:else>
@@ -19,7 +23,11 @@
 							<label for="powermail_frontend_search_{vh:Getter.GetFieldMarkerFromUid(uid: '{field}')}">
 								<vh:Getter.GetFieldLabelFromUid uid="{field}" />
 							</label>
-							<f:form.textfield property="{field}" id="powermail_frontend_search_{vh:Getter.GetFieldMarkerFromUid(uid: '{field}')}" class="powermail_frontend_search powermail_frontend_search_{vh:Getter.GetFieldMarkerFromUid(uid: '{field}')}" value="{vh:Misc.VariableInVariable(obj: '{piVars.filter}', prop: '{field}')}" />
+							<f:form.textfield
+									property="{field}"
+									id="powermail_frontend_search_{vh:Getter.GetFieldMarkerFromUid(uid: '{field}')}"
+									class="powermail_frontend_search powermail_frontend_search_{vh:Getter.GetFieldMarkerFromUid(uid: '{field}')}"
+									value="{vh:Misc.VariableInVariable(obj: '{piVars.filter}', prop: '{field}')}" />
 						</div>
 					</f:else>
 				</f:if>
@@ -32,5 +40,5 @@
 </f:form>
 
 <f:if condition="{settings.search.abc}">
-	<f:render partial="Output/Abc" arguments="{mails: mails, piVars: piVars, abc : abc}" />
+	<f:render partial="Output/Abc" arguments="{_all}" />
 </f:if>
