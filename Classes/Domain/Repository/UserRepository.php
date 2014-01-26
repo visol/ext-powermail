@@ -50,4 +50,19 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		return $query->execute();
 	}
+
+	/**
+	 * Find by Uid but don't respect storage page
+	 *
+	 * @param \int $uid
+	 * @return \In2code\Powermail\Domain\Model\User
+	 */
+	public function findByUid($uid) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->matching(
+			$query->equals('uid', $uid)
+		);
+		return $query->execute()->getFirst();
+	}
 }

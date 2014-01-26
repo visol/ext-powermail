@@ -72,6 +72,14 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $answerRepository;
 
 	/**
+	 * userRepository
+	 *
+	 * @var \In2code\Powermail\Domain\Repository\UserRepository
+	 * @inject
+	 */
+	protected $userRepository;
+
+	/**
 	 * SignalSlot Dispatcher
 	 *
 	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher

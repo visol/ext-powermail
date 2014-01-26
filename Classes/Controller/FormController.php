@@ -357,10 +357,12 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		$mail->setMarketingPageFunnel($marketingInfos['pageFunnel']);
 		if (intval($GLOBALS['TSFE']->fe_user->user['uid']) > 0) {
 			$mail->setFeuser(
-				Div::getPropertyFromLoggedInFeUser('uid')
+				$this->userRepository->findByUid(
+					Div::getPropertyFromLoggedInFeUser('uid')
+				)
 			);
 		}
-		if (isset($this->settings['global']['disableIpLog']) && $this->settings['global']['disableIpLog'] == 0) {
+		if (empty($this->settings['global']['disableIpLog'])) {
 			$mail->setSenderIp(
 				GeneralUtility::getIndpEnv('REMOTE_ADDR')
 			);
