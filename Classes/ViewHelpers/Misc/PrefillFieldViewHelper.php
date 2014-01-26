@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\ViewHelpers\Misc;
 
+use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+
 /**
  * Prefill a field with variables
  *
@@ -98,8 +100,6 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 
 			return $value;
 
-
-
 		// Check, Radio
 		} else {
 			$selected = 0;
@@ -191,14 +191,14 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	/**
 	 * Inject Configuration Manager
 	 *
-	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+	 * @param ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */
-	public function injectConfigurationManager(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
+	public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 		$this->cObj = $this->configurationManager->getContentObject();
 		$typoScriptSetup = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
 		$this->settings = $typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'];
 	}

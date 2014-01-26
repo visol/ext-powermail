@@ -148,7 +148,6 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 			$this->increaseSpamIndicator($indication);
 			$this->addMessage(__FUNCTION__ . ' failed');
 		}
-		return;
 	}
 
 	/**
@@ -182,7 +181,6 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 			$this->increaseSpamIndicator($indication);
 			$this->addMessage(__FUNCTION__ . ' failed');
 		}
-		return;
 	}
 
 	/**
@@ -241,7 +239,7 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 	 * @return void
 	 */
 	protected function sessionCheck(\In2code\Powermail\Domain\Model\Mail $mail, $indication = 1.0) {
-		// Stop sessionCheck if indicator was turned to 0 OR if last action was optinConfirm
+		// Stop if indicator was turned to 0 OR if last action was optinConfirm
 		if (!$indication || $this->referrer == 'optinConfirm') {
 			return;
 		}
@@ -252,7 +250,6 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 			$this->increaseSpamIndicator($indication);
 			$this->addMessage(__FUNCTION__ . ' failed');
 		}
-		return;
 	}
 
 	/**
@@ -314,7 +311,6 @@ class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractVa
 				}
 			}
 		}
-		return;
 	}
 
 	/**

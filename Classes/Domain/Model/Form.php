@@ -108,7 +108,7 @@ class Form extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the pages
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Page> $pages
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function getPages() {
 		// if elementbrowser instead of IRRE (sorting workarround)
@@ -130,7 +130,7 @@ class Form extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the pages
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Page> $pages
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 * @return void
 	 */
 	public function setPages(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $pages) {

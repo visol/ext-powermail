@@ -46,13 +46,9 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return	Query Object
 	 */
 	public function findAllInPid($pid = 0, $settings = array(), $piVars = array()) {
-		// settings
-		// initialize query
 		$query = $this->createQuery();
-		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		// show also hidden
-		$query->getQuerySettings()->setRespectEnableFields(FALSE); // todo check if this still works
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		// initial filter
 		$and = array(
@@ -100,7 +96,6 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 					}
 				}
 
-
 				// Answer Fields
 				if (is_array($value)) {
 					foreach ((array) $value as $answerField => $answerValue) {
@@ -147,13 +142,9 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return	Query Object
 	 */
 	public function findFirstInPid($pid = 0) {
-		// settings
-		// initialize query
 		$query = $this->createQuery();
-		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		// show also hidden
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		// initial filter
 		$and = array(
@@ -189,7 +180,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByUid($uid) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		$and = array(
 			$query->equals('uid', $uid),
@@ -210,14 +201,10 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return	Query Object
 	 */
 	public function findByUidList($uidList, $sorting = array()) {
-		// settings
 		$uids = GeneralUtility::trimExplode(',', $uidList, 1);
-		// initialize query
 		$query = $this->createQuery();
-		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-		// show also hidden
-		$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		// initial filter
 		$and = array(
@@ -323,13 +310,11 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				$and[] = $query->logicalOr($filter);
 			}
 
-
 		}
 
 		// FILTER: create constraint
 		$constraint = $query->logicalAnd($and);
 		$query->matching($constraint);
-
 
 		// sorting
 		$query->setOrderings(

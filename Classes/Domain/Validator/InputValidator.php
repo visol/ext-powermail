@@ -100,7 +100,6 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 						$this->setErrorAndMessage($field, $validation);
 					}
 				}
-				break;
 		}
 	}
 }

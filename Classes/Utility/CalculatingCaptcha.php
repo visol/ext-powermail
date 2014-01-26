@@ -181,14 +181,6 @@ class CalculatingCaptcha {
 		}
 		// give me the operator
 		switch ($op) {
-			case 0:
-			default:
-				// operator
-				$operator = '+';
-				// result
-				$result = $number1 + $number2;
-				break;
-
 			case 1:
 				$operator = '-';
 				// result
@@ -206,6 +198,13 @@ class CalculatingCaptcha {
 				// result
 				$result = $number1 / $number2;
 				break;
+
+			case 0:
+			default:
+				// operator
+				$operator = '+';
+				// result
+				$result = $number1 + $number2;
 		}
 
 		// Save result to session

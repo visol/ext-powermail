@@ -6,6 +6,7 @@
 - done: SendPost with cObject parsing
 - done: Rewritten SaveToAnyTable function for even more flexibility
 - done: Marketing Tracking via JavaScript (going away from USER_INT to enable static filecache)
-- ajax form submit
-- adding Unit Tests
+- done: Resolving PHPSniffer Notes
+- Ajax form submit
+- Adding Unit Tests
 - Adding RST Documentation

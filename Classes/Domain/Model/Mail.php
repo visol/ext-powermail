@@ -412,7 +412,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the answers
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Answer> $answers
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function getAnswers() {
 		return $this->answers;
@@ -421,7 +421,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the answers
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Answer> $answers
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 * @return void
 	 */
 	public function setAnswers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $answers) {
@@ -441,7 +441,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Removes an answer
 	 *
-	 * @param \In2code\Powermail\Domain\Model\Answer $answerToRemove The Fields to be removed
+	 * @param \In2code\Powermail\Domain\Model\Answer $answerToRemove
 	 * @return void
 	 */
 	public function removeAnswer(\In2code\Powermail\Domain\Model\Answer $answerToRemove) {

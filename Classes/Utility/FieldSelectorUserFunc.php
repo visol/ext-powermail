@@ -96,7 +96,8 @@ class FieldSelectorUserFunc {
 	 * @return array
 	 */
 	protected function getFieldsFromForm($formUid) {
-		$select = 'tx_powermail_domain_model_fields.uid, tx_powermail_domain_model_fields.title, tx_powermail_domain_model_fields.marker';
+		$select = 'tx_powermail_domain_model_fields.uid, tx_powermail_domain_model_fields.title';
+		$select .= ', tx_powermail_domain_model_fields.marker';
 		$from = '
 			tx_powermail_domain_model_fields
 			left join tx_powermail_domain_model_pages on tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid

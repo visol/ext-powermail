@@ -47,7 +47,7 @@ class EidGetLocation {
 		$lng = GeneralUtility::_GP('lng');
 
 		$address = $this->getAddressFromGeo($lat, $lng);
-		return $address['route'] . ' ' . $address['street_number'];
+		return $address['route'] . ' ' . $address['street_number'] . ', ' . $address['locality'];
 	}
 
 	/**

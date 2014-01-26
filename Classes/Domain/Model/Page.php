@@ -139,7 +139,7 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Removes a Fields
 	 *
-	 * @param \In2code\Powermail\Domain\Model\Field $fieldToRemove The Fields to be removed
+	 * @param \In2code\Powermail\Domain\Model\Field $fieldToRemove
 	 * @return void
 	 */
 	public function removeField(\In2code\Powermail\Domain\Model\Field $fieldToRemove) {
@@ -149,24 +149,16 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the fields
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Field> $fields
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function getFields() {
 		return $this->fields;
-//
-//		// Workarround to get the fields sorted
-//		$fieldArray = array();
-//		foreach ($this->fields as $field) {
-//			$fieldArray[$field->getSorting()] = $field;
-//		}
-//		ksort($fieldArray);
-//		return $fieldArray;
 	}
 
 	/**
 	 * Sets the fields
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Field> $fields
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 * @return void
 	 */
 	public function setFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $fields) {

@@ -577,9 +577,10 @@ class Div {
 		$settingsField = GeneralUtility::trimExplode("\n", $string, 1);
 		foreach ($settingsField as $line) {
 			$settings = GeneralUtility::trimExplode('|', $line, 0);
+			$value = (isset($settings[1]) ? $settings[1] : $settings[0]);
 			$options[] = array(
 				'label' => $settings[0],
-				'value' => (isset($settings[1]) ? $settings[1] : $settings[0]),
+				'value' => $value,
 				'selected' => isset($settings[2]) ? 1 : 0
 			);
 		}
@@ -1123,31 +1124,34 @@ class Div {
 		);
 		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
 		$templatePathAndFilename .= $email['template'] . '.html';
-		$emailBody = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
-		$emailBody->getRequest()->setControllerExtensionName('Powermail');
-		$emailBody->getRequest()->setPluginName('Pi1');
-		$emailBody->getRequest()->setControllerName('Form');
-		$emailBody->setFormat('html');
-		$emailBody->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailBody->setPartialRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath']));
-		$emailBody->setLayoutRootPath(GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath']));
+		$emailBodyObject = $this->objectManager->get('Tx_Fluid_View_StandaloneView');
+		$emailBodyObject->getRequest()->setControllerExtensionName('Powermail');
+		$emailBodyObject->getRequest()->setPluginName('Pi1');
+		$emailBodyObject->getRequest()->setControllerName('Form');
+		$emailBodyObject->setFormat('html');
+		$emailBodyObject->setTemplatePathAndFilename($templatePathAndFilename);
+		$emailBodyObject->setPartialRootPath(
+			GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath'])
+		);
+		$emailBodyObject->setLayoutRootPath(
+			GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath'])
+		);
 
 		// get variables
 		// additional variables
 		if (isset($email['variables']) && is_array($email['variables'])) {
-			$emailBody->assignMultiple($email['variables']);
+			$emailBodyObject->assignMultiple($email['variables']);
 		}
 		// markers in HTML Template
 		$variablesWithMarkers = $this->getVariablesWithMarkers($mail);
-		$emailBody->assign('variablesWithMarkers', $this->htmlspecialcharsOnArray($variablesWithMarkers));
-		$emailBody->assignMultiple($variablesWithMarkers);
-		$emailBody->assign('powermail_all', $this->powermailAll($mail, 'mail', $settings));
+		$emailBodyObject->assign('variablesWithMarkers', $this->htmlspecialcharsOnArray($variablesWithMarkers));
+		$emailBodyObject->assignMultiple($variablesWithMarkers);
+		$emailBodyObject->assign('powermail_all', $this->powermailAll($mail, 'mail', $settings));
 		// from rte
-		$emailBody->assign('powermail_rte', $email['rteBody']);
-		$emailBody->assign('marketingInfos', self::getMarketingInfos());
-		$emailBody->assign('mail', $mail);
-		$emailBody = $emailBody->render();
-
+		$emailBodyObject->assign('powermail_rte', $email['rteBody']);
+		$emailBodyObject->assign('marketingInfos', self::getMarketingInfos());
+		$emailBodyObject->assign('mail', $mail);
+		$emailBody = $emailBodyObject->render();
 
 		/*****************
 		 * generate mail

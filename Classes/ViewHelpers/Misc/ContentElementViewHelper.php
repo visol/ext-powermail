@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\ViewHelpers\Misc;
 
+use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+
 /**
  * Shows Content Element
  *
@@ -17,8 +19,8 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 	/**
 	 * Parse a content element
 	 *
-	 * @param	int			UID of any content element
-	 * @return 	string		Parsed Content Element
+	 * @param \int $uid UID of any content element
+	 * @return \string Parsed Content Element
 	 */
 	public function render($uid) {
 		$conf = array(
@@ -26,16 +28,16 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 			'source' => $uid,
 			'dontCheckPid' => 1
 		);
-		return $this->cObj->RECORDS($conf);
+		return $this->contentObject->RECORDS($conf);
 	}
 
 	/**
 	 * Injects the content object
 	 *
-	 * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+	 * @param ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */
-	public function injectContentObject(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager) {
+	public function injectContentObject(ConfigurationManagerInterface $configurationManager) {
 		$this->contentObject = $configurationManager->getContentObject();
 	}
 

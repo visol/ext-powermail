@@ -107,7 +107,10 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 */
 	protected function checkExtension($filename, \In2code\Powermail\Domain\Model\Field $field) {
 		$fileInfo = pathinfo($filename);
-		if (!isset($fileInfo['extension']) || !GeneralUtility::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])) {
+		if (
+			!isset($fileInfo['extension']) ||
+			!GeneralUtility::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])
+		) {
 			$this->setErrorAndMessage($field, 'upload_extension');
 			return FALSE;
 		}
