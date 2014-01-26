@@ -1,7 +1,10 @@
 <?php
 namespace In2code\Powermail\Controller;
 
+use \In2code\Powermail\Utility\Div;
+use \In2code\Powermail\Domain\Model\Mail;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -48,16 +51,16 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$mails = $this->mailRepository->findListBySettings($this->settings, $this->piVars);
 		$this->view->assign('mails', $mails);
 
-		// get field array for output
-		$fields = GeneralUtility::trimExplode(',', $this->settings['list']['fields'], 1);
-		if (!$fields) {
-			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
+		// get fields for iteration
+		if ($this->settings['list']['fields']) {
+			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['list']['fields'], 1);
+		} else {
+			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
+		$fields = $this->fieldRepository->findByUids($fieldArray);
 		$this->view->assign('fields', $fields);
-
-		// get piVars
 		$this->view->assign('piVars', $this->piVars);
-		$this->view->assign('abc', Tx_Powermail_Utility_Div::getAbcArray());
+		$this->view->assign('abc', Div::getAbcArray());
 
 		// single pid
 		if (empty($this->settings['single']['pid'])) {
@@ -78,14 +81,16 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function showAction(\In2code\Powermail\Domain\Model\Mail $mail) {
+	public function showAction(Mail $mail) {
 		$this->view->assign('mail', $mail);
 
-		// get field array for output
-		$fields = GeneralUtility::trimExplode(',', $this->settings['detail']['fields'], 1);
-		if (!$fields) {
-			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
+		// get fields for iteration
+		if ($this->settings['list']['fields']) {
+			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['detail']['fields'], 1);
+		} else {
+			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
+		$fields = $this->fieldRepository->findByUids($fieldArray);
 		$this->view->assign('fields', $fields);
 
 		// list pid
@@ -107,17 +112,16 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function editAction(\In2code\Powermail\Domain\Model\Mail $mail) {
+	public function editAction(Mail $mail) {
 		$this->view->assign('mail', $mail);
 
-		// get field array for output
-		$fields = GeneralUtility::trimExplode(',', $this->settings['edit']['fields'], 1);
-		if (!$fields) {
-			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
+		// get fields for iteration
+		if ($this->settings['list']['fields']) {
+			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['edit']['fields'], 1);
+		} else {
+			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
-		foreach ((array) $fields as $key => $field) {
-			$fields[$key] = $this->fieldRepository->findByUid($field);
-		}
+		$fields = $this->fieldRepository->findByUids($fieldArray);
 		$this->view->assign('fields', $fields);
 
 		// list pid
@@ -142,7 +146,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 * @dontvalidate $field
 	 * @return void
 	 */
-	public function updateAction(\In2code\Powermail\Domain\Model\Mail $mail, $field = array()) {
+	public function updateAction(Mail $mail, $field = array()) {
 		if ($this->div->isAllowedToEdit($this->settings, $mail)) {
 			// one loop for every received field
 			foreach ((array) $field as $fieldUid => $value) {
@@ -151,11 +155,11 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 				$this->answerRepository->update($answer);
 			}
 			$this->flashMessageContainer->add(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail')
+				LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail')
 			);
 		} else {
 			$this->flashMessageContainer->add(
-				\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail')
+				LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail')
 			);
 		}
 
@@ -247,11 +251,13 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 */
 	public function initializeObject() {
 		// merge typoscript to flexform
-		Tx_Powermail_Utility_Div::mergeTypoScript2FlexForm($this->settings, 'Pi2');
+		Div::mergeTypoScript2FlexForm($this->settings, 'Pi2');
 
 		// check if ts is included
 		if (!isset($this->settings['staticTemplate'])) {
-			$this->flashMessageContainer->add(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail'));
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail')
+			);
 		}
 	}
 

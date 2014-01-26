@@ -138,7 +138,7 @@
 			<label index="flexform_pi2.updateNote">ATTENTION: Please select a form in Settings before!</label>
 			<label index="flexform_pi2.main">Main Settings</label>
 			<label index="flexform_pi2.main.switchableControllerActions">Choose your view</label>
-			<label index="flexform_pi2.main.switchableControllerActions.0">List View</label>
+			<label index="flexform_pi2.main.switchableControllerActions.0">List or Detail View</label>
 			<label index="flexform_pi2.main.switchableControllerActions.1">Detail View</label>
 			<label index="flexform_pi2.main.switchableControllerActions.2">Edit View</label>
 			<label index="flexform_pi2.main.form">Choose a form</label>
@@ -308,7 +308,7 @@
 			<label index="flexform_pi2.updateNote">ACHTUNG: Bitte zuvor Formular in Einstellungen auswählen!</label>
 			<label index="flexform_pi2.main">Einstellungen</label>
 			<label index="flexform_pi2.main.switchableControllerActions">Wählen Sie Ihre Ansicht</label>
-			<label index="flexform_pi2.main.switchableControllerActions.0">Listenansicht</label>
+			<label index="flexform_pi2.main.switchableControllerActions.0">Listen- oder Detailansicht</label>
 			<label index="flexform_pi2.main.switchableControllerActions.1">Detailansicht</label>
 			<label index="flexform_pi2.main.switchableControllerActions.2">Änderungsansicht</label>
 			<label index="flexform_pi2.main.form">Wählen Sie ein Formular</label>

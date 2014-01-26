@@ -48,6 +48,14 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	protected $formRepository;
 
 	/**
+	 * fieldRepository
+	 *
+	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
+	 * @inject
+	 */
+	protected $fieldRepository;
+
+	/**
 	 * mailRepository
 	 *
 	 * @var \In2code\Powermail\Domain\Repository\MailRepository
@@ -90,7 +98,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * cObj
 	 *
-	 * @var tslib_cObj
+	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
 	 */
 	protected $cObj;
 
@@ -100,6 +108,13 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @var array
 	 */
 	protected $conf;
+
+	/**
+	 * Plugin variables
+	 *
+	 * @var array
+	 */
+	protected $piVars;
 
 	/**
 	 * message Class

@@ -152,15 +152,15 @@ class Page extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\In2code\Powermail\Domain\Model\Field> $fields
 	 */
 	public function getFields() {
-//		return $this->fields;
-
-		// Workarround to get the fields sorted
-		$fieldArray = array();
-		foreach ($this->fields as $field) {
-			$fieldArray[$field->getSorting()] = $field;
-		}
-		ksort($fieldArray);
-		return $fieldArray;
+		return $this->fields;
+//
+//		// Workarround to get the fields sorted
+//		$fieldArray = array();
+//		foreach ($this->fields as $field) {
+//			$fieldArray[$field->getSorting()] = $field;
+//		}
+//		ksort($fieldArray);
+//		return $fieldArray;
 	}
 
 	/**

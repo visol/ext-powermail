@@ -263,11 +263,8 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return object storage
 	 */
 	public function findListBySettings($settings, $piVars) {
-		// initialize query
 		$query = $this->createQuery();
-		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
-
 
 		/**
 		 * FILTER start
@@ -305,27 +302,27 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		// FILTER: field
 		if (isset($piVars['filter'])) {
 			// fulltext
-			if (isset($piVars['filter']['_all'])) {
+			if (!empty($piVars['filter']['_all'])) {
 				$and[] = $query->like('answers.value', '%' . $piVars['filter']['_all'] . '%');
-			// or single field search
-			} else {
-				$filter = array();
-				foreach ((array) $piVars['filter'] as $field => $value) {
-					if (is_numeric($field) && !empty($value)) {
-						$filterAnd = array(
-							$query->equals('answers.field', $field),
-							$query->like('answers.value', '%' . $value . '%')
-						);
-						$filter[] = $query->logicalAnd($filterAnd);
-					}
-				}
-
-				if (count($filter) > 0) {
-					// TODO AND
-					$and[] = $query->logicalOr($filter);
-				}
-
 			}
+
+			// single field search
+			$filter = array();
+			foreach ((array) $piVars['filter'] as $field => $value) {
+				if (is_numeric($field) && !empty($value)) {
+					$filterAnd = array(
+						$query->equals('answers.field', $field),
+						$query->like('answers.value', '%' . $value . '%')
+					);
+					$filter[] = $query->logicalAnd($filterAnd);
+				}
+			}
+
+			if (count($filter) > 0) {
+				// TODO AND
+				$and[] = $query->logicalOr($filter);
+			}
+
 
 		}
 

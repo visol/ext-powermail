@@ -1,6 +1,8 @@
 <?php
 namespace In2code\Powermail\Domain\Repository;
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -35,11 +37,24 @@ namespace In2code\Powermail\Domain\Repository;
 class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
+	 * @param \array $uids
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findByUids($uids) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->matching(
+			$query->in('uid', $uids)
+		);
+		return $query->execute();
+	}
+
+	/**
 	 * Return uid from given field marker and form
 	 *
-	 * @param $marker
-	 * @param int $formUid
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @param \string $marker
+	 * @param \int $formUid
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findByMarkerAndForm($marker, $formUid = 0) {
 		$query = $this->createQuery();

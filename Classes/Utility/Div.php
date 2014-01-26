@@ -84,6 +84,20 @@ class Div {
 	 * @return \array
 	 */
 	public function getFieldsFromForm($formUid) {
+		$allowedFieldTypes = array(
+			'input',
+			'textarea',
+			'select',
+			'check',
+			'radio',
+			'password',
+			'file',
+			'hidden',
+			'date',
+			'location',
+			'typoscript'
+		);
+
 		$fields = array();
 		$form = $this->formRepository->findByUid($formUid);
 		if (!method_exists($form, 'getPages')) {
@@ -91,6 +105,10 @@ class Div {
 		}
 		foreach ($form->getPages() as $page) {
 			foreach ($page->getFields() as $field) {
+				// skip type submit
+				if (!in_array($field->getType(), $allowedFieldTypes)) {
+					continue;
+				}
 				$fields[] = $field->getUid();
 			}
 		}
