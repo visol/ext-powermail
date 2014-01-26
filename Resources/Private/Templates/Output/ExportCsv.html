@@ -10,14 +10,7 @@ Render Powermail CSV Export
 	<f:for each="{mails}" as="mail" iteration="index">
 		<f:if condition="{index.isFirst}">
 			<f:for each="{fields}" as="field">
-				<f:if condition="{vh:Condition.IsNumber(val: '{field}')}">
-					<f:then>
-						"<vh:String.RemoveQuote><vh:Getter.GetFieldLabelFromUid uid="{field}" /></vh:String.RemoveQuote>";
-					</f:then>
-					<f:else>
-						"<vh:String.RemoveQuote><f:translate key="\In2code\Powermail\Domain\Model\Mail.{vh:String.UnderscoredToLowerCamelCase(val: '{field}')}" /></vh:String.RemoveQuote>";
-					</f:else>
-				</f:if>
+				"<vh:String.RemoveQuote>{field.title}</vh:String.RemoveQuote>";
 			</f:for>
 			<br />
 		</f:if>
@@ -28,6 +21,9 @@ Render Powermail CSV Export
 				<f:if condition="{field} == {answer.field}">
 
 					<f:if condition="{vh:Condition.IsArray(val: '{answer.value}')}">
+						<f:else>
+							"<vh:String.RemoveQuote>{answer.value}</vh:String.RemoveQuote>";
+						</f:else>
 						<f:then>
 							"<vh:String.RemoveQuote>
 								<f:for each="{answer.value}" as="singleValue">
@@ -37,9 +33,6 @@ Render Powermail CSV Export
 								</f:for>
 							</vh:String.RemoveQuote>";
 						</f:then>
-						<f:else>
-							"<vh:String.RemoveQuote>{answer.value}</vh:String.RemoveQuote>";
-						</f:else>
 					</f:if>
 
 				</f:if>

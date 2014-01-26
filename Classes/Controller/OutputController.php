@@ -5,6 +5,7 @@ use \In2code\Powermail\Utility\Div;
 use \In2code\Powermail\Domain\Model\Mail;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 /***************************************************************
  *  Copyright notice
@@ -180,10 +181,12 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$mails = $this->mailRepository->findByUidList($export['fields']);
 
 		// get field array for output
-		$fields = GeneralUtility::trimExplode(',', $this->settings['list']['fields'], 1);
-		if (!$fields) {
-			$fields = $this->div->getFieldsFromForm($this->settings['main']['form']);
+		if ($this->settings['list']['fields']) {
+			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['list']['fields'], 1);
+		} else {
+			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
+		$fields = $this->fieldRepository->findByUids($fieldArray);
 
 		if ($export['format'] == 'xls') {
 			$this->forward('exportXls', NULL, NULL, array('mails' => $mails, 'fields' => $fields));
@@ -194,13 +197,13 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	/**
 	 * Export mails XLS
 	 *
-	 * @param		array		$mails mails objects
-	 * @param		array		$fields uid field list
+	 * @param QueryResult $mails mails objects
+	 * @param QueryResult $fields uid field list
 	 * @dontvalidate $mails
 	 * @dontvalidate $fields
 	 * @return 	void
 	 */
-	public function exportXlsAction($mails = array(), $fields = array()) {
+	public function exportXlsAction(QueryResult $mails = NULL, QueryResult $fields = NULL) {
 		$this->view->assign('mails', $mails);
 		$this->view->assign('fields', $fields);
 	}
@@ -208,13 +211,13 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	/**
 	 * Export mails CSV
 	 *
-	 * @param array $mails mails objects
-	 * @param array $fields uid field list
+	 * @param QueryResult $mails mails objects
+	 * @param QueryResult $fields uid field list
 	 * @dontvalidate $mails
 	 * @dontvalidate $fields
 	 * @return void
 	 */
-	public function exportCsvAction($mails = array(), $fields = array()) {
+	public function exportCsvAction(QueryResult $mails = NULL, QueryResult $fields = NULL) {
 		$this->view->assign('mails', $mails);
 		$this->view->assign('fields', $fields);
 	}
@@ -233,15 +236,6 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 			$this->settings['single']['pid'] = $GLOBALS['TSFE']->id;
 		}
 		$this->view->assign('singlePid', $this->settings['single']['pid']);
-	}
-
-	/**
-	 * Deactivate errormessages in flashmessages
-	 *
-	 * @return bool
-	 */
-	protected function getErrorFlashMessage() {
-		return FALSE;
 	}
 
 	/**
