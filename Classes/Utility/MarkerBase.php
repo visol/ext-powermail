@@ -233,7 +233,7 @@ class MarkerBase {
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->data = GeneralUtility::_GP('data');
+		$this->data = (array)GeneralUtility::_GP('data');
 		$this->getMarkers();
 		$this->formUid = $this->getFormUid();
 		$this->existingMarkers = $this->getFieldMarkersFromForm();
