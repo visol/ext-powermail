@@ -61,7 +61,7 @@ class InitialMarker extends \In2code\Powermail\Utility\MarkerBase {
 
 		// marker should be changed OR this is a new field
 		if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['marker']) || stristr($uid, 'NEW')) {
-			$fieldArray['marker'] = $markers['_' . $uid];
+			$fieldArray['marker'] = (string)$markers['_' . $uid];
 		}
 	}
 }
