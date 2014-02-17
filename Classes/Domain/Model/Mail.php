@@ -547,7 +547,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @param mixed $marketingPageFunnel
+	 * @param array $marketingPageFunnel
 	 * @return void
 	 */
 	public function setMarketingPageFunnel($marketingPageFunnel) {
@@ -558,13 +558,26 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @return mixed
+	 * @return array
 	 */
 	public function getMarketingPageFunnel() {
 		if (\In2code\Powermail\Utility\Div::isSerialized($this->marketingPageFunnel)) {
 			return unserialize($this->marketingPageFunnel);
 		}
-		return $this->marketingPageFunnel;
+		return (array)$this->marketingPageFunnel;
+	}
+
+	/**
+	 * Returns the UID of the last page that the user has opened.
+	 *
+	 * @return int
+	 */
+	public function getMarketingPageFunnelLastPage() {
+		$pageFunnel = $this->getMarketingPageFunnel();
+		if (count($pageFunnel)) {
+			return $pageFunnel[count($pageFunnel) - 1];
+		}
+		return 0;
 	}
 
 	/**

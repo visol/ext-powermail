@@ -264,7 +264,6 @@ Show Backend Module: Powermail List
 												</dt>
 												<dd>
 													{mail.spamFactor}
-													<f:debug>{mail.marketingPageFunnel}</f:debug>
 												</dd>
 											</dl>
 										</f:if>
@@ -298,7 +297,7 @@ Show Backend Module: Powermail List
 												</dd>
 											</dl>
 										</f:if>
-										<f:if condition="{mail.marketingPageFunnel}">
+										<f:if condition="{mail.marketingMobileDevice}">
 											<f:comment>Use marketingPageFunnel as indicator if marketing is switched on in generally - showing "0" is ok</f:comment>
 											<dl class="powermail_listbe_details_dl powermail_listbe_details_dl_additional">
 												<dt>

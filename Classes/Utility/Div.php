@@ -654,12 +654,13 @@ class Div {
 	 */
 	public static function getGroupedMarketingStuff($mails, $max = 10, $maxLabel = 'All others') {
 		$arr = array(
-			'marketingSearchterm' => array(),
+			'marketingRefererDomain' => array(),
 			'marketingReferer' => array(),
-			'marketingPayedSearchResult' => array(),
-			'marketingLanguage' => array(),
+			'marketingCountry' => array(),
+			'marketingMobileDevice' => array(),
+			'marketingFrontendLanguage' => array(),
 			'marketingBrowserLanguage' => array(),
-			'marketingFunnel' => array(),
+			'marketingPageFunnelLastPage' => array(),
 		);
 		foreach ($mails as $mail) {
 			foreach ($arr as $key => $v) {
