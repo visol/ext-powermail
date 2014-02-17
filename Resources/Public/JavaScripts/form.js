@@ -68,9 +68,9 @@ jQuery(document).ready(function($) {
  */
 function checkCheckboxes(field, rules, i, options) {
 	var checked = 0; // no checkbox checked at the beginning
-	var classes = field.attr('class').split(' ');
+	var classes = field.prop('class').split(' ');
 	jQuery('.' + classes[1]).each(function() {
-		if (jQuery(this).attr('checked')) {
+		if (jQuery(this).prop('checked')) {
 			checked = 1;
 		}
 	});
@@ -119,7 +119,7 @@ function getLocationAndWrite() {
 function getBaseUrl() {
 	var baseurl;
 	if (jQuery('base').length > 0) {
-		baseurl = jQuery('base').attr('href');
+		baseurl = jQuery('base').prop('href');
 	} else {
 		if (window.location.protocol != "https:") {
 			baseurl = 'http://' + window.location.hostname;

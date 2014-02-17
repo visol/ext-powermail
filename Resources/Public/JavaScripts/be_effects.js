@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Hide/Unhide Mails
-	$('.unhideMail, .hideMail').live('click', function() {
+	$(document).on('click', '.unhideMail, .hideMail', function () {
 		$this = $(this);
 		formToken = $this.siblings('.container_formtoken').val();
 		uid = $this.siblings('.container_uid').val();
@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
 	});
 
 	// Delete Mail
-	$('.deleteMail').live('click', function() {
+	$(document).on('click', '.deleteMail', function () {
 		$this = $(this);
 		formToken = $this.siblings('.container_formtoken').val();
 		uid = $this.siblings('.container_uid').val();
@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
 
 	// pagebrowser (add hiddenfield with pagebrowser variables to search form and submit)
 	$('.f3-widget-paginator a').click(function(e) {
-		href = $(this).attr('href');
+		href = $(this).prop('href');
 		hrefParts = href.split('&');
 		for (i = 0; i < hrefParts.length; i++) {
 			if (hrefParts[i].indexOf('widget') != -1) {
@@ -76,7 +76,7 @@ jQuery(document).ready(function($) {
 
 	// sorting (add hiddenfield with sorting variables to search form and submit)
 	$('a.sorting').click(function(e) {
-		href = $(this).attr('href');
+		href = $(this).prop('href');
 		hrefParts = href.split('&');
 		for (i = 0; i < hrefParts.length; i++) {
 			if (hrefParts[i].indexOf('sorting') != -1) {
@@ -199,7 +199,7 @@ jQuery(document).ready(function($) {
 		$('.extended_export_field, .extended_export_field_container').sortable({
 			connectWith: '.connected',
 			update: function(event, ui) {
-				$id = $(this).attr('id');
+				$id = $(this).prop('id');
 				if ($id == 'export_field_selection') {
 					$fields = $(this).sortable('toArray').toString();
 					$('#export_fields').val($fields);
