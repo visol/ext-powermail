@@ -106,8 +106,18 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 			$index = $cycle - 1;
 			$options = $field->getModifiedSettings();
 
+			// if GET/POST with marker (&tx_powermail_pi1[field][marker][index]=value)
+			if (isset($this->piVars['field'][$marker]) && is_array($this->piVars['field'][$marker])) {
+				if (
+					$this->piVars['field'][$marker][$index] == $options[$index]['value']
+					|| $this->piVars['field'][$marker][$index] == $options[$index]['label']
+				) {
+					$selected = 1;
+				}
+			}
+
 			// if GET/POST with marker (&tx_powermail_pi1[field][marker]=value)
-			if (isset($this->piVars['field'][$marker])) {
+			elseif (isset($this->piVars['field'][$marker])) {
 				if ($this->piVars['field'][$marker] == $options[$index]['value'] ||
 					$this->piVars['field'][$marker] == $options[$index]['label']) {
 					$selected = 1;
