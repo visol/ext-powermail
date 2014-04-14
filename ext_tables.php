@@ -52,14 +52,14 @@ $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi1';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
 	$pluginSignature,
-	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi1.xml'
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/FlexformPi1.xml'
 );
 	// Pi2
 $pluginSignature = str_replace('_', '', $_EXTKEY) . '_pi2';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
 	$pluginSignature,
-	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/flexform_pi2.xml'
+	'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/FlexformPi2.xml'
 );
 
 /**
@@ -67,13 +67,19 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
  */
 if (TYPO3_MODE == 'BE') {
 	// show powermail fields in Pi2 (powermail_frontend)
-	require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php');
+	require_once(
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php'
+	);
 
 	// marker field in Pi1
-	require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Marker.php');
+	require_once(
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Marker.php'
+	);
 
 	// add options to TCA select fields with itemsProcFunc
-	require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php');
+	require_once(
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php'
+	);
 
 	// WizIcon for Pi1
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['In2code\Powermail\Utility\WizIcon'] =
@@ -83,11 +89,26 @@ if (TYPO3_MODE == 'BE') {
 /**
  * Include TypoScript
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Main', 'Main Template');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Powermail_Frontend', 'Powermail_Frontend');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/CssBasic', 'Add basic CSS');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/CssFancy', 'Add fancy CSS');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript/Marketing', 'Marketing Information');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/Main',
+	'Main Template'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/Powermail_Frontend',
+	'Powermail_Frontend'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/CssBasic',
+	'Add basic CSS'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/CssFancy',
+	'Add fancy CSS'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+	$_EXTKEY, 'Configuration/TypoScript/Marketing',
+	'Marketing Information'
+);
 
 /**
  * Settings for Tables
@@ -119,7 +140,8 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Form.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_forms.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_powermail_domain_model_forms.gif'
 	),
 );
 
@@ -151,7 +173,8 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Page.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_pages.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_powermail_domain_model_pages.gif'
 	),
 );
 
@@ -184,7 +207,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'requestUpdate' => 'type,own_marker_select',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Field.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_fields.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_powermail_domain_model_fields.gif'
 	),
 );
 
@@ -215,7 +239,8 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Mail.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_mails.gif',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_powermail_domain_model_mails.gif',
 		'searchFields' => 'sender_mail, sender_name, subject, body'
 	),
 );
@@ -247,6 +272,7 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Answer.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_powermail_domain_model_answers.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
+			'Resources/Public/Icons/tx_powermail_domain_model_answers.gif'
 	),
 );
