@@ -174,8 +174,10 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		);
 
 		// allow subvalues in new property mapper
-		$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
-		$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
+		$mailMvcArgument = $this->arguments->getArgument('mail');
+		$mailMvcArgument->getPropertyMappingConfiguration()->allowProperties('answers');
+		$mailMvcArgument->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
+		$mailMvcArgument->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
 
 		$i = 0;
 		foreach ((array) $arguments['field'] as $marker => $value) {
@@ -185,12 +187,29 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			}
 
 			// allow subvalues in new property mapper
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
-			$this->arguments['mail']->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers.' . $i);
+			$mailMvcArgument->getPropertyMappingConfiguration()->forProperty('answers')->allowProperties($i);
+			$mailMvcArgument->getPropertyMappingConfiguration()->forProperty('answers.' . $i)->allowAllProperties();
+			$mailMvcArgument->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
+			$mailMvcArgument->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers.' . $i);
+
+			$fieldUid = $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']);
+
+			// Skip fields for which the UID can not be determined (e.g. secondary password field, upload field).
+			if ($fieldUid === 0) {
+				continue;
+			}
+
+			if (is_array($value)) {
+				if (isset($value['tmp_name'])) {
+					$value = $value['name'];
+				} else {
+					$value = serialize($value);
+				}
+			}
 
 			$newArguments['mail']['answers'][$i] = array(
-				'field' => strval($this->div->getFieldUidFromMarker($marker, $arguments['mail']['form'])),
-				'value' => (is_array($value) && !empty($value['tmp_name']) ? $value['name'] : $value),
+				'field' => strval($fieldUid),
+				'value' => $value,
 				'valueType' => Div::getDataTypeFromFieldType(
 					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
 				)
