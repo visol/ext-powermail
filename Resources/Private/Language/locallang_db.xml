@@ -141,6 +141,7 @@
 			<label index="flexform_pi2.main.switchableControllerActions.0">List or Detail View</label>
 			<label index="flexform_pi2.main.switchableControllerActions.1">Detail View</label>
 			<label index="flexform_pi2.main.switchableControllerActions.2">Edit View</label>
+			<label index="flexform_pi2.main.switchableControllerActions.3">All Views</label>
 			<label index="flexform_pi2.main.form">Choose a form</label>
 			<label index="flexform_pi2.main.pid">Select a page with mails (optional)</label>
 			<label index="flexform_pi2.list">Listview</label>
@@ -311,6 +312,7 @@
 			<label index="flexform_pi2.main.switchableControllerActions.0">Listen- oder Detailansicht</label>
 			<label index="flexform_pi2.main.switchableControllerActions.1">Detailansicht</label>
 			<label index="flexform_pi2.main.switchableControllerActions.2">Änderungsansicht</label>
+			<label index="flexform_pi2.main.switchableControllerActions.3">Alle Ansichten</label>
 			<label index="flexform_pi2.main.form">Wählen Sie ein Formular</label>
 			<label index="flexform_pi2.main.pid">Seite mit Mails auswählen (optional)</label>
 			<label index="flexform_pi2.list">Listenansicht</label>
