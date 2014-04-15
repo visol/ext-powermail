@@ -13,11 +13,11 @@ class ErrorClassViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
 	/**
 	 * Prefill string for fields
 	 *
-	 * @param 	object		Current field
-	 * @param 	string 		Any string for errorclass
-	 * @return 	string		Changed string
+	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param string $class Any string for errorclass
+	 * @return string
 	 */
-	public function render($field, $class) {
+	public function render(\In2code\Powermail\Domain\Model\Field $field, $class = 'error') {
 		$validationResults = $this->controllerContext->getRequest()->getOriginalRequestMappingResults();
 		$errors = $validationResults->getFlattenedErrors();
 		foreach ($errors as $error) {

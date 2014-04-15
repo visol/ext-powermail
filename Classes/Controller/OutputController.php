@@ -246,13 +246,6 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	public function initializeObject() {
 		// merge typoscript to flexform
 		Div::mergeTypoScript2FlexForm($this->settings, 'Pi2');
-
-		// check if ts is included
-		if (!isset($this->settings['staticTemplate'])) {
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail')
-			);
-		}
 	}
 
 	/**
@@ -262,6 +255,14 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 */
 	protected function initializeAction() {
 		$this->piVars = $this->request->getArguments();
+
+		// check if ts is included
+		if (!isset($this->settings['staticTemplate'])) {
+			$this->controllerContext = $this->buildControllerContext();
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail')
+			);
+		}
 	}
 
 }

@@ -9,11 +9,12 @@ $red1: #F2DEDE;
 $red2: #EBCCD1;
 $red3: #A94442;
 
+$widthPowermail: 640px;
 $widthField: 400px;
 $widthLabel: 200px;
 
 .tx-powermail {
-	width: 640px;
+	width: $widthPowermail;
 	color: $grey1;
 
 	* {

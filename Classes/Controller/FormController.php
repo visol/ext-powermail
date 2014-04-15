@@ -431,13 +431,6 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'Settings', array($this));
 
-		// check if ts is included
-		if (!isset($this->settings['staticTemplate'])) {
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('error_no_typoscript', 'powermail')
-			);
-		}
-
 		// Debug Output
 		if ($this->settings['debug']['settings']) {
 			GeneralUtility::devLog(
@@ -445,6 +438,20 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 				$this->extensionName,
 				0,
 				$this->settings
+			);
+		}
+	}
+
+	/**
+	 * Initialize Action
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+		if (!isset($this->settings['staticTemplate'])) {
+			$this->controllerContext = $this->buildControllerContext();
+			$this->flashMessageContainer->add(
+				LocalizationUtility::translate('error_no_typoscript', 'powermail')
 			);
 		}
 	}
