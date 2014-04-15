@@ -5,28 +5,9 @@
 		<vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if>
 	</label>
 	<f:form.textfield
-		id="powermail_field_{field.marker}"
+		type="{vh:Misc.FieldTypeFromValidation(field:field)}"
 		property="{field.marker}"
 		value="{vh:Misc.PrefillField(field: '{field}')}"
 		class="powermail_field powermail_input {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
-		additionalAttributes="{vh:Misc.ValidationDataAttribute(field: '{field}')}" />
-
-	<!--<f:if condition="{field.mandatory}">-->
-		<!--<f:then>-->
-			<!--<f:form.textfield-->
-					<!--id="powermail_field_{field.marker}"-->
-					<!--property="{field.marker}"-->
-					<!--value="{vh:Misc.PrefillField(field: '{field}')}"-->
-					<!--class="powermail_field powermail_input {vh:Misc.ValidationClass(field: '{field}')} {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"-->
-					<!--required="{field.mandatory}" />-->
-		<!--</f:then>-->
-		<!--<f:else>-->
-			<!--<f:form.textfield-->
-					<!--id="powermail_field_{field.marker}"-->
-					<!--property="{field.marker}"-->
-					<!--value="{vh:Misc.PrefillField(field: '{field}')}"-->
-					<!--class="powermail_field powermail_input {vh:Misc.ValidationClass(field: '{field}')} {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}" />-->
-		<!--</f:else>-->
-	<!--</f:if>-->
-
+		id="powermail_field_{field.marker}" />
 </div>
