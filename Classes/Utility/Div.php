@@ -956,6 +956,11 @@ class Div {
 		} else {
 			// add current pid to funnel
 			$marketingInfo['pageFunnel'][] = $pid;
+
+			// clean pagefunnel if has more than 256 entries
+			if (count($marketingInfo['pageFunnel']) > 256) {
+				$marketingInfo['pageFunnel'] = array($pid);
+			}
 		}
 
 		// store in session
