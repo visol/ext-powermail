@@ -39,14 +39,14 @@
 										</params>
 										<script>wizard_add.php</script>
 									</add>
-									<!--<edit>-->
-										<!--<type>popup</type>-->
-										<!--<title>Edit Form</title>-->
-										<!--<icon>edit2.gif</icon>-->
-										<!--<popup_onlyOpenIfSelected>1</popup_onlyOpenIfSelected>-->
-										<!--<JSopenParams>height=350,width=580,status=0,menubar=0,scrollbars=1</JSopenParams>-->
-										<!--<script>wizard_edit.php</script>-->
-									<!--</edit>-->
+									<!--<edit>
+										<type>popup</type>
+										<title>Edit Form</title>
+										<icon>edit2.gif</icon>
+										<popup_onlyOpenIfSelected>1</popup_onlyOpenIfSelected>
+										<JSopenParams>height=350,width=580,status=0,menubar=0,scrollbars=1</JSopenParams>
+										<script>wizard_edit.php</script>
+									</edit>-->
 									<suggest>
 										<title>Add Form</title>
 										<type>suggest</type>

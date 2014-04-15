@@ -157,6 +157,9 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		$this->view->assign('isValid', $isValid);
 		$this->view->assign('errors', $inputValidator->getErrors());
+		if (!$isValid) {
+			header('HTTP/1.0 404 Not Found');
+		}
 	}
 
 	/**
@@ -175,9 +178,19 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		// allow subvalues in new property mapper
 		$mailMvcArgument = $this->arguments->getArgument('mail');
-		$mailMvcArgument->getPropertyMappingConfiguration()->allowProperties('answers');
-		$mailMvcArgument->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers');
-		$mailMvcArgument->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers');
+		$propertyMappingConfiguration = $mailMvcArgument->getPropertyMappingConfiguration();
+		$propertyMappingConfiguration->allowProperties('answers');
+		$propertyMappingConfiguration->allowCreationForSubProperty('answers');
+		$propertyMappingConfiguration->allowModificationForSubProperty('answers');
+		$propertyMappingConfiguration->allowProperties('form');
+		$propertyMappingConfiguration->allowCreationForSubProperty('form');
+		$propertyMappingConfiguration->allowModificationForSubProperty('form');
+
+		// allow creation of new objects (for validation)
+		$propertyMappingConfiguration->setTypeConverterOptions('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\PersistentObjectConverter', array(
+			\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => TRUE,
+			\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => TRUE
+		));
 
 		$i = 0;
 		foreach ((array) $arguments['field'] as $marker => $value) {
@@ -187,10 +200,10 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			}
 
 			// allow subvalues in new property mapper
-			$mailMvcArgument->getPropertyMappingConfiguration()->forProperty('answers')->allowProperties($i);
-			$mailMvcArgument->getPropertyMappingConfiguration()->forProperty('answers.' . $i)->allowAllProperties();
-			$mailMvcArgument->getPropertyMappingConfiguration()->allowCreationForSubProperty('answers.' . $i);
-			$mailMvcArgument->getPropertyMappingConfiguration()->allowModificationForSubProperty('answers.' . $i);
+			$propertyMappingConfiguration->forProperty('answers')->allowProperties($i);
+			$propertyMappingConfiguration->forProperty('answers.' . $i)->allowAllProperties();
+			$propertyMappingConfiguration->allowCreationForSubProperty('answers.' . $i);
+			$propertyMappingConfiguration->allowModificationForSubProperty('answers.' . $i);
 
 			$fieldUid = $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']);
 

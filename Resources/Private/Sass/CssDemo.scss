@@ -107,7 +107,8 @@ $widthLabel: 200px;
 		/**
 		 * JS Form Validation
 		 */
-		.parsley-error-list {
+		.parsley-errors-list {
+			display: none;
 			margin: 5px 0 20px 0;
 			padding: 0;
 			list-style-type: none;
@@ -116,6 +117,9 @@ $widthLabel: 200px;
 			width: $widthField;
 			float: right;
 			clear: left;
+			&.filled {
+				display: block;
+			}
 
 			> li {
 				color: $red3;

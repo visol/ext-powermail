@@ -477,7 +477,7 @@ page {
 	# Inlude JavaScript files
 	includeJSFooterlibs {
 		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/JavaScripts/jquery.ui.datepicker.min.js
-		powermailJQueryFormValidation = EXT:powermail/Resources/Public/JavaScripts/parsley.min.js
+		powermailJQueryFormValidation = EXT:powermail/Resources/Public/JavaScripts/parsley.remote.min.js
 		powermailJQueryTabs = EXT:powermail/Resources/Public/JavaScripts/tabs.js
 	}
 	includeJSFooter {
