@@ -1,15 +1,20 @@
 /**
  * Main Settings
  */
-div.tx-powermail h3 {
-	display: none;
-}
 div.tx-powermail {
 	font-family: Calibri, Arial, sans-serif;
 	font-size: 14px;
 	width: 640px;
 	margin: 0 !important;
 	padding: 0 !important;
+}
+div.tx-powermail * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+div.tx-powermail h3 {
+	display: none;
 }
 .powermail_message {
 	padding-left: 20px;
@@ -26,11 +31,6 @@ div.tx-powermail {
 	-webkit-box-shadow: 0px 0px 8px 0px;
 	-moz-box-shadow: 0px 0px 8px 0px;
 	box-shadow: 0px 0px 8px 0px;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
 
 	background-position: 98% 10px;
 	background-repeat: no-repeat;
@@ -74,11 +74,6 @@ div.tx-powermail {
 	-webkit-box-shadow: 0px 0px 8px 0px;
 	-moz-box-shadow: 0px 0px 8px 0px;
 	box-shadow: 0px 0px 8px 0px;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
 }
 .powermail_legend {
 	font-weight: bold;
@@ -113,11 +108,6 @@ div.powermail_fieldwrap {
 	-webkit-box-shadow: 3px 3px 5px #eee;
 	-moz-box-shadow: 3px 3px 5px #eee;
 	box-shadow: 3px 3px 5px #eee;
-
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	-khtml-border-radius: 2px;
-	border-radius: 2px;
 }
 .powermail_captcha {
 	width: 392px;
@@ -130,7 +120,8 @@ input.powermail_field:focus {
 	border: 1px solid white;
 	outline: none;
 }
-.powermail_submit {
+.powermail_submit,
+.powermail_reset {
 	margin: 10px 16px 10px 0;
 	float: right;
 	border: 0;
@@ -148,14 +139,12 @@ input.powermail_field:focus {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
 	background: linear-gradient(top, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%); /* W3C */
 
-	-webkit-box-shadow: 3px 3px 5px #aaa;
-	-moz-box-shadow: 3px 3px 5px #aaa;
-	box-shadow: 3px 3px 5px #aaa;
-
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	-khtml-border-radius: 2px;
-	border-radius: 2px;
+	-webkit-box-shadow: 3px 3px 5px #ccc;
+	-moz-box-shadow: 3px 3px 5px #ccc;
+	box-shadow: 3px 3px 5px #ccc;
+}
+.powermail_reset {
+	background: #FF6724;
 }
 .powermail_fieldwrap_radio fieldset,
 .powermail_fieldwrap_check fieldset {
@@ -169,12 +158,16 @@ input.powermail_field:focus {
 }
 .powermail_radio_outer,
 .powermail_captcha_outer,
-.powermail_check_outer {
+.powermail_check_outer,
+.powermail_fieldwrap_text {
 	background-color: white;
 	border: 1px solid #ccc;
 	float: left;
 	padding: 3px;
-	width: 392px;
+	width: 400px;
+}
+.powermail_fieldwrap.powermail_fieldwrap_text {
+	margin-left: 200px;
 }
 .powermail_radio_outer label,
 .powermail_captcha_outer label,
@@ -233,11 +226,6 @@ ul#powermail_tabmenu {
 	-webkit-box-shadow: 0px 0px 8px 0px;
 	-moz-box-shadow: 0px 0px 8px 0px;
 	box-shadow: 0px 0px 8px 0px;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
 }
 ul#powermail_tabmenu li {
 	float: left;
@@ -277,11 +265,6 @@ ul#powermail_tabmenu li.act {
 	-webkit-box-shadow: 0px 0px 8px 0px;
 	-moz-box-shadow: 0px 0px 8px 0px;
 	box-shadow: 0px 0px 8px 0px;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
 }
 input.powermail_confirmation_form {
 	float: left;
@@ -303,11 +286,6 @@ input.powermail_confirmation_form {
 	-webkit-box-shadow: 3px 3px 5px #aaa;
 	-moz-box-shadow: 3px 3px 5px #aaa;
 	box-shadow: 3px 3px 5px #aaa;
-
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	-khtml-border-radius: 2px;
-	border-radius: 2px;
 }
 input.powermail_confirmation_submit {
 	float: right;
@@ -329,11 +307,6 @@ input.powermail_confirmation_submit {
 	-webkit-box-shadow: 3px 3px 5px #aaa;
 	-moz-box-shadow: 3px 3px 5px #aaa;
 	box-shadow: 3px 3px 5px #aaa;
-
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	-khtml-border-radius: 2px;
-	border-radius: 2px;
 }
 
 /**
@@ -373,11 +346,6 @@ dl.powermail_all dd {
 	-webkit-box-shadow: 0px 0px 8px 0px;
 	-moz-box-shadow: 0px 0px 8px 0px;
 	box-shadow: 0px 0px 8px 0px;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
 }
 
 /**
@@ -419,11 +387,6 @@ dl.powermail_all dd {
 	-webkit-box-shadow: 0px 0px 8px 0px;
 	-moz-box-shadow: 0px 0px 8px 0px;
 	box-shadow: 0px 0px 8px 0px;
-
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
 }
 .powermail_frontend_list {
 	width: 100%;
