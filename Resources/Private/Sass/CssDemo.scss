@@ -1,0 +1,154 @@
+$greySoft1: #EEEEEE;
+$greySoft2: #BBBBBB;
+$grey1: #444444;
+$blue1: #1E5799;
+$orange1: #FCF8E3;
+$orange2: #FAEBCC;
+$yellow1: #FFCA4B;
+$red1: #F2DEDE;
+$red2: #EBCCD1;
+$red3: #A94442;
+
+$widthField: 400px;
+$widthLabel: 200px;
+
+.tx-powermail {
+	width: 640px;
+	color: $grey1;
+
+	* {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+
+	.powermail_fieldset {
+		clear: left;
+		border: 1px solid $greySoft2;
+		padding: 10px;
+		margin: 0 0 20px 0;
+		background: $greySoft1;
+
+		.powermail_legend {
+			color: $greySoft2;
+			float: right;
+			margin: 3px 0 10px 0;
+			font-size: 200%;
+			white-space: normal;
+		}
+
+		.powermail_label {
+			display: block;
+			width: $widthLabel;
+			float: left;
+			clear: left;
+			font-weight: bold;
+		}
+
+		.powermail_fieldwrap {
+			margin: 0 0 0.5em 0;
+			clear: both;
+			overflow: hidden;
+		}
+
+		/* Powermail Fields */
+		.powermail_field {
+			width: $widthField;
+			padding: 3px;
+			border: 1px solid $greySoft2;
+			color: #444;
+			float: right;
+			font-size: inherit;
+
+			&.powermail_submit,
+			&.powermail_reset {
+				margin: 5px 0 0 0;
+				padding: 5px 20px;
+				color: white;
+				font-weight: bold;
+				cursor: pointer;
+				background-color: $blue1;
+				border: 1px solid $greySoft1;
+			}
+			&.powermail_reset {
+				background-color: $yellow1;
+			}
+			&.powermail_captcha {
+				width: 100%;
+			}
+		}
+
+		.powermail_captchaimage {
+			width: 100%;
+			margin-top: 10px;
+		}
+
+		.powermail_fieldwrap_radio,
+		.powermail_fieldwrap_check {
+			fieldset {
+				border: 0;
+				padding: 0;
+				margin: 0;
+			}
+		}
+
+		.powermail_radio_outer,
+		.powermail_captcha_outer,
+		.powermail_check_outer,
+		.powermail_fieldwrap_text {
+			background-color: white;
+			border: 1px solid $greySoft2;
+			float: right;
+			padding: 3px;
+			width: $widthField;
+		}
+
+		/**
+		 * JS Form Validation
+		 */
+		.parsley-error-list {
+			margin: 5px 0 20px 0;
+			padding: 0;
+			list-style-type: none;
+			background-color: $red1;
+			border: 1px solid $red2;
+			width: $widthField;
+			float: right;
+			clear: left;
+
+			> li {
+				color: $red3;
+				padding: 5px 10px;
+			}
+		}
+		.powermail_field_error,
+		.parsley-error,
+		.powermail_form .parsley-error:focus,
+		div.error {
+			background-color: $red2;
+			border: 1px solid $red3;
+		}
+	}
+
+	/**
+	 * Serverside Validation
+	 */
+	.powermail_message {
+		padding-left: 20px;
+		min-height: 65px;
+		background-color: $red2;
+		border: 1px solid $red3;
+		background-position: 98% 10px;
+		background-repeat: no-repeat;
+	}
+	.powermail_message_ok {
+		background-image: url("/typo3conf/ext/powermail/Resources/Public/Image/icon_ok.png");
+	}
+	.powermail_message_error {
+		background-image: url("/typo3conf/ext/powermail/Resources/Public/Image/icon_error.png");
+	}
+	.powermail_message li {
+		padding: 10px 50px 0 0;
+		color: $red3;
+	}
+}

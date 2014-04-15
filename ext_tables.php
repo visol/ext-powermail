@@ -98,12 +98,8 @@ if (TYPO3_MODE == 'BE') {
 	'Powermail_Frontend'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-	$_EXTKEY, 'Configuration/TypoScript/CssBasic',
-	'Add basic CSS'
-);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-	$_EXTKEY, 'Configuration/TypoScript/CssFancy',
-	'Add fancy CSS'
+	$_EXTKEY, 'Configuration/TypoScript/CssDemo',
+	'Add Demo CSS'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
 	$_EXTKEY, 'Configuration/TypoScript/Marketing',
