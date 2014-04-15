@@ -38,9 +38,9 @@ class Marker {
 	/**
 	 * Create individual marker for powermail field
 	 *
-	 * @param	array	Config Array
-	 * @param	object	Parent Object
-	 * @return	string	String to render
+	 * @param array $pa Config Array
+	 * @param object $fobj Parent Object
+	 * @return string
 	 */
 	public function createMarker($pa, $fobj) {
 		$content = '';
@@ -48,9 +48,9 @@ class Marker {
 		// if entry in db
 		if (isset($pa['row']['marker']) && !empty($pa['row']['marker'])) {
 			$marker = $pa['row']['marker'];
-		// no entry
 		} else {
-			$marker = 'Error: Marker is empty';
+			// no entry - take "marker"
+			$marker = 'marker';
 		}
 
 		// field just generated
@@ -73,9 +73,9 @@ class Marker {
 	/**
 	 * Workarround to only show a label and no field in TCA
 	 *
-	 * @param	array	Config Array
-	 * @param	object	Parent Object
-	 * @return	empty string
+	 * @param array $pa Config Array
+	 * @param object $fobj Parent Object
+	 * @return string empty
 	 */
 	public function doNothing($pa, $fobj) {
 		return '';
