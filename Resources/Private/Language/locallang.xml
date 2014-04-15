@@ -55,6 +55,11 @@
 			<label index="validationerror_validation.3">This is not a valid Phone Number!</label>
 			<label index="validationerror_validation.4">Please insert numbers only!</label>
 			<label index="validationerror_validation.5">Please insert letters only!</label>
+			<label index="validationerror_validation.6">Please increase number!</label>
+			<label index="validationerror_validation.7">Please decrease number!</label>
+			<label index="validationerror_validation.8">Number to high or to low!</label>
+			<label index="validationerror_validation.9">Too many signs given!</label>
+			<label index="validationerror_validation.10">Error in validation!</label>
 			<label index="validationerror_upload_extension">It's not allowed to upload a file with this extension!</label>
 			<label index="validationerror_upload_size">The file, that you want to upload is too large!</label>
 			<label index="validationerror_upload_error">Upload failed, please check permissons on the server!</label>
@@ -214,6 +219,11 @@
 			<label index="validationerror_validation.3">Keine gültige Telefonnummer!</label>
 			<label index="validationerror_validation.4">Bitte nur Nummern eintragen!</label>
 			<label index="validationerror_validation.5">Bitte nur Buchstaben eintragen!</label>
+			<label index="validationerror_validation.6">Bitte höhrere Zahl eintragen!</label>
+			<label index="validationerror_validation.7">Bitte niedrigere Zahl eintragen!</label>
+			<label index="validationerror_validation.8">Zahl zu groß oder zu klein!</label>
+			<label index="validationerror_validation.9">Zu viele Zeichen!</label>
+			<label index="validationerror_validation.10">Fehler in Validierung!</label>
 			<label index="validationerror_upload_extension">Der Dateityp ist nicht erlaubt, bitte versuchen Sie einen anderen Typ!</label>
 			<label index="validationerror_upload_size">Die hochgeladene Datei ist zu groß!</label>
 			<label index="validationerror_upload_error">Upload fehlgeschlagen, bitte Berechtigungen auf Server überprüfen!</label>

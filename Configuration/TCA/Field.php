@@ -9,7 +9,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
 			path, content_element, text, prefill_value, create_from_typoscript, mandatory,
-			validation, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
+			validation, validation_configuration, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
 		'1' => array(
@@ -24,7 +24,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 	),
 	'palettes' => array(
 		'1' => array('showitem' => 'sender_email, sender_name'),
-		'2' => array('showitem' => 'mandatory, validation'),
+		'2' => array('showitem' => 'mandatory, validation, validation_configuration'),
 		'3' => array('showitem' => 'prefill_value, feuser_value, create_from_typoscript'),
 		'4' => array('showitem' => 'auto_marker, marker, own_marker_select'),
 		'canNotCollapse' => '1'
@@ -305,25 +305,124 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose',
 						''
 					),
+
+					/**
+					 * EMAIL (+html5)
+					 *
+					 * html5 example: <input type="email" />
+					 * javascript example: <input type="text" data-parsley-type="email" />
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.1',
 						1
 					),
+
+					/**
+					 * URL (+html5)
+					 *
+					 * html5 example: <input type="url" />
+					 * javascript example: <input type="text" data-parsley-type="url" />
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.2',
 						2
 					),
+
+					/**
+					 * PHONE (+html5)
+					 *
+					 * html5 example:
+					 * 		<input type="text" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
+					 * javascript example:
+					 * 		<input ... data-parsley-pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.3',
 						3
 					),
+
+					/**
+					 * NUMBER/INTEGER (+html5)
+					 *
+					 * html5 example: <input type="number" />
+					 * javascript example: <input type="text" data-parsley-type="integer" />
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.4',
 						4
 					),
+
+					/**
+					 * LETTERS (+html5)
+					 *
+					 * html5 example: <input type="text" pattern="[a-zA-Z]*" />
+					 * javascript example: <input type="text" data-parsley-pattern="[a-zA-Z]*" />
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.5',
 						5
+					),
+
+					/**
+					 * MIN NUMBER (+html5)
+					 *
+					 * Note: Field validation_configuration for editors viewable
+					 * html5 example: <input type="text" min="6" />
+					 * javascript example: <input type="text" data-parsley-min="6" />
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.6',
+						6
+					),
+
+					/**
+					 * MAX NUMBER (+html5)
+					 *
+					 * Note: Field validation_configuration for editors viewable
+					 * html5 example: <input type="text" max="12" />
+					 * javascript example: <input type="text" data-parsley-max="12" />
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.7',
+						7
+					),
+
+					/**
+					 * RANGE (+html5)
+					 *
+					 * Note: Field validation_configuration for editors viewable
+					 * html5 example: <input type="range" min="1" max="10" />
+					 * javascript example:
+					 * 		<input type="text" data-parsley-type="range" min="1" max="10" />
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.8',
+						8
+					),
+
+					/**
+					 * LENGTH
+					 *
+					 * Note: Field validation_configuration for editors viewable
+					 * javascript example:
+					 * 		<input type="text" data-parsley-length="[6, 10]" />
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.9',
+						9
+					),
+
+					/**
+					 * PATTERN (+html5)
+					 *
+					 * Note: Field validation_configuration for editors viewable
+					 * html5 example: <input type="text"  pattern="\d+" />
+					 * javascript example:
+					 * 		<input type="text" data-parsley-pattern="\d+" />
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.10',
+						10
 					),
 				),
 				'size' => 1,
@@ -333,6 +432,16 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'itemsProcFuncFieldName' => 'validation'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea'
+		),
+		'validation_configuration' => array(
+			'exclude' => 1,
+			'label' =>
+				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validationConfiguration',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30
+			),
+			'displayCond' => 'FIELD:validation:IN:6,7,8,9,10'
 		),
 		'prefill_title' => array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.prefill_title',

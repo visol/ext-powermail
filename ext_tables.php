@@ -201,7 +201,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'requestUpdate' => 'type,own_marker_select',
+		'requestUpdate' => 'type,validation,own_marker_select',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Field.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) .
 			'Resources/Public/Icons/tx_powermail_domain_model_fields.gif'
