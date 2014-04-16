@@ -30,12 +30,19 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 
 		// if mandatory field
 		if ($field->getMandatory()) {
-			//$dataArray['required'] = 'required';
-			$dataArray['data-parsley-required'] = 'true';
-			$dataArray['data-parsley-required-message'] = LocalizationUtility::translate(
-				'validationerror_mandatory',
-				$extensionName
-			);
+			if ($this->isNativeValidationEnabled()) {
+				$dataArray['required'] = 'required';
+			} else {
+				if ($this->isClientValidationEnabled()) {
+					$dataArray['data-parsley-required'] = 'true';
+				}
+			}
+			if ($this->isClientValidationEnabled()) {
+				$dataArray['data-parsley-required-message'] = LocalizationUtility::translate(
+					'validationerror_mandatory',
+					$extensionName
+				);
+			}
 		}
 
 		// validation
