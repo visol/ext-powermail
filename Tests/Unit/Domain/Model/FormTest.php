@@ -26,9 +26,8 @@ namespace In2code\Powermail\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Form.
+ * Test case for class \In2code\Powermail\Domain\Model\Form
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
@@ -38,25 +37,25 @@ namespace In2code\Powermail\Tests;
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class FormTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var Tx_Powermail_Domain_Model_Form
+	 * @var \In2code\Powermail\Domain\Model\Form
 	 */
-	protected $fixture;
+	protected $generalValidatorMock;
 
 	/**
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Form();
+		$this->generalValidatorMock = $this->getAccessibleMock('\In2code\Powermail\Domain\Model\Form', array('dummy'));
 	}
 
 	/**
 	 * @return void
 	 */
 	public function tearDown() {
-		unset($this->fixture);
+		unset($this->generalValidatorMock);
 	}
 
 	/**
@@ -72,11 +71,11 @@ class FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
-		$this->fixture->setTitle('Conceived at T3CON10');
+		$this->generalValidatorMock->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getTitle()
+			$this->generalValidatorMock->getTitle()
 		);
 	}
 
@@ -87,7 +86,7 @@ class FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	public function getCssReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->fixture->getCss()
+			$this->generalValidatorMock->getCss()
 		);
 	}
 
@@ -96,11 +95,11 @@ class FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setCssForStringSetsCss() {
-		$this->fixture->setCss('my CSS');
+		$this->generalValidatorMock->setCss('my CSS');
 
 		$this->assertSame(
 			'my CSS',
-			$this->fixture->getCss()
+			$this->generalValidatorMock->getCss()
 		);
 	}
 
@@ -111,7 +110,7 @@ class FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	public function getPagesReturnsInitialValueForTxPowermailDomainModelPage() {
 		$this->assertEquals(
 			NULL,
-			$this->fixture->getPages()
+			$this->generalValidatorMock->getPages()
 		);
 	}
 
@@ -121,11 +120,11 @@ class FormTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 */
 	public function setPagesForTxPowermailDomainModelPageSetsPages() {
 		$dummyObject = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->fixture->setPages($dummyObject);
+		$this->generalValidatorMock->setPages($dummyObject);
 
 		$this->assertSame(
 			$dummyObject,
-			$this->fixture->getPages()
+			$this->generalValidatorMock->getPages()
 		);
 	}
 

@@ -26,9 +26,8 @@ namespace In2code\Powermail\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Page.
+ * Test case for class \In2code\Powermail\Domain\Model\Page
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
@@ -38,27 +37,26 @@ namespace In2code\Powermail\Tests;
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class PageTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var Tx_Powermail_Domain_Model_Page
+	 * @var \In2code\Powermail\Domain\Model\Page
 	 */
-	protected $fixture;
+	protected $generalValidatorMock;
 
 	/**
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Page();
+		$this->generalValidatorMock = $this->getAccessibleMock('\In2code\Powermail\Domain\Model\Page', array('dummy'));
 	}
 
 	/**
 	 * @return void
 	 */
 	public function tearDown() {
-		unset($this->fixture);
+		unset($this->generalValidatorMock);
 	}
-
 
 	/**
 	 * @test
@@ -73,11 +71,11 @@ class PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
-		$this->fixture->setTitle('Conceived at T3CON10');
+		$this->generalValidatorMock->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getTitle()
+			$this->generalValidatorMock->getTitle()
 		);
 	}
 
@@ -88,7 +86,7 @@ class PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	public function getCssReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->fixture->getCss()
+			$this->generalValidatorMock->getCss()
 		);
 	}
 
@@ -97,85 +95,11 @@ class PageTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setCssForStringSetsCss() {
-		$this->fixture->setCss('my CSS');
+		$this->generalValidatorMock->setCss('my CSS');
 
 		$this->assertSame(
 			'my CSS',
-			$this->fixture->getCss()
+			$this->generalValidatorMock->getCss()
 		);
 	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function getFieldsReturnsInitialValueForObjectStorageContainingTxPowermailDomainModelField() {
-		//$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->assertSame(
-			array(),
-			$this->fixture->getFields()
-		);
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function setFieldsForObjectStorageContainingTxPowermailDomainModelFieldSetsFields() {
-		$objectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-
-		$field = new Tx_Powermail_Domain_Model_Field();
-		$field->setSorting(42);
-		$objectStorage->attach($field);
-
-		$this->fixture->setFields($objectStorage);
-
-		$this->assertSame(
-			array(
-				42 => $field,
-			),
-			$this->fixture->getFields()
-		);
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function addFieldToObjectStorageHoldingFields() {
-		$field = new Tx_Powermail_Domain_Model_Field();
-		$field->setSorting(42);
-		$this->fixture->addField($field);
-
-		$this->assertSame(
-			array(
-				42 => $field,
-			),
-			$this->fixture->getFields()
-		);
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function removeFieldFromObjectStorageHoldingFields() {
-		$field = new Tx_Powermail_Domain_Model_Field();
-		$field->setSorting(42);
-		$this->fixture->addField($field);
-
-		$this->assertSame(
-			array(
-				42 => $field,
-			),
-			$this->fixture->getFields()
-		);
-		$this->fixture->removeField($field);
-
-		$this->assertSame(
-			array(),
-			$this->fixture->getFields()
-		);
-	}
-
 }

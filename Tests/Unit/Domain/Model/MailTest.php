@@ -1,4 +1,5 @@
 <?php
+namespace In2code\Powermail\Tests;
 
 /***************************************************************
  *  Copyright notice
@@ -25,33 +26,37 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Field.
+ * Test case for class \In2code\Powermail\Domain\Model\Mail
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @license http://www.gnu.org/licenses/gpl.html 
+ * 			GNU General Public License, version 3 or later
  *
  * @package TYPO3
  * @subpackage powermail
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-
-class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class MailTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @var \In2code\Powermail\Domain\Model\Mail
 	 */
-	protected $fixture;
+	protected $generalValidatorMock;
 
+	/**
+	 * @return void
+	 */
 	public function setUp() {
-		$this->fixture = new \In2code\Powermail\Domain\Model\Mail();
+		$this->generalValidatorMock = $this->getAccessibleMock('\In2code\Powermail\Domain\Model\Mail', array('dummy'));
 	}
 
+	/**
+	 * @return void
+	 */
 	public function tearDown() {
-		unset($this->fixture);
+		unset($this->generalValidatorMock);
 	}
-
 
 	/**
 	 * @test
@@ -59,7 +64,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getSenderNameReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->fixture->getSenderName()
+			$this->generalValidatorMock->getSenderName()
 		);
 	}
 
@@ -67,11 +72,11 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setTitleForStringSetsSenderName() {
-		$this->fixture->setSenderName('Conceived at T3CON10');
+		$this->generalValidatorMock->setSenderName('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getSenderName()
+			$this->generalValidatorMock->getSenderName()
 		);
 	}
 
@@ -81,7 +86,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getSenderMailReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->fixture->getSenderMail()
+			$this->generalValidatorMock->getSenderMail()
 		);
 	}
 
@@ -89,10 +94,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setTitleForStringSetsSenderMail() {
-		$this->fixture->setSenderMail('Conceived at T3CON10');
+		$this->generalValidatorMock->setSenderMail('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getSenderMail()
+			$this->generalValidatorMock->getSenderMail()
 		);
 	}
 
@@ -103,7 +108,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getSubjectReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getSubject()
+			$this->generalValidatorMock->getSubject()
 		);
 	}
 
@@ -111,10 +116,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setTitleForStringSetsSubject() {
-		$this->fixture->setSubject('Conceived at T3CON10');
+		$this->generalValidatorMock->setSubject('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getSubject()
+			$this->generalValidatorMock->getSubject()
 		);
 	}
 
@@ -124,7 +129,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getReceiverMailReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getReceiverMail()
+			$this->generalValidatorMock->getReceiverMail()
 		);
 	}
 
@@ -132,10 +137,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setTitleForStringReceiverMail() {
-		$this->fixture->setReceiverMail('Conceived at T3CON10');
+		$this->generalValidatorMock->setReceiverMail('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getReceiverMail()
+			$this->generalValidatorMock->getReceiverMail()
 		);
 	}
 
@@ -145,7 +150,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getBodyReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getBody()
+			$this->generalValidatorMock->getBody()
 		);
 	}
 
@@ -153,10 +158,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setBodyForStringSetsBody() {
-		$this->fixture->setBody('Conceived at T3CON10');
+		$this->generalValidatorMock->setBody('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getBody()
+			$this->generalValidatorMock->getBody()
 		);
 	}
 
@@ -165,19 +170,8 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 */
 	public function getFeuserReturnsInitialValueForString(){
 		$this->assertSame(
-			'',
-			$this->fixture->getFeuser()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setFeuserForStringSetsFeuser() {
-		$this->fixture->setFeuser('Conceived at T3CON10');
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getFeuser()
+			NULL,
+			$this->generalValidatorMock->getFeuser()
 		);
 	}
 
@@ -187,7 +181,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getSenderipReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getSenderIp()
+			$this->generalValidatorMock->getSenderIp()
 		);
 	}
 
@@ -195,10 +189,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setsenderIpForStringSetssenderIp() {
-		$this->fixture->setSenderIp('Conceived at T3CON10');
+		$this->generalValidatorMock->setSenderIp('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getSenderIp()
+			$this->generalValidatorMock->getSenderIp()
 		);
 	}
 
@@ -208,7 +202,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getuserAgentReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getSenderIp()
+			$this->generalValidatorMock->getSenderIp()
 		);
 	}
 
@@ -216,10 +210,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setuserAgentForStringSetsUseragent() {
-		$this->fixture->setUserAgent('Conceived at T3CON10');
+		$this->generalValidatorMock->setUserAgent('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getUserAgent()
+			$this->generalValidatorMock->getUserAgent()
 		);
 	}
 
@@ -229,7 +223,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getSpamfactorReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getSpamFactor()
+			$this->generalValidatorMock->getSpamFactor()
 		);
 	}
 
@@ -237,10 +231,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setSpamfactorForStringSetsSpamfactor() {
-		$this->fixture->setSpamFactor('Conceived at T3CON10');
+		$this->generalValidatorMock->setSpamFactor('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getSpamFactor()
+			$this->generalValidatorMock->getSpamFactor()
 		);
 	}
 
@@ -251,7 +245,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getTimeReturnsInitialValueForNull(){
 		$this->assertSame(
 			NULL,
-			$this->fixture->getTime()
+			$this->generalValidatorMock->getTime()
 		);
 	}
 
@@ -260,10 +254,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 */
 	public function setTimeForDatetimeSetsTime() {
 		$now = mktime();
-		$this->fixture->setTime($now);
+		$this->generalValidatorMock->setTime($now);
 		$this->assertSame(
 			$now,
-			$this->fixture->getTime()
+			$this->generalValidatorMock->getTime()
 		);
 	}
 
@@ -273,7 +267,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getFormReturnsInitialValueForNull(){
 		$this->assertSame(
 			NULL,
-			$this->fixture->getForm()
+			$this->generalValidatorMock->getForm()
 		);
 	}
 
@@ -281,11 +275,11 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setFormForTxPowermailDomainModelFormSetsForm() {
-		$form = new Tx_Powermail_Domain_Model_Form;
-		$this->fixture->setForm($form);
+		$form = new \In2code\Powermail\Domain\Model\Form;
+		$this->generalValidatorMock->setForm($form);
 		$this->assertSame(
 			$form,
-			$this->fixture->getForm()
+			$this->generalValidatorMock->getForm()
 		);
 	}
 
@@ -296,7 +290,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getAnswersReturnsInitialValueForNull(){
 		$this->assertSame(
 			NULL,
-			$this->fixture->getAnswers()
+			$this->generalValidatorMock->getAnswers()
 		);
 	}
 
@@ -305,10 +299,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 */
 	public function setAnswersForTxPowermailDomainModelAnswerSetsAnswers() {
 		$dummy = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-		$this->fixture->setAnswers($dummy);
+		$this->generalValidatorMock->setAnswers($dummy);
 		$this->assertSame(
 			$dummy,
-			$this->fixture->getAnswers()
+			$this->generalValidatorMock->getAnswers()
 		);
 	}
 
@@ -319,7 +313,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getCrdateReturnsInitialValueForNull(){
 		$this->assertSame(
 			NULL,
-			$this->fixture->getCrdate()
+			$this->generalValidatorMock->getCrdate()
 		);
 	}
 
@@ -328,10 +322,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 */
 	public function setCrdateForDatetimeSetsCrdate() {
 		$now = mktime();
-		$this->fixture->setCrdate($now);
+		$this->generalValidatorMock->setCrdate($now);
 		$this->assertSame(
 			$now,
-			$this->fixture->getCrdate()
+			$this->generalValidatorMock->getCrdate()
 		);
 	}
 
@@ -341,7 +335,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getHiddenReturnsInitialValueForFalse(){
 		$this->assertSame(
 			FALSE,
-			$this->fixture->getHidden()
+			$this->generalValidatorMock->getHidden()
 		);
 	}
 
@@ -350,41 +344,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 */
 	public function setHiddenToTrue() {
 
-		$this->fixture->setHidden(TRUE);
+		$this->generalValidatorMock->setHidden(TRUE);
 		$this->assertSame(
 			TRUE,
-			$this->fixture->getHidden()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getMarketingsearchtermReturnsInitialValueForString(){
-		$this->assertSame(
-			'',
-			$this->fixture->getMarketingSearchterm()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setMarketingsearchtermForStringSetsMarketingsearchterm() {
-		$this->fixture->setMarketingSearchterm('Conceived at T3CON10');
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getMarketingSearchterm()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getmarketingRefererReturnsInitialValueForString(){
-		$this->assertSame(
-			'',
-			$this->fixture->getMarketingSearchterm()
+			$this->generalValidatorMock->getHidden()
 		);
 	}
 
@@ -392,52 +355,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setmarketingRefererForStringSetsmarketingReferer() {
-		$this->fixture->setMarketingReferer('Conceived at T3CON10');
+		$this->generalValidatorMock->setMarketingReferer('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getMarketingReferer()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getmarketingPayedSearchResultReturnsInitialValueForString(){
-		$this->assertSame(
-			'',
-			$this->fixture->getMarketingPayedSearchResult()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setmarketingPayedSearchResultForStringSetsmarketingPayedSearchResult() {
-		$this->fixture->setMarketingPayedSearchResult('Conceived at T3CON10');
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getMarketingPayedSearchResult()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getmarketingLanguageReturnsInitialValueForString(){
-		$this->assertSame(
-			'',
-			$this->fixture->getMarketingLanguage()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setmarketingLanguageForStringSetsmarketingLanguage() {
-		$this->fixture->setMarketingLanguage('Conceived at T3CON10');
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getMarketingLanguage()
+			$this->generalValidatorMock->getMarketingReferer()
 		);
 	}
 
@@ -447,7 +368,7 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	public function getmarketingBrowserLanguageReturnsInitialValueForString(){
 		$this->assertSame(
 			'',
-			$this->fixture->getMarketingBrowserLanguage()
+			$this->generalValidatorMock->getMarketingBrowserLanguage()
 		);
 	}
 
@@ -455,31 +376,10 @@ class \In2code\Powermail\Domain\Model\MailTest extends Tx_Extbase_Tests_Unit_Bas
 	 * @test
 	 */
 	public function setmarketingBrowserLanguageForStringSetsmarketingBrowserLanguage() {
-		$this->fixture->setMarketingBrowserLanguage('Conceived at T3CON10');
+		$this->generalValidatorMock->setMarketingBrowserLanguage('Conceived at T3CON10');
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getMarketingBrowserLanguage()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getmarketingFunnelReturnsInitialValueForFalse(){
-		$this->assertSame(
-			FALSE,
-			$this->fixture->getMarketingFunnel()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setmarketingFunnelForStringSetsmarketingFunnel() {
-		$this->fixture->setMarketingFunnel('Conceived at T3CON10');
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getMarketingFunnel()
+			$this->generalValidatorMock->getMarketingBrowserLanguage()
 		);
 	}
 }

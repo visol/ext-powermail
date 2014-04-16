@@ -19,6 +19,10 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validateMandatory($value) {
+		// bools
+		if (is_bool($value)) {
+			return FALSE;
+		}
 		// default fields
 		if (!is_array($value)) {
 			if (!empty($value)) {
@@ -57,7 +61,10 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validateUrl($value) {
-		return filter_var($value, FILTER_VALIDATE_URL);
+		if (filter_var($value, FILTER_VALIDATE_URL) !== FALSE) {
+			return TRUE;
+		};
+		return FALSE;
 	}
 
 	/**
@@ -67,7 +74,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validatePhone($value) {
-		if (preg_replace('/[^0-9+ .]/', '', $value) === $value) {
+		if (preg_replace('/[^0-9+ .()]/', '', $value) === $value) {
 			return TRUE;
 		}
 		return FALSE;
@@ -80,7 +87,10 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validateNumbersOnly($value) {
-		return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+		if (!empty($value) && strval(intval($value)) === strval($value)) {
+			return TRUE;
+		};
+		return FALSE;
 	}
 
 	/**
@@ -90,7 +100,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validateLettersOnly($value) {
-		if (preg_replace('/[^a-zA-Z]/', '', $value) === $value) {
+		if (preg_replace('/[^a-zA-ZäüößÄÜÖ]/', '', $value) === $value) {
 			return TRUE;
 		}
 		return FALSE;
@@ -118,7 +128,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validateMaxNumber($value, $configuration) {
-		if ($value <= $configuration) {
+		if (floatval($value) <= floatval($configuration)) {
 			return TRUE;
 		}
 		return FALSE;
@@ -140,7 +150,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 			$values[1] = $values[0];
 			$values[0] = 1;
 		}
-		if ($value >= $values[0] || $value <= $values[1]) {
+		if ($value >= $values[0] && $value <= $values[1]) {
 			return TRUE;
 		}
 		return FALSE;
@@ -162,7 +172,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 			$values[1] = $values[0];
 			$values[0] = 1;
 		}
-		if (strlen($value) >= $values[0] || strlen($value) <= $values[1]) {
+		if (strlen($value) >= $values[0] && strlen($value) <= $values[1]) {
 			return TRUE;
 		}
 		return FALSE;
@@ -176,7 +186,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validatePattern($value, $configuration) {
-		if (preg_match('~' . $configuration . '~', $value)) {
+		if (preg_match('~' . $configuration . '~', $value) === 1) {
 			return TRUE;
 		}
 		return FALSE;

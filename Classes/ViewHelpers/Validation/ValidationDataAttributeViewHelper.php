@@ -205,9 +205,9 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 			 * PATTERN (+html5)
 			 *
 			 * Note: Field validation_configuration for editors viewable
-			 * html5 example: <input type="text" pattern="\d+" />
+			 * html5 example: <input type="text" pattern="https?://.+" />
 			 * javascript example:
-			 * 		<input type="text" data-parsley-pattern="\d+" />
+			 * 		<input type="text" data-parsley-pattern="https?://.+" />
 			 */
 			case 10:
 				if ($this->isNativeValidationEnabled()) {

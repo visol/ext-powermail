@@ -26,9 +26,8 @@ namespace In2code\Powermail\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Tx_Powermail_Domain_Model_Field.
+ * Test case for class \In2code\Powermail\Domain\Model\Field
  *
- * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html
  * 			GNU General Public License, version 3 or later
@@ -38,27 +37,26 @@ namespace In2code\Powermail\Tests;
  *
  * @author Alex Kellner <alexander.kellner@in2code.de>
  */
-class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class FieldTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var Tx_Powermail_Domain_Model_Field
+	 * @var \In2code\Powermail\Domain\Model\Field
 	 */
-	protected $fixture;
+	protected $generalValidatorMock;
 
 	/**
 	 * @return void
 	 */
 	public function setUp() {
-		$this->fixture = new Tx_Powermail_Domain_Model_Field();
+		$this->generalValidatorMock = $this->getAccessibleMock('\In2code\Powermail\Domain\Model\Field', array('dummy'));
 	}
 
 	/**
 	 * @return void
 	 */
 	public function tearDown() {
-		unset($this->fixture);
+		unset($this->generalValidatorMock);
 	}
-
 
 	/**
 	 * @test
@@ -73,11 +71,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
-		$this->fixture->setTitle('Conceived at T3CON10');
+		$this->generalValidatorMock->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getTitle()
+			$this->generalValidatorMock->getTitle()
 		);
 	}
 
@@ -86,11 +84,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function getTypeReturnsInitialValueForSting() {
-		$this->fixture->setType('Conceived at T3CON10');
+		$this->generalValidatorMock->setType('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getType()
+			$this->generalValidatorMock->getType()
 		);
 	}
 
@@ -99,11 +97,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setTypeForIntegerSetsType() {
-		$this->fixture->setType(12);
+		$this->generalValidatorMock->setType(12);
 
 		$this->assertSame(
 			12,
-			$this->fixture->getType()
+			$this->generalValidatorMock->getType()
 		);
 	}
 
@@ -120,11 +118,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setPrefillValueForStringSetsPrefillValue() {
-		$this->fixture->setPrefillValue('Conceived at T3CON10');
+		$this->generalValidatorMock->setPrefillValue('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getPrefillValue()
+			$this->generalValidatorMock->getPrefillValue()
 		);
 	}
 
@@ -135,7 +133,7 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	public function getValidationReturnsInitialValueForInteger() {
 		$this->assertSame(
 			0,
-			$this->fixture->getValidation()
+			$this->generalValidatorMock->getValidation()
 		);
 	}
 
@@ -144,11 +142,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setValidationForIntegerSetsValidation() {
-		$this->fixture->setValidation(12);
+		$this->generalValidatorMock->setValidation(12);
 
 		$this->assertSame(
 			12,
-			$this->fixture->getValidation()
+			$this->generalValidatorMock->getValidation()
 		);
 	}
 
@@ -159,7 +157,7 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	public function getCssReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->fixture->getCss()
+			$this->generalValidatorMock->getCss()
 		);
 	}
 
@@ -168,11 +166,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setCssForStringSetsCss() {
-		$this->fixture->setCss('Conceived at T3CON10');
+		$this->generalValidatorMock->setCss('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getCss()
+			$this->generalValidatorMock->getCss()
 		);
 	}
 
@@ -183,7 +181,7 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	public function getFeuserValueReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
-			$this->fixture->getFeuserValue()
+			$this->generalValidatorMock->getFeuserValue()
 		);
 	}
 
@@ -192,11 +190,11 @@ class FieldTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	 * @return void
 	 */
 	public function setFeuserValueForStringSetsFeuserValue() {
-		$this->fixture->setFeuserValue('my FrontendUser');
+		$this->generalValidatorMock->setFeuserValue('my FrontendUser');
 
 		$this->assertSame(
 			'my FrontendUser',
-			$this->fixture->getFeuserValue()
+			$this->generalValidatorMock->getFeuserValue()
 		);
 	}
 
