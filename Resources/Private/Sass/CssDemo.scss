@@ -55,7 +55,8 @@ $widthLabel: 200px;
 		/* Powermail Fields */
 		.powermail_field {
 			width: $widthField;
-			padding: 3px;
+			padding: 5px;
+			margin: 0;
 			border: 1px solid $greySoft2;
 			color: #444;
 			float: right;
@@ -132,6 +133,7 @@ $widthLabel: 200px;
 		div.error {
 			background-color: $red2;
 			border: 1px solid $red3;
+			color: $red3;
 		}
 	}
 
@@ -139,12 +141,13 @@ $widthLabel: 200px;
 	 * Serverside Validation
 	 */
 	.powermail_message {
-		padding-left: 20px;
+		padding: 5px 0 10px 20px;
 		min-height: 65px;
 		background-color: $red2;
 		border: 1px solid $red3;
 		background-position: 98% 10px;
 		background-repeat: no-repeat;
+		list-style: circle;
 	}
 	.powermail_message_ok {
 		background-image: url("/typo3conf/ext/powermail/Resources/Public/Image/icon_ok.png");
@@ -153,7 +156,7 @@ $widthLabel: 200px;
 		background-image: url("/typo3conf/ext/powermail/Resources/Public/Image/icon_error.png");
 	}
 	.powermail_message li {
-		padding: 10px 50px 0 0;
+		padding: 5px 50px 0 0;
 		color: $red3;
 	}
 }

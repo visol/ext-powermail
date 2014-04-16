@@ -416,7 +416,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * PATTERN (+html5)
 					 *
 					 * Note: Field validation_configuration for editors viewable
-					 * html5 example: <input type="text"  pattern="\d+" />
+					 * html5 example: <input type="text" pattern="\d+" />
 					 * javascript example:
 					 * 		<input type="text" data-parsley-pattern="\d+" />
 					 */

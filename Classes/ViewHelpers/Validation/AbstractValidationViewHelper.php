@@ -1,15 +1,16 @@
 <?php
-namespace In2code\Powermail\ViewHelpers\Misc;
+namespace In2code\Powermail\ViewHelpers\Validation;
 
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
- * Get Field Type for input fields
+ * Abstract Validation ViewHelper
  *
  * @package TYPO3
  * @subpackage Fluid
+ * @version
  */
-class FieldTypeFromValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class AbstractValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
@@ -22,40 +23,36 @@ class FieldTypeFromValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 	protected $settings;
 
 	/**
-	 * InputTypes
-	 *
-	 * @var array
+	 * @var string
 	 */
-	protected $html5InputTypes = array(
-		1 => 'email',
-		2 => 'url',
-		4 => 'number',
-		8 => 'range'
-	);
+	protected $extensionName;
 
 	/**
-	 * Parses variables again
-	 *
-	 * @param \In2code\Powermail\Domain\Model\Field $field
-	 * @return string
-	 */
-	public function render(\In2code\Powermail\Domain\Model\Field $field) {
-		if (!$this->isHtml5ValidationEnabled()) {
-			return 'text';
-		}
-		if (array_key_exists($field->getValidation(), $this->html5InputTypes)) {
-			return $this->html5InputTypes[$field->getValidation()];
-		}
-		return 'text';
-	}
-
-	/**
-	 * Checks if HTML5 validation was turned on by TypoScript
+	 * Check if native validation is activated
 	 *
 	 * @return bool
 	 */
-	protected function isHtml5ValidationEnabled() {
+	protected function isNativeValidationEnabled() {
 		return $this->settings['validation']['native'] === '1';
+	}
+
+	/**
+	 * Check if javascript validation is activated
+	 *
+	 * @return bool
+	 */
+	protected function isClientValidationEnabled() {
+		return $this->settings['validation']['client'] === '1';
+	}
+
+	/**
+	 * Get Current FE language
+	 *
+	 * @return int
+	 */
+	protected function getLanguageUid() {
+		return $GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] ?
+			$GLOBALS['TSFE']->tmpl->setup['config.']['sys_language_uid'] : 0;
 	}
 
 	/**
@@ -63,7 +60,7 @@ class FieldTypeFromValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 	 *
 	 * @param ConfigurationManagerInterface $configurationManager
 	 * @return void
-	*/
+	 */
 	public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager) {
 		$this->configurationManager = $configurationManager;
 		$typoScriptSetup = $this->configurationManager->getConfiguration(
@@ -73,5 +70,4 @@ class FieldTypeFromValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper
 			$typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.']
 		);
 	}
-
 }

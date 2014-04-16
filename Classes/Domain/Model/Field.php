@@ -108,6 +108,13 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $validation = 0;
 
 	/**
+	 * validationConfiguration
+	 *
+	 * @var string
+	 */
+	protected $validationConfiguration = '';
+
+	/**
 	 * css
 	 *
 	 * @var string
@@ -344,6 +351,21 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setValidation($validation) {
 		$this->validation = $validation;
+	}
+
+	/**
+	 * @param string $validationConfiguration
+	 * @return void
+	 */
+	public function setValidationConfiguration($validationConfiguration) {
+		$this->validationConfiguration = $validationConfiguration;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getValidationConfiguration() {
+		return $this->validationConfiguration;
 	}
 
 	/**

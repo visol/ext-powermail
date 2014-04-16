@@ -5,12 +5,12 @@
 		<vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if>
 	</label>
 
-	<div class="powermail_captcha_outer {vh:Misc.ErrorClass(field: '{field}')}">
+	<div class="powermail_captcha_outer {vh:Validation.ErrorClass(field: '{field}')}">
 		<f:form.textfield
 				id="powermail_field_{field.marker}"
 				property="{field.marker}"
 				value=""
-				class="powermail_field powermail_captcha validate[required] {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
+				class="powermail_field powermail_captcha validate[required] {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
 				required="required" />
 		<img src="{vh:Misc.Captcha()}" alt="captcha" class="powermail_captchaimage" id="powermail_captchaimage" />
 	</div>

@@ -9,7 +9,7 @@
 			id="powermail_field_{field.marker}"
 			property="{field.marker}"
 			value="{vh:Misc.PrefillField(field: '{field}')}"
-			class="powermail_field powermail_date  {vh:Misc.ValidationClass(field: '{field}')} {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}" />
+			class="powermail_field powermail_date {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}" />
 
 
 	<input type="hidden" name="container_datepicker_dateformat" class="container_datepicker_dateformat" value="{f:translate(key: 'datepicker_dateformat')}" />

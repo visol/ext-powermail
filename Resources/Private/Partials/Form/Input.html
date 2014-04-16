@@ -5,9 +5,10 @@
 		<vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if>
 	</label>
 	<f:form.textfield
-		type="{vh:Misc.FieldTypeFromValidation(field:field)}"
+		type="{vh:Validation.FieldTypeFromValidation(field:field)}"
 		property="{field.marker}"
 		value="{vh:Misc.PrefillField(field: '{field}')}"
-		class="powermail_field powermail_input {vh:Misc.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
+		class="powermail_field powermail_input {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
+		additionalAttributes="{vh:Validation.ValidationDataAttribute(field: '{field}')}"
 		id="powermail_field_{field.marker}" />
 </div>
