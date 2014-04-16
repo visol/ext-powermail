@@ -106,6 +106,15 @@ abstract class AbstractValidator extends \TYPO3\CMS\Extbase\Validation\Validator
 	}
 
 	/**
+	 * Check if javascript validation is activated
+	 *
+	 * @return bool
+	 */
+	protected function isServerValidationEnabled() {
+		return $this->settings['validation.']['server'] === '1';
+	}
+
+	/**
 	 * @param ConfigurationManagerInterface $configurationManager
 	 * @return void
 	 */

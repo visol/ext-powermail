@@ -19,6 +19,11 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 	 * @return bool
 	 */
 	public function isValid($mail) {
+		// stop validation if it's turned off
+		if (!$this->isServerValidationEnabled()) {
+			return TRUE;
+		}
+
 		// iterate through all fields of current form
 		// every page
 		foreach ($mail->getForm()->getPages() as $page) {
@@ -59,35 +64,70 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 			// email
 			case 1:
 				if (!$this->validateEmail($value)) {
-					$this->setErrorAndMessage($field, 'validation.1');
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
 				}
 				break;
 
 			// URL
 			case 2:
 				if (!$this->validateUrl($value)) {
-					$this->setErrorAndMessage($field, 'validation.2');
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
 				}
 				break;
 
 			// phone
 			case 3:
 				if (!$this->validatePhone($value)) {
-					$this->setErrorAndMessage($field, 'validation.3');
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
 				}
 				break;
 
 			// numbers only
 			case 4:
 				if (!$this->validateNumbersOnly($value)) {
-					$this->setErrorAndMessage($field, 'validation.4');
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
 				}
 				break;
 
 			// letters only
 			case 5:
 				if (!$this->validateLettersOnly($value)) {
-					$this->setErrorAndMessage($field, 'validation.5');
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
+				}
+				break;
+
+			// min number
+			case 6:
+				if (!$this->validateMinNumber($value, $field->getValidationConfiguration())) {
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
+				}
+				break;
+
+			// max number
+			case 7:
+				if (!$this->validateMaxNumber($value, $field->getValidationConfiguration())) {
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
+				}
+				break;
+
+			// range
+			case 8:
+				if (!$this->validateRange($value, $field->getValidationConfiguration())) {
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
+				}
+				break;
+
+			// length
+			case 9:
+				if (!$this->validateLength($value, $field->getValidationConfiguration())) {
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
+				}
+				break;
+
+			// pattern
+			case 10:
+				if (!$this->validatePattern($value, $field->getValidationConfiguration())) {
+					$this->setErrorAndMessage($field, 'validation.' . $field->getValidation());
 				}
 				break;
 

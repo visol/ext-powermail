@@ -162,8 +162,12 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 			 */
 			case 8:
 				$values = GeneralUtility::trimExplode(',', $field->getValidationConfiguration(), TRUE);
-				if (intval($values[0]) <= 0 || intval($values[1]) <= 0) {
+				if (intval($values[0]) <= 0) {
 					break;
+				}
+				if (!isset($values[1])) {
+					$values[1] = $values[0];
+					$values[0] = 1;
 				}
 				if ($this->isNativeValidationEnabled()) {
 					$dataArray['min'] = intval($values[0]);
@@ -190,7 +194,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 				}
 				if (!isset($values[1])) {
 					$values[1] = intval($values[0]);
-					$values[0] = 0;
+					$values[0] = 1;
 				}
 				if ($this->isClientValidationEnabled()) {
 					$dataArray['data-parsley-length'] = '[' . implode(', ', $values) . ']';
