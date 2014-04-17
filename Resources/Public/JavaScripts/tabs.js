@@ -34,17 +34,23 @@ jQuery(document).ready(function() {
 		}, options);
 
 		// initial show first fieldset
-		$this.children(options.container).hide();
+		hideAllFieldsets($this, options);
 		$this.find(options.container).first().show();
-
-		// Stop submit
-		$this.submit(function(e) {
-			//e.preventDefault();
-		});
 
 		generateTabNavigation($this, options);
 		generateButtonNavigation($this, options);
 	};
+
+	/**
+	 * Hide all fieldsets
+	 *
+	 * @param element
+	 * @param options
+	 * @return void
+	 */
+	function hideAllFieldsets(element, options) {
+		element.children(options.container).hide();
+	}
 
 	/**
 	 * Generate Button Navigation
@@ -60,17 +66,16 @@ jQuery(document).ready(function() {
 
 		// buttons
 		element.children(options.container).each(function(i) {
-			console.log(i);
 			var navigationContainer = $('<div />')
 				.addClass('powermail_fieldwrap')
 				.addClass('powermail_tab_navigation')
 				.appendTo($(this));
 			;
 			if (i > 0) {
-				navigationContainer.append(createPreviousButton());
+				navigationContainer.append(createPreviousButton(element, options));
 			}
 			if (i < (element.children(options.container).length - 1)) {
-				navigationContainer.append(createNextButton());
+				navigationContainer.append(createNextButton(element, options));
 			}
 		});
 	}
@@ -78,25 +83,63 @@ jQuery(document).ready(function() {
 	/**
 	 * Create next button
 	 *
+	 * @param object element
+	 * @param array options
 	 * @return void
 	 */
-	function createPreviousButton() {
+	function createPreviousButton(element, options) {
 		return $('<a />')
 			.prop('href', '#')
 			.addClass('powermail_tab_navigation_previous')
-			.html('<');
+			.html('<')
+			.click(function() {
+				showPreviousTab(element, options);
+			});
 	}
 
 	/**
 	 * Create next button
 	 *
+	 * @param object element
+	 * @param array options
 	 * @return void
 	 */
-	function createNextButton() {
+	function createNextButton(element, options) {
 		return $('<a />')
 			.prop('href', '#')
 			.addClass('powermail_tab_navigation_next')
-			.html('>');
+			.html('>')
+			.click(function() {
+				showNextTab(element, options);
+			});
+	}
+
+	/**
+	 * Show next Tab
+	 *
+	 * @param object element
+	 * @param array options
+	 * @return void
+	 */
+	function showNextTab(element, options) {
+		var currentActiveTab = element.find('#powermail_tabmenu > li').index($('.act'));
+		element.find('#powermail_tabmenu > li.act').removeClass('act').next().addClass('act');
+		hideAllFieldsets(element, options);
+		element.find(options.container).slice(currentActiveTab + 1, currentActiveTab + 2).show();
+	}
+
+	/**
+	 * Show previous Tab
+	 *
+	 * @param object element
+	 * @param array options
+	 * @return void
+	 */
+	function showPreviousTab(element, options) {
+		var currentActiveTab = element.find('#powermail_tabmenu > li').index($('.act'));
+		element.find('#powermail_tabmenu > li.act').removeClass('act').prev().addClass('act');
+		hideAllFieldsets(element, options);
+		element.find(options.container).slice(currentActiveTab - 1, currentActiveTab).show();
 	}
 
 	/**
