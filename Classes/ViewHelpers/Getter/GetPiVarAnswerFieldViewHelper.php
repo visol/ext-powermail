@@ -12,12 +12,19 @@ class GetPiVarAnswerFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
 	/**
 	 * Used in the Backendmodule to get a defined piVar
 	 *
-	 * @param 	int			Field UID
-	 * @param 	array		Plugin Vars
-	 * @return	string		parsed Variable
+	 * @param mixed $field Field (UID)
+	 * @param array $piVars Plugin Vars
+	 * @return string parsed Variable
 	 */
-	public function render($fieldUid, $piVars) {
-		if (isset($piVars['filter']['answer'][$fieldUid])) {
+	public function render($field, $piVars) {
+		$result = '';
+		if (is_a($field, '\In2code\Powermail\Domain\Model\Field')) {
+			$fieldUid = $field->getUid();
+		}
+		if (is_numeric($field)) {
+			$fieldUid = $field;
+		}
+		if (!empty($fieldUid) && isset($piVars['filter']['answer'][$fieldUid])) {
 			$result = htmlspecialchars($piVars['filter']['answer'][$fieldUid]);
 		}
 
