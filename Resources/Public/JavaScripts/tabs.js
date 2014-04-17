@@ -22,45 +22,120 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-jQuery.fn.powermailTabs = function(options) {
-	'use strict';
-	var $this = jQuery(this);
-	options = jQuery.extend({
-		container: 'fieldset',
-		header: 'legend'
-	},options);
+jQuery(document).ready(function() {
+	$.fn.powermailTabs = function(options) {
+		'use strict';
+		var $this = jQuery(this);
+		options = jQuery.extend({
+			container: 'fieldset',
+			header: 'legend',
+			tabs: true,
+			navigation: true
+		}, options);
 
-	// generate menu
-	var $ul = jQuery('<ul />', {
-		'id': 'powermail_tabmenu',
-		'class': 'powermail_tabmenu'
-	}).insertBefore($this.children(options.container).filter(':first'));
+		// initial show first fieldset
+		$this.children(options.container).hide();
+		$this.find(options.container).first().show();
 
-	//all containers
-	$this.children(options.container).each(function(i, $fieldset){
-		//tab_menu
-		$ul.append(
-			jQuery('<li/>')
-			.html($(this).children(options.header).html())
-			.addClass((i==0) ? 'act' : '')
-			.click({
-				container: $this.children(options.container),
-				fieldset: $($fieldset)
-			}, function(e){
-				jQuery('.powermail_tabmenu li', $this).removeClass('act');
-				jQuery(this).addClass('act');
-				e.data.container.hide();
-				e.data.fieldset.show()
-			})
-		)
-	});
+		// Stop submit
+		$this.submit(function(e) {
+			//e.preventDefault();
+		});
 
-	// initial show first fieldset
-	$this.children(options.container).hide();
-	$this.find(options.container).first().show();
+		generateTabNavigation($this, options);
+		generateButtonNavigation($this, options);
+	};
 
-	// Stop submit
-	$this.submit(function(e) {
-		//e.preventDefault();
-	});
-};
+	/**
+	 * Generate Button Navigation
+	 *
+	 * @param object element
+	 * @param array options
+	 * @return void
+	 */
+	function generateButtonNavigation(element, options) {
+		if (!options.navigation) {
+			return;
+		}
+
+		// buttons
+		element.children(options.container).each(function(i) {
+			console.log(i);
+			var navigationContainer = $('<div />')
+				.addClass('powermail_fieldwrap')
+				.addClass('powermail_tab_navigation')
+				.appendTo($(this));
+			;
+			if (i > 0) {
+				navigationContainer.append(createPreviousButton());
+			}
+			if (i < (element.children(options.container).length - 1)) {
+				navigationContainer.append(createNextButton());
+			}
+		});
+	}
+
+	/**
+	 * Create next button
+	 *
+	 * @return void
+	 */
+	function createPreviousButton() {
+		return $('<a />')
+			.prop('href', '#')
+			.addClass('powermail_tab_navigation_previous')
+			.html('<');
+	}
+
+	/**
+	 * Create next button
+	 *
+	 * @return void
+	 */
+	function createNextButton() {
+		return $('<a />')
+			.prop('href', '#')
+			.addClass('powermail_tab_navigation_next')
+			.html('>');
+	}
+
+	/**
+	 * Generate Tabs
+	 *
+	 * @param object element
+	 * @param array options
+	 * @return void
+	 */
+	function generateTabNavigation(element, options) {
+		if (!options.tabs) {
+			return;
+		}
+
+		// generate menu
+		var $ul = jQuery('<ul />', {
+			'id': 'powermail_tabmenu',
+			'class': 'powermail_tabmenu'
+		}).insertBefore(
+				element.children(options.container).filter(':first')
+		);
+
+		//all containers
+		element.children(options.container).each(function(i, $fieldset){
+			//tab_menu
+			$ul.append(
+				jQuery('<li/>')
+					.html($(this).children(options.header).html())
+					.addClass((i==0) ? 'act' : '')
+					.click({
+						container: element.children(options.container),
+						fieldset: $($fieldset)
+					}, function(e){
+						jQuery('.powermail_tabmenu li', element).removeClass('act');
+						jQuery(this).addClass('act');
+						e.data.container.hide();
+						e.data.fieldset.show()
+					})
+			)
+		});
+	}
+});

@@ -1,5 +1,6 @@
 $greySoft1: #EEEEEE;
 $greySoft2: #BBBBBB;
+$greySoft3: #AAAAAA;
 $grey1: #444444;
 $blue1: #1E5799;
 $orange1: #FCF8E3;
@@ -158,5 +159,28 @@ $widthLabel: 200px;
 	.powermail_message li {
 		padding: 5px 50px 0 0;
 		color: $red3;
+	}
+
+	/**
+	 * Morstep
+	 */
+	.powermail_tabmenu {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		> li {
+			display: inline-block;
+			padding: 5px 10px;
+			cursor: pointer;
+			background: $greySoft1;
+			border-top: 1px solid $greySoft2;
+			border-left: 1px solid $greySoft2;
+			border-right: 1px solid $greySoft2;
+			color: $greySoft3;
+			&.act {
+				color: $grey1;
+			}
+		}
 	}
 }
