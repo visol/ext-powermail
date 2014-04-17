@@ -181,6 +181,10 @@ $widthLabel: 200px;
 			&.act {
 				color: $grey1;
 			}
+			&.parsley-error {
+				background-color: $red2;
+				color: $red3;
+			}
 		}
 	}
 	.powermail_fieldset {

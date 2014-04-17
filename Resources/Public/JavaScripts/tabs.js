@@ -39,7 +39,38 @@ jQuery(document).ready(function() {
 
 		generateTabNavigation($this, options);
 		generateButtonNavigation($this, options);
+
+		if ($.fn.parsley && $('form[data-parsley-validate="data-parsley-validate"]').length) {
+			$('form[data-parsley-validate="data-parsley-validate"]').parsley().subscribe('parsley:field:validated', function() {
+				$('#powermail_tabmenu > li').removeClass('parsley-error');
+
+				// if error occurs
+				if (!$('form[data-parsley-validate="data-parsley-validate"]').parsley().isValid()) {
+					var errorIndex = $('.powermail_fieldset').index($('.parsley-error:first').closest('fieldset'));
+					var tabWithError = $('#powermail_tabmenu > li').slice(errorIndex, errorIndex + 1);
+					tabWithError.addClass('parsley-error');
+					var indexTabWithError = $('.powermail_tabmenu li', $this).index(tabWithError);
+					showTab(tabWithError, $this, options, indexTabWithError);
+				}
+			});
+		}
 	};
+
+	/**
+	 * Show Tab
+	 *
+	 * @param tab
+	 * @param form
+	 * @param options
+	 * @param clickedIndex
+	 * @return void
+	 */
+	function showTab(tab, form, options, clickedIndex) {
+		$('.powermail_tabmenu li', form).removeClass('act');
+		tab.addClass('act');
+		hideAllFieldsets(form, options)
+		$('.powermail_fieldset', form).slice(clickedIndex, clickedIndex + 1).show();
+	}
 
 	/**
 	 * Hide all fieldsets
@@ -155,28 +186,26 @@ jQuery(document).ready(function() {
 		}
 
 		// generate menu
-		var $ul = jQuery('<ul />', {
+		var $ul = $('<ul />', {
 			'id': 'powermail_tabmenu',
 			'class': 'powermail_tabmenu'
 		}).insertBefore(
 				element.children(options.container).filter(':first')
 		);
 
-		//all containers
+		// all containers
 		element.children(options.container).each(function(i, $fieldset){
 			//tab_menu
 			$ul.append(
-				jQuery('<li/>')
+				$('<li/>')
 					.html($(this).children(options.header).html())
 					.addClass((i==0) ? 'act' : '')
 					.click({
 						container: element.children(options.container),
 						fieldset: $($fieldset)
-					}, function(e){
-						jQuery('.powermail_tabmenu li', element).removeClass('act');
-						jQuery(this).addClass('act');
-						e.data.container.hide();
-						e.data.fieldset.show()
+					}, function() {
+						var indexTab = $('.powermail_tabmenu li', element).index($(this));
+						showTab($(this), element, options, indexTab);
 					})
 			)
 		});
