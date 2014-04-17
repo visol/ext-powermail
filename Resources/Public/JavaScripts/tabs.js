@@ -49,8 +49,8 @@ jQuery(document).ready(function() {
 					var errorIndex = $('.powermail_fieldset').index($('.parsley-error:first').closest('fieldset'));
 					var tabWithError = $('#powermail_tabmenu > li').slice(errorIndex, errorIndex + 1);
 					tabWithError.addClass('parsley-error');
-					var indexTabWithError = $('.powermail_tabmenu li', $this).index(tabWithError);
-					showTab(tabWithError, $this, options, indexTabWithError);
+//					var indexTabWithError = $('.powermail_tabmenu li', $this).index(tabWithError);
+//					showTab(tabWithError, $this, options, indexTabWithError);
 				}
 			});
 		}
