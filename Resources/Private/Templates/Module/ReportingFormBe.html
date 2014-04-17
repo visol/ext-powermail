@@ -28,7 +28,7 @@ Show Backend Module: Powermail Reporting Form
 						<f:for each="{firstMail.answers}" as="answer">
 
 							<div class="powermail_reporting_form_fields_item">
-								<h4>{vh:Getter.GetFieldLabelFromUid(uid: '{answer.field}')}</h4>
+								<h4>{answer.field.title}</h4>
 
 								<img src="http://chart.apis.google.com/chart?
 									chf=bg,s,F8F8F8

@@ -1,4 +1,5 @@
 - Rewrite all stuff to namespaces
+- Remove unused Methods and ViewHelpers
 - done: cleaning up fields (use fluid for select, use marker instead of uid for name, use property)
 - done: creating select, check and radio out of typoscript
 - done: adding a new js validation

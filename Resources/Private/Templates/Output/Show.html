@@ -13,7 +13,7 @@ Render Powermail_Frontend Show View
 			<dl>
 				<f:for each="{mail.answers}" as="answer">
 					<f:if condition="{answer.field} == {field}">
-						<dt><vh:Getter.GetFieldLabelFromUid uid="{field}" /></dt>
+						<dt>{field.title}</dt>
 
 						<f:if condition="{vh:Condition.IsArray(val: '{answer.value}')}">
 							<f:then>

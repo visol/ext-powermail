@@ -24,7 +24,7 @@
 				<ul class="extended_export_field connected" id="export_field_selection">
 					<f:for each="{firstMail.answers}" as="answer">
 						<li id="{answer.field}">
-							<vh:Getter.GetFieldLabelFromUid uid="{answer.field}" /> <span class="info">(<f:translate key="FormField" />)</span>
+							{answer.field.title} <span class="info">(<f:translate key="FormField" />)</span>
 						</li>
 					</f:for>
 				</ul>

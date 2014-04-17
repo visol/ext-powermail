@@ -21,7 +21,7 @@
 					<f:else>
 						<div class="powermail_frontend_search_container">
 							<label for="powermail_frontend_search_{vh:Getter.GetFieldMarkerFromUid(uid: '{field}')}">
-								<vh:Getter.GetFieldLabelFromUid uid="{field}" />
+								{field.title}
 							</label>
 							<f:form.textfield
 									property="{field}"

@@ -12,7 +12,7 @@ Render Powermail CSV Export
 			<f:for each="{fields}" as="field">
 				<f:if condition="{vh:Condition.IsNumber(val: '{field}')}">
 					<f:then>
-						"<vh:String.RemoveQuote><vh:Getter.GetFieldLabelFromUid uid="{field}" /></vh:String.RemoveQuote>";
+						"<vh:String.RemoveQuote>{field.title}</vh:String.RemoveQuote>";
 					</f:then>
 					<f:else>
 						"<vh:String.RemoveQuote><f:translate key="\In2code\Powermail\Domain\Model\Mail.{vh:String.UnderscoredToLowerCamelCase(val: '{field}')}" /></vh:String.RemoveQuote>";

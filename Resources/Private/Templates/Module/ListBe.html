@@ -230,9 +230,9 @@ Show Backend Module: Powermail List
 											<f:if condition="{answer.value}">
 												<dl class="powermail_listbe_details_dl">
 													<dt>
-														<f:if condition="{vh:Getter.GetFieldLabelFromUid(uid: '{answer.field}')}">
+														<f:if condition="{answer.field.title}">
 															<f:then>
-																<strong><vh:Getter.GetFieldLabelFromUid uid="{answer.field}" />:</strong>
+																<strong>{answer.field.title}:</strong>
 															</f:then>
 															<f:else>
 																<strong>No Label:</strong>
