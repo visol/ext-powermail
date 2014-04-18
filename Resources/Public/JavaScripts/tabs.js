@@ -46,11 +46,13 @@ jQuery(document).ready(function() {
 
 				// if error occurs
 				if (!$('form[data-parsley-validate="data-parsley-validate"]').parsley().isValid()) {
-					var errorIndex = $('.powermail_fieldset').index($('.parsley-error:first').closest('fieldset'));
-					var tabWithError = $('#powermail_tabmenu > li').slice(errorIndex, errorIndex + 1);
-					tabWithError.addClass('parsley-error');
-//					var indexTabWithError = $('.powermail_tabmenu li', $this).index(tabWithError);
-//					showTab(tabWithError, $this, options, indexTabWithError);
+
+					// for each field with an error
+					$('.parsley-error').each(function() {
+						var errorIndex = $('.powermail_fieldset').index($(this).closest('fieldset'));
+						var tabWithError = $('#powermail_tabmenu > li').slice(errorIndex, errorIndex + 1);
+						tabWithError.addClass('parsley-error');
+					});
 				}
 			});
 		}
@@ -116,7 +118,7 @@ jQuery(document).ready(function() {
 	 *
 	 * @param object element
 	 * @param array options
-	 * @return void
+	 * @return object
 	 */
 	function createPreviousButton(element, options) {
 		return $('<a />')
@@ -133,7 +135,7 @@ jQuery(document).ready(function() {
 	 *
 	 * @param object element
 	 * @param array options
-	 * @return void
+	 * @return object
 	 */
 	function createNextButton(element, options) {
 		return $('<a />')
