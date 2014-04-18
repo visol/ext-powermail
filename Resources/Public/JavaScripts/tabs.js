@@ -49,7 +49,7 @@ jQuery(document).ready(function() {
 
 					// for each field with an error
 					$('.parsley-error').each(function() {
-						var errorIndex = $('.powermail_fieldset').index($(this).closest('fieldset'));
+						var errorIndex = $('.powermail_fieldset').index($(this).closest('.powermail_fieldset'));
 						var tabWithError = $('#powermail_tabmenu > li').slice(errorIndex, errorIndex + 1);
 						tabWithError.addClass('parsley-error');
 					});
