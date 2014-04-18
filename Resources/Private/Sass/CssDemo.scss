@@ -136,6 +136,17 @@ $widthLabel: 200px;
 			border: 1px solid $red3;
 			color: $red3;
 		}
+		.powermail_field_error_container {
+			.parsley-errors-list {
+				width: 100%;
+				margin-bottom: 0;
+				background-color: $red2;
+				border: none;
+				> li {
+					padding-left: 5px;
+				}
+			}
+		}
 	}
 
 	/**

@@ -12,9 +12,9 @@
 					<f:form.radio
 							property="{field.marker}"
 							value="{setting.value}"
-							checked="{vh:Misc.PrefillField(field: '{field}', cycle: '{index.cycle}')}"
+							checked="{vh:Misc.PrefillField(field: field, cycle: index.cycle)}"
 							id="powermail_field_{field.marker}_{index.cycle}"
-							additionalAttributes="{vh:Validation.ValidationDataAttribute(field: '{field}')}"
+							additionalAttributes="{vh:Validation.ValidationDataAttribute(field: field, index: index.index)}"
 							class="powermail_radio" />
 
 					<label for="powermail_field_{field.marker}_{index.cycle}">
@@ -22,6 +22,8 @@
 					</label>
 				</div>
 			</f:for>
+
+			<div class="powermail_field_error_container powermail_field_error_container_{field.marker}"></div>
 		</div>
 	</fieldset>
 </div>

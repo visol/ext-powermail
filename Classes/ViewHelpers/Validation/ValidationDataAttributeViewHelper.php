@@ -18,9 +18,10 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @param \array $additionalAttributes To add further attributes
+	 * @param \int $index Index for Multiple Fields (Radio, Check, ...)
 	 * @return \array for data attributes
 	 */
-	public function render(\In2code\Powermail\Domain\Model\Field $field, $additionalAttributes = array()) {
+	public function render(\In2code\Powermail\Domain\Model\Field $field, $additionalAttributes = array(), $index = 0) {
 		$dataArray = $additionalAttributes;
 		$request = $this->controllerContext->getRequest();
 		$extensionName = $request->getControllerExtensionName();
@@ -29,7 +30,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 		}
 
 		// if mandatory field
-		if ($field->getMandatory()) {
+		if ($field->getMandatory() && $index === 0) {
 			if ($this->isNativeValidationEnabled()) {
 				$dataArray['required'] = 'required';
 			} else {
@@ -42,7 +43,21 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 					'validationerror_mandatory',
 					$extensionName
 				);
+
+				// type radio
+				if ($field->getType() == 'radio') {
+					// define where to show errors
+					$dataArray['data-parsley-errors-container'] = '.powermail_field_error_container_' . $field->getMarker();
+					// define where to set the error class
+					$dataArray['data-parsley-class-handler'] = '.powermail_fieldwrap_' . $field->getUid() . ' > fieldset > div';
+					// overwrite error message
+					$dataArray['data-parsley-required-message'] = LocalizationUtility::translate(
+						'validationerror_mandatory_multi',
+						$extensionName
+					);
+				}
 			}
+
 		}
 
 		// extended validation

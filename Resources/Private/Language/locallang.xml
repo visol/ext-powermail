@@ -48,6 +48,7 @@
 			<label index="error_no_form">No form to show</label>
 			<label index="error_wrong_captcha">Wrong Captcha value, please try again!</label>
 			<label index="validationerror_mandatory">This field must be filled!</label>
+			<label index="validationerror_mandatory_multi">One of these fields must be filled!</label>
 			<label index="validationerror_captcha">Wrong captcha code entered - please try again!</label>
 			<label index="validationerror_validation">Your input is not allowed!</label>
 			<label index="validationerror_validation.1">This is not a valid email address!</label>
@@ -212,6 +213,7 @@
 			<label index="error_no_form">Kein Formular zur Anzeige</label>
 			<label index="error_wrong_captcha">Falschen Code eingetragen, bitte erneut versuchen!</label>
 			<label index="validationerror_mandatory">Dieses Feld muss ausgefüllt werden!</label>
+			<label index="validationerror_mandatory_multi">Eines dieser Felder muss ausgefüllt werden!</label>
 			<label index="validationerror_captcha">Falscher Captcha Code eingetragen, bitte erneut versuchen!</label>
 			<label index="validationerror_validation">Ihre Eingabe ist nicht erlaubt!</label>
 			<label index="validationerror_validation.1">Keine gültige E-Mail-Adresse!</label>
