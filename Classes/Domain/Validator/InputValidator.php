@@ -29,16 +29,30 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 		foreach ($mail->getForm()->getPages() as $page) {
 			// every field
 			foreach ($page->getFields() as $field) {
-				// iterate through answers of given mail object
-				foreach ($mail->getAnswers() as $answer) {
-					if ($answer->getField()->getUid() === $field->getUid()) {
-						$this->isValidField($field, $answer->getValue());
-					}
-				}
+				$this->isValidField(
+					$field,
+					$this->getAnswerFromField($field, $mail)
+				);
 			}
 		}
 
 		return $this->getIsValid();
+	}
+
+	/**
+	 * Get Answer from given field out of Mail object
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @return \string Answer value
+	 */
+	protected function getAnswerFromField($field, $mail) {
+		foreach ($mail->getAnswers() as $answer) {
+			if ($answer->getField() === $field) {
+				return $answer->getValue();
+			}
+		}
+		return '';
 	}
 
 	/**

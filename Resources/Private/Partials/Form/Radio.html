@@ -6,7 +6,7 @@
 			<vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if>
 		</legend>
 
-		<div class="powermail_radio_outer">
+		<div class="powermail_radio_outer {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}">
 			<f:for each="{field.modifiedSettings}" as="setting" iteration="index">
 				<div class="powermail_radio_inner powermail_radio_inner_{index.cycle}">
 					<f:form.radio
