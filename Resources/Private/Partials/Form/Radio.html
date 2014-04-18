@@ -14,6 +14,7 @@
 							value="{setting.value}"
 							checked="{vh:Misc.PrefillField(field: '{field}', cycle: '{index.cycle}')}"
 							id="powermail_field_{field.marker}_{index.cycle}"
+							additionalAttributes="{vh:Validation.ValidationDataAttribute(field: '{field}')}"
 							class="powermail_radio" />
 
 					<label for="powermail_field_{field.marker}_{index.cycle}">

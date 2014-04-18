@@ -45,181 +45,183 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 			}
 		}
 
-		// validation
-		switch ($field->getValidation()) {
+		// extended validation
+		if ($field->getType() == 'input' || $field->getType() == 'textarea') {
+			switch ($field->getValidation()) {
 
-			/**
-			 * EMAIL (+html5)
-			 *
-			 * html5 example: <input type="email" />
-			 * javascript example: <input type="text" data-parsley-type="email" />
-			 */
-			case 1:
-				if ($this->isClientValidationEnabled() && !$this->isNativeValidationEnabled()) {
-					$dataArray['data-parsley-type'] = 'email';
-				}
-				break;
-
-			/**
-			 * URL (+html5)
-			 *
-			 * html5 example: <input type="url" />
-			 * javascript example: <input type="text" data-parsley-type="url" />
-			 */
-			case 2:
-				if ($this->isClientValidationEnabled() && !$this->isNativeValidationEnabled()) {
-					$dataArray['data-parsley-type'] = 'url';
-				}
-				break;
-
-			/**
-			 * PHONE (+html5)
-			 *
-			 * html5 example:
-			 * 		<input type="text" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
-			 * javascript example:
-			 * 		<input ... data-parsley-pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
-			 */
-			case 3:
-				if ($this->isNativeValidationEnabled()) {
-					$dataArray['pattern'] = '[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}';
-				} else {
-					if ($this->isClientValidationEnabled()) {
-						$dataArray['data-parsley-pattern'] = '[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}';
+				/**
+				 * EMAIL (+html5)
+				 *
+				 * html5 example: <input type="email" />
+				 * javascript example: <input type="text" data-parsley-type="email" />
+				 */
+				case 1:
+					if ($this->isClientValidationEnabled() && !$this->isNativeValidationEnabled()) {
+						$dataArray['data-parsley-type'] = 'email';
 					}
-				}
-				break;
-
-			/**
-			 * NUMBER/INTEGER (+html5)
-			 *
-			 * html5 example: <input type="number" />
-			 * javascript example: <input type="text" data-parsley-type="integer" />
-			 */
-			case 4:
-				if ($this->isClientValidationEnabled() && !$this->isNativeValidationEnabled()) {
-					$dataArray['data-parsley-type'] = 'integer';
-				}
-				break;
-
-			/**
-			 * LETTERS (+html5)
-			 *
-			 * html5 example: <input type="text" pattern="[a-zA-Z]*" />
-			 * javascript example: <input type="text" data-parsley-pattern="[a-zA-Z]*" />
-			 */
-			case 5:
-				if ($this->isNativeValidationEnabled()) {
-					$dataArray['pattern'] = '[A-Za-z]{3}';
-				} else {
-					if ($this->isClientValidationEnabled()) {
-						$dataArray['data-parsley-pattern'] = '[a-zA-Z]*';
-					}
-				}
-				break;
-
-			/**
-			 * MIN NUMBER (+html5)
-			 *
-			 * Note: Field validation_configuration for editors viewable
-			 * html5 example: <input type="text" min="6" />
-			 * javascript example: <input type="text" data-parsley-min="6" />
-			 */
-			case 6:
-				if ($this->isNativeValidationEnabled()) {
-					$dataArray['min'] = $field->getValidationConfiguration();
-				} else {
-					if ($this->isClientValidationEnabled()) {
-						$dataArray['data-parsley-min'] = $field->getValidationConfiguration();
-					}
-				}
-				break;
-
-			/**
-			 * MAX NUMBER (+html5)
-			 *
-			 * Note: Field validation_configuration for editors viewable
-			 * html5 example: <input type="text" max="12" />
-			 * javascript example: <input type="text" data-parsley-max="12" />
-			 */
-			case 7:
-				if ($this->isNativeValidationEnabled()) {
-					$dataArray['max'] = $field->getValidationConfiguration();
-				} else {
-					if ($this->isClientValidationEnabled()) {
-						$dataArray['data-parsley-max'] = $field->getValidationConfiguration();
-					}
-				}
-				break;
-
-			/**
-			 * RANGE (+html5)
-			 *
-			 * Note: Field validation_configuration for editors viewable
-			 * html5 example: <input type="range" min="1" max="10" />
-			 * javascript example:
-			 * 		<input type="text" data-parsley-type="range" min="1" max="10" />
-			 */
-			case 8:
-				$values = GeneralUtility::trimExplode(',', $field->getValidationConfiguration(), TRUE);
-				if (intval($values[0]) <= 0) {
 					break;
-				}
-				if (!isset($values[1])) {
-					$values[1] = $values[0];
-					$values[0] = 1;
-				}
-				if ($this->isNativeValidationEnabled()) {
-					$dataArray['min'] = intval($values[0]);
-					$dataArray['max'] = intval($values[1]);
-				} else {
-					if ($this->isClientValidationEnabled()) {
-						$dataArray['data-parsley-min'] = intval($values[0]);
-						$dataArray['data-parsley-max'] = intval($values[1]);
-					}
-				}
-				break;
 
-			/**
-			 * LENGTH
-			 *
-			 * Note: Field validation_configuration for editors viewable
-			 * javascript example:
-			 * 		<input type="text" data-parsley-length="[6, 10]" />
-			 */
-			case 9:
-				$values = GeneralUtility::trimExplode(',', $field->getValidationConfiguration(), TRUE);
-				if (intval($values[0]) <= 0) {
+				/**
+				 * URL (+html5)
+				 *
+				 * html5 example: <input type="url" />
+				 * javascript example: <input type="text" data-parsley-type="url" />
+				 */
+				case 2:
+					if ($this->isClientValidationEnabled() && !$this->isNativeValidationEnabled()) {
+						$dataArray['data-parsley-type'] = 'url';
+					}
 					break;
-				}
-				if (!isset($values[1])) {
-					$values[1] = intval($values[0]);
-					$values[0] = 1;
-				}
-				if ($this->isClientValidationEnabled()) {
-					$dataArray['data-parsley-length'] = '[' . implode(', ', $values) . ']';
-				}
-				break;
 
-			/**
-			 * PATTERN (+html5)
-			 *
-			 * Note: Field validation_configuration for editors viewable
-			 * html5 example: <input type="text" pattern="https?://.+" />
-			 * javascript example:
-			 * 		<input type="text" data-parsley-pattern="https?://.+" />
-			 */
-			case 10:
-				if ($this->isNativeValidationEnabled()) {
-					$dataArray['pattern'] = $field->getValidationConfiguration();
-				} else {
-					if ($this->isClientValidationEnabled()) {
-						$dataArray['data-parsley-pattern'] = $field->getValidationConfiguration();
+				/**
+				 * PHONE (+html5)
+				 *
+				 * html5 example:
+				 * 		<input type="text" pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
+				 * javascript example:
+				 * 		<input ... data-parsley-pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
+				 */
+				case 3:
+					if ($this->isNativeValidationEnabled()) {
+						$dataArray['pattern'] = '[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}';
+					} else {
+						if ($this->isClientValidationEnabled()) {
+							$dataArray['data-parsley-pattern'] = '[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}';
+						}
 					}
-				}
-				break;
+					break;
 
-			default:
+				/**
+				 * NUMBER/INTEGER (+html5)
+				 *
+				 * html5 example: <input type="number" />
+				 * javascript example: <input type="text" data-parsley-type="integer" />
+				 */
+				case 4:
+					if ($this->isClientValidationEnabled() && !$this->isNativeValidationEnabled()) {
+						$dataArray['data-parsley-type'] = 'integer';
+					}
+					break;
+
+				/**
+				 * LETTERS (+html5)
+				 *
+				 * html5 example: <input type="text" pattern="[a-zA-Z]*" />
+				 * javascript example: <input type="text" data-parsley-pattern="[a-zA-Z]*" />
+				 */
+				case 5:
+					if ($this->isNativeValidationEnabled()) {
+						$dataArray['pattern'] = '[A-Za-z]{3}';
+					} else {
+						if ($this->isClientValidationEnabled()) {
+							$dataArray['data-parsley-pattern'] = '[a-zA-Z]*';
+						}
+					}
+					break;
+
+				/**
+				 * MIN NUMBER (+html5)
+				 *
+				 * Note: Field validation_configuration for editors viewable
+				 * html5 example: <input type="text" min="6" />
+				 * javascript example: <input type="text" data-parsley-min="6" />
+				 */
+				case 6:
+					if ($this->isNativeValidationEnabled()) {
+						$dataArray['min'] = $field->getValidationConfiguration();
+					} else {
+						if ($this->isClientValidationEnabled()) {
+							$dataArray['data-parsley-min'] = $field->getValidationConfiguration();
+						}
+					}
+					break;
+
+				/**
+				 * MAX NUMBER (+html5)
+				 *
+				 * Note: Field validation_configuration for editors viewable
+				 * html5 example: <input type="text" max="12" />
+				 * javascript example: <input type="text" data-parsley-max="12" />
+				 */
+				case 7:
+					if ($this->isNativeValidationEnabled()) {
+						$dataArray['max'] = $field->getValidationConfiguration();
+					} else {
+						if ($this->isClientValidationEnabled()) {
+							$dataArray['data-parsley-max'] = $field->getValidationConfiguration();
+						}
+					}
+					break;
+
+				/**
+				 * RANGE (+html5)
+				 *
+				 * Note: Field validation_configuration for editors viewable
+				 * html5 example: <input type="range" min="1" max="10" />
+				 * javascript example:
+				 * 		<input type="text" data-parsley-type="range" min="1" max="10" />
+				 */
+				case 8:
+					$values = GeneralUtility::trimExplode(',', $field->getValidationConfiguration(), TRUE);
+					if (intval($values[0]) <= 0) {
+						break;
+					}
+					if (!isset($values[1])) {
+						$values[1] = $values[0];
+						$values[0] = 1;
+					}
+					if ($this->isNativeValidationEnabled()) {
+						$dataArray['min'] = intval($values[0]);
+						$dataArray['max'] = intval($values[1]);
+					} else {
+						if ($this->isClientValidationEnabled()) {
+							$dataArray['data-parsley-min'] = intval($values[0]);
+							$dataArray['data-parsley-max'] = intval($values[1]);
+						}
+					}
+					break;
+
+				/**
+				 * LENGTH
+				 *
+				 * Note: Field validation_configuration for editors viewable
+				 * javascript example:
+				 * 		<input type="text" data-parsley-length="[6, 10]" />
+				 */
+				case 9:
+					$values = GeneralUtility::trimExplode(',', $field->getValidationConfiguration(), TRUE);
+					if (intval($values[0]) <= 0) {
+						break;
+					}
+					if (!isset($values[1])) {
+						$values[1] = intval($values[0]);
+						$values[0] = 1;
+					}
+					if ($this->isClientValidationEnabled()) {
+						$dataArray['data-parsley-length'] = '[' . implode(', ', $values) . ']';
+					}
+					break;
+
+				/**
+				 * PATTERN (+html5)
+				 *
+				 * Note: Field validation_configuration for editors viewable
+				 * html5 example: <input type="text" pattern="https?://.+" />
+				 * javascript example:
+				 * 		<input type="text" data-parsley-pattern="https?://.+" />
+				 */
+				case 10:
+					if ($this->isNativeValidationEnabled()) {
+						$dataArray['pattern'] = $field->getValidationConfiguration();
+					} else {
+						if ($this->isClientValidationEnabled()) {
+							$dataArray['data-parsley-pattern'] = $field->getValidationConfiguration();
+						}
+					}
+					break;
+
+				default:
+			}
 		}
 
 		// set errormessage if javascript validation active

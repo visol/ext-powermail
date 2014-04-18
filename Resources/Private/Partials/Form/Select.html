@@ -9,5 +9,6 @@
 			property="{field.marker}"
 			class="powermail_field powermail_select {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
 			id="powermail_field_{field.marker}"
+			additionalAttributes="{vh:Validation.ValidationDataAttribute(field: '{field}')}"
 			value="{vh:Misc.PrefillField(field: '{field}')}" />
 </div>
