@@ -2,7 +2,7 @@
 - Remove unused Methods and ViewHelpers
 - done: cleaning up fields (use fluid for select, use marker instead of uid for name, use property)
 - done: creating select, check and radio out of typoscript
-- done: adding a new js validation
+- done: adding a new js validation (+ html5)
 - done: Debug output to devlog
 - done: SendPost with cObject parsing
 - done: Rewritten SaveToAnyTable function for even more flexibility
@@ -11,3 +11,11 @@
 - Ajax form submit
 - Adding Unit Tests
 - Adding RST Documentation
+- converting language files from xml to xlf
+- add a powermail 1.x form converter to 2.x
+- add a countryselection
+- powermail_cond update
+- schedulertask to remove unused uploaded files
+- multiselect field
+- datetime (+ html5)
+- Create testparcour for visual tests
