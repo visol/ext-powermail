@@ -25,11 +25,11 @@ plugin.tx_powermail {
 				# enable native HTML5 validation
 				native = 1
 
-				# enable serverside validation
-				server = 1
-
 				# enable clientside validation
 				client = 1
+
+				# enable serverside validation
+				server = 1
 			}
 
 			receiver {
