@@ -10,11 +10,11 @@
 			<f:for each="{field.modifiedSettings}" as="setting" iteration="index">
 				<div class="powermail_check_inner powermail_check_inner_{index.cycle}">
 					<f:form.checkbox
-							property="{field.marker}.{index.index}"
+							property="{field.marker}"
 							value="{setting.value}"
 							checked="{vh:Misc.PrefillField(field: '{field}', cycle: '{index.cycle}')}"
 							id="powermail_field_{field.marker}_{index.cycle}"
-							additionalAttributes="{vh:Validation.ValidationDataAttribute(field: field, index: index.index)}"
+							additionalAttributes="{vh:Validation.ValidationDataAttribute(field: field, iteration: index)}"
 							class="powermail_checkbox powermail_checkbox_{field.uid}" />
 
 					<label for="powermail_field_{field.marker}_{index.cycle}">

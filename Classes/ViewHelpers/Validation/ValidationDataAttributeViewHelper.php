@@ -23,10 +23,10 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @param \array $additionalAttributes To add further attributes
-	 * @param \int $index Index for Multiple Fields (Radio, Check, ...)
+	 * @param \mixed $iteration Iterationarray for Multi Fields (Radio, Check, ...)
 	 * @return \array for data attributes
 	 */
-	public function render(\In2code\Powermail\Domain\Model\Field $field, $additionalAttributes = array(), $index = 0) {
+	public function render(\In2code\Powermail\Domain\Model\Field $field, $additionalAttributes = array(), $iteration = NULL) {
 		$dataArray = $additionalAttributes;
 		$request = $this->controllerContext->getRequest();
 		$this->extensionName = $request->getControllerExtensionName();
@@ -34,7 +34,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 			$this->extensionName = $this->arguments['extensionName'];
 		}
 
-		$this->addMandatoryAttributes($dataArray, $field, $index);
+		$this->addMandatoryAttributes($dataArray, $field, $iteration);
 		$this->addValidationAttributes($dataArray, $field);
 		return $dataArray;
 	}
@@ -44,13 +44,18 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 	 *
 	 * @param \array $dataArray
 	 * @param \In2code\Powermail\Domain\Model\Field $field
-	 * @param \int $index
+	 * @param \mixed $iteration
 	 * @return void
 	 */
-	protected function addMandatoryAttributes(&$dataArray, $field, $index) {
-		if ($field->getMandatory() && $index === 0) {
+	protected function addMandatoryAttributes(&$dataArray, $field, $iteration) {
+		if ($field->getMandatory() && ($iteration === NULL || $iteration['index'] === 0)) {
 			if ($this->isNativeValidationEnabled()) {
 				$dataArray['required'] = 'required';
+
+				// don't want the required attribute if more checkboxes
+				if ($field->getType() == 'check' && $iteration['total'] > 1) {
+					unset($dataArray['required']);
+				}
 			} else {
 				if ($this->isClientValidationEnabled()) {
 					$dataArray['data-parsley-required'] = 'true';
@@ -62,7 +67,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 					$this->extensionName
 				);
 
-				// type radio
+				// type radio, checkbox
 				if ($field->getType() == 'radio' || $field->getType() == 'check') {
 					// define where to show errors
 					$dataArray['data-parsley-errors-container'] = '.powermail_field_error_container_' . $field->getMarker();
@@ -73,8 +78,16 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 						'validationerror_mandatory_multi',
 						$this->extensionName
 					);
+					if ($field->getType() == 'check' && $iteration['total'] > 1) {
+						$dataArray['data-parsley-required'] = 'true';
+					}
 				}
 			}
+		}
+
+		// add multiple attribute to bundle checkboxes for parsley
+		if ($field->getMandatory() && $field->getType() == 'check' && $iteration['total'] > 1) {
+			$dataArray['data-parsley-multiple'] = $field->getMarker();
 		}
 	}
 
