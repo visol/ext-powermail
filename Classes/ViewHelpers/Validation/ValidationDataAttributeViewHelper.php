@@ -86,7 +86,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 		}
 
 		// add multiple attribute to bundle checkboxes for parsley
-		if ($field->getMandatory() && $field->getType() == 'check' && $iteration['total'] > 1) {
+		if ($field->getMandatory() && $this->isClientValidationEnabled() && $field->getType() == 'check' && $iteration['total'] > 1) {
 			$dataArray['data-parsley-multiple'] = $field->getMarker();
 		}
 	}
