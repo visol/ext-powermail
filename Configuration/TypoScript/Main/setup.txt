@@ -23,13 +23,13 @@ plugin.tx_powermail {
 
 			validation {
 				# enable native HTML5 validation
-				native = 1
+				native = {$plugin.tx_powermail.settings.validation.native}
 
 				# enable clientside validation
-				client = 1
+				client = {$plugin.tx_powermail.settings.validation.client}
 
 				# enable serverside validation
-				server = 1
+				server = {$plugin.tx_powermail.settings.validation.server}
 			}
 
 			receiver {
@@ -284,6 +284,9 @@ plugin.tx_powermail {
 
 				# HTML Output allowed
 				htmlField = {$plugin.tx_powermail.settings.misc.htmlField}
+
+				# Submit Powermail Forms with AJAX (browser will not reload complete page)
+				ajaxSubmit = {$plugin.tx_powermail.settings.misc.ajaxSubmit}
 
 				# File upload settings
 				file {

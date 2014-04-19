@@ -51,6 +51,38 @@ $widthLabel: 200px;
 			margin: 0 0 0.5em 0;
 			clear: both;
 			overflow: hidden;
+
+			/* Progress Bar for AJAX Submit */
+			.powermail_progressbar {
+				width: $widthField;
+				height: 5px;
+				float: right;
+				border: 1px solid #EEEEEE;
+				&.disable {
+					display: none;
+				}
+				> .powermail_progress {
+					background: $blue1;
+					width: 0%;
+					max-width: 100%;
+					-webkit-animation: progress 5s 1 forwards;
+					-moz-animation: progress 5s 1 forwards;
+					-ms-animation: progress 5s 1 forwards;
+					animation: progress 5s 1 forwards;
+					> .powermail_progess_inner {
+						height: 5px;
+						width: 100%;
+						overflow: hidden;
+						background: url("/typo3conf/ext/powermail/Resources/Public/Image/icon_loading.gif") repeat-x;
+						-moz-opacity: 0.25;
+						-khtml-opacity: 0.25;
+						opacity: 0.25;
+						-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=25);
+						filter: progid:DXImageTransform.Microsoft.Alpha(opacity=25);
+						filter: alpha(opacity=25);
+					}
+				}
+			}
 		}
 
 		/* Powermail Fields */
@@ -217,4 +249,21 @@ $widthLabel: 200px;
 			}
 		}
 	}
+}
+
+@-webkit-keyframes progress {
+	from { }
+	to { width: 100% }
+}
+@-moz-keyframes progress {
+	from { }
+	to { width: 100% }
+}
+@-ms-keyframes progress {
+	from { }
+	to { width: 100% }
+}
+@keyframes progress {
+	from { }
+	to { width: 100% }
 }

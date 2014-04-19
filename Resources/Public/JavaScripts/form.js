@@ -18,6 +18,46 @@ jQuery(document).ready(function($) {
 		$('.powermail_morestep').powermailTabs();
 	}
 
+	// Location field
+	if ($('.powermail_fieldwrap_location input').length) {
+		getLocationAndWrite();
+	}
+
+	// AJAX Form submit
+	if ($('form[data-powermail-ajax]').length) {
+		// submit is only called after parsley and html5 checks :) - so we don't have to check for errors
+		$('form[data-powermail-ajax]').submit(function(e) {
+			var $this = $(this);
+			var formUid = $this.data('powermail-ajax');
+
+			$.ajax({
+				type: 'POST',
+				url: $this.prop('action'),
+				data: $this.serialize(),
+				beforeSend: function() {
+					// add progressbar <div class="powermail_progressbar"><div class="powermail_progress"><div class="powermail_progess_inner"></div></div></div>
+					var progressBar = $('<div />').addClass('powermail_progressbar').html(
+						$('<div />').addClass('powermail_progress').html(
+							$('<div />').addClass('powermail_progess_inner')
+						)
+					);
+					$('.powermail_fieldwrap_submit', $this).append(progressBar);
+				},
+				complete: function() {
+					// remove progressbar
+					$('.powermail_fieldwrap_submit', $this).find('.powermail_progressbar').remove();
+				},
+				success: function(data) {
+					var html = $('*[data-powermail-form="' + formUid + '"]', data);
+					$('.tx-powermail').html(html);
+				}
+			});
+
+			e.preventDefault();
+//			console.log(formUid);
+		});
+	}
+
 	// Datepicker field
 	if ($.fn.datepicker) {
 		$('.powermail_date').datepicker({
@@ -50,35 +90,7 @@ jQuery(document).ready(function($) {
 			firstDay: 1
 		});
 	}
-
-	// Location field
-	if ($('.powermail_fieldwrap_location input').length > 0) {
-		getLocationAndWrite();
-	}
 });
-
-/**
- * Custom Validation of checkboxes for powermail
- *
- * @param	object		Current Field
- * @param	object		Given Rules
- * @param	int			Index
- * @param	object		Options
- * @return	string		Error Message
- */
-function checkCheckboxes(field, rules, i, options) {
-	var checked = 0; // no checkbox checked at the beginning
-	var classes = field.prop('class').split(' ');
-	jQuery('.' + classes[1]).each(function() {
-		if (jQuery(this).prop('checked')) {
-			checked = 1;
-		}
-	});
-
-	if (!checked) {
-		return options.allrules.checkCheckboxes.alertText;
-	}
-}
 
 /**
  * Getting the Location by the browser and write to inputform as address
