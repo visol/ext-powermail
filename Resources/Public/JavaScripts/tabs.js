@@ -158,7 +158,7 @@ jQuery(document).ready(function() {
 		var currentActiveTab = element.find('#powermail_tabmenu > li').index($('.act'));
 		element.find('#powermail_tabmenu > li.act').removeClass('act').next().addClass('act');
 		hideAllFieldsets(element, options);
-		element.find(options.container).slice(currentActiveTab + 1, currentActiveTab + 2).show();
+		element.find('.powermail_fieldset').slice(currentActiveTab + 1, currentActiveTab + 2).show();
 	}
 
 	/**
@@ -172,7 +172,7 @@ jQuery(document).ready(function() {
 		var currentActiveTab = element.find('#powermail_tabmenu > li').index($('.act'));
 		element.find('#powermail_tabmenu > li.act').removeClass('act').prev().addClass('act');
 		hideAllFieldsets(element, options);
-		element.find(options.container).slice(currentActiveTab - 1, currentActiveTab).show();
+		element.find('.powermail_fieldset').slice(currentActiveTab - 1, currentActiveTab).show();
 	}
 
 	/**

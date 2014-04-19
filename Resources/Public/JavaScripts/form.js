@@ -25,37 +25,7 @@ jQuery(document).ready(function($) {
 
 	// AJAX Form submit
 	if ($('form[data-powermail-ajax]').length) {
-		// submit is called after parsley and html5 validation - so we don't have to check for errors
-		$(document).on('submit', 'form[data-powermail-ajax]', function (e) {
-			var $this = $(this);
-			var formUid = $this.data('powermail-form');
-
-			$.ajax({
-				type: 'POST',
-				url: $this.prop('action'),
-				data: $this.serialize(),
-				beforeSend: function() {
-					// add progressbar <div class="powermail_progressbar"><div class="powermail_progress"><div class="powermail_progess_inner"></div></div></div>
-					var progressBar = $('<div />').addClass('powermail_progressbar').html(
-						$('<div />').addClass('powermail_progress').html(
-							$('<div />').addClass('powermail_progess_inner')
-						)
-					);
-					$('.powermail_submit', $this).parent().append(progressBar);
-					$('.powermail_confirmation_submit, .powermail_confirmation_form', $this).closest('.powermail_confirmation').append(progressBar);
-				},
-				complete: function() {
-					// remove progressbar
-					$('.powermail_fieldwrap_submit', $this).find('.powermail_progressbar').remove();
-				},
-				success: function(data) {
-					var html = $('*[data-powermail-form="' + formUid + '"]:first', data);
-					$('.tx-powermail').html(html);
-				}
-			});
-
-			e.preventDefault();
-		});
+		ajaxFormSubmit();
 	}
 
 	// Datepicker field
@@ -91,6 +61,52 @@ jQuery(document).ready(function($) {
 		});
 	}
 });
+
+/**
+ * Allow AJAX Submit for powermail
+ *
+ * @return void
+ */
+function ajaxFormSubmit() {
+	// submit is called after parsley and html5 validation - so we don't have to check for errors
+	$(document).on('submit', 'form[data-powermail-ajax]', function (e) {
+		var $this = $(this);
+		var formUid = $this.data('powermail-form');
+
+		$.ajax({
+			type: 'POST',
+			url: $this.prop('action'),
+			data: $this.serialize(),
+			beforeSend: function() {
+				// add progressbar <div class="powermail_progressbar"><div class="powermail_progress"><div class="powermail_progess_inner"></div></div></div>
+				var progressBar = $('<div />').addClass('powermail_progressbar').html(
+					$('<div />').addClass('powermail_progress').html(
+						$('<div />').addClass('powermail_progess_inner')
+					)
+				);
+				$('.powermail_submit', $this).parent().append(progressBar);
+				$('.powermail_confirmation_submit, .powermail_confirmation_form', $this).closest('.powermail_confirmation').append(progressBar);
+			},
+			complete: function() {
+				// remove progressbar
+				$('.powermail_fieldwrap_submit', $this).find('.powermail_progressbar').remove();
+			},
+			success: function(data) {
+				var html = $('*[data-powermail-form="' + formUid + '"]:first', data);
+				$('.tx-powermail').html(html);
+				// fire tabs and parsley again
+				if ($.fn.powermailTabs) {
+					$('.powermail_morestep').powermailTabs();
+				}
+				if ($.fn.parsley) {
+					$('form[data-parsley-validate="data-parsley-validate"]').parsley();
+				}
+			}
+		});
+
+		e.preventDefault();
+	});
+}
 
 /**
  * Getting the Location by the browser and write to inputform as address
