@@ -26,7 +26,7 @@ jQuery(document).ready(function($) {
 	// AJAX Form submit
 	if ($('form[data-powermail-ajax]').length) {
 		// submit is only called after parsley and html5 checks :) - so we don't have to check for errors
-		$('form[data-powermail-ajax]').submit(function(e) {
+		$(document).on('submit', 'form[data-powermail-ajax]', function (e) {
 			var $this = $(this);
 			var formUid = $this.data('powermail-ajax');
 
@@ -41,7 +41,8 @@ jQuery(document).ready(function($) {
 							$('<div />').addClass('powermail_progess_inner')
 						)
 					);
-					$('.powermail_fieldwrap_submit', $this).append(progressBar);
+					$('.powermail_submit', $this).parent().append(progressBar);
+					$('.powermail_confirmation_submit, .powermail_confirmation_form', $this).closest('.powermail_confirmation').append(progressBar);
 				},
 				complete: function() {
 					// remove progressbar
@@ -54,7 +55,6 @@ jQuery(document).ready(function($) {
 			});
 
 			e.preventDefault();
-//			console.log(formUid);
 		});
 	}
 
