@@ -96,7 +96,7 @@
 					<label>
 						{answer.field.title}
 					</label>
-					<f:form.textfield property="answer.{answer.field}" class="powermail_module_search_field_dynamicfield" value="{vh:Getter.GetPiVarAnswerField(piVars: '{piVars}', fieldUid: '{answer.field}')}" />
+					<f:form.textfield property="answer.{answer.field}" class="powermail_module_search_field_dynamicfield" value="{vh:Getter.GetPiVarAnswerField(piVars: '{piVars}', field: '{answer.field}')}" />
 				</div>
 			</f:for>
 		</div>
