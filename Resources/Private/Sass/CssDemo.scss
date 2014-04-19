@@ -181,6 +181,44 @@ $widthLabel: 200px;
 		}
 	}
 
+	.powermail_create,
+	.powermail_confirmation {
+		border: 1px solid $greySoft2;
+		padding: 10px;
+		margin: 0 0 20px 0;
+		background: $greySoft1;
+		overflow: hidden;
+		.powermail_confirmation_submit,
+		.powermail_confirmation_form {
+			margin: 20px 0 0 0;
+			padding: 5px 20px;
+			color: white;
+			font-weight: bold;
+			cursor: pointer;
+			float: right;
+			background-color: $blue1;
+			border: 1px solid $greySoft1;
+		}
+		.powermail_confirmation_form {
+			float: left;
+			background-color: $greySoft2;
+		}
+	}
+
+	.powermail_all {
+		> dt {
+			width: $widthLabel;
+			float: left;
+			clear: left;
+			font-weight: bold;
+		}
+		> dd {
+			width: $widthField;
+			float: left;
+			margin: 0;
+		}
+	}
+
 	/**
 	 * Serverside Validation
 	 */
