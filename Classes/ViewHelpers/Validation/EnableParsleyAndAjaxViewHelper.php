@@ -27,7 +27,8 @@ class EnableParsleyAndAjaxViewHelper extends AbstractValidationViewHelper {
 
 		// add ajax attribute
 		if ($this->settings['misc']['ajaxSubmit'] === '1') {
-			$dataArray['data-powermail-ajax'] = $form->getUid();
+			$dataArray['data-powermail-ajax'] = 'true';
+			$dataArray['data-powermail-form'] = $form->getUid();
 		}
 
 		return $dataArray;

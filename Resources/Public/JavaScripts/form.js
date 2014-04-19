@@ -25,10 +25,10 @@ jQuery(document).ready(function($) {
 
 	// AJAX Form submit
 	if ($('form[data-powermail-ajax]').length) {
-		// submit is only called after parsley and html5 checks :) - so we don't have to check for errors
+		// submit is called after parsley and html5 validation - so we don't have to check for errors
 		$(document).on('submit', 'form[data-powermail-ajax]', function (e) {
 			var $this = $(this);
-			var formUid = $this.data('powermail-ajax');
+			var formUid = $this.data('powermail-form');
 
 			$.ajax({
 				type: 'POST',
@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
 					$('.powermail_fieldwrap_submit', $this).find('.powermail_progressbar').remove();
 				},
 				success: function(data) {
-					var html = $('*[data-powermail-form="' + formUid + '"]', data);
+					var html = $('*[data-powermail-form="' + formUid + '"]:first', data);
 					$('.tx-powermail').html(html);
 				}
 			});
