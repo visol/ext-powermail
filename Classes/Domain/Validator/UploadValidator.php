@@ -108,13 +108,15 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	protected function checkExtension($filename, \In2code\Powermail\Domain\Model\Field $field) {
 		$fileInfo = pathinfo($filename);
 		if (
-			!isset($fileInfo['extension']) ||
-			!GeneralUtility::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension'])
+			!empty($fileInfo['extension']) &&
+			!empty($this->settings['misc.']['file.']['extension']) &&
+			t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension']) &&
+			t3lib_div::verifyFilenameAgainstDenyPattern($filename)
 		) {
-			$this->setErrorAndMessage($field, 'upload_extension');
-			return FALSE;
+			return TRUE;
 		}
-		return TRUE;
+		$this->setErrorAndMessage($field, 'upload_extension');
+		return FALSE;
 	}
 
 	/**
@@ -125,11 +127,11 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function checkFilesize($tmpName, \In2code\Powermail\Domain\Model\Field $field) {
-		if (filesize($tmpName) > $this->settings['misc.']['file.']['size']) {
-			$this->setErrorAndMessage($field, 'upload_size');
-			return FALSE;
+		if (filesize($tmpName) <= $this->settings['misc.']['file.']['size']) {
+			return TRUE;
 		}
-		return TRUE;
+		$this->setErrorAndMessage($field, 'upload_size');
+		return FALSE;
 	}
 
 	/**
