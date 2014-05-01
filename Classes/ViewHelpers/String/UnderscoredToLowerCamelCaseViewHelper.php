@@ -12,8 +12,8 @@ class UnderscoredToLowerCamelCaseViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHe
 	/**
 	 * Underscored value to lower camel case value (nice_field => niceField)
 	 *
-	 * @param 	string 		String
-	 * @return 	string
+	 * @param string $val
+	 * @return string
 	 */
 	public function render($val = '') {
 		return \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToLowerCamelCase($val);

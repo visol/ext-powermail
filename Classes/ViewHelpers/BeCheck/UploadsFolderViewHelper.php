@@ -14,14 +14,14 @@ class UploadsFolderViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 	/**
 	 * Upload Filder
 	 *
-	 * @var		string
+	 * @var string
 	 */
 	public $folder = 'uploads/tx_powermail/';
 
 	/**
 	 * Check if uploads folder exists
 	 *
-	 * @return 	boolean
+	 * @return bool
 	 */
 	public function render() {
 		return file_exists(GeneralUtility::getFileAbsFileName($this->folder));

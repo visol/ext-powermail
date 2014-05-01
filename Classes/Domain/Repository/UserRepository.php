@@ -37,8 +37,8 @@ class UserRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find FE_Users by their group
 	 *
-	 * @param 	$uid	int		fe_groups UID
-	 * @return	query result
+	 * @param int $uid fe_groups UID
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findByUsergroup($uid) {
 		$query = $this->createQuery();

@@ -12,9 +12,9 @@ class IsStringInStringViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstra
 	/**
 	 * Check if there is a string in another string
 	 *
-	 * @param 	string 		Haystack
-	 * @param 	string 		Needle
-	 * @return 	boolean
+	 * @param string $haystack
+	 * @param string $needle
+	 * @return bool
 	 */
 	public function render($haystack, $needle) {
 		return stristr($haystack, $needle);

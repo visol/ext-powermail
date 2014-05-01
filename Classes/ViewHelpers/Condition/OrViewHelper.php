@@ -6,7 +6,7 @@ namespace In2code\Powermail\ViewHelpers\Condition;
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html
- * GNU Lesser General Public License, version 3 or later
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class OrViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 

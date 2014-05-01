@@ -37,7 +37,8 @@ class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Get title from table "pages" in TYPO3
 	 *
-	 * @param $uid
+	 * @param int $uid
+	 * @return string
 	 */
 	public function getPageNameFromUid($uid) {
 		$query = $this->createQuery();

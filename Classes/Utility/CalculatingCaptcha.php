@@ -38,19 +38,24 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class CalculatingCaptcha {
 
 	/**
-	 * @var 	array		TypoScript
+	 * TypoScript
+	 *
+	 * @var \array
 	 */
 	protected $conf;
 
 	/**
 	 * Path to captcha image
 	 *
-	 * @var 	string		New Image Path
+	 * @var \string
 	 */
 	public $captchaImage = 'EXT:powermail/Resources/Public/Image/captcha.png';
 
 	/**
 	 * Render Link to Captcha Image
+	 *
+	 * @param \array $conf
+	 * @return \string
 	 */
 	public function render($conf) {
 		$this->conf = $conf;
@@ -211,7 +216,6 @@ class CalculatingCaptcha {
 
 		// Generate Session with result
 		$GLOBALS['TSFE']->fe_user->setKey('ses', 'powermail_captcha_value', $result);
-		// Save session
 		$GLOBALS['TSFE']->storeSessionData();
 
 		return $number1 . ' ' . $operator . ' ' . $number2;

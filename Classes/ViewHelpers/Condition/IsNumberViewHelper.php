@@ -12,10 +12,10 @@ class IsNumberViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
 	/**
 	 * View helper check if given value is number or not
 	 *
-	 * @param 	mixed 		String or Number
-	 * @return 	boolean
+	 * @param mixed $val
+	 * @return bool
 	 */
-	public function render($val = '') {
+	public function render($val = NULL) {
 		return is_numeric($val);
 	}
 }

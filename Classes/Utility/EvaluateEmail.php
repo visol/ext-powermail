@@ -78,10 +78,10 @@ class EvaluateEmail {
 	/**
 	 * Server valuation
 	 *
-	 * @param 	$value		The field value to be evaluated.
-	 * @param 	$isIn		The "isIn" value of the field configuration from TCA
-	 * @param 	$set		Boolean defining if the value is written to the database or not.
-	 * @return 	string		Value
+	 * @param \string $value The field value to be evaluated.
+	 * @param \string $isIn The "isIn" value of the field configuration from TCA
+	 * @param \bool $set defining if the value is written to the database or not.
+	 * @return \string
 	 */
 	public function evaluateFieldValue($value, $isIn, &$set) {
 		if (GeneralUtility::validEmail($value)) {

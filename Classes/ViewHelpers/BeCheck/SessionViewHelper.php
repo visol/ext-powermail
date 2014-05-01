@@ -21,7 +21,7 @@ class SessionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	/**
 	 * Check FE Session
 	 *
-	 * @return 	boolean
+	 * @return bool
 	 */
 	public function render() {
 		// settings

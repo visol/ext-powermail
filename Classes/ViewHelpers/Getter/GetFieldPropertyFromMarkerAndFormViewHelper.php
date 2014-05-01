@@ -14,7 +14,6 @@ class GetFieldPropertyFromMarkerAndFormViewHelper extends \TYPO3\CMS\Fluid\Core\
 	 * fieldRepository
 	 *
 	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
-	 *
 	 * @inject
 	 */
 	protected $fieldRepository;
@@ -32,6 +31,6 @@ class GetFieldPropertyFromMarkerAndFormViewHelper extends \TYPO3\CMS\Fluid\Core\
 		if (method_exists($field, 'get' . ucfirst($property))) {
 			return $field->{'get' . ucfirst($property)}();
 		}
-		return FALSE;
+		return '';
 	}
 }

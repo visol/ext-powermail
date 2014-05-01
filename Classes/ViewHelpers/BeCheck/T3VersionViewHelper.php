@@ -15,7 +15,7 @@ class T3VersionViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 	/**
 	 * Check if TYPO3 Version is correct
 	 *
-	 * @return 	boolean
+	 * @return bool
 	 */
 	public function render() {
 		// settings

@@ -18,13 +18,13 @@ class GetPiVarAnswerFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abs
 	 */
 	public function render($field, $piVars) {
 		$result = '';
+		$fieldUid = 0;
 		if (is_a($field, '\In2code\Powermail\Domain\Model\Field')) {
 			$fieldUid = $field->getUid();
-		}
-		if (is_numeric($field)) {
+		} elseif (is_numeric($field)) {
 			$fieldUid = $field;
 		}
-		if (!empty($fieldUid) && isset($piVars['filter']['answer'][$fieldUid])) {
+		if (!empty($piVars['filter']['answer'][$fieldUid])) {
 			$result = htmlspecialchars($piVars['filter']['answer'][$fieldUid]);
 		}
 

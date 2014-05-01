@@ -38,16 +38,22 @@ class PluginInfo {
 
 	/**
 	 * Params
+	 *
+	 * @var array
 	 */
 	public $params;
 
 	/**
 	 * showTable
+	 *
+	 * @var bool
 	 */
-	public $showTable = 1;
+	public $showTable = TRUE;
 
 	/**
 	 * Path to locallang file
+	 *
+	 * @var string
 	 */
 	protected $locallangPath = 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pluginInfo.';
 
@@ -55,7 +61,7 @@ class PluginInfo {
 	 * Main Function
 	 *
 	 * @param array $params
-	 * @param $pObj
+	 * @param object $pObj
 	 * @return string
 	 */
 	public function getInfo($params = array(), $pObj) {
@@ -98,8 +104,8 @@ class PluginInfo {
 	/**
 	 * Get form title from uid
 	 *
-	 * @param 	integer 	Form uid
-	 * @return 	string		Form Title
+	 * @param int $uid Form uid
+	 * @return string
 	 */
 	protected function getFormTitle($uid) {
 		$select = 'title';
@@ -135,9 +141,9 @@ class PluginInfo {
 	/**
 	 * Get field value from flexform configuration
 	 *
-	 * @param 	string 		$sheet name of the sheet
-	 * @param 	string 		$key name of the key
-	 * @return 	string		value if found
+	 * @param string $sheet name of the sheet
+	 * @param string $key name of the key
+	 * @return string value if found
 	 */
 	protected function getFieldFromFlexform($sheet, $key) {
 		$flexform = GeneralUtility::xml2array($this->params['row']['pi_flexform']);
@@ -152,7 +158,7 @@ class PluginInfo {
 			return $flexform['data'][$sheet]['lDEF'][$key]['vDEF'];
 		}
 
-		$this->showTable = 0;
+		$this->showTable = FALSE;
 		return FALSE;
 	}
 }

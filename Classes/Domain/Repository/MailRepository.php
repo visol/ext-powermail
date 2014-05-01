@@ -40,10 +40,10 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find all mails in given PID (BE List)
 	 *
-	 * @param 	int 	Page Id
-	 * @param 	array 	TypoScript Config Array
-	 * @param 	array 	Plugin Variables
-	 * @return	Query Object
+	 * @param int $pid
+	 * @param array $settings TypoScript Config Array
+	 * @param array $piVars Plugin Variables
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findAllInPid($pid = 0, $settings = array(), $piVars = array()) {
 		$query = $this->createQuery();
@@ -138,8 +138,8 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find first mail in given PID
 	 *
-	 * @param 	int 	Page Id
-	 * @return	Query Object
+	 * @param int $pid
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findFirstInPid($pid = 0) {
 		$query = $this->createQuery();
@@ -174,8 +174,8 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find mails by given UID (also hidden and don't care about starting page)
 	 *
-	 * @param 	integer 		Mail uid
-	 * @return	Query Object
+	 * @param int $uid
+	 * @return \In2code\Powermail\Domain\Model\Mail
 	 */
 	public function findByUid($uid) {
 		$query = $this->createQuery();
@@ -196,9 +196,9 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find mails in UID List
 	 *
-	 * @param 	string 		Commaseparated UID List of mails
-	 * @param 	array 		Sorting array('field' => 'asc')
-	 * @return	Query Object
+	 * @param string $uidList Commaseparated UID List of mails
+	 * @param array $sorting array('field' => 'asc')
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findByUidList($uidList, $sorting = array()) {
 		$uids = GeneralUtility::trimExplode(',', $uidList, 1);
@@ -247,7 +247,7 @@ class MailRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 *
 	 * @param \array $settings TypoScript Settings
 	 * @param \array $piVars Plugin Variables
-	 * @return object storage
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findListBySettings($settings, $piVars) {
 		$query = $this->createQuery();

@@ -40,36 +40,36 @@ class MarkerBase {
 	/**
 	 * Array with all GET/POST params to save
 	 *
-	 * @var $data array
+	 * @var array
 	 */
 	protected $data;
 
 	/**
 	 * Marker Array
 	 *
-	 * @var array $marker
+	 * @var array
 	 */
 	protected $marker;
 
 	/**
 	 * Form Uid
 	 *
-	 * @var int $formUid
+	 * @var int
 	 */
 	protected $formUid;
 
 	/**
 	 * Existing Markers from Database to current form
 	 *
-	 * @var array $existingMarkers
+	 * @var array
 	 */
 	protected $existingMarkers;
 
 	/**
 	 * Clean Marker String ("My Field" => "my_field")
 	 *
-	 * @param	string		$string Any String
-	 * @return	string
+	 * @param string $string Any String
+	 * @return string
 	 */
 	protected function cleanString($string) {
 		$string = preg_replace('/[^a-zA-Z0-9_-]/', '', $string);
@@ -110,7 +110,7 @@ class MarkerBase {
 	/**
 	 * Get From Uid from related Page
 	 *
-	 * @param $pageUid
+	 * @param int $pageUid
 	 * @return int
 	 */
 	protected function getFormUidFromRelatedPage($pageUid) {
@@ -190,7 +190,7 @@ class MarkerBase {
 	/**
 	 * Make Array with unique values
 	 *
-	 * @param $array
+	 * @param array $array
 	 * @return void
 	 */
 	protected function makeUniqueValueInArray(&$array) {

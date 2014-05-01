@@ -12,7 +12,7 @@ class TrimViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 	/**
 	 * Trim Inner HTML
 	 *
-	 * @return 	boolean
+	 * @return bool
 	 */
 	public function render() {
 		$string = trim($this->renderChildren());

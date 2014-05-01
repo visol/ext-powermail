@@ -40,7 +40,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Find Form objects by its given uids
 	 *
 	 * @param string $uids commaseparated list of uids
-	 * @return Tx_Extbase_Persistence_QueryResult
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function findByUids($uids) {
 		$query = $this->createQuery();
@@ -59,7 +59,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Returns form with captcha from given UID
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Form $form
-	 * @return Tx_Extbase_Persistence_QueryResult
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult
 	 */
 	public function hasCaptcha(\In2code\Powermail\Domain\Model\Form $form) {
 		$query = $this->createQuery();

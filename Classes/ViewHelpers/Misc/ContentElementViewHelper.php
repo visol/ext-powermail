@@ -25,7 +25,7 @@ class ContentElementViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstract
 	public function render($uid) {
 		$conf = array(
 			'tables' => 'tt_content',
-			'source' => $uid,
+			'source' => intval($uid),
 			'dontCheckPid' => 1
 		);
 		return $this->contentObject->RECORDS($conf);

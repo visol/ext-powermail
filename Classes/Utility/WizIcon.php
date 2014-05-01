@@ -30,18 +30,17 @@ use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 /**
  * Plugin 'Powermail' for the 'powermail' extension.
  *
- * @author	2010 powermail development team
- * (details on http://forge.typo3.org/projects/show/extension-powermail)
- * @package	TYPO3
- * @subpackage	tx_powermail
+ * @author 2010 powermail development team
+ * @package TYPO3
+ * @subpackage tx_powermail
  */
 class WizIcon {
 
 	/**
 	 * Processing the wizard items array
 	 *
-	 * @param	array		$wizardItems: The wizard items
-	 * @return	array		array with wizard items
+	 * @param array $wizardItems The wizard items
+	 * @return array
 	 */
 	public function proc($wizardItems) {
 		$ll = $this->includeLocalLang();
@@ -62,7 +61,7 @@ class WizIcon {
 	/**
 	 * Reads the [extDir]/locallang.xml and returns the \$LOCAL_LANG array
 	 *
-	 * @return The array with language labels
+	 * @return array language labels
 	 */
 	protected function includeLocalLang() {
 		$locallangXmlParser = GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');

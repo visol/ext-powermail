@@ -13,7 +13,7 @@ class IsArrayViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	 * View helper check if given value is array or not
 	 *
 	 * @param mixed $val String or Array
-	 * @return boolean
+	 * @return bool
 	 */
 	public function render($val = '') {
 		return is_array($val);

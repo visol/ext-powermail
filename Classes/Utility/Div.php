@@ -166,7 +166,7 @@ class Div {
 	/**
 	 * Save current timestamp to session
 	 *
-	 * @param integer $formUid Form uid
+	 * @param int $formUid Form uid
 	 * @return void
 	 */
 	public static function saveFormStartInSession($formUid) {
@@ -430,7 +430,6 @@ class Div {
 			'&auml;',
 		);
 
-		// let's go
 		$content = nl2br($content);
 		// 1. add linebreaks on some parts (</p> => </p><br />)
 		$content = str_replace($htmltagarray, $htmltagarray[0] . '<br />', $content);

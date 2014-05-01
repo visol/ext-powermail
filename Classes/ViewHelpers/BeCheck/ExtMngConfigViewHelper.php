@@ -12,7 +12,7 @@ class ExtMngConfigViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	/**
 	 * Check if Extension Manager Settings are available
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function render() {
 		$confArr = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['powermail']);

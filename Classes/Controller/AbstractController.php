@@ -187,10 +187,13 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$propertyMappingConfiguration->allowModificationForSubProperty('form');
 
 		// allow creation of new objects (for validation)
-		$propertyMappingConfiguration->setTypeConverterOptions('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\PersistentObjectConverter', array(
-			\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => TRUE,
-			\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => TRUE
-		));
+		$propertyMappingConfiguration->setTypeConverterOptions(
+			'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\PersistentObjectConverter',
+			array(
+				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => TRUE,
+				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => TRUE
+			)
+		);
 
 		$i = 0;
 		foreach ((array) $arguments['field'] as $marker => $value) {

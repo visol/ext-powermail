@@ -13,7 +13,6 @@ class GetPageNameFromUidViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	 * pageRepository
 	 *
 	 * @var \In2code\Powermail\Domain\Repository\PageRepository
-	 *
 	 * @inject
 	 */
 	protected $pageRepository;

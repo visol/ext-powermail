@@ -18,7 +18,6 @@ class VariablesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-	 *
 	 * @inject
 	 */
 	protected $objectManager;
@@ -33,6 +32,8 @@ class VariablesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 
 	/**
 	 * Configuration
+	 *
+	 * @var array
 	 */
 	protected $settings;
 

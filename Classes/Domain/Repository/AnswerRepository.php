@@ -37,9 +37,9 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Find single Answer by field uid and mail uid
 	 *
-	 * @param 	int 	Field Uid
-	 * @param 	int 	Mail Uid
-	 * @return	Query Object
+	 * @param int $fieldUid
+	 * @param int $mailUid
+	 * @return \In2code\Powermail\Domain\Model\Answer
 	 */
 	public function findByFieldAndMail($fieldUid, $mailUid) {
 		// initialize query

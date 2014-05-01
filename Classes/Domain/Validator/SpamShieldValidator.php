@@ -9,7 +9,7 @@ use \In2code\Powermail\Utility\Div;
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html
- * GNU Lesser General Public License, version 3 or later
+ * 			GNU Lesser General Public License, version 3 or later
  */
 class SpamShieldValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 

@@ -13,10 +13,9 @@ class EncodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelp
 	/**
 	 * Returns encoded string
 	 *
-	 * @return 	string		Encoded string
+	 * @return string
 	 */
 	public function render() {
-		$string = htmlspecialchars($this->renderChildren());
-		return $string;
+		return htmlspecialchars($this->renderChildren());
 	}
 }

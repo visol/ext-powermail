@@ -48,9 +48,9 @@ class FieldSelectorUserFunc {
 	/**
 	 * Cretae Array for Field Selector
 	 *
-	 * @param	array	Config Array
-	 * @param	object	Parent Object
-	 * @return	void
+	 * @param array $params
+	 * @param object $pObj Parent Object
+	 * @return void
 	 */
 	public function getFieldSelection(&$params, $pObj) {
 		$formUid = $this->getFormFromFlexform($params);
@@ -77,8 +77,8 @@ class FieldSelectorUserFunc {
 	/**
 	 * Return Form Uid from Flexform settings
 	 * 
-	 * @param	array	Config Array
-	 * @return	int		Form Uid
+	 * @param array $params
+	 * @return int
 	 */
 	protected function getFormFromFlexform($params) {
 		$xml = $params['row']['pi_flexform'];
@@ -92,7 +92,7 @@ class FieldSelectorUserFunc {
 	/**
 	 * Get Fieldlist from Form UID
 	 *
-	 * @param integer $formUid Form UID
+	 * @param int $formUid Form UID
 	 * @return array
 	 */
 	protected function getFieldsFromForm($formUid) {

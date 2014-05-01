@@ -14,9 +14,9 @@ class VariableInVariableViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	/**
 	 * Solution for {outer.{inner}} problem with variables in fluid
 	 *
-	 * @param $obj  object Object
-	 * @param $prop	string Property
-	 * @return property
+	 * @param object $obj
+	 * @param string $prop
+	 * @return string
 	 */
 	public function render($obj, $prop) {
 		if (is_object($obj) && method_exists($obj, 'get' . GeneralUtility::underscoredToUpperCamelCase($prop))) {

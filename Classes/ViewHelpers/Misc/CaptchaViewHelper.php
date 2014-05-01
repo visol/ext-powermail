@@ -11,20 +11,20 @@ class CaptchaViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	 *
 	 * @inject
 	 */
 	protected $configurationManager;
 
 	/**
 	 * @var \In2code\Powermail\Utility\CalculatingCaptcha
-	 *
 	 * @inject
 	 */
 	protected $captchaEngine;
 
 	/**
 	 * Configuration
+	 *
+	 * @var array
 	 */
 	protected $settings;
 

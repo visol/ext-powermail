@@ -14,9 +14,9 @@ class IsDateTimeVariableInVariableViewHelper extends \TYPO3\CMS\Fluid\Core\ViewH
 	/**
 	 * Is {outer.{inner}} a datetime?
 	 *
-	 * @param	$obj	object Object
-	 * @param	$prop	string Property
-	 * @return	bool
+	 * @param object $obj
+	 * @param string $prop Property
+	 * @return bool
 	 */
 	public function render($obj, $prop) {
 		$mixed = NULL;
