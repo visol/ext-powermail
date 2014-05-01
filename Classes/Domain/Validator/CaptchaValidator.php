@@ -53,8 +53,7 @@ class CaptchaValidator extends \In2code\Powermail\Domain\Validator\AbstractValid
 
 			// if field wrong code given - set error
 			if (!$this->captchaEngine->validCode($answer->getValue(), $this->clearSession)) {
-				$this->addError('captcha', 0);
-				$this->setIsValid(FALSE);
+				$this->setErrorAndMessage($answer->getField(), 'mandatory');
 			}
 
 		}

@@ -5,7 +5,7 @@
 		<vh:string.RawAndRemoveXss>{field.title}</vh:string.RawAndRemoveXss><f:if condition="{field.mandatory}"><span class="mandatory">*</span></f:if>
 	</label>
 
-	<div class="powermail_captcha_outer {vh:Validation.ErrorClass(field: '{field}')}">
+	<div class="powermail_captcha_outer {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}">
 		<f:form.textfield
 				id="powermail_field_{field.marker}"
 				property="{field.marker}"
