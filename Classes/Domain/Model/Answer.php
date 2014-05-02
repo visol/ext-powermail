@@ -69,11 +69,18 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string $value
 	 */
 	public function getValue() {
-		// workarround to get array from database (checkbox values)
+		$value = $this->value;
+
+		// if serialized, get array (checkboxes)
 		if (\In2code\Powermail\Utility\Div::isSerialized($this->value)) {
-			return unserialize($this->value);
+			$value = unserialize($value);
 		}
-		return $this->value;
+
+		if ($this->getValueType() === 2 && is_numeric($value)) {
+			$value = date('y-m-d', $value);
+		}
+
+		return $value;
 	}
 
 	/**
@@ -84,10 +91,26 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return void
 	 */
 	public function setValue($value) {
-		// workarround to store array in database (checkbox values)
+		// if array, get serializes string (checkboxes)
 		if (is_array($value)) {
 			$value = serialize($value);
 		}
+
+		// if date get timestamp (datepicker)
+		if (
+			\In2code\Powermail\Utility\Div::getDataTypeFromFieldType($this->getField()->getType()) === 2 &&
+			!is_numeric($value)
+		) {
+			$format = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+				'datepicker_format_' . $this->getField()->getDatepickerSettings(),
+				'powermail'
+			);
+			$date = \DateTime::createFromFormat($format, $value);
+			if ($date) {
+				$value = $date->getTimestamp();
+			}
+		}
+
 		$this->value = $value;
 	}
 

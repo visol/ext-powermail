@@ -67,8 +67,8 @@
 			<label index="validationerror_spam">Spam recognized:</label>
 			<label index="validationerror_spam_details">Spam chance in this message!</label>
 			<label index="writePasswordAgain">Please write again</label>
-			<label index="datepicker_format_date">y-m-d</label>
-			<label index="datepicker_format_datetime">y-m-d H:i</label>
+			<label index="datepicker_format_date">Y-m-d</label>
+			<label index="datepicker_format_datetime">Y-m-d H:i</label>
 			<label index="datepicker_format_time">H:i</label>
 			<label index="datepicker_day_so">So</label>
 			<label index="datepicker_day_mo">Mo</label>
@@ -234,8 +234,8 @@
 			<label index="validationerror_spam">Spam in Nachricht vermutet:</label>
 			<label index="validationerror_spam_details">Spam-Wahrscheinlichkeit in dieser Nachricht!</label>
 			<label index="writePasswordAgain">Bitte erneut eintragen</label>
-			<label index="datepicker_format_date">d.m.y</label>
-			<label index="datepicker_format_datetime">d.m.y H:i</label>
+			<label index="datepicker_format_date">d.m.Y</label>
+			<label index="datepicker_format_datetime">d.m.Y H:i</label>
 			<label index="datepicker_format_time">H:i</label>
 			<label index="datepicker_day_so">So</label>
 			<label index="datepicker_day_mo">Mo</label>
