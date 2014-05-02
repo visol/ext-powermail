@@ -97,7 +97,7 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 		),
 		'value' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '60',
@@ -106,24 +106,24 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 		),
 		'value_type' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.0',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.0',
 						'0'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.1',
 						'1'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.2',
 						'2'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.value_type.3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.3',
 						'3'
 					),
 				),
@@ -131,7 +131,7 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 		),
 		'field' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.field',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.field',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',
@@ -143,7 +143,7 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 		),
 		'mail' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers.mail',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.mail',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',

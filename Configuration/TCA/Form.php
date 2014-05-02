@@ -12,7 +12,7 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 		'1' => array(
 			'showitem' =>
 				'title, pages,
-				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1,
+				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sheet1,
 				css, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
 				l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
 	),
@@ -102,7 +102,7 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 		),
 		'title' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.title',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -112,24 +112,24 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 		'css' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.css',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.css',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pleaseChoose',
 						''
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.css.1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.css.1',
 						'layout1'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.css.2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.css.2',
 						'layout2'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.css.3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.css.3',
 						'layout3'
 					),
 				),
@@ -141,7 +141,7 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 		'pages' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 0,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.pages',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.pages',
 			'config' => array(
 				'type' => 'inline',
 				'foreign_table' => 'tx_powermail_domain_model_pages',
@@ -183,7 +183,7 @@ if ($confArr['replaceIrreWithElementBrowser']) {
 	$TCA['tx_powermail_domain_model_forms']['columns']['pages'] = array(
 		'l10n_mode' => 'exclude',
 		'exclude' => 0,
-		'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms.pages',
+		'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.pages',
 		'config' => array(
 			'type' => 'group',
 			'internal_type' => 'db',

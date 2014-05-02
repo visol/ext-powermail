@@ -6,30 +6,30 @@
 		<main>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<switchableControllerActions>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.switchableControllerActions</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.switchableControllerActions</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.switchableControllerActions.0</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.switchableControllerActions.0</numIndex>
 										<numIndex index="1">Output->list;Output->show;Output->export;Output->rss;</numIndex>
 									</numIndex>
 									<!--<numIndex index="1" type="array">-->
-										<!--<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.switchableControllerActions.1</numIndex>-->
+										<!--<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.switchableControllerActions.1</numIndex>-->
 										<!--<numIndex index="1">Output->list;Output->show;Output->export;Output->rss;</numIndex>-->
 									<!--</numIndex>-->
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.switchableControllerActions.2</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.switchableControllerActions.2</numIndex>
 										<numIndex index="1">Output->edit;Output->update;</numIndex>
 									</numIndex>
 									<numIndex index="3" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.switchableControllerActions.3</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.switchableControllerActions.3</numIndex>
 										<numIndex index="1">Output->list;Output->show;Output->export;Output->rss;Output->edit;Output->update;</numIndex>
 									</numIndex>
 								</items>
@@ -40,12 +40,12 @@
 					</switchableControllerActions>
 					<settings.flexform.main.form>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.form</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.form</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pleaseChoose</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 								</items>
@@ -67,7 +67,7 @@
 					</settings.flexform.main.form>
 					<settings.flexform.main.pid>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.main.pid</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.main.pid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -85,13 +85,13 @@
 		<list>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.list.fields>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.fields</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.fields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -109,20 +109,20 @@
 					</settings.flexform.list.fields>
 					<settings.flexform.list.export>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.export</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.export</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.export.0</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.export.0</numIndex>
 										<numIndex index="1">xls</numIndex>
 									</numIndex>
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.export.1</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.export.1</numIndex>
 										<numIndex index="1">csv</numIndex>
 									</numIndex>
 									<numIndex index="2" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.export.2</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.export.2</numIndex>
 										<numIndex index="1">rss</numIndex>
 									</numIndex>
 								</items>
@@ -139,7 +139,7 @@
 					<settings.flexform.list.delta>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.delta</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.delta</label>
 							<config>
 								<type>input</type>
 								<size>10</size>
@@ -149,7 +149,7 @@
 					<settings.flexform.list.limit>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.limit</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.limit</label>
 							<config>
 								<type>input</type>
 								<size>10</size>
@@ -159,7 +159,7 @@
 					<settings.flexform.list.pid>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.pid</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.pid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -173,12 +173,12 @@
 					</settings.flexform.list.pid>
 					<settings.flexform.list.showownonly>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.showownonly</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.showownonly</label>
 							<config>
 								<type>check</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.list.showownonly.0</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.list.showownonly.0</numIndex>
 										<numIndex index="1">1</numIndex>
 									</numIndex>
 								</items>
@@ -192,13 +192,13 @@
 		<single>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.single</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.single</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.single.fields>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.single.fields</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.single.fields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -217,7 +217,7 @@
 					<settings.flexform.single.pid>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.single.pid</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.single.pid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -235,18 +235,18 @@
 		<search>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.search.fields>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.fields</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.fields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.fields.all</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.fields.all</numIndex>
 										<numIndex index="1">_all</numIndex>
 									</numIndex>
 								</items>
@@ -264,16 +264,16 @@
 					<!--<settings.flexform.search.operator>-->
 						<!--<TCEforms>-->
 							<!--<exclude>1</exclude>-->
-							<!--<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.operator</label>-->
+							<!--<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.operator</label>-->
 							<!--<config>-->
 								<!--<type>select</type>-->
 								<!--<items type="array">-->
 									<!--<numIndex index="0" type="array">-->
-										<!--<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.operator.0</numIndex>-->
+										<!--<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.operator.0</numIndex>-->
 										<!--<numIndex index="1">OR</numIndex>-->
 									<!--</numIndex>-->
 									<!--<numIndex index="1" type="array">-->
-										<!--<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.operator.1</numIndex>-->
+										<!--<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.operator.1</numIndex>-->
 										<!--<numIndex index="1">AND</numIndex>-->
 									<!--</numIndex>-->
 								<!--</items>-->
@@ -283,12 +283,12 @@
 					<!--</settings.flexform.search.operator>-->
 					<settings.flexform.search.abc>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.abc</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.abc</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.search.abc.off</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.search.abc.off</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 								</items>
@@ -305,13 +305,13 @@
 		<edit>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.edit.fields>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit.fields</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit.fields</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -329,12 +329,12 @@
 					</settings.flexform.edit.fields>
 					<settings.flexform.edit.feuser>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit.feuser</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit.feuser</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit.feuser.owner</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit.feuser.owner</numIndex>
 										<numIndex index="1">_owner</numIndex>
 									</numIndex>
 								</items>
@@ -352,12 +352,12 @@
 					</settings.flexform.edit.feuser>
 					<settings.flexform.edit.fegroup>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit.fegroup</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit.fegroup</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="1" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit.feuser.owner</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit.feuser.owner</numIndex>
 										<numIndex index="1">_owner</numIndex>
 									</numIndex>
 								</items>
@@ -376,7 +376,7 @@
 					<settings.flexform.edit.pid>
 						<TCEforms>
 							<exclude>1</exclude>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform_pi2.edit.pid</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform_pi2.edit.pid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>

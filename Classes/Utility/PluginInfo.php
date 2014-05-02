@@ -55,7 +55,7 @@ class PluginInfo {
 	 *
 	 * @var string
 	 */
-	protected $locallangPath = 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pluginInfo.';
+	protected $locallangPath = 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pluginInfo.';
 
 	/**
 	 * Main Function

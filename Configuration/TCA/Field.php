@@ -9,14 +9,15 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
 			path, content_element, text, prefill_value, create_from_typoscript, mandatory,
-			validation, validation_configuration, css, datepicker_settings, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
+			validation, validation_configuration, css, datepicker_settings, feuser_value,
+			sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
 		'1' => array(
 			'showitem' =>
 				'pages, title, type, settings, path, content_element, text,
-				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.palette1;1,
-				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1,
+				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.palette1;1,
+				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sheet1,
 				validation_title, --palette--; Validation;2, prefill_title, --palette--;
 				Prefill;3, --palette--;Layout;4, marker_title, --palette--;Variables;5,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
@@ -113,7 +114,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'title' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.title',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -122,88 +123,88 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'type' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.spacer1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.spacer1',
 						'--div--'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.0',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.0',
 						'input'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.1',
 						'textarea'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.2',
 						'select'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.3',
 						'check'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.4',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.4',
 						'radio'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.5',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.5',
 						'submit'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.spacer2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.spacer2',
 						'--div--'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.6',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.6',
 						'captcha'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.7',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.7',
 						'reset'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.8',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.8',
 						'text'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.9',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.9',
 						'content'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.10',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.10',
 						'html'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.11',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.11',
 						'password'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.12',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.12',
 						'file'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.13',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.13',
 						'hidden'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.14',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.14',
 						'date'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.15',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.15',
 						'location'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.16',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.16',
 						'typoscript'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.type.spacer3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.spacer3',
 						'--div--'
 					),
 				),
@@ -217,7 +218,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'settings' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.settings',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.settings',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '32',
@@ -228,7 +229,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'path' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.path',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.path',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -238,7 +239,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'content_element' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.content_element',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.content_element',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'db',
@@ -251,7 +252,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'text' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.text',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.text',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '32',
@@ -262,7 +263,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'sender_email' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sender_email',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sender_email',
 			'config' => array(
 				'type' => 'check'
 			),
@@ -271,7 +272,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'sender_name' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sender_name',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sender_name',
 			'config' => array(
 				'type' => 'check'
 			),
@@ -279,7 +280,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'validation_title' => array(
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation_title',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation_title',
 			'config' => array(
 				'type' => 'user',
 				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
@@ -289,7 +290,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'mandatory' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.mandatory',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.mandatory',
 			'config' => array(
 				'type' => 'check'
 			),
@@ -298,12 +299,12 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'validation' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pleaseChoose',
 						''
 					),
 
@@ -314,7 +315,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * javascript example: <input type="text" data-parsley-type="email" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.1',
 						1
 					),
 
@@ -325,7 +326,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * javascript example: <input type="text" data-parsley-type="url" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.2',
 						2
 					),
 
@@ -338,7 +339,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * 		<input ... data-parsley-pattern="[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.3',
 						3
 					),
 
@@ -349,7 +350,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * javascript example: <input type="text" data-parsley-type="integer" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.4',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.4',
 						4
 					),
 
@@ -360,7 +361,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * javascript example: <input type="text" data-parsley-pattern="[a-zA-Z]*" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.5',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.5',
 						5
 					),
 
@@ -372,7 +373,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * javascript example: <input type="text" data-parsley-min="6" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.6',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.6',
 						6
 					),
 
@@ -384,7 +385,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * javascript example: <input type="text" data-parsley-max="12" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.7',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.7',
 						7
 					),
 
@@ -397,7 +398,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * 		<input type="text" data-parsley-type="range" min="1" max="10" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.8',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.8',
 						8
 					),
 
@@ -409,7 +410,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * 		<input type="text" data-parsley-length="[6, 10]" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.9',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.9',
 						9
 					),
 
@@ -422,7 +423,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					 * 		<input type="text" data-parsley-pattern="https?://.+" />
 					 */
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validation.10',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.10',
 						10
 					),
 				),
@@ -437,7 +438,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'validation_configuration' => array(
 			'exclude' => 1,
 			'label' =>
-				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.validationConfiguration',
+				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validationConfiguration',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30
@@ -445,7 +446,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'displayCond' => 'FIELD:validation:IN:6,7,8,9,10'
 		),
 		'prefill_title' => array(
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.prefill_title',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_title',
 			'config' => array(
 				'type' => 'user',
 				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
@@ -454,7 +455,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'prefill_value' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.prefill_value',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_value',
 			'config' => array(
 				'type' => 'text',
 				'cols' => '32',
@@ -465,52 +466,52 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'feuser_value' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pleaseChoose',
 						''
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.name',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.name',
 						'name'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.address',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.address',
 						'address'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.phone',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.phone',
 						'telephone'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.fax',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.fax',
 						'fax'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.email',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.email',
 						'email'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.zip',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.zip',
 						'zip'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.city',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.city',
 						'city'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.country',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.country',
 						'country'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.www',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.www',
 						'www'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.feuser_value.company',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.feuser_value.company',
 						'company'
 					),
 				),
@@ -525,7 +526,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'create_from_typoscript' => array(
 			'exclude' => 1,
 			'label' =>
-				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.create_from_typoscript',
+				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.create_from_typoscript',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -536,24 +537,24 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'css' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.css',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.css',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pleaseChoose',
 						''
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.css.1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.css.1',
 						'layout1'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.css.2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.css.2',
 						'layout2'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.css.3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.css.3',
 						'layout3'
 					),
 				),
@@ -567,20 +568,20 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
 			'label' =>
-				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings',
+				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.datepicker_settings',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings.1',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.datepicker_settings.1',
 						'date'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings.2',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.datepicker_settings.2',
 						'datetime'
 					),
 					array(
-						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings.3',
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.datepicker_settings.3',
 						'time'
 					),
 				),
@@ -592,7 +593,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		),
 		'marker_title' => array(
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.marker_title',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.marker_title',
 			'config' => array(
 				'type' => 'user',
 				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
@@ -601,7 +602,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'auto_marker' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.auto_marker',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.auto_marker',
 			'config' => array(
 				'type' => 'user',
 				'userFunc' => 'In2code\Powermail\Utility\Marker->createMarker'
@@ -611,7 +612,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'marker' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.own_marker',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.own_marker',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -622,7 +623,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'own_marker_select' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.own_marker_select',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.own_marker_select',
 			'config' => array(
 				'type' => 'check',
 				'default' => 0
@@ -631,7 +632,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'pages' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.pages',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.pages',
 			'config' => array(
 				'type' => 'select',
 				'items' => array(

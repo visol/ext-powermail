@@ -39,7 +39,7 @@ if (TYPO3_MODE === 'BE' && !$confArr['disableBackendModule'] && !(TYPO3_REQUESTT
 		array(
 			'access' => 'user,group',
 			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
-			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xml',
+			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mod.xlf',
 		)
 	);
 }
@@ -111,12 +111,12 @@ if (TYPO3_MODE == 'BE') {
  */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 	'tx_powermail_domain_model_forms',
-	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xml'
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_forms.xlf'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_forms');
 $TCA['tx_powermail_domain_model_forms'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_forms',
+		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -143,12 +143,12 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 	'tx_powermail_domain_model_pages',
-	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_pages.xml'
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_pages.xlf'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_pages');
 $TCA['tx_powermail_domain_model_pages'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_pages',
+		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_pages',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -176,12 +176,12 @@ $TCA['tx_powermail_domain_model_pages'] = array(
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 	'tx_powermail_domain_model_fields',
-	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_fields.xml'
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_fields.xlf'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_fields');
 $TCA['tx_powermail_domain_model_fields'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields',
+		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -210,12 +210,12 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 	'tx_powermail_domain_model_mails',
-	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_mails.xml'
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_mails.xlf'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_mails');
 $TCA['tx_powermail_domain_model_mails'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_mails',
+		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_mails',
 		'label' => 'sender_mail',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -243,12 +243,12 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 	'tx_powermail_domain_model_answers',
-	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_answers.xml'
+	'EXT:powermail/Resources/Private/Language/locallang_csh_tx_powermail_domain_model_answers.xlf'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_powermail_domain_model_answers');
 $TCA['tx_powermail_domain_model_answers'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_answers',
+		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers',
 		'label' => 'value',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',

@@ -59,14 +59,14 @@ class WizIcon {
 	}
 
 	/**
-	 * Reads the [extDir]/locallang.xml and returns the \$LOCAL_LANG array
+	 * Reads the [extDir]/locallang.xlf and returns the \$LOCAL_LANG array
 	 *
 	 * @return array language labels
 	 */
 	protected function includeLocalLang() {
 		$locallangXmlParser = GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');
 		$parsedRepresentationOfXmlFile = $locallangXmlParser->getParsedData(
-			ExtensionManagementUtility::extPath('powermail') . 'Resources/Private/Language/locallang.xml',
+			ExtensionManagementUtility::extPath('powermail') . 'Resources/Private/Language/locallang.xlf',
 			$GLOBALS['LANG']->lang
 		);
 

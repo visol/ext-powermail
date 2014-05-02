@@ -197,7 +197,7 @@ plugin.tx_powermail {
 
 			optin {
 				subject = TEXT
-				subject.data = LLL:EXT:powermail/Resources/Private/Language/locallang.xml:optin_subject
+				subject.data = LLL:EXT:powermail/Resources/Private/Language/locallang.xlf:optin_subject
 
 				overwrite {
 #					email = TEXT

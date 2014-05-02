@@ -11,7 +11,7 @@
 - done: Ajax form submit
 - Adding Unit Tests
 - Adding RST Documentation
-- converting language files from xml to xlf
+- done converting language files from xml to xlf
 - add a powermail 1.x form converter to 2.x
 - add a countryselection
 - powermail_cond update

@@ -6,13 +6,13 @@
 		<main>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.main</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.main.form>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.main.form</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main.form</label>
 							<config>
 								<type>select</type>
 								<items type="array">
@@ -57,7 +57,7 @@
 					</settings.flexform.main.form>
 					<settings.flexform.main.confirmation>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.main.confirmation</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main.confirmation</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -66,7 +66,7 @@
 					</settings.flexform.main.confirmation>
 					<settings.flexform.main.optin>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.main.optin</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main.optin</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -75,7 +75,7 @@
 					</settings.flexform.main.optin>
 					<settings.flexform.main.moresteps>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.main.moresteps</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main.moresteps</label>
 							<config>
 								<type>check</type>
 								<default>0</default>
@@ -84,7 +84,7 @@
 					</settings.flexform.main.moresteps>
 					<settings.flexform.main.pid>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.main.pid</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main.pid</label>
 							<config>
 								<type>group</type>
 								<internal_type>db</internal_type>
@@ -102,13 +102,13 @@
 		<receiver>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.receiver</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.receiver</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.receiver.name>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.receiver.name</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.receiver.name</label>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
@@ -117,7 +117,7 @@
 					</settings.flexform.receiver.name>
 					<settings.flexform.receiver.email>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.receiver.email</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.receiver.email</label>
 							<config>
 								<type>text</type>
 								<cols>32</cols>
@@ -127,12 +127,12 @@
 					</settings.flexform.receiver.email>
 					<settings.flexform.receiver.fe_group>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.receiver.fe_group</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.receiver.fe_group</label>
 							<config>
 								<type>select</type>
 								<items type="array">
 									<numIndex index="0" type="array">
-										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:pleaseChoose</numIndex>
+										<numIndex index="0">LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:pleaseChoose</numIndex>
 										<numIndex index="1"></numIndex>
 									</numIndex>
 								</items>
@@ -148,7 +148,7 @@
 					</settings.flexform.receiver.fe_group>
 					<settings.flexform.receiver.subject>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.receiver.subject</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.receiver.subject</label>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
@@ -157,7 +157,7 @@
 					</settings.flexform.receiver.subject>
 					<settings.flexform.receiver.body>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.receiver.body</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.receiver.body</label>
 							<config>
 								<type>text</type>
 								<default>{powermail_all}</default>
@@ -171,13 +171,13 @@
 		<sender>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.sender</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.sender</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.sender.name>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.sender.name</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.sender.name</label>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
@@ -186,7 +186,7 @@
 					</settings.flexform.sender.name>
 					<settings.flexform.sender.email>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.sender.email</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.sender.email</label>
 							<config>
 								<type>input</type>
 								<!--
@@ -198,7 +198,7 @@
 					</settings.flexform.sender.email>
 					<settings.flexform.sender.subject>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.sender.subject</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.sender.subject</label>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
@@ -207,7 +207,7 @@
 					</settings.flexform.sender.subject>
 					<settings.flexform.sender.body>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.sender.body</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.sender.body</label>
 							<config>
 								<type>text</type>
 								<default>{powermail_all}</default>
@@ -221,13 +221,13 @@
 		<thx>
 			<ROOT>
 				<TCEforms>
-					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.thx</sheetTitle>
+					<sheetTitle>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.thx</sheetTitle>
 				</TCEforms>
 				<type>array</type>
 				<el>
 					<settings.flexform.thx.body>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.thx.body</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.thx.body</label>
 							<config>
 								<type>text</type>
 								<default>{powermail_all}</default>
@@ -237,7 +237,7 @@
 					</settings.flexform.thx.body>
 					<settings.flexform.thx.redirect>
 						<TCEforms>
-							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:flexform.thx.redirect</label>
+							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.thx.redirect</label>
 							<config>
 								<type>input</type>
 								<eval>trim</eval>
