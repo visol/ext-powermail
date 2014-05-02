@@ -9,7 +9,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
 			path, content_element, text, prefill_value, create_from_typoscript, mandatory,
-			validation, validation_configuration, css, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
+			validation, validation_configuration, css, datepicker_settings, feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
 		'1' => array(
@@ -18,7 +18,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.palette1;1,
 				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.sheet1,
 				validation_title, --palette--; Validation;2, prefill_title, --palette--;
-				Prefill;3, css, marker_title, --palette--;Variables;4,
+				Prefill;3, --palette--;Layout;4, marker_title, --palette--;Variables;5,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
 				l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
 	),
@@ -26,7 +26,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'1' => array('showitem' => 'sender_email, sender_name'),
 		'2' => array('showitem' => 'mandatory, validation, validation_configuration'),
 		'3' => array('showitem' => 'prefill_value, feuser_value, create_from_typoscript'),
-		'4' => array('showitem' => 'auto_marker, marker, own_marker_select'),
+		'4' => array('showitem' => 'css, datepicker_settings'),
+		'5' => array('showitem' => 'auto_marker, marker, own_marker_select'),
 		'canNotCollapse' => '1'
 	),
 	'columns' => array(
@@ -561,6 +562,33 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'eval' => ''
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,submit,password,file,location,text,date'
+		),
+		'datepicker_settings' => array(
+			'l10n_mode' => 'exclude',
+			'exclude' => 1,
+			'label' =>
+				'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings',
+			'config' => array(
+				'type' => 'select',
+				'items' => array(
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings.1',
+						'date'
+					),
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings.2',
+						'datetime'
+					),
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xml:tx_powermail_domain_model_fields.datepicker_settings.3',
+						'time'
+					),
+				),
+				'size' => 1,
+				'maxitems' => 1,
+				'eval' => ''
+			),
+			'displayCond' => 'FIELD:type:IN:date'
 		),
 		'marker_title' => array(
 			'l10n_mode' => 'exclude',

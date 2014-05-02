@@ -295,8 +295,13 @@ plugin.tx_powermail {
 					extension = {$plugin.tx_powermail.settings.misc.uploadFileExtensions}
 				}
 
-				# Date Format for Double-Optin together with date fields
-				dateFormat = {$plugin.tx_powermail.settings.misc.dateFormat}
+				datepicker {
+					# Per default html5 Date or Datetime format is used. If you don't want to use it and want to have the same datepicker all over all browsers, you can enable this feature
+					forceJavaScriptDatePicker = {$plugin.tx_powermail.settings.misc.forceJavaScriptDatePicker}
+
+					# If you use the JavaScript Datepicker, you can define the date format (see forceJavaScriptDatePicker)
+					dateFormat = {$plugin.tx_powermail.settings.misc.dateFormat}
+				}
 			}
 
 
@@ -480,27 +485,18 @@ page.includeJSFooterlibs.powermailJQuery.external = 1
 [end]
 
 # add jQuery if it was turned on in the constants
-[globalVar = LIT:0 < {$plugin.tx_powermail.settings.javascript.addJQueryFromGoogle}]
-page.includeJSFooterlibs.powermailJQueryUi = {$plugin.tx_powermail.settings.javascript.powermailJQueryUi}
-page.includeJSFooterlibs.powermailJQueryUi.external = 1
-[end]
-
-# add jQuery if it was turned on in the constants
 [globalVar = LIT:0 < {$plugin.tx_powermail.settings.javascript.addAdditionalJavaScript}]
 page {
 	# Inlude JavaScript files
-	includeJSFooterlibs {
-		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/JavaScripts/jquery.ui.datepicker.min.js
+	includeJSFooter {
+		powermailJQueryDatepicker = EXT:powermail/Resources/Public/JavaScripts/jquery.datetimepicker.js
 		powermailJQueryFormValidation = EXT:powermail/Resources/Public/JavaScripts/parsley.min.js
 		powermailJQueryTabs = EXT:powermail/Resources/Public/JavaScripts/tabs.js
-	}
-	includeJSFooter {
 		powermailForm = EXT:powermail/Resources/Public/JavaScripts/form.js
 	}
 
 	# Include CSS files
 	includeCSS {
-		powermailJQueryUiTheme = EXT:powermail/Resources/Public/Css/jquery.ui.theme.css
 		powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/Css/jquery.ui.datepicker.css
 	}
 }

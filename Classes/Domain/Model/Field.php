@@ -122,6 +122,13 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $css = '';
 
 	/**
+	 * datepicker settings
+	 *
+	 * @var string
+	 */
+	protected $datepickerSettings = '';
+
+	/**
 	 * feuserValue
 	 *
 	 * @var string
@@ -385,6 +392,34 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setCss($css) {
 		$this->css = $css;
+	}
+
+	/**
+	 * @param string $datepickerSettings
+	 * @return void
+	 */
+	public function setDatepickerSettings($datepickerSettings) {
+		$this->datepickerSettings = $datepickerSettings;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDatepickerSettings() {
+		return $this->datepickerSettings;
+	}
+
+	/**
+	 * Rewrite datetime to datetime-local (Chrome support)
+	 *
+	 * @return string
+	 */
+	public function getDatepickerSettingsOptimized() {
+		$settings = $this->datepickerSettings;
+		if ($settings === 'datetime') {
+			$settings = 'datetime-local';
+		}
+		return $settings;
 	}
 
 	/**

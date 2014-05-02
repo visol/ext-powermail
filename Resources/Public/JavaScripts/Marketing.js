@@ -38,7 +38,7 @@ function isMobile() {
 function getBaseUrl() {
 	var baseurl;
 	if (jQuery('base').length > 0) {
-		baseurl = jQuery('base').attr('href');
+		baseurl = jQuery('base').prop('href');
 	} else {
 		if (window.location.protocol != "https:") {
 			baseurl = 'http://' + window.location.hostname;

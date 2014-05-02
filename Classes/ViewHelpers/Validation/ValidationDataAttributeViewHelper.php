@@ -28,8 +28,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 	 */
 	public function render(\In2code\Powermail\Domain\Model\Field $field, $additionalAttributes = array(), $iteration = NULL) {
 		$dataArray = $additionalAttributes;
-		$request = $this->controllerContext->getRequest();
-		$this->extensionName = $request->getControllerExtensionName();
+		$this->extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 		if ($this->arguments['extensionName'] !== NULL) {
 			$this->extensionName = $this->arguments['extensionName'];
 		}
