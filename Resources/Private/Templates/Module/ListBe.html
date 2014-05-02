@@ -179,10 +179,10 @@ Show Backend Module: Powermail List
 									</f:if>
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									<f:format.date format="d.m.Y">{mail.crdate}</f:format.date>
+									<f:format.date format="{f:translate(key:'datepicker_format_date')}">{mail.crdate}</f:format.date>
 								</td>
 								<td nowrap="nowrap" class="col-title">
-									<f:format.date format="H:i">{mail.crdate}</f:format.date>
+									<f:format.date format="{f:translate(key:'datepicker_format_time')}">{mail.crdate}</f:format.date>
 								</td>
 								<td nowrap="nowrap" class="col-title">
 									<span title="{mail.senderName}">
