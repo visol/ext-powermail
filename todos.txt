@@ -17,5 +17,5 @@
 - powermail_cond update
 - schedulertask to remove unused uploaded files
 - multiselect field
-- datetime (+ html5)
+- done datetime (+ html5)
 - Create testparcour for visual tests
