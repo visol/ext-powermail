@@ -74,6 +74,9 @@
 
 		.powermail_fieldwrap_radio,
 		.powermail_fieldwrap_check {
+			legend {
+				padding: 0;
+			}
 			fieldset {
 				border: 0;
 				padding: 0;

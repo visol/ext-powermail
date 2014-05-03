@@ -94,7 +94,7 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 		}
 
 		// if prefill value (from typoscript)
-		elseif ($this->settings['prefill.'][$marker . '.']) {
+		elseif (isset($this->settings['prefill.'][$marker]) || isset($this->settings['prefill.'][$marker . '.'])) {
 			if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) {
 				$data = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field);
 				$this->cObj->start($data);
@@ -228,7 +228,7 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 		}
 
 		// if prefill value (from typoscript)
-		elseif ($this->settings['prefill.'][$marker . '.']) {
+		elseif (isset($this->settings['prefill.'][$marker]) || isset($this->settings['prefill.'][$marker . '.'])) {
 			if (isset($this->settings['prefill.'][$marker . '.']) && is_array($this->settings['prefill.'][$marker . '.'])) {
 				$data =  \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($field);
 				$this->cObj->start($data);

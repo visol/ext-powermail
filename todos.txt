@@ -12,7 +12,8 @@
 - done: converting language files from xml to xlf
 - done: html5 and JavaScript datepicker (datetime + date + time)
 - done: add a countryselection
-- multiselect field
+- done: multiselect field
+- decrease number of forms to select in plugin (probably with Page TSconfig)
 - Adding Unit Tests
 - Adding RST Documentation
 - add a powermail 1.x form converter to 2.x

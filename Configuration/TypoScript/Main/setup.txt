@@ -306,7 +306,7 @@ plugin.tx_powermail {
 
 
 
-			# Prefill some fields with their marker - e.g. {firstname}
+			# Prefill fields with their marker - e.g. {firstname} (Fields available for prefill: input, textarea, select, select multi, radio, checkbox)
 			prefill {
 				# example: fill with string
 #				firstname = Alex
@@ -316,7 +316,7 @@ plugin.tx_powermail {
 #				email.value = alex@in2code.de
 #				email.wrap = <b>|</b>
 
-				# example: fill checkboxes or multiselection with more values
+				# example: fill checkboxes or multiselect with more values
 #				category.0 = TEXT
 #				category.0.value = IT
 #				category.1 = TEXT
