@@ -15,6 +15,14 @@
 				<source>Powermail list</source>
 				<target state="translated">Powermail Liste</target>
 			</trans-unit>
+			<trans-unit id="pluginWizardTitle">
+				<source>Powermail</source>
+				<target state="translated">Powermail</target>
+			</trans-unit>
+			<trans-unit id="pluginWizardDescription">
+				<source>Powerful and easy mailform extension optimized for editors. Powermail offers data storing, extended input validation, advanced spam-prevention, marketing analyses and a lot of configuration settings.</source>
+				<target state="translated">Umfangreiche Kontaktformular Erweiterung - optimiert für Redakteure. Powermail bietet Speicherung der Daten, erweiterte Feldüberprüfung, ausführlichen Spamschutz, Marketing-Analyse und sehr viele Konfigurationsmöglichkeiten.</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

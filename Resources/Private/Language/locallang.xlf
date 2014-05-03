@@ -6,12 +6,6 @@
 			<trans-unit id="pleaseChoose">
 				<source>Please choose...</source>
 			</trans-unit>
-			<trans-unit id="pi1_title">
-				<source>powermail</source>
-			</trans-unit>
-			<trans-unit id="pi1_plus_wiz_description">
-				<source>Powerful and easy mailform extension with database storing, javascript validation and many more...</source>
-			</trans-unit>
 			<trans-unit id="\In2code\Powermail\Domain\Model\Mail.senderName">
 				<source>Senders Name</source>
 			</trans-unit>

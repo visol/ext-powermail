@@ -9,13 +9,13 @@
 - done: Marketing Tracking via JavaScript (going away from USER_INT to enable static filecache)
 - done: Resolving PHPSniffer Notes
 - done: Ajax form submit
+- done: converting language files from xml to xlf
+- done: html5 and JavaScript datepicker (datetime + date + time)
+- done: add a countryselection
+- multiselect field
 - Adding Unit Tests
 - Adding RST Documentation
-- done converting language files from xml to xlf
 - add a powermail 1.x form converter to 2.x
-- add a countryselection
 - powermail_cond update
 - schedulertask to remove unused uploaded files
-- multiselect field
-- done datetime (+ html5)
 - Create testparcour for visual tests

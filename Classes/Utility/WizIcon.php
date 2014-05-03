@@ -37,18 +37,23 @@ use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 class WizIcon {
 
 	/**
+	 * Path to locallang file (with : as postfix)
+	 *
+	 * @var string
+	 */
+	protected $locallangPath = 'LLL:EXT:powermail/Resources/Private/Language/locallang_mod.xlf:';
+
+	/**
 	 * Processing the wizard items array
 	 *
-	 * @param array $wizardItems The wizard items
+	 * @param array $wizardItems
 	 * @return array
 	 */
-	public function proc($wizardItems) {
-		$ll = $this->includeLocalLang();
-
+	public function proc($wizardItems = array()) {
 		$wizardItems['plugins_tx_powermail_pi1'] = array(
 			'icon' => ExtensionManagementUtility::extRelPath('powermail') . 'Resources/Public/Icons/ce_wiz.gif',
-			'title' => $GLOBALS['LANG']->getLLL('pi1_title', $ll),
-			'description' => $GLOBALS['LANG']->getLLL('pi1_plus_wiz_description', $ll),
+			'title' => $GLOBALS['LANG']->sL($this->locallangPath . 'pluginWizardTitle', TRUE),
+			'description' => $GLOBALS['LANG']->sL($this->locallangPath . 'pluginWizardDescription', TRUE),
 			'params' => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=powermail_pi1',
 			'tt_content_defValues' => array(
 				'CType' => 'list',
@@ -56,20 +61,5 @@ class WizIcon {
 		);
 
 		return $wizardItems;
-	}
-
-	/**
-	 * Reads the [extDir]/locallang.xlf and returns the \$LOCAL_LANG array
-	 *
-	 * @return array language labels
-	 */
-	protected function includeLocalLang() {
-		$locallangXmlParser = GeneralUtility::makeInstance('t3lib_l10n_parser_Llxml');
-		$parsedRepresentationOfXmlFile = $locallangXmlParser->getParsedData(
-			ExtensionManagementUtility::extPath('powermail') . 'Resources/Private/Language/locallang.xlf',
-			$GLOBALS['LANG']->lang
-		);
-
-		return $parsedRepresentationOfXmlFile;
 	}
 }
