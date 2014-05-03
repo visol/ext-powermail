@@ -314,10 +314,16 @@ plugin.tx_powermail {
 				# example: fill with TypoScript
 #				email = TEXT
 #				email.value = alex@in2code.de
-#				eamil.wrap = <b>|</b>
+#				email.wrap = <b>|</b>
 
-				# example: fill with value from Flexform
-					# available: css, feuserValue, mandatory, marker, pid, prefillValue, senderEmail, senderName, sorting, title, type, uid, validation
+				# example: fill checkboxes or multiselection with more values
+#				category.0 = TEXT
+#				category.0.value = IT
+#				category.1 = TEXT
+#				category.1.value = Real Estate
+
+				# example: fill with value from Field Record
+					# available: uid, title, type, settings, css, feuserValue, mandatory, marker, pid, prefillValue, senderEmail, senderName, sorting, validation
 #				comment = TEXT
 #				comment.field = type
 			}

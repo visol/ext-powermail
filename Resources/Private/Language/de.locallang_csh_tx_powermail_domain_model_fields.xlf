@@ -71,6 +71,10 @@
 				<source>Choose a Layout (This may change the Frontend Rendering - please ask your administrator for more information)</source>
 				<target state="translated">Wählen Sie ein Layout (Diese Änderung kann sich auf das Aussehen im Frontend auswirken - bitte fragen Sie Ihren Administrator für weitere Informationen)</target>
 			</trans-unit>
+			<trans-unit id="multiselect.description">
+				<source>If you want to have a select field, where your users can select more than only one entry, activate this settings</source>
+				<target state="translated">Wenn Sie ein Auswahlfeld benötigen, bei dem der Besucher mehr als nur eine Auswahl treffen kann, können Sie diese Einstellung wählen</target>
+			</trans-unit>
 			<trans-unit id="datepicker_settings.description">
 				<source>Choose the type of the datepicker (date only or date and time or time only)</source>
 				<target state="translated">Typ des Datepickers auswählen (nur Datum oder Datum und Uhrzeit oder nur Uhrzeit)</target>

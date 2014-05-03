@@ -331,6 +331,10 @@
 				<source>Layout 3</source>
 				<target state="translated">Layout 3</target>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.multiselect">
+				<source>Multiselect</source>
+				<target state="translated">Mehrfachauswahl</target>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.datepicker_settings">
 				<source>Datepicker Mode</source>
 				<target state="translated">Datepicker Modus</target>

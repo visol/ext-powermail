@@ -9,8 +9,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
 			path, content_element, text, prefill_value, create_from_typoscript, mandatory,
-			validation, validation_configuration, css, datepicker_settings, feuser_value,
-			sender_email, sender_name, own_marker_select, auto_marker, marker',
+			validation, validation_configuration, css, multiselect, datepicker_settings,
+			feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
 		'1' => array(
@@ -27,7 +27,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 		'1' => array('showitem' => 'sender_email, sender_name'),
 		'2' => array('showitem' => 'mandatory, validation, validation_configuration'),
 		'3' => array('showitem' => 'prefill_value, feuser_value, create_from_typoscript'),
-		'4' => array('showitem' => 'css, datepicker_settings'),
+		'4' => array('showitem' => 'css, multiselect, datepicker_settings'),
 		'5' => array('showitem' => 'auto_marker, marker, own_marker_select'),
 		'canNotCollapse' => '1'
 	),
@@ -455,7 +455,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'type' => 'user',
 				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
 			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,hidden,country'
+			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden,country'
 		),
 		'prefill_value' => array(
 			'exclude' => 1,
@@ -525,7 +525,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
 				'itemsProcFuncFieldName' => 'feUserProperty'
 			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden'
+			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden,country'
 		),
 		'create_from_typoscript' => array(
 			'exclude' => 1,
@@ -567,6 +567,15 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'eval' => ''
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,submit,password,file,location,text,date,country'
+		),
+		'multiselect' => array(
+			'l10n_mode' => 'exclude',
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.multiselect',
+			'config' => array(
+				'type' => 'check'
+			),
+			'displayCond' => 'FIELD:type:=:select'
 		),
 		'datepicker_settings' => array(
 			'l10n_mode' => 'exclude',

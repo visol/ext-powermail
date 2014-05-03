@@ -47,13 +47,22 @@ class SelectFieldViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectView
 	 * @return boolean TRUE if the value marked a s selected; FALSE otherwise
 	 */
 	protected function isSelectedAlternative($option) {
-		if (
-			// preselect from flexform
-			($option['selected'] && !$this->getValue()) ||
-			// preselect from piVars
-			($this->getValue() && ($option['value'] == $this->getValue() || $option['label'] == $this->getValue()))
-		) {
-			return TRUE;
+		if (!is_array($this->getValue())) {
+			if (
+				// preselect from flexform
+				($option['selected'] && !$this->getValue()) ||
+				// preselect from piVars
+				($this->getValue() && ($option['value'] === $this->getValue() || $option['label'] === $this->getValue()))
+			) {
+				return TRUE;
+			}
+		} else {
+			// Multi Select
+			foreach ($this->getValue() as $singleValue) {
+				if (!empty($singleValue) && ($option['value'] === $singleValue || $option['label'] === $singleValue)) {
+					return TRUE;
+				}
+			}
 		}
 
 		return FALSE;

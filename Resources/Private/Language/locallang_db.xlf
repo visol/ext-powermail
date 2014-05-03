@@ -249,6 +249,9 @@
 			<trans-unit id="tx_powermail_domain_model_fields.css.3">
 				<source>Layout 3</source>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.multiselect">
+				<source>Multiselect</source>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.datepicker_settings">
 				<source>Datepicker Mode</source>
 			</trans-unit>

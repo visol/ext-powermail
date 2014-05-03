@@ -104,6 +104,7 @@ CREATE TABLE tx_powermail_domain_model_fields (
 	validation int(11) DEFAULT '0' NOT NULL,
 	validation_configuration varchar(255) DEFAULT '' NOT NULL,
 	css varchar(255) DEFAULT '' NOT NULL,
+	multiselect tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	datepicker_settings varchar(255) DEFAULT '' NOT NULL,
 	feuser_value varchar(255) DEFAULT '' NOT NULL,
 	sender_email tinyint(4) unsigned DEFAULT '0' NOT NULL,

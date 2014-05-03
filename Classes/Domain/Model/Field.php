@@ -122,6 +122,13 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $css = '';
 
 	/**
+	 * multiselect
+	 *
+	 * @var bool
+	 */
+	protected $multiselect = FALSE;
+
+	/**
 	 * datepicker settings
 	 *
 	 * @var string
@@ -392,6 +399,34 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setCss($css) {
 		$this->css = $css;
+	}
+
+	/**
+	 * @param boolean $multiselect
+	 * @return void
+	 */
+	public function setMultiselect($multiselect) {
+		$this->multiselect = $multiselect;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getMultiselect() {
+		return $this->multiselect;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getMultiselectForField() {
+		$value = $this->getMultiselect();
+		if ($value) {
+			$value = 'multiple';
+		} else {
+			$value = '';
+		}
+		return $value;
 	}
 
 	/**
