@@ -180,6 +180,9 @@
 			<trans-unit id="tx_powermail_domain_model_fields.type.16">
 				<source>TypoScript</source>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.type.17">
+				<source>Country Selection</source>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.settings">
 				<source>Options</source>
 			</trans-unit>

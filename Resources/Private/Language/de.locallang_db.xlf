@@ -239,6 +239,10 @@
 				<source>TypoScript</source>
 				<target state="translated">TypoScript</target>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.type.17">
+				<source>Country Selection</source>
+				<target state="translated">Länderauswahl</target>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.settings">
 				<source>Options</source>
 				<target state="translated">Optionen</target>

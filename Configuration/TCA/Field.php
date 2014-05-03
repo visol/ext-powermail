@@ -196,6 +196,10 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 						'date'
 					),
 					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.17',
+						'country'
+					),
+					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.15',
 						'location'
 					),
@@ -451,7 +455,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'type' => 'user',
 				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
 			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,hidden'
+			'displayCond' => 'FIELD:type:IN:input,textarea,hidden,country'
 		),
 		'prefill_value' => array(
 			'exclude' => 1,
@@ -461,7 +465,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'cols' => '32',
 				'rows' => '2'
 			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,hidden'
+			'displayCond' => 'FIELD:type:IN:input,textarea,hidden,country'
 		),
 		'feuser_value' => array(
 			'l10n_mode' => 'exclude',
@@ -562,7 +566,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'maxitems' => 1,
 				'eval' => ''
 			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,submit,password,file,location,text,date'
+			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,submit,password,file,location,text,date,country'
 		),
 		'datepicker_settings' => array(
 			'l10n_mode' => 'exclude',
