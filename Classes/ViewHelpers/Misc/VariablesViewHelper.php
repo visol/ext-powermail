@@ -35,7 +35,7 @@ class VariablesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 	 *
 	 * @var array
 	 */
-	protected $settings;
+	protected $settings = array();
 
 	/**
 	 * Parses variables again
@@ -67,9 +67,11 @@ class VariablesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
 		$typoScriptSetup = $this->configurationManager->getConfiguration(
 			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
-		$this->settings = \TYPO3\CMS\Core\Utility\GeneralUtility::removeDotsFromTS(
-			$typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.']
-		);
+		if (!empty($typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'])) {
+			$this->settings = \TYPO3\CMS\Core\Utility\GeneralUtility::removeDotsFromTS(
+				$typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.']
+			);
+		}
 	}
 
 }

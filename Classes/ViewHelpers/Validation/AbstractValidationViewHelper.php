@@ -20,7 +20,7 @@ class AbstractValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 	/**
 	 * Configuration
 	 */
-	protected $settings;
+	protected $settings = array();
 
 	/**
 	 * @var string
@@ -66,8 +66,10 @@ class AbstractValidationViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abst
 		$typoScriptSetup = $this->configurationManager->getConfiguration(
 			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 		);
-		$this->settings = \TYPO3\CMS\Core\Utility\GeneralUtility::removeDotsFromTS(
-			$typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.']
-		);
+		if (!empty($typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.'])) {
+			$this->settings = \TYPO3\CMS\Core\Utility\GeneralUtility::removeDotsFromTS(
+				$typoScriptSetup['plugin.']['tx_powermail.']['settings.']['setup.']
+			);
+		}
 	}
 }
