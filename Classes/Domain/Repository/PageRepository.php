@@ -49,9 +49,7 @@ class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$sql .= ' where uid = ' . intval($uid);
 		$sql .= ' limit 1';
 
-		//this generates an array and makes it much slower
-		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		$result = $query->statement($sql)->execute();
+		$result = $query->statement($sql)->execute(TRUE);
 
 		return $result[0]['title'];
 	}

@@ -89,7 +89,6 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function getPagesValue($uid) {
 		$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
 
 		// create sql statement
 		$sql = 'select pages';
@@ -97,7 +96,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$sql .= ' where uid = ' . intval($uid);
 		$sql .= ' limit 1';
 
-		$result = $query->statement($sql)->execute();
+		$result = $query->statement($sql)->execute(TRUE);
 
 		return $result[0]['pages'];
 	}
