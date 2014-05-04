@@ -208,9 +208,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$sent = $this->div->sendTemplateEmail($email, $mail, $this->settings, 'receiver');
 
 			if (!$sent) {
-				$this->flashMessageContainer->add(
-					LocalizationUtility::translate('error_mail_not_created', 'powermail')
-				);
+				$this->addFlashMessage(LocalizationUtility::translate('error_mail_not_created', 'powermail'));
 				$this->messageClass = 'error';
 			}
 		}
@@ -450,9 +448,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	public function initializeAction() {
 		if (!isset($this->settings['staticTemplate'])) {
 			$this->controllerContext = $this->buildControllerContext();
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('error_no_typoscript', 'powermail')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript', 'powermail'));
 		}
 	}
 

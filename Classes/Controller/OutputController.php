@@ -155,13 +155,9 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 				$answer->setValue($value);
 				$this->answerRepository->update($answer);
 			}
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail'));
 		} else {
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail'));
 		}
 
 		$this->redirect('edit', NULL, NULL, array('mail' => $mail));
@@ -259,9 +255,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		// check if ts is included
 		if (!isset($this->settings['staticTemplate'])) {
 			$this->controllerContext = $this->buildControllerContext();
-			$this->flashMessageContainer->add(
-				LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail')
-			);
+			$this->addFlashMessage(LocalizationUtility::translate('error_no_typoscript_pi2', 'powermail'));
 		}
 	}
 
