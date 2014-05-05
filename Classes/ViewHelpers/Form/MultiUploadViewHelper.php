@@ -28,36 +28,12 @@ class MultiUploadViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\UploadView
 		$name = $this->getName();
 		$allowedFields = array('name', 'type', 'tmp_name', 'error', 'size');
 		foreach ($allowedFields as $fieldName) {
-			if ($this->isMultiple()) {
-				$this->registerFieldNameForFormTokenGeneration($name . '[' . $fieldName . '][]');
-			} else {
-				$this->registerFieldNameForFormTokenGeneration($name . '[' . $fieldName . ']');
-			}
+			$this->registerFieldNameForFormTokenGeneration($name . '[' . $fieldName . '][]');
 		}
 		$this->tag->addAttribute('type', 'file');
-		if ($this->isMultiple()) {
-			$name .= '[]';
-		}
+		$name .= '[]';
 		$this->tag->addAttribute('name', $name);
 		$this->setErrorClassAttribute();
 		return $this->tag->render();
-	}
-
-	/**
-	 * Check if upload is set to multiple
-	 *
-	 * @return bool
-	 */
-	protected function isMultiple() {
-		if (
-			(isset($this->arguments['multiple']) && $this->arguments['multiple'] === 'multiple')
-			|| (
-				isset($this->arguments['additionalAttributes']['multiple']) &&
-				$this->arguments['additionalAttributes']['multiple'] === 'multiple'
-			)
-		) {
-			return TRUE;
-		}
-		return FALSE;
 	}
 }
