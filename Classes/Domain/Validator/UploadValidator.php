@@ -48,18 +48,17 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 		foreach ($mail->getAnswers() as $answer) {
 			// fileupload found
 			if ($answer->getValueType() === 3) {
-				\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($answer->getValue(), 'in2code: ' . __CLASS__ . ':' . __LINE__);
 				// loop through filenames
 				foreach ($answer->getValue() as $value) {
 
 					// check file extension
-					if (!$this->checkExtension($value)) {
+					if (!BasicFileFunctions::checkExtension($value, $this->settings['misc.']['file.']['extension'])) {
 						$this->setErrorAndMessage($answer->getField(), 'upload_extension');
 						continue;
 					}
 
 					// check file size
-					if (!$this->checkFilesize($value)) {
+					if (!BasicFileFunctions::checkFilesize($value, $this->settings)) {
 						$this->setErrorAndMessage($answer->getField(), 'upload_size');
 						continue;
 					}
@@ -68,38 +67,5 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 		}
 
 		return $this->getIsValid();
-	}
-
-	/**
-	 * Is file-extension allowed for uploading?
-	 *
-	 * @param string $filename Filename like (upload_03.txt)
-	 * @return bool
-	 */
-	protected function checkExtension($filename) {
-		$fileInfo = pathinfo($filename);
-		if (
-			!empty($fileInfo['extension']) &&
-			!empty($this->settings['misc.']['file.']['extension']) &&
-			GeneralUtility::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension']) &&
-			GeneralUtility::verifyFilenameAgainstDenyPattern($filename)
-		) {
-			return TRUE;
-		}
-		return FALSE;
-	}
-
-	/**
-	 * Is file size ok?
-	 *
-	 * @param string $filename Filename like (upload_03.txt)
-	 * @return bool
-	 */
-	protected function checkFilesize($filename) {
-		$fileUploads = BasicFileFunctions::getFileUploadValuesOutOfUniqueName($this->settings['misc.']['file.']['folder']);
-		if (filesize($fileUploads[$filename]['tmp_name']) <= $this->settings['misc.']['file.']['size']) {
-			return TRUE;
-		}
-		return FALSE;
 	}
 }

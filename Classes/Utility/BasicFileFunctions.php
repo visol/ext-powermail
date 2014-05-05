@@ -45,6 +45,10 @@ class BasicFileFunctions {
 	 * @return array
 	 */
 	public static function getUniqueNamesForFileUploads($files, $destinationPath, $addPath = TRUE) {
+		if (empty($files[0]['tmp_name'])) {
+			return $files;
+		}
+
 		$newFileNames = array();
 		foreach ((array) $files as $file) {
 			if (!empty($file['name'])) {
@@ -109,20 +113,57 @@ class BasicFileFunctions {
 	 * File Upload
 	 *
 	 * @param string $destinationPath
+	 * @param string $allowedFileExtensions
 	 * @return bool
 	 */
-	public static function fileUpload($destinationPath) {
+	public static function fileUpload($destinationPath, $allowedFileExtensions = '') {
 		$result = FALSE;
 		if (isset($_FILES['tx_powermail_pi1']['tmp_name']['field'])) {
 			foreach (array_keys($_FILES['tx_powermail_pi1']['tmp_name']['field']) as $marker) {
 				foreach ($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker] as $key => $tmpName) {
-					$result = GeneralUtility::upload_copy_move(
-						$tmpName,
-						self::getUniqueName($_FILES['tx_powermail_pi1']['name']['field'][$marker][$key], $destinationPath)
-					);
+					$uniqueFileName = self::getUniqueName($_FILES['tx_powermail_pi1']['name']['field'][$marker][$key], $destinationPath);
+					if (!self::checkExtension($uniqueFileName, $allowedFileExtensions)) {
+						continue;
+					}
+					$result = GeneralUtility::upload_copy_move($tmpName, $uniqueFileName);
 				}
 			}
 		}
 		return $result;
+	}
+
+	/**
+	 * Is file-extension allowed for uploading?
+	 *
+	 * @param string $filename Filename like (upload_03.txt)
+	 * @param string $allowedFileExtensions
+	 * @return bool
+	 */
+	public static function checkExtension($filename, $allowedFileExtensions = '') {
+		$fileInfo = pathinfo($filename);
+		if (
+			!empty($fileInfo['extension']) &&
+			!empty($allowedFileExtensions) &&
+			GeneralUtility::inList($allowedFileExtensions, $fileInfo['extension']) &&
+			GeneralUtility::verifyFilenameAgainstDenyPattern($filename)
+		) {
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	/**
+	 * Is file size ok?
+	 *
+	 * @param string $filename Filename like (upload_03.txt)
+	 * @param array $settings
+	 * @return bool
+	 */
+	public static function checkFilesize($filename, $settings) {
+		$fileUploads = self::getFileUploadValuesOutOfUniqueName($settings['misc.']['file.']['folder']);
+		if (filesize($fileUploads[$filename]['tmp_name']) <= $settings['misc.']['file.']['size']) {
+			return TRUE;
+		}
+		return FALSE;
 	}
 }

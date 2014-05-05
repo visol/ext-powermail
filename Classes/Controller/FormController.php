@@ -88,7 +88,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 */
 	public function createAction(Mail $mail, $hash = NULL) {
 		$this->ignoreWrongForm($mail);
-		BasicFileFunctions::fileUpload($this->settings['misc']['file']['folder']);
+		BasicFileFunctions::fileUpload($this->settings['misc']['file']['folder'], $this->settings['misc']['file']['extension']);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
 
@@ -154,7 +154,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 */
 	public function confirmationAction(Mail $mail) {
 		$this->ignoreWrongForm($mail);
-		BasicFileFunctions::fileUpload($this->settings['misc']['file']['folder']);
+		BasicFileFunctions::fileUpload($this->settings['misc']['file']['folder'], $this->settings['misc']['file']['extension']);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
 

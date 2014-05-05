@@ -221,7 +221,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			$valueType = Div::getDataTypeFromFieldType(
 				$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
 			);
-			if ($valueType === 3) {
+			if ($valueType === 3 && is_array($value)) {
 				$value = BasicFileFunctions::getUniqueNamesForFileUploads($value, $this->settings['misc']['file']['folder'], FALSE);
 			}
 			if (is_array($value)) {
