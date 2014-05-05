@@ -575,7 +575,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'config' => array(
 				'type' => 'check'
 			),
-			'displayCond' => 'FIELD:type:=:select'
+			'displayCond' => 'FIELD:type:IN:select,file'
 		),
 		'datepicker_settings' => array(
 			'l10n_mode' => 'exclude',

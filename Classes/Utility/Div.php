@@ -544,7 +544,7 @@ class Div {
 			return '';
 		}
 		$setup = $GLOBALS['TSFE']->tmpl->setup;
-		$contentObject = GeneralUtility::makeInstance('tslib_cObj');
+		$contentObject = GeneralUtility::makeInstance('\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer');
 		$pathSegments = GeneralUtility::trimExplode('.', $typoScriptObjectPath);
 		$lastSegment = array_pop($pathSegments);
 		foreach ($pathSegments as $segment) {
@@ -1067,6 +1067,34 @@ class Div {
 	}
 
 	/**
+	 * Return Unique Filename for File Upload
+	 *
+	 * @param array $files
+	 * @param array $settings
+	 * @param bool $addPath
+	 * @return array
+	 */
+	public static function getUniqueNamesForFileUploads($files, $settings = array(), $addPath = TRUE) {
+		/** @var \TYPO3\CMS\Core\Utility\File\BasicFileUtility $basicFileFunctions */
+		$basicFileFunctions = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Utility\File\BasicFileUtility');
+		$destinationPath = $settings['misc']['file']['folder'];
+		$newFileNames = array();
+		foreach ((array) $files as $file) {
+			if (!empty($file['name'])) {
+				$newFileName = $basicFileFunctions->getUniqueName(
+					$file['name'],
+					GeneralUtility::getFileAbsFileName($destinationPath)
+				);
+				if (!$addPath) {
+					$newFileName = basename($newFileName);
+				}
+				$newFileNames[] = $newFileName;
+			}
+		}
+		return $newFileNames;
+	}
+
+	/**
 	 * This is the main-function for sending Mails
 	 *
 	 * @param array $email Array with all needed mail information
@@ -1161,7 +1189,7 @@ class Div {
 		/*****************
 		 * generate mail
 		 ****************/
-		$message = GeneralUtility::makeInstance('t3lib_mail_Message');
+		$message = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
 		$this->overwriteValueFromTypoScript($email['subject'], $this->conf[$type . '.']['overwrite.'], 'subject');
 		$message
 			->setTo(array($email['receiverEmail'] => $email['receiverName']))

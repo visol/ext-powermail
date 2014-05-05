@@ -75,7 +75,7 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 				$body = 'New <b>Test Email</b> from User ';
 				$body .= $GLOBALS['BE_USER']->user['username'] . ' (' . GeneralUtility::getIndpEnv('HTTP_HOST') . ')';
 
-				$message = GeneralUtility::makeInstance('t3lib_mail_Message');
+				$message = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
 				$message
 					->setTo(array($email => 'Receiver'))
 					->setFrom(array('powermail@domain.net' => 'powermail'))

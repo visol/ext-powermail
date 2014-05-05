@@ -216,23 +216,28 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				continue;
 			}
 
-			if (is_array($value)) {
-				if (isset($value['tmp_name'])) {
-					$value = $value['name'];
-				} else {
-					$value = serialize($value);
-				}
-			}
+//			if (is_array($value)) {
+//				if (isset($value['tmp_name'])) {
+//					$value = $value['name'];
+//				} else {
+//					$value = serialize($value);
+//				}
+//			}
 
+			$valueType = Div::getDataTypeFromFieldType(
+				$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
+			);
+			if ($valueType === 3) {
+				$value = Div::getUniqueNamesForFileUploads($value, $this->settings, FALSE);
+			}
 			$newArguments['mail']['answers'][$i] = array(
 				'field' => strval($fieldUid),
 				'value' => $value,
-				'valueType' => Div::getDataTypeFromFieldType(
-					$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
-				)
+				'valueType' => $valueType
 			);
 			$i++;
 		}
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newArguments, 'in2code: ' . __CLASS__ . ':' . __LINE__);
 
 		$this->request->setArguments($newArguments);
 		$this->request->setArgument('field', NULL);

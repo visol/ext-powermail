@@ -138,6 +138,6 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * Constructor
 	 */
 	public function __construct() {
-		$this->basicFileFunctions = GeneralUtility::makeInstance('t3lib_basicFileFunctions');
+		$this->basicFileFunctions = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Utility\File\BasicFileUtility');
 	}
 }
