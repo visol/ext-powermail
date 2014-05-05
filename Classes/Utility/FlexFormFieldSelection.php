@@ -1,7 +1,7 @@
 <?php
 namespace In2code\Powermail\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Utility\Div;
 
 /**
  * Class FlexFormFieldSelection allows to add individual options
@@ -27,7 +27,7 @@ class FlexFormFieldSelection {
 	 * @return void
 	 */
 	public function addOptions(&$params, &$pObj) {
-		$typoScriptConfiguration = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig($this->getPid());
+		$typoScriptConfiguration = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig(Div::getPidFromBackendPage());
 		$extensionConfiguration = $typoScriptConfiguration[$this->extension . '.']['flexForm.'];
 
 		if (!empty($extensionConfiguration[$params['config']['itemsProcFuncFieldName'] . '.']['addFieldOptions.'])) {
@@ -39,28 +39,6 @@ class FlexFormFieldSelection {
 				);
 			}
 		}
-	}
-
-	/**
-	 * Read pid from current URL
-	 * 		URL example:
-	 * 		http://powermailt361.in2code.de/typo3/alt_doc.php?
-	 * 		&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D17%23
-	 * 		element-tt_content-14&edit[tt_content][14]=edit
-	 *
-	 * @return int
-	 */
-	protected function getPid() {
-		$pid = 0;
-		$backUrl = str_replace('?', '&', GeneralUtility::_GP('returnUrl'));
-		$urlParts = GeneralUtility::trimExplode('&', $backUrl, 1);
-		foreach ($urlParts as $part) {
-			if (stristr($part, 'id=')) {
-				$pid = str_replace('id=', '', $part);
-			}
-		}
-
-		return intval($pid);
 	}
 
 }

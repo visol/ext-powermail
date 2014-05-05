@@ -66,6 +66,11 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
  * Include UserFuncs
  */
 if (TYPO3_MODE == 'BE') {
+	// form selection
+	require_once(
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FormSelectorUserFunc.php'
+	);
+
 	// show powermail fields in Pi2 (powermail_frontend)
 	require_once(
 		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php'

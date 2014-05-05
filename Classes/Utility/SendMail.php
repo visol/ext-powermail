@@ -74,7 +74,7 @@ class SendMail {
 	 */
 	public function sendTemplateEmail(array $email, \In2code\Powermail\Domain\Model\Mail $mail, $settings, $type = 'receiver') {
 		$cObj = $this->configurationManager->getContentObject();
-		$typoScriptService = $this->objectManager->get('Tx_Extbase_Service_TypoScriptService');
+		$typoScriptService = $this->objectManager->get('\TYPO3\CMS\Extbase\Service\TypoScriptService');
 		$conf = $typoScriptService->convertPlainArrayToTypoScriptArray($settings);
 
 		// parsing variables with fluid engine to allow viewhelpers in flexform

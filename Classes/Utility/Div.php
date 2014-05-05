@@ -1063,6 +1063,28 @@ class Div {
 	}
 
 	/**
+	 * Read pid from current URL
+	 * 		URL example:
+	 * 		http://powermailt361.in2code.de/typo3/alt_doc.php?
+	 * 		&returnUrl=%2Ftypo3%2Fsysext%2Fcms%2Flayout%2Fdb_layout.php%3Fid%3D17%23
+	 * 		element-tt_content-14&edit[tt_content][14]=edit
+	 *
+	 * @return int
+	 */
+	public static function getPidFromBackendPage() {
+		$pid = 0;
+		$backUrl = str_replace('?', '&', GeneralUtility::_GP('returnUrl'));
+		$urlParts = GeneralUtility::trimExplode('&', $backUrl, 1);
+		foreach ($urlParts as $part) {
+			if (stristr($part, 'id=')) {
+				$pid = str_replace('id=', '', $part);
+			}
+		}
+
+		return intval($pid);
+	}
+
+	/**
 	 * Merges Flexform, TypoScript and Extension Manager Settings (up to 2 levels)
 	 * 		Note: It's not possible to have the same field in TypoScript and Flexform
 	 * 		and if FF value is empty, we want the TypoScript value instead

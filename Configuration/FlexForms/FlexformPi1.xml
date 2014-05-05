@@ -19,11 +19,15 @@
 
 								</items>
 								<maxitems>100</maxitems>
-								<size>4</size>
-								<autoSizeMax>10</autoSizeMax>
+								<size>1</size>
+								<!--<autoSizeMax>10</autoSizeMax>-->
 								<minitems>1</minitems>
-								<foreign_table>tx_powermail_domain_model_forms</foreign_table>
-								<foreign_table_where>AND tx_powermail_domain_model_forms.deleted = 0 AND tx_powermail_domain_model_forms.hidden = 0 AND tx_powermail_domain_model_forms.sys_language_uid = 0 order by tx_powermail_domain_model_forms.title</foreign_table_where>
+								<maxitems>1</maxitems>
+								<!--<foreign_table>tx_powermail_domain_model_forms</foreign_table>-->
+								<!--<foreign_table_where>AND tx_powermail_domain_model_forms.deleted = 0-->
+									<!--AND tx_powermail_domain_model_forms.hidden = 0-->
+									<!--AND tx_powermail_domain_model_forms.sys_language_uid = 0-->
+									<!--order by tx_powermail_domain_model_forms.title</foreign_table_where>-->
 								<requestUpdate>1</requestUpdate>
 								<wizards>
 									<_PADDING>16</_PADDING>
@@ -39,19 +43,21 @@
 										</params>
 										<script>wizard_add.php</script>
 									</add>
-									<!--<edit>
-										<type>popup</type>
-										<title>Edit Form</title>
-										<icon>edit2.gif</icon>
-										<popup_onlyOpenIfSelected>1</popup_onlyOpenIfSelected>
-										<JSopenParams>height=350,width=580,status=0,menubar=0,scrollbars=1</JSopenParams>
-										<script>wizard_edit.php</script>
-									</edit>-->
+									<!--Edit wizard don't work in FlexForm :(-->
+									<!--<edit>-->
+										<!--<type>popup</type>-->
+										<!--<title>Edit Form</title>-->
+										<!--<icon>edit2.gif</icon>-->
+										<!--<popup_onlyOpenIfSelected>1</popup_onlyOpenIfSelected>-->
+										<!--<JSopenParams>height=350,width=580,status=0,menubar=0,scrollbars=1</JSopenParams>-->
+										<!--<script>wizard_edit.php</script>-->
+									<!--</edit>-->
 									<suggest>
 										<title>Add Form</title>
 										<type>suggest</type>
 									</suggest>
 								</wizards>
+								<itemsProcFunc>In2code\Powermail\Utility\FormSelectorUserFunc->getForms</itemsProcFunc>
 							</config>
 						</TCEforms>
 					</settings.flexform.main.form>
