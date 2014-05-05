@@ -1,9 +1,11 @@
 <?php
 namespace In2code\Powermail\Controller;
 
-use \In2code\Powermail\Utility\Div;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \In2code\Powermail\Domain\Model\Mail;
+use \In2code\Powermail\Utility\Div,
+	\TYPO3\CMS\Core\Utility\GeneralUtility,
+	\In2code\Powermail\Utility\BasicFileFunctions,
+	\In2code\Powermail\Domain\Model\Mail,
+	\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 
 /***************************************************************
  *  Copyright notice
@@ -190,8 +192,8 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$propertyMappingConfiguration->setTypeConverterOptions(
 			'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\PersistentObjectConverter',
 			array(
-				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => TRUE,
-				\TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => TRUE
+				PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => TRUE,
+				PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => TRUE
 			)
 		);
 
@@ -216,19 +218,14 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				continue;
 			}
 
-//			if (is_array($value)) {
-//				if (isset($value['tmp_name'])) {
-//					$value = $value['name'];
-//				} else {
-//					$value = serialize($value);
-//				}
-//			}
-
 			$valueType = Div::getDataTypeFromFieldType(
 				$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
 			);
 			if ($valueType === 3) {
-				$value = Div::getUniqueNamesForFileUploads($value, $this->settings, FALSE);
+				$value = BasicFileFunctions::getUniqueNamesForFileUploads($value, $this->settings['misc']['file']['folder'], FALSE);
+			}
+			if (is_array($value)) {
+				$value = serialize($value);
 			}
 			$newArguments['mail']['answers'][$i] = array(
 				'field' => strval($fieldUid),
@@ -237,7 +234,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			);
 			$i++;
 		}
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($newArguments, 'in2code: ' . __CLASS__ . ':' . __LINE__);
 
 		$this->request->setArguments($newArguments);
 		$this->request->setArgument('field', NULL);

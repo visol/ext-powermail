@@ -1,8 +1,8 @@
 <?php
 namespace In2code\Powermail\Domain\Validator;
 
-use \In2code\Powermail\Utility\Div;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Utility\BasicFileFunctions,
+	\TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -39,60 +39,32 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValidator {
 
 	/**
-	 * BasicFileFunctions
-	 */
-	public $basicFileFunctions;
-
-	/**
 	 * Validation of given Mail Params
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
 	public function isValid($mail) {
-		if (isset($_FILES['tx_powermail_pi1']['name']['field'])) {
-			// session stuff
-			$uploadSession = array();
-			// clean old session before
-			Div::setSessionValue('upload', array(), TRUE);
+		foreach ($mail->getAnswers() as $answer) {
+			// fileupload found
+			if ($answer->getValueType() === 3) {
+				\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($answer->getValue(), 'in2code: ' . __CLASS__ . ':' . __LINE__);
+				// loop through filenames
+				foreach ($answer->getValue() as $value) {
 
-			foreach ($mail->getAnswers() as $answer) {
-				if ($answer->getField()->getType() != 'upload') {
-					continue;
-				}
+					// check file extension
+					if (!$this->checkExtension($value)) {
+						$this->setErrorAndMessage($answer->getField(), 'upload_extension');
+						continue;
+					}
 
-				$fileName = $_FILES['tx_powermail_pi1']['name']['field'][$answer->getField()->getMarker()];
-				$tmpName = $_FILES['tx_powermail_pi1']['tmp_name']['field'][$answer->getField()->getMarker()];
-
-				// if no file given
-				if (!$answer->getValue() || empty($fileName)) {
-					continue;
-				}
-
-				// Check extension
-				if (!$this->checkExtension($fileName, $answer->getField())) {
-					continue;
-				}
-
-				// Check filesize
-				if (!$this->checkFilesize($tmpName, $answer->getField())) {
-					continue;
-				}
-
-				// create new filename with absolute path
-				$newFile = $this->basicFileFunctions->getUniqueName(
-					$fileName,
-					GeneralUtility::getFileAbsFileName($this->settings['misc.']['file.']['folder'])
-				);
-				// create array for upload session
-				$uploadSession[] = $newFile;
-				if (!GeneralUtility::upload_copy_move($tmpName, $newFile)) {
-					$this->setErrorAndMessage($answer->getField(), 'upload_error');
+					// check file size
+					if (!$this->checkFilesize($value)) {
+						$this->setErrorAndMessage($answer->getField(), 'upload_size');
+						continue;
+					}
 				}
 			}
-
-			// save uploaded filenames to session (to attach it later)
-			Div::setSessionValue('upload', $uploadSession, TRUE);
 		}
 
 		return $this->getIsValid();
@@ -101,43 +73,33 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	/**
 	 * Is file-extension allowed for uploading?
 	 *
-	 * @param string $filename Filename like (upload.txt)
-	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param string $filename Filename like (upload_03.txt)
 	 * @return bool
 	 */
-	protected function checkExtension($filename, \In2code\Powermail\Domain\Model\Field $field) {
+	protected function checkExtension($filename) {
 		$fileInfo = pathinfo($filename);
 		if (
 			!empty($fileInfo['extension']) &&
 			!empty($this->settings['misc.']['file.']['extension']) &&
-			t3lib_div::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension']) &&
-			t3lib_div::verifyFilenameAgainstDenyPattern($filename)
+			GeneralUtility::inList($this->settings['misc.']['file.']['extension'], $fileInfo['extension']) &&
+			GeneralUtility::verifyFilenameAgainstDenyPattern($filename)
 		) {
 			return TRUE;
 		}
-		$this->setErrorAndMessage($field, 'upload_extension');
 		return FALSE;
 	}
 
 	/**
-	 * Is filesize small enough?
+	 * Is file size ok?
 	 *
-	 * @param string $tmpName
-	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param string $filename Filename like (upload_03.txt)
 	 * @return bool
 	 */
-	protected function checkFilesize($tmpName, \In2code\Powermail\Domain\Model\Field $field) {
-		if (filesize($tmpName) <= $this->settings['misc.']['file.']['size']) {
+	protected function checkFilesize($filename) {
+		$fileUploads = BasicFileFunctions::getFileUploadValuesOutOfUniqueName($this->settings['misc.']['file.']['folder']);
+		if (filesize($fileUploads[$filename]['tmp_name']) <= $this->settings['misc.']['file.']['size']) {
 			return TRUE;
 		}
-		$this->setErrorAndMessage($field, 'upload_size');
 		return FALSE;
-	}
-
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->basicFileFunctions = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Utility\File\BasicFileUtility');
 	}
 }

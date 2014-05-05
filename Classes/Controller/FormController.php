@@ -1,6 +1,7 @@
 <?php
 namespace In2code\Powermail\Controller;
 
+use In2code\Powermail\Utility\BasicFileFunctions;
 use \In2code\Powermail\Utility\Div;
 use \In2code\Powermail\Domain\Model\Mail;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -86,8 +87,8 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	public function createAction(Mail $mail, $hash = NULL) {
-		// forward back to formAction if wrong form - relevant if more forms on one page
 		$this->ignoreWrongForm($mail);
+		BasicFileFunctions::fileUpload($this->settings['misc']['file']['folder']);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $hash, $this));
 
@@ -152,8 +153,8 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	public function confirmationAction(Mail $mail) {
-		// forward back to formAction if wrong form - relevant if forms on one page
 		$this->ignoreWrongForm($mail);
+		BasicFileFunctions::fileUpload($this->settings['misc']['file']['folder']);
 
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', array($mail, $this));
 

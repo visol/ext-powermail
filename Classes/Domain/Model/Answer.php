@@ -38,7 +38,7 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * value
 	 *
-	 * @var string|array
+	 * @var string
 	 */
 	protected $value = '';
 
