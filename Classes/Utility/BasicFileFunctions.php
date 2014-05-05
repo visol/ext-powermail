@@ -45,7 +45,7 @@ class BasicFileFunctions {
 	 * @return array
 	 */
 	public static function getUniqueNamesForFileUploads($files, $destinationPath, $addPath = TRUE) {
-		if (empty($files[0]['tmp_name'])) {
+		if (!isset($files[0]['tmp_name'])) {
 			return $files;
 		}
 

@@ -1219,11 +1219,17 @@ class Div {
 
 		// add attachments from upload fields
 		if ($settings[$type]['attachment']) {
-			// read upload session
-			$uploadsFromSession = self::getSessionValue('upload');
-			if (is_array($uploadsFromSession)) {
-				foreach ((array) $uploadsFromSession as $file) {
-					$message->attach(\Swift_Attachment::fromPath($file));
+			foreach ($mail->getAnswers() as $answer) {
+				$values = $answer->getValue();
+				if ($answer->getValueType() === 3 && is_array($values) && !empty($values)) {
+					foreach ($values as $value) {
+						$file = $settings['misc']['file']['folder'] . $value;
+						if (file_exists(GeneralUtility::getFileAbsFileName($file))) {
+							$message->attach(\Swift_Attachment::fromPath($file));
+						} else {
+							GeneralUtility::devLog('Error: File to attach does not exist', 'powermail', 2, $file);
+						}
+					}
 				}
 			}
 		}
@@ -1236,7 +1242,11 @@ class Div {
 				1
 			);
 			foreach ($files as $file) {
-				$message->attach(\Swift_Attachment::fromPath($file));
+				if (file_exists(GeneralUtility::getFileAbsFileName($file))) {
+					$message->attach(\Swift_Attachment::fromPath($file));
+				} else {
+					GeneralUtility::devLog('Error: File to attach does not exist', 'powermail', 2, $file);
+				}
 			}
 		}
 		if ($email['format'] != 'plain') {

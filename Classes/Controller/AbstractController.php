@@ -225,7 +225,11 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				$value = BasicFileFunctions::getUniqueNamesForFileUploads($value, $this->settings['misc']['file']['folder'], FALSE);
 			}
 			if (is_array($value)) {
-				$value = serialize($value);
+				if (empty($value)) {
+					$value = '';
+				} else {
+					$value = serialize($value);
+				}
 			}
 			$newArguments['mail']['answers'][$i] = array(
 				'field' => strval($fieldUid),

@@ -1,8 +1,7 @@
 <?php
 namespace In2code\Powermail\Domain\Validator;
 
-use \In2code\Powermail\Utility\BasicFileFunctions,
-	\TYPO3\CMS\Core\Utility\GeneralUtility;
+use \In2code\Powermail\Utility\BasicFileFunctions;
 
 /***************************************************************
  *  Copyright notice
@@ -28,7 +27,6 @@ use \In2code\Powermail\Utility\BasicFileFunctions,
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-
 /**
  * Class for uploading files and check if they are valid
  *
@@ -48,6 +46,10 @@ class UploadValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 		foreach ($mail->getAnswers() as $answer) {
 			// fileupload found
 			if ($answer->getValueType() === 3) {
+				if (!is_array($answer->getValue())) {
+					continue;
+				}
+
 				// loop through filenames
 				foreach ($answer->getValue() as $value) {
 
