@@ -1,11 +1,11 @@
 <?php
 namespace In2code\Powermail\Controller;
 
-use In2code\Powermail\Utility\BasicFileFunctions;
-use \In2code\Powermail\Utility\Div;
-use \In2code\Powermail\Domain\Model\Mail;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use In2code\Powermail\Utility\BasicFileFunctions,
+	\In2code\Powermail\Utility\Div,
+	\In2code\Powermail\Domain\Model\Mail,
+	\TYPO3\CMS\Core\Utility\GeneralUtility,
+	\TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /***************************************************************
  *  Copyright notice
@@ -40,6 +40,12 @@ use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  * 			GNU Lesser General Public License, version 3 or later
  */
 class FormController extends \In2code\Powermail\Controller\AbstractController {
+
+	/**
+	 * @var \In2code\Powermail\Utility\SendMail
+	 * @inject
+	 */
+	protected $sendMail;
 
 	/**
 	 * action show form for creating new mails
@@ -206,7 +212,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$this->div->overwriteValueFromTypoScript($email['receiverName'], $this->conf['receiver.']['overwrite.'], 'name');
 			$this->div->overwriteValueFromTypoScript($email['senderName'], $this->conf['receiver.']['overwrite.'], 'senderName');
 			$this->div->overwriteValueFromTypoScript($email['senderEmail'], $this->conf['receiver.']['overwrite.'], 'senderEmail');
-			$sent = $this->div->sendTemplateEmail($email, $mail, $this->settings, 'receiver');
+			$sent = $this->sendMail->sendTemplateEmail($email, $mail, $this->settings, 'receiver');
 
 			if (!$sent) {
 				$this->addFlashMessage(LocalizationUtility::translate('error_mail_not_created', 'powermail'));
@@ -237,7 +243,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		$this->div->overwriteValueFromTypoScript($email['receiverName'], $this->conf['sender.']['overwrite.'], 'name');
 		$this->div->overwriteValueFromTypoScript($email['senderName'], $this->conf['sender.']['overwrite.'], 'senderName');
 		$this->div->overwriteValueFromTypoScript($email['senderEmail'], $this->conf['sender.']['overwrite.'], 'senderEmail');
-		$this->div->sendTemplateEmail($email, $mail, $this->settings, 'sender');
+		$this->sendMail->sendTemplateEmail($email, $mail, $this->settings, 'sender');
 	}
 
 	/**
@@ -266,7 +272,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 		$this->div->overwriteValueFromTypoScript($email['receiverEmail'], $this->conf['optin.']['overwrite.'], 'email');
 		$this->div->overwriteValueFromTypoScript($email['senderName'], $this->conf['optin.']['overwrite.'], 'senderName');
 		$this->div->overwriteValueFromTypoScript($email['senderEmail'], $this->conf['optin.']['overwrite.'], 'senderEmail');
-		$this->div->sendTemplateEmail($email, $mail, $this->settings, 'optin');
+		$this->sendMail->sendTemplateEmail($email, $mail, $this->settings, 'optin');
 	}
 
 	/**
