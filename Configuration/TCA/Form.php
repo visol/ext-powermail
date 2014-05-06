@@ -109,6 +109,14 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 				'eval' => 'trim,required'
 			),
 		),
+		'note' => array(
+			'l10n_mode' => 'exclude',
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.note',
+			'config' => array(
+				'type' => 'user',
+				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
+			),
+		),
 		'css' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,

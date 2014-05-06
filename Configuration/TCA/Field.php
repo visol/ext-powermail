@@ -215,7 +215,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => 'required',
-				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'In2code\Powermail\Utility\Tca\AddOptionsToSelection->addOptions',
 				'itemsProcFuncFieldName' => 'type'
 			),
 			'displayCond' => 'FIELD:sys_language_uid:=:0',
@@ -287,7 +287,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation_title',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio'
 		),
@@ -434,7 +434,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'In2code\Powermail\Utility\Tca\AddOptionsToSelection->addOptions',
 				'itemsProcFuncFieldName' => 'validation'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea'
@@ -453,7 +453,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_title',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden,country'
 		),
@@ -522,7 +522,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'size' => 1,
 				'maxitems' => 1,
 				'eval' => '',
-				'itemsProcFunc' => 'In2code\Powermail\Utility\FlexFormFieldSelection->addOptions',
+				'itemsProcFunc' => 'In2code\Powermail\Utility\Tca\AddOptionsToSelection->addOptions',
 				'itemsProcFuncFieldName' => 'feUserProperty'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden,country'
@@ -609,7 +609,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.marker_title',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
 			),
 		),
 		'auto_marker' => array(
@@ -618,7 +618,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.auto_marker',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Marker->createMarker'
+				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->createMarker'
 			),
 			'displayCond' => 'FIELD:own_marker_select:REQ:false'
 		),

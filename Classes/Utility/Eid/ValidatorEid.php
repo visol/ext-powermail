@@ -1,12 +1,12 @@
 <?php
-namespace In2code\Powermail\Utility;
+namespace In2code\Powermail\Utility\Eid;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ *  (c) 2013 Alex Kellner <alexander.kellner@in2code.de>, in2code.de
  *
  *  All rights reserved
  *
@@ -30,11 +30,11 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class could called with AJAX via eID
  *
- * @author	Alex Kellner <alexander.kellner@in2code.de>, in2code.de
- * @package	TYPO3
- * @subpackage	EidMarketing
+ * @author Alex Kellner <alexander.kellner@in2code.de>, in2code.de
+ * @package TYPO3
+ * @subpackage ValidatorEid
  */
-class EidMarketing {
+class ValidatorEid {
 
 	/**
 	 * configuration
@@ -70,7 +70,7 @@ class EidMarketing {
 			'vendorName' => 'In2code',
 			'extensionName' => 'Powermail',
 			'controller' => 'Form',
-			'action' => 'marketing',
+			'action' => 'validateAjax',
 			'mvc' => array(
 				'requestHandlers' => array(
 					'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler' => 'TYPO3\CMS\Extbase\Mvc\Web\FrontendRequestHandler'
@@ -78,7 +78,7 @@ class EidMarketing {
 			),
 			'settings' => array()
 		);
-		$_POST['tx_powermail_pi1']['action'] = 'marketing';
+		$_POST['tx_powermail_pi1']['action'] = 'validateAjax';
 		$_POST['tx_powermail_pi1']['controller'] = 'Form';
 
 		$this->bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
@@ -103,5 +103,5 @@ class EidMarketing {
 	}
 }
 
-$eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\EidMarketing', $GLOBALS['TYPO3_CONF_VARS']);
+$eid = GeneralUtility::makeInstance('In2code\Powermail\Utility\Eid\ValidatorEid', $GLOBALS['TYPO3_CONF_VARS']);
 echo $eid->run();

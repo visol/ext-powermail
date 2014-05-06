@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Powermail\Utility;
+namespace In2code\Powermail\Utility\Tca;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility,
 	\In2code\Powermail\Utility\Div;
@@ -31,6 +31,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility,
 
 /**
  * Powermail Form Selector
+ * 		Used in FlexForm
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html

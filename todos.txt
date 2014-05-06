@@ -14,10 +14,10 @@
 - done: add a countryselection
 - done: multiselect field
 - done: upload (multiupload with html5)
-- decrease number of forms to select in plugin (probably with Page TSconfig)
-- Adding Unit Tests
-- Adding RST Documentation
+- done: decrease number of forms to select in plugin (probably with Page TSconfig)
+- schedulertask to remove unused uploaded files
 - add a powermail 1.x form converter to 2.x
 - powermail_cond update
-- schedulertask to remove unused uploaded files
+- Adding Unit Tests
+- Adding RST Documentation
 - Create testparcour for visual tests

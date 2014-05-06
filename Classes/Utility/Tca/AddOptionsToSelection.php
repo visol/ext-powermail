@@ -1,12 +1,12 @@
 <?php
-namespace In2code\Powermail\Utility;
+namespace In2code\Powermail\Utility\Tca;
 
 use \In2code\Powermail\Utility\Div;
 
 /**
- * Class FlexFormFieldSelection allows to add individual options
+ * Class AddOptionsToSelection allows to add individual options
  */
-class FlexFormFieldSelection {
+class AddOptionsToSelection {
 
 	/**
 	 * Extension prefix

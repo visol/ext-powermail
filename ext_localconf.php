@@ -44,37 +44,37 @@ ExtensionUtility::configurePlugin(
 );
 
 /**
- * Hooking for PluginInfo
+ * Hook to show PluginInfo
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info'][$_EXTKEY . '_pi1'][$_EXTKEY] =
-	'EXT:' . $_EXTKEY . '/Classes/Utility/PluginInfo.php:In2code\Powermail\Utility\PluginInfo->getInfo';
+	'EXT:' . $_EXTKEY . '/Classes/Utility/Hook/PluginInfo.php:In2code\Powermail\Utility\Hook\PluginInfo->getInfo';
 
 /**
- * Hooking for first fill of marker field in backend
+ * Hook for first fill of marker field in backend
  */
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] =
-	'EXT:' . $_EXTKEY . '/Classes/Utility/InitialMarker.php:In2code\Powermail\Utility\InitialMarker';
+	'EXT:' . $_EXTKEY . '/Classes/Utility/Hook/InitialMarker.php:In2code\Powermail\Utility\Hook\InitialMarker\Hook';
+
+/**
+ * JavaScript evaluation of TCA fields
+ */
+$TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['\In2code\Powermail\Utility\Tca\EvaluateEmail'] =
+	'EXT:powermail/Classes/Utility/Tca/EvaluateEmail.php';
 
 /**
  * eID to get location from geo coordinates
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidGetLocation'] =
-	'EXT:powermail/Classes/Utility/EidGetLocation.php';
+	'EXT:powermail/Classes/Utility/Eid/GetLocationEid.php';
 
 /**
  * eID to validate form fields
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] =
-	'EXT:powermail/Classes/Utility/EidValidator.php';
+	'EXT:powermail/Classes/Utility/Eid/ValidatorEid.php';
 
 /**
  * eID to store marketing information
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidMarketing'] =
-	'EXT:powermail/Classes/Utility/EidMarketing.php';
-
-/**
- * Extra evaluation of TCA fields
- */
-$TYPO3_CONF_VARS['SC_OPTIONS']['tce']['formevals']['Tx_Powermail_Utility_EvaluateEmail'] =
-	'EXT:powermail/Classes/Utility/EvaluateEmail.php';
+	'EXT:powermail/Classes/Utility/Eid/MarketingEid.php';

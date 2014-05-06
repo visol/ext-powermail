@@ -68,27 +68,27 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
 if (TYPO3_MODE == 'BE') {
 	// form selection
 	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FormSelectorUserFunc.php'
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/FormSelectorUserFunc.php'
 	);
 
 	// show powermail fields in Pi2 (powermail_frontend)
 	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FieldSelectorUserFunc.php'
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/FieldSelectorUserFunc.php'
 	);
 
 	// marker field in Pi1
 	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Marker.php'
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/Marker.php'
 	);
 
 	// add options to TCA select fields with itemsProcFunc
 	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/FlexFormFieldSelection.php'
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/AddOptionsToSelection.php'
 	);
 
 	// WizIcon for Pi1
-	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['In2code\Powermail\Utility\WizIcon'] =
-		t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/WizIcon.php';
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['In2code\Powermail\Utility\Hook\WizIcon'] =
+		t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/Hook/WizIcon.php';
 }
 
 /**
