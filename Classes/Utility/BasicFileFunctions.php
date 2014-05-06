@@ -166,4 +166,21 @@ class BasicFileFunctions {
 		}
 		return FALSE;
 	}
+
+	/**
+	 * Get all Files from a folder
+	 *
+	 * @param string $path Relative Path
+	 * @return array
+	 */
+	public static function getFilesFromRelativePath($path) {
+		$array = array();
+		$files = GeneralUtility::getFilesInDir(
+			GeneralUtility::getFileAbsFileName($path)
+		);
+		foreach ($files as $file) {
+			$array[] = $file;
+		}
+		return $array;
+	}
 }

@@ -78,3 +78,9 @@ $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidValidator'] =
  */
 $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['powermailEidMarketing'] =
 	'EXT:powermail/Classes/Utility/Eid/MarketingEid.php';
+
+/**
+ * CommandController for powermail tasks
+ */
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] =
+	'In2code\\Powermail\\Command\\TaskCommandController';

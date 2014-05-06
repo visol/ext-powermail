@@ -30,7 +30,7 @@ class ShowFormNoteIfNoEmailOrNameSelected {
 
 		if (!$this->senderEmailOrSenderNameSet($pa['row']['uid'])) {
 			if ($this->noteFieldDisabled($pa)) {
-				$content .= '<p style="opacity: 0.3;">';
+				$content .= '<p style="opacity: 0.3; margin: 0;">';
 				$content .= $this->getCheckboxHtml($pa);
 				$content .= '<label for="tx_powermail_domain_model_forms_note_checkbox" style="vertical-align: bottom;">';
 				$content .= $GLOBALS['LANG']->sL($this->locallangPath . 'tx_powermail_domain_model_forms.note.4', TRUE);

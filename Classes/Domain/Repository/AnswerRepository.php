@@ -24,7 +24,6 @@ namespace In2code\Powermail\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-
 /**
  * AnswerRepository
  *
@@ -42,9 +41,7 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return \In2code\Powermail\Domain\Model\Answer
 	 */
 	public function findByFieldAndMail($fieldUid, $mailUid) {
-		// initialize query
 		$query = $this->createQuery();
-		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
 		$and = array(
@@ -58,4 +55,25 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query->execute()->getFirst();
 	}
 
+	/**
+	 * Find any answer with uploaded file
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findByAnyUpload() {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+
+		// get all uploaded answers which are not empty
+		$query->matching(
+			$query->logicalAnd(
+				array(
+					$query->equals('valueType', 3),
+					$query->logicalNot($query->equals('value', ''))
+				)
+			)
+		);
+
+		return $query->execute();
+	}
 }
