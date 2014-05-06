@@ -63,6 +63,7 @@ class AnswerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByAnyUpload() {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
 
 		// get all uploaded answers which are not empty
 		$query->matching(
