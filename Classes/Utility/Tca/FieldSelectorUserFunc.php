@@ -1,7 +1,8 @@
 <?php
 namespace In2code\Powermail\Utility\Tca;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\In2code\Powermail\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -40,13 +41,6 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class FieldSelectorUserFunc {
 
 	/**
-	 * Crazy Query Limit
-	 *
-	 * @var int
-	 */
-	protected $limit = 10000;
-
-	/**
 	 * Cretae Array for Field Selector
 	 *
 	 * @param array $params
@@ -65,9 +59,7 @@ class FieldSelectorUserFunc {
 			return;
 		}
 
-		$this->getFieldsFromForm($formUid);
-
-		foreach ((array) $this->getFieldsFromForm($formUid) as $field) {
+		foreach ((array) Div::getFieldsFromFormWithSelectQuery($formUid) as $field) {
 			$params['items'][] = array(
 				$field['title'] . ' {' . $field['marker'] . '}',
 				$field['uid']
@@ -88,40 +80,5 @@ class FieldSelectorUserFunc {
 			return $flexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
 		}
 		return 0;
-	}
-
-	/**
-	 * Get Fieldlist from Form UID
-	 *
-	 * @param int $formUid Form UID
-	 * @return array
-	 */
-	protected function getFieldsFromForm($formUid) {
-		$select = 'tx_powermail_domain_model_fields.uid, tx_powermail_domain_model_fields.title';
-		$select .= ', tx_powermail_domain_model_fields.marker';
-		$from = '
-			tx_powermail_domain_model_fields
-			left join tx_powermail_domain_model_pages on tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid
-			left join tx_powermail_domain_model_forms on tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
-		';
-		$where = '
-			tx_powermail_domain_model_fields.deleted = 0 and
-			tx_powermail_domain_model_fields.hidden = 0 and
-			tx_powermail_domain_model_fields.type != "submit" and
-			tx_powermail_domain_model_fields.sys_language_uid IN (-1,0) and
-			tx_powermail_domain_model_forms.uid = ' . intval($formUid);
-		$groupBy = '';
-		$orderBy = 'tx_powermail_domain_model_fields.sorting ASC';
-		$limit = $this->limit;
-		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
-
-		$array = array();
-		if ($res) {
-			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
-				$array[] = $row;
-			}
-		}
-
-		return $array;
 	}
 }

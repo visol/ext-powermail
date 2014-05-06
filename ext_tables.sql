@@ -7,6 +7,7 @@ CREATE TABLE tx_powermail_domain_model_forms (
 
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	note tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	css varchar(255) DEFAULT '' NOT NULL,
 	pages varchar(255) DEFAULT '' NOT NULL,
 

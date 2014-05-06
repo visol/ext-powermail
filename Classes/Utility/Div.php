@@ -1085,6 +1085,46 @@ class Div {
 	}
 
 	/**
+	 * Get Fieldlist from Form UID
+	 *
+	 * @param int $formUid Form UID
+	 * @return array
+	 */
+	public static function getFieldsFromFormWithSelectQuery($formUid) {
+		$select = '
+			tx_powermail_domain_model_fields.uid,
+			tx_powermail_domain_model_fields.title,
+			tx_powermail_domain_model_fields.sender_email,
+			tx_powermail_domain_model_fields.sender_name
+		';
+		$select .= ', tx_powermail_domain_model_fields.marker';
+		$from = '
+			tx_powermail_domain_model_fields
+			left join tx_powermail_domain_model_pages on tx_powermail_domain_model_fields.pages = tx_powermail_domain_model_pages.uid
+			left join tx_powermail_domain_model_forms on tx_powermail_domain_model_pages.forms = tx_powermail_domain_model_forms.uid
+		';
+		$where = '
+			tx_powermail_domain_model_fields.deleted = 0 and
+			tx_powermail_domain_model_fields.hidden = 0 and
+			tx_powermail_domain_model_fields.type != "submit" and
+			tx_powermail_domain_model_fields.sys_language_uid IN (-1,0) and
+			tx_powermail_domain_model_forms.uid = ' . intval($formUid);
+		$groupBy = '';
+		$orderBy = 'tx_powermail_domain_model_fields.sorting ASC';
+		$limit = 10000;
+		$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $from, $where, $groupBy, $orderBy, $limit);
+
+		$array = array();
+		if ($res) {
+			while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+				$array[] = $row;
+			}
+		}
+
+		return $array;
+	}
+
+	/**
 	 * Merges Flexform, TypoScript and Extension Manager Settings (up to 2 levels)
 	 * 		Note: It's not possible to have the same field in TypoScript and Flexform
 	 * 		and if FF value is empty, we want the TypoScript value instead

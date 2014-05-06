@@ -24,8 +24,8 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
 	),
 	'palettes' => array(
-		'1' => array('showitem' => 'sender_email, sender_name'),
-		'2' => array('showitem' => 'mandatory, validation, validation_configuration'),
+		'1' => array('showitem' => 'sender_email, sender_name', '', 'canNotCollapse' => 1),
+		'2' => array('showitem' => 'mandatory, validation, validation_configuration', '', 'canNotCollapse' => 1),
 		'3' => array('showitem' => 'prefill_value, feuser_value, create_from_typoscript'),
 		'4' => array('showitem' => 'css, multiselect, datepicker_settings'),
 		'5' => array('showitem' => 'auto_marker, marker, own_marker_select'),

@@ -6,18 +6,18 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_powermail_domain_model_forms'] = array(
 	'ctrl' => $TCA['tx_powermail_domain_model_forms']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, css, pages',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, css, pages, note',
 	),
 	'types' => array(
 		'1' => array(
 			'showitem' =>
-				'title, pages,
+				'title, pages, note,
 				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sheet1,
 				css, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
 				l10n_parent, l10n_diffsource, hidden;;1, starttime, endtime'),
 	),
 	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'1' => array(),
 	),
 	'columns' => array(
 		'sys_language_uid' => array(
@@ -111,10 +111,9 @@ $TCA['tx_powermail_domain_model_forms'] = array(
 		),
 		'note' => array(
 			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.note',
 			'config' => array(
 				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
+				'userFunc' => 'In2code\Powermail\Utility\Tca\ShowFormNoteIfNoEmailOrNameSelected->showNote'
 			),
 		),
 		'css' => array(

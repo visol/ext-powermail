@@ -95,6 +95,22 @@
 				<source>Title</source>
 				<target state="translated">Bezeichnung</target>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_forms.note.1">
+				<source>Note:</source>
+				<target state="translated">Hinweis:</target>
+			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_forms.note.2">
+				<source>There are no fields marked as sender-email or sender-name</source>
+				<target state="translated">In diesem Formular wurden keine Felder als Absender-E-Mail oder Absender-Name markiert</target>
+			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_forms.note.3">
+				<source>Do not show this note again for this form</source>
+				<target state="translated">Hinweis für dieses Formular ausblenden</target>
+			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_forms.note.4">
+				<source>Note hidden</source>
+				<target state="translated">Hinweis ausgeblendet</target>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_forms.css">
 				<source>Layout</source>
 				<target state="translated">Layout</target>

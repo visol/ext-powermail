@@ -195,10 +195,7 @@
 							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.sender.email</label>
 							<config>
 								<type>input</type>
-								<!--
-								JS Validation seems not to work with namespaces-->
 								<eval>trim,In2code\Powermail\Utility\Tca\EvaluateEmail</eval>
-
 							</config>
 						</TCEforms>
 					</settings.flexform.sender.email>
