@@ -488,7 +488,7 @@
 				<source>Activate this Mail</source>
 				<target state="translated">Diese Mail aktivieren</target>
 			</trans-unit>
-			<trans-unit id="BackendListHelpUHide">
+			<trans-unit id="BackendListHelpHide">
 				<source>Deactivate this Mail</source>
 				<target state="translated">Diese Mail deaktivieren</target>
 			</trans-unit>

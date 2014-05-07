@@ -1,3 +1,5 @@
+@import "Settings";
+
 /**
  * Misc Settings
  */
@@ -71,6 +73,9 @@ input.powermail_email_input {
 .powermail_listbe_details_dl dd {
 	margin-left: 190px;
 }
+.powermail_listbe_details_dl dd img {
+	padding: 3px 0;
+}
 .powermail_listbe_details_dl_additional {
 	color: #aaa;
 }
@@ -139,7 +144,7 @@ a.sorting_asc {
 .extended_search_title,
 .searchall_mails,
 .extended_search,
-typo3-dblist {
+.typo3-dblist {
 	clear: both;
 }
 .powermail_module_search {
@@ -431,3 +436,8 @@ table.powermail_reporting_form_fields_table th.close {
 tr.powermail_listbe_overview:hover a {
 	text-decoration: none;
 }
+
+/**
+ * DatePicker
+ */
+@import "DatePicker";

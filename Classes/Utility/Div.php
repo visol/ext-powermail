@@ -349,7 +349,7 @@ class Div {
 			'password' => 0,
 			'radio' => 0,
 			'reset' => 0,
-			'select' => 0,
+			'select' => 1,
 			'submit' => 0,
 			'text' => 0,
 			'textarea' => 0,
@@ -528,10 +528,10 @@ class Div {
 				if (is_array($answer->getValue())) {
 					$value = implode(', ', $value);
 				}
-				if (!isset($arr[$answer->getField()][$value])) {
-					$arr[$answer->getField()][$value] = 1;
+				if (!isset($arr[$answer->getField()->getUid()][$value])) {
+					$arr[$answer->getField()->getUid()][$value] = 1;
 				} else {
-					$arr[$answer->getField()][$value]++;
+					$arr[$answer->getField()->getUid()][$value]++;
 				}
 			}
 		}

@@ -13,18 +13,18 @@ class GetValuesGoogleChartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
 	 * View helper check if given value is array or not
 	 *
 	 * @param array $answers Grouped Answers
-	 * @param int $field Field UID
+	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @param string $separator Separator
 	 * @return string "label1|label2|label3"
 	 */
 	public function render($answers, $field, $separator = ',') {
 		$string = '';
-		if (!isset($answers[$field])) {
+		if (!isset($answers[$field->getUid()])) {
 			return '';
 		}
 
 		// create string
-		foreach ((array) $answers[$field] as $amount) {
+		foreach ((array) $answers[$field->getUid()] as $amount) {
 			$string .= $amount;
 			$string .= $separator;
 		}

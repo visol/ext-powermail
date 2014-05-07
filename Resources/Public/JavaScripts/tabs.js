@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 		generateTabNavigation($this, options);
 		generateButtonNavigation($this, options);
 
-		if ($.fn.parsley && $('form[data-parsley-validate="data-parsley-validate"]').length) {
+		if ($.fn.parsley && $('form[data-parsley-validate="data-parsley-validate"]').length && $('.powermail_morestep').length) {
 			$('form[data-parsley-validate="data-parsley-validate"]').parsley().subscribe('parsley:field:validated', function() {
 				$('#powermail_tabmenu > li').removeClass('parsley-error');
 

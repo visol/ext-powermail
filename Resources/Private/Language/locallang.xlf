@@ -366,7 +366,7 @@
 			<trans-unit id="BackendListHelpUnhide">
 				<source>Activate this Mail</source>
 			</trans-unit>
-			<trans-unit id="BackendListHelpUHide">
+			<trans-unit id="BackendListHelpHide">
 				<source>Deactivate this Mail</source>
 			</trans-unit>
 			<trans-unit id="BackendListNoMails">

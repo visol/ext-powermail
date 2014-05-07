@@ -110,18 +110,33 @@ $TCA['tx_powermail_domain_model_answers'] = array(
 			'config' => array(
 				'type' => 'select',
 				'items' => array(
+					/**
+					 * Text
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.0',
 						'0'
 					),
+
+					/**
+					 * Multi Text (Array)
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.1',
 						'1'
 					),
+
+					/**
+					 * Date
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.2',
 						'2'
 					),
+
+					/**
+					 * Upload
+					 */
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_answers.value_type.3',
 						'3'

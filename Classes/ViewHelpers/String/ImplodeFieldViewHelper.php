@@ -19,7 +19,7 @@ class ImplodeFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	 */
 	public function render($objects, $field = 'uid', $separator = ',') {
 		$string = '';
-		if (count($objects) === 0) {
+		if (count($objects) === 0 || is_string($objects)) {
 			return $string;
 		}
 
@@ -32,7 +32,8 @@ class ImplodeFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 					$string .= $separator;
 				}
 			}
+			$string = substr($string, 0, (-1 * strlen($separator)));
 		}
-		return substr($string, 0, (-1 * strlen($separator)));
+		return $string;
 	}
 }

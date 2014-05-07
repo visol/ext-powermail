@@ -13,7 +13,7 @@
 - done: html5 and JavaScript datepicker (datetime + date + time)
 - done: add a countryselection
 - done: multiselect field
-- done: upload (multiupload with html5)
+- upload (multiupload with html5) and show upload if user goes back to form
 - done: decrease number of forms to select in plugin (probably with Page TSconfig)
 - done: show in TCA if sender_email or sender_name was not set
 - done: Schedulertask with CommandController to remove unused uploaded files
@@ -22,3 +22,6 @@
 - Adding Unit Tests
 - Adding RST Documentation
 - Create testparcour for visual tests
+
+Possible Problems:
+- Date Parsing from Chrome (native HTML5)

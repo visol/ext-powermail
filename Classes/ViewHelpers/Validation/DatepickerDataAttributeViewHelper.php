@@ -18,18 +18,18 @@ class DatepickerDataAttributeViewHelper extends AbstractValidationViewHelper {
 	protected $extensionName;
 
 	/**
-	 * Returns Data Attribute Array Datepicker settings
+	 * Returns Data Attribute Array Datepicker settings (FE + BE)
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @param \array $additionalAttributes To add further attributes
 	 * @return \array for data attributes
 	 */
-	public function render(\In2code\Powermail\Domain\Model\Field $field, $additionalAttributes = array()) {
+	public function render(\In2code\Powermail\Domain\Model\Field $field = NULL, $additionalAttributes = array()) {
 		$this->extensionName = $this->controllerContext->getRequest()->getControllerExtensionName();
 
 		$additionalAttributes['data-datepicker-force'] =
 			$this->settings['misc']['datepicker']['forceJavaScriptDatePicker'];
-		$additionalAttributes['data-datepicker-settings'] = $field->getDatepickerSettings();
+		$additionalAttributes['data-datepicker-settings'] = $this->getDatepickerSettings($field);
 		$additionalAttributes['data-datepicker-months'] = $this->getMonthNames();
 		$additionalAttributes['data-datepicker-days'] = $this->getDayNames();
 		$additionalAttributes['data-datepicker-format'] = $this->getFormat($field);
@@ -38,13 +38,26 @@ class DatepickerDataAttributeViewHelper extends AbstractValidationViewHelper {
 	}
 
 	/**
+	 * Get Datepicker Settings
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @return string
+	 */
+	protected function getDatepickerSettings(\In2code\Powermail\Domain\Model\Field $field = NULL) {
+		if ($field === NULL) {
+			return 'datetime';
+		}
+		return $field->getDatepickerSettings();
+	}
+
+	/**
 	 * Get timeformat out of datepicker type
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
 	 * @return string
 	 */
-	protected function getFormat(\In2code\Powermail\Domain\Model\Field $field) {
-		return LocalizationUtility::translate('datepicker_format_' . $field->getDatepickerSettings(), $this->extensionName);
+	protected function getFormat(\In2code\Powermail\Domain\Model\Field $field = NULL) {
+		return LocalizationUtility::translate('datepicker_format_' . $this->getDatepickerSettings($field), $this->extensionName);
 	}
 
 	/**

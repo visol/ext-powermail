@@ -48,7 +48,7 @@ Show Backend Module: Powermail Reporting Form
 											<th width="90%" class="close"><f:translate key="BackendReportingFormValue" /></th>
 											<th width="10%" class="powermail_reporting_form_fields_table_right"><f:translate key="BackendReportingFormAmount" /></th>
 										</tr>
-										<f:for each="{vh:Misc.VariableInVariable(obj:'{groupedAnswers}', prop: '{answer.field}')}" as="amount" key="value">
+										<f:for each="{vh:Misc.VariableInVariable(obj:'{groupedAnswers}', prop: '{answer.field.uid}')}" as="amount" key="value">
 											<tr>
 												<td>{value}</td>
 												<td class="powermail_reporting_form_fields_table_right">{amount}</td>
