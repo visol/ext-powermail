@@ -368,6 +368,14 @@
 				<source>Reporting</source>
 				<target state="translated">Auswertung</target>
 			</trans-unit>
+			<trans-unit id="BackendSelectionReportingForm">
+				<source>Reporting (Form)</source>
+				<target state="translated">Auswertung (Formular)</target>
+			</trans-unit>
+			<trans-unit id="BackendSelectionReportingMarketing">
+				<source>Reporting (Marketing)</source>
+				<target state="translated">Auswertung (Marketing)</target>
+			</trans-unit>
 			<trans-unit id="BackendSelectionCheck">
 				<source>Powermail Function Check</source>
 				<target state="translated">Powermail Funktions-Check</target>
@@ -599,6 +607,10 @@
 			<trans-unit id="BackendReportingMarketingTitle">
 				<source>Marketing Reporting</source>
 				<target state="translated">Marketing Auswertung</target>
+			</trans-unit>
+			<trans-unit id="BackendReportingNoValues">
+				<source>No Values to Show</source>
+				<target state="translated">Keine Daten zum Anzeigen vorhanden</target>
 			</trans-unit>
 			<trans-unit id="PowermailFrontendNoMails">
 				<source>No Mails found.</source>

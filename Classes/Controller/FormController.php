@@ -1,7 +1,7 @@
 <?php
 namespace In2code\Powermail\Controller;
 
-use In2code\Powermail\Utility\BasicFileFunctions,
+use \In2code\Powermail\Utility\BasicFileFunctions,
 	\In2code\Powermail\Utility\Div,
 	\In2code\Powermail\Domain\Model\Mail,
 	\TYPO3\CMS\Core\Utility\GeneralUtility,

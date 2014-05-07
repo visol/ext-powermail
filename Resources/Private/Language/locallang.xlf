@@ -276,6 +276,12 @@
 			<trans-unit id="BackendSelectionReporting">
 				<source>Reporting</source>
 			</trans-unit>
+			<trans-unit id="BackendSelectionReportingForm">
+				<source>Reporting (Form)</source>
+			</trans-unit>
+			<trans-unit id="BackendSelectionReportingMarketing">
+				<source>Reporting (Marketing)</source>
+			</trans-unit>
 			<trans-unit id="BackendSelectionCheck">
 				<source>Powermail Function Check</source>
 			</trans-unit>
@@ -449,6 +455,9 @@
 			</trans-unit>
 			<trans-unit id="BackendReportingMarketingTitle">
 				<source>Marketing Reporting</source>
+			</trans-unit>
+			<trans-unit id="BackendReportingNoValues">
+				<source>No Values to Show</source>
 			</trans-unit>
 			<trans-unit id="PowermailFrontendNoMails">
 				<source>No Mails found.</source>

@@ -13,18 +13,18 @@ class GetLabelsGoogleChartsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\A
 	 * View helper check if given value is array or not
 	 *
 	 * @param array $answers Grouped Answers
-	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param string $fieldUidOrKey
 	 * @param int $crop Crop each label after X signs
 	 * @return string "label1|label2|label3"
 	 */
-	public function render($answers, $field, $crop = 15) {
+	public function render($answers, $fieldUidOrKey, $crop = 15) {
 		$string = '';
-		if (!isset($answers[$field->getUid()])) {
+		if (!isset($answers[$fieldUidOrKey])) {
 			return '';
 		}
 
 		// create string
-		foreach ((array) $answers[$field->getUid()] as $value => $amount) {
+		foreach ((array) $answers[$fieldUidOrKey] as $value => $amount) {
 			$amount = NULL;
 			if (strlen($value) > $crop) {
 				$value = substr($value, 0, $crop) . '...';

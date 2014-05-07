@@ -387,6 +387,13 @@ span.info {
 	margin-right: 2%;
 	margin-bottom: 20px;
 	position: relative;
+	> .noValuesToShow {
+		font-weight: bold;
+		width: 100%;
+		height: 200px;
+		display: block;
+		margin: 0 0 5px 0;
+	}
 }
 .powermail_reporting_form_fields_item:nth-child(even),
 .powermail_reporting_marketing_fields_item:nth-child(even) {
