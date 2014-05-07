@@ -164,7 +164,7 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	public function exportXlsBeAction(array $export = array()) {
 		$mails = $this->mailRepository->findByUidList($export['mails'], $export['sorting']);
 		$this->view->assign('mails', $mails);
-		$this->view->assign('fields', GeneralUtility::trimExplode(',', $export['fields'], 1));
+		$this->view->assign('fieldUids', GeneralUtility::trimExplode(',', $export['fields'], 1));
 
 		$fileName = ($this->settings['export']['filenameXls'] ? $this->settings['export']['filenameXls'] : 'export.xls');
 		header('Content-Type: application/vnd.ms-excel');
@@ -181,7 +181,7 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	public function exportCsvBeAction(array $export = array()) {
 		$mails = $this->mailRepository->findByUidList($export['mails'], $export['sorting']);
 		$this->view->assign('mails', $mails);
-		$this->view->assign('fields', GeneralUtility::trimExplode(',', $export['fields'], 1));
+		$this->view->assign('fieldUids', GeneralUtility::trimExplode(',', $export['fields'], 1));
 
 		$fileName = ($this->settings['export']['filenameCsv'] ? $this->settings['export']['filenameCsv'] : 'export.csv');
 		header('Content-Type: text/x-csv');

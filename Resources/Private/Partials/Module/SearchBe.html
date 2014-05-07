@@ -2,7 +2,7 @@
 
 <f:form action="{action}" name="filter" id="powermail_module_search">
 
-	<div class="powermail_module_search_field searchall_mails" class="searchall">
+	<div class="powermail_module_search_field searchall searchall_mails">
 
 		<label for="searchall_mails">
 			<f:translate key="BackendListFilterFulltextSearch" />
@@ -55,28 +55,45 @@
 				<label for="searchName">
 					<f:translate key="BackendListFilterName" />
 				</label>
-				<f:form.textfield property="sender_name" id="searchName" class="powermail_module_search_field_name" value="{piVars.filter.sender_name}" />
+				<f:form.textfield
+						property="sender_name"
+						id="searchName"
+						class="powermail_module_search_field_name"
+						value="{piVars.filter.sender_name}" />
 			</div>
 
 			<div class="powermail_module_search_field searchMail">
 				<label for="searchMail">
 					<f:translate key="BackendListFilterMail" />
 				</label>
-				<f:form.textfield property="sender_mail" id="searchMail" class="powermail_module_search_field_mail" value="{piVars.filter.sender_mail}" />
+				<f:form.textfield
+						property="sender_mail"
+						id="searchMail"
+						class="powermail_module_search_field_mail"
+						value="{piVars.filter.sender_mail}" />
 			</div>
 
 			<div class="powermail_module_search_field searchSubject">
 				<label for="searchSubject">
 					<f:translate key="BackendListFilterSubject" />
 				</label>
-				<f:form.textfield property="subject" id="searchSubject" class="powermail_module_search_field_subject" value="{piVars.filter.subject}" />
+				<f:form.textfield
+						property="subject"
+						id="searchSubject"
+						class="powermail_module_search_field_subject"
+						value="{piVars.filter.subject}" />
 			</div>
 
 			<div class="powermail_module_search_field searchHidden">
 				<label for="searchHidden">
 					<f:translate key="BackendListFilterHidden" />
 				</label>
-				<vh:form.advancedSelect property="hidden" options="{1: '{f:translate(key: \'BackendListFilterShowNonHidden\')}', 2: '{f:translate(key: \'BackendListFilterShowHidden\')}'}" id="searchHidden" defaultOption="{f:translate(key: 'pleaseChoose')}" value="{piVars.filter.hidden}" />
+				<vh:form.advancedSelect
+						property="hidden"
+						options="{1: '{f:translate(key: \'BackendListFilterShowNonHidden\')}', 2: '{f:translate(key: \'BackendListFilterShowHidden\')}'}"
+						id="searchHidden"
+						defaultOption="{f:translate(key: 'pleaseChoose')}"
+						value="{piVars.filter.hidden}" />
 			</div>
 
 			<div class="powermail_module_search_field searchAddField clear">
@@ -106,7 +123,10 @@
 					<label>
 						{answer.field.title}
 					</label>
-					<f:form.textfield property="answer.{answer.field}" class="powermail_module_search_field_dynamicfield" value="{vh:Getter.GetPiVarAnswerField(piVars: '{piVars}', field: '{answer.field}')}" />
+					<f:form.textfield
+							property="answer.{answer.field.uid}"
+							class="powermail_module_search_field_dynamicfield"
+							value="{vh:Getter.GetPiVarAnswerField(piVars: '{piVars}', field: '{answer.field}')}" />
 				</div>
 			</f:for>
 		</div>

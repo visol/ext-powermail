@@ -23,7 +23,7 @@
 				</label>
 				<ul class="extended_export_field connected" id="export_field_selection">
 					<f:for each="{firstMail.answers}" as="answer">
-						<li id="{answer.field}">
+						<li id="{answer.field.uid}">
 							{answer.field.title} <span class="info">(<f:translate key="FormField" />)</span>
 						</li>
 					</f:for>
@@ -90,7 +90,7 @@
 		</div>
 
 		<f:form.hidden property="fields" value="{vh:String.ImplodeField(objects: '{firstMail.answers}', field: 'field')}" id="export_fields" />
-		<f:form.hidden property="mails" value="{vh:String.ImplodeField(objects: '{mailBasic}')}" id="export_mails" />
+		<f:form.hidden property="mails" value="{vh:String.ImplodeField(objects: '{mails}', field: 'uid')}" id="export_mails" />
 		<f:form.hidden property="format" value="xls" id="export_format" />
 
 		<f:if condition="{piVars.sorting}">

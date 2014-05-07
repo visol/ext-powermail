@@ -28,7 +28,11 @@ class ImplodeFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 		} else {
 			foreach ($objects as $object) {
 				if (method_exists($object, 'get' . ucfirst($field))) {
-					$string .= $object->{'get' . ucfirst($field)}();
+					$tempString = $object->{'get' . ucfirst($field)}();
+					if (method_exists($tempString, 'getUid')) {
+						$tempString = $tempString->getUid();
+					}
+					$string .= $tempString;
 					$string .= $separator;
 				}
 			}
