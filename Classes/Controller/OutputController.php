@@ -59,6 +59,8 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
 		$fields = $this->fieldRepository->findByUids($fieldArray);
+		$searchFields = $this->fieldRepository->findByUids(GeneralUtility::trimExplode(',', $this->settings['search']['fields'], TRUE));
+		$this->view->assign('searchFields', $searchFields);
 		$this->view->assign('fields', $fields);
 		$this->view->assign('piVars', $this->piVars);
 		$this->view->assign('abc', Div::getAbcArray());

@@ -21,14 +21,11 @@ class IsAllowedToEditViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
 	 * Check if logged in User is allowed to edit
 	 *
 	 * @param array $settings TypoScript and FlexForm Settings
-	 * @param object $mail
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
 	public function render($settings = array(), $mail) {
-		if ($this->div->isAllowedToEdit($settings, $mail)) {
-			return TRUE;
-		}
-		return FALSE;
+		return $this->div->isAllowedToEdit($settings, $mail);
 	}
 
 }

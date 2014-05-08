@@ -4,6 +4,9 @@
 	background: $greySoft1;
 	overflow: auto;
 
+	/**
+	 * List View
+	 */
 	table.powermail_frontend_list {
 		width: 100%;
 		font-size: 0.8em;
@@ -32,7 +35,6 @@
 
 	.powermail_frontend_filter {
 		background: $greySoft2;
-		color: white;
 		padding: 10px 0;
 
 		.powermail_frontend_search_container {
@@ -98,23 +100,26 @@
 		}
 	}
 
-	/*
-	.powermail_frontend dl {
+
+	/**
+	 * Detail View
+	 */
+	dl {
 		clear: both;
-		padding: 5px 0;
+		padding: 5px 10px;
+		dt {
+			float: left;
+			width: 150px;
+			font-weight: bold;
+			clear: left;
+			margin-right: 10px;
+		}
+		dd {
+			float: left;
+		}
 	}
-	.powermail_frontend dt {
-		float: left;
-		width: 150px;
-		font-weight: bold;
-		clear: left;
-		margin-right: 10px;
+	.powermail_frontend_back {
+		margin: 10px;
+		display: block;
 	}
-	.powermail_frontend dd {
-		float: left;
-	}
-	#powermail_frontend_search {
-		margin: 0;
-	}
-	*/
 }

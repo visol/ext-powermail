@@ -93,6 +93,11 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 			);
 		}
 
+		// if multitext or upload force array
+		if (($this->getValueType() === 1 || $this->getValueType() === 3) && !is_array($value)) {
+			$value = array(strval($value));
+		}
+
 		return $value;
 	}
 

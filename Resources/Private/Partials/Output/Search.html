@@ -23,16 +23,16 @@
 			</f:for>
 
 			<f:comment>Selected Fields</f:comment>
-			<f:for each="{fields}" as="field">
+			<f:for each="{searchFields}" as="searchField">
 				<div class="powermail_frontend_search_container">
-					<label for="powermail_frontend_search_{field.marker}">
-						{field.title}
+					<label for="powermail_frontend_search_{searchField.marker}">
+						{searchField.title}
 					</label>
 					<f:form.textfield
-							property="{field.uid}"
-							id="powermail_frontend_search_{field.marker}"
-							class="powermail_frontend_search powermail_frontend_search_{field.marker}"
-							value="{vh:Misc.VariableInVariable(obj:piVars.filter, prop:field)}" />
+							property="{searchField.uid}"
+							id="powermail_frontend_search_{searchField.marker}"
+							class="powermail_frontend_search powermail_frontend_search_{searchField.marker}"
+							value="{vh:Misc.VariableInVariable(obj:piVars.filter, prop:searchField.uid)}" />
 				</div>
 			</f:for>
 

@@ -721,7 +721,7 @@ class Div {
 	 * Check if logged in user is allowed to make changes in Pi2
 	 *
 	 * @param array $settings $settings TypoScript and Flexform Settings
-	 * @param object $mail $mail Mail Object
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
 	public function isAllowedToEdit($settings, $mail) {
