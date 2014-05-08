@@ -88,8 +88,8 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 		$this->view->assign('mail', $mail);
 
 		// get fields for iteration
-		if ($this->settings['list']['fields']) {
-			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['detail']['fields'], 1);
+		if ($this->settings['single']['fields']) {
+			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['single']['fields'], 1);
 		} else {
 			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
