@@ -622,7 +622,7 @@
 			</trans-unit>
 			<trans-unit id="PowermailFrontendFilterSubmit">
 				<source>Filter Now</source>
-				<target state="translated">Jetzt Filter</target>
+				<target state="translated">Jetzt Filtern</target>
 			</trans-unit>
 			<trans-unit id="PowermailFrontendNoMailsDetail">
 				<source>Please edit your filtersettings.</source>

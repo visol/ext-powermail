@@ -31,7 +31,7 @@
 	}
 
 	.powermail_frontend_filter {
-		background: $grey1;
+		background: $greySoft2;
 		color: white;
 		padding: 10px 0;
 
@@ -54,8 +54,7 @@
 			.powermail_frontend_search_submit {
 				color: white;
 				cursor: pointer;
-				background: $grey1;
-				border: 2px solid white;
+				background: $blue1;
 				clear: both;
 			}
 		}
@@ -94,6 +93,7 @@
 		.powermail_frontend_export_icon {
 			float: right;
 			padding-top: 5px;
+			margin-left: 5px;
 			height: 19px;
 		}
 	}

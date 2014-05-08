@@ -10,8 +10,8 @@
 				id="powermail_field_{field.marker}"
 				property="{field.marker}"
 				value=""
-				class="powermail_field powermail_captcha {vh:Validation.ErrorClass(field: '{field}', class: 'powermail_field_error')}"
-				additionalAttributes="{vh:Validation.ValidationDataAttribute(field: field)}" />
+				class="powermail_field powermail_captcha {vh:Validation.ErrorClass(field:field, class:'powermail_field_error')}"
+				additionalAttributes="{vh:Validation.ValidationDataAttribute(field:field)}" />
 		<img src="{vh:Misc.Captcha()}" alt="captcha" class="powermail_captchaimage" id="powermail_captchaimage" />
 
 		<div class="powermail_field_error_container powermail_field_error_container_{field.marker}"></div>
