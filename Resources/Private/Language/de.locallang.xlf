@@ -616,6 +616,14 @@
 				<source>No Mails found.</source>
 				<target state="translated">Keine Mails gefunden.</target>
 			</trans-unit>
+			<trans-unit id="PowermailFrontendFilterAll">
+				<source>All</source>
+				<target state="translated">Alle</target>
+			</trans-unit>
+			<trans-unit id="PowermailFrontendFilterSubmit">
+				<source>Filter Now</source>
+				<target state="translated">Jetzt Filter</target>
+			</trans-unit>
 			<trans-unit id="PowermailFrontendNoMailsDetail">
 				<source>Please edit your filtersettings.</source>
 				<target state="translated">Bitte passen Sie Ihre Filtereinstellungen an.</target>

@@ -462,6 +462,12 @@
 			<trans-unit id="PowermailFrontendNoMails">
 				<source>No Mails found.</source>
 			</trans-unit>
+			<trans-unit id="PowermailFrontendFilterAll">
+				<source>All</source>
+			</trans-unit>
+			<trans-unit id="PowermailFrontendFilterSubmit">
+				<source>Filter Now</source>
+			</trans-unit>
 			<trans-unit id="PowermailFrontendNoMailsDetail">
 				<source>Please edit your filtersettings.</source>
 			</trans-unit>
