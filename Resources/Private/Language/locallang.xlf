@@ -501,6 +501,9 @@
 			<trans-unit id="honeypodLabel">
 				<source>Don't fill this field!</source>
 			</trans-unit>
+			<trans-unit id="deleteAllFiles">
+				<source>Delete All Files</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

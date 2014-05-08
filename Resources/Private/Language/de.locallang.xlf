@@ -668,6 +668,10 @@
 				<source>Don't fill this field!</source>
 				<target state="translated">Bitte dieses Feld NICHT ausfüllen!</target>
 			</trans-unit>
+			<trans-unit id="deleteAllFiles">
+				<source>Delete All Files</source>
+				<target state="translated">Alle Dateien löschen</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

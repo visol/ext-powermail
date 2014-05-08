@@ -8,6 +8,9 @@
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
+		&.hide {
+			display: none;
+		}
 	}
 
 	.powermail_fieldset {
@@ -87,12 +90,25 @@
 		.powermail_radio_outer,
 		.powermail_captcha_outer,
 		.powermail_check_outer,
-		.powermail_fieldwrap_text {
+		.powermail_fieldwrap_text,
+		.powermail_fieldwrap_file_inner ul {
 			background-color: white;
 			border: 1px solid $greySoft2;
 			float: right;
 			padding: 3px;
 			width: $widthField;
+			list-style: none;
+			margin: 0;
+			> li {
+				margin: 5px;
+				.deleteAllFiles {
+					color: $greySoft2;
+					cursor: pointer;
+					&:hover {
+						text-decoration: underline;
+					}
+				}
+			}
 		}
 
 		/**

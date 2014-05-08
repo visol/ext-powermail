@@ -66,6 +66,24 @@ jQuery(document).ready(function($) {
 			});
 		});
 	}
+
+	// File Upload Delete
+	$('.powermail_fieldwrap_file_inner').find('.deleteAllFiles').each(function() {
+		// initially hide upload fields
+		disableUploadField($(this).closest('.powermail_fieldwrap_file_inner').find('input[type="file"]'));
+	});
+	$('.deleteAllFiles').click(function() {
+		enableUploadField($(this).closest('.powermail_fieldwrap_file_inner').find('input[type="file"]'));
+		$(this).closest('ul').fadeOut(function() {
+			$(this).remove();
+		});
+	});
+	function disableUploadField(element) {
+		element.prop('disabled', 'disabled').addClass('hide');
+	}
+	function enableUploadField(element) {
+		element.removeProp('disabled').removeClass('hide');
+	}
 });
 
 /**
