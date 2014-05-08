@@ -1,6 +1,9 @@
 <?php
 namespace In2code\Powermail\Domain\Model;
 
+use \In2code\Powermail\Utility\Div,
+	\TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -66,18 +69,28 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the value
 	 *
-	 * @return string $value
+	 * @return mixed $value
 	 */
 	public function getValue() {
 		$value = $this->value;
 
-		// if serialized, get array (checkboxes)
-		if (\In2code\Powermail\Utility\Div::isSerialized($this->value)) {
-			$value = unserialize($value);
+		// if serialized, change to array
+		if (Div::isSerialized($this->value)) {
+			// only if type multivalue or upload
+			if ($this->getValueType() === 1 || $this->getValueType() === 3) {
+				$value = unserialize($value);
+			}
 		}
 
+		// if type date
 		if ($this->getValueType() === 2 && is_numeric($value)) {
-			$value = date('y-m-d', $value);
+			$value = date(
+				LocalizationUtility::translate(
+					'datepicker_format_' . $this->getField()->getDatepickerSettings(),
+					'powermail'
+				),
+				$value
+			);
 		}
 
 		return $value;
@@ -86,22 +99,22 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the value
 	 *
-	 * @param string $value
+	 * @param mixed $value
 	 * @dontvalidate $value
 	 * @return void
 	 */
 	public function setValue($value) {
-		// if array, get serializes string (checkboxes)
+		// if array, serialize to string
 		if (is_array($value)) {
 			$value = serialize($value);
 		}
 
-		// if date get timestamp (datepicker)
+		// if date, get timestamp (datepicker)
 		if (
-			\In2code\Powermail\Utility\Div::getDataTypeFromFieldType($this->getField()->getType()) === 2 &&
+			Div::getDataTypeFromFieldType($this->getField()->getType()) === 2 &&
 			!is_numeric($value)
 		) {
-			$format = \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+			$format = LocalizationUtility::translate(
 				'datepicker_format_' . $this->getField()->getDatepickerSettings(),
 				'powermail'
 			);
