@@ -132,6 +132,11 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$this->view->assign('optinActive', TRUE);
 		}
 
+		if ($this->settings['db']['enable'] && $hash === NULL) {
+			$this->mailRepository->update($mail);
+			$this->persistenceManager->persistAll();
+		}
+
 		$this->signalSlotDispatcher->dispatch(__CLASS__, __FUNCTION__ . 'AfterSubmitView', array($mail, $hash, $this));
 		$this->assignForAll();
 		$this->showThx($mail);
@@ -198,6 +203,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$receiverString,
 			$this->settings['receiver']['fe_group']
 		);
+		$mail->setReceiverMail(implode("\n", $receivers));
 		foreach ($receivers as $receiver) {
 			$email = array(
 				'template' => 'Mail/ReceiverMail',
@@ -252,7 +258,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	protected function sendConfirmationMail(Mail $mail) {
+	protected function sendConfirmationMail(Mail &$mail) {
 		// Send Mail to sender with hashed link
 		$email = array(
 			'template' => 'Mail/OptinMail',
@@ -333,7 +339,7 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	/**
 	 * Save mail on submit
 	 *
-	 * @param \In2code\Powermail\Domain\Model\Mail $mail = NULL
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
 	protected function saveMail(Mail &$mail = NULL) {

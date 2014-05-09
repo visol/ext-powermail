@@ -50,6 +50,22 @@ class SendMail {
 	protected $objectManager;
 
 	/**
+	 * SignalSlot Dispatcher
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+	 * @inject
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * mailRepository
+	 *
+	 * @var \In2code\Powermail\Domain\Repository\MailRepository
+	 * @inject
+	 */
+	protected $mailRepository;
+
+	/**
 	 * @var \In2code\Powermail\Utility\Div
 	 * @inject
 	 */
@@ -72,7 +88,7 @@ class SendMail {
 	 * @param string $type Email to "sender" or "receiver"
 	 * @return bool Mail successfully sent
 	 */
-	public function sendTemplateEmail(array $email, \In2code\Powermail\Domain\Model\Mail $mail, $settings, $type = 'receiver') {
+	public function sendTemplateEmail(array $email, \In2code\Powermail\Domain\Model\Mail &$mail, $settings, $type = 'receiver') {
 		$cObj = $this->configurationManager->getContentObject();
 		$typoScriptService = $this->objectManager->get('\TYPO3\CMS\Extbase\Service\TypoScriptService');
 		$conf = $typoScriptService->convertPlainArrayToTypoScriptArray($settings);
@@ -211,6 +227,11 @@ class SendMail {
 		}
 		$message->send();
 
+		// update mail
+		$mail->setSenderMail($email['senderEmail']);
+		$mail->setSenderName($email['senderName']);
+		$mail->setSubject($email['subject']);
+
 		return $message->isSent();
 	}
 
@@ -222,7 +243,7 @@ class SendMail {
 	 * @param array $settings TypoScript Settings
 	 * @return bool
 	 */
-	protected function createEmailBody($email, \In2code\Powermail\Domain\Model\Mail $mail, $settings) {
+	protected function createEmailBody($email, \In2code\Powermail\Domain\Model\Mail &$mail, $settings) {
 		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
 			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
 		);
@@ -255,7 +276,9 @@ class SendMail {
 		$emailBodyObject->assign('powermail_rte', $email['rteBody']);
 		$emailBodyObject->assign('marketingInfos', Div::getMarketingInfos());
 		$emailBodyObject->assign('mail', $mail);
-		return $emailBodyObject->render();
+		$body = $emailBodyObject->render();
+		$mail->setBody($body);
+		return $body;
 	}
 
 	/**

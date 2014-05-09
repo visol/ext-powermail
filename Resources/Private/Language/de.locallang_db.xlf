@@ -7,6 +7,10 @@
 				<source>Mails</source>
 				<target state="translated">Mails</target>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_mails.palette1">
+				<source>Sender</source>
+				<target state="translated">Sender</target>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_mails.sender_mail">
 				<source>Senders Email</source>
 				<target state="translated">Absender E-Mail</target>
@@ -20,8 +24,8 @@
 				<target state="translated">E-Mail Betreffzeile</target>
 			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_mails.body">
-				<source>Parameter</source>
-				<target state="translated">Parameter</target>
+				<source>Email Body</source>
+				<target state="translated">E-Mail</target>
 			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_mails.receiver_mail">
 				<source>Receivers Mail</source>

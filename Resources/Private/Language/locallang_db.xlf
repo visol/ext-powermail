@@ -6,6 +6,9 @@
 			<trans-unit id="tx_powermail_domain_model_mails">
 				<source>Mails</source>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_mails.palette1">
+				<source>Sender</source>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_mails.sender_mail">
 				<source>Senders Email</source>
 			</trans-unit>
@@ -16,7 +19,7 @@
 				<source>Mail Subject</source>
 			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_mails.body">
-				<source>Parameter</source>
+				<source>Email Body</source>
 			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_mails.receiver_mail">
 				<source>Receivers Mail</source>

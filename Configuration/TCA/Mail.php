@@ -7,24 +7,27 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 	'ctrl' => $TCA['tx_powermail_domain_model_mails']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' =>
-			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, crdate, sender_mail,
-			sender_name, subject, receiver_mail, form, answers, body, feuser, spam_factor,
+			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, crdate, receiver_mail,
+			sender_name, sender_mail,
+			subject, form, answers, body, feuser, spam_factor,
 			time, sender_ip, user_agent, marketing_referer_domain, marketing_referer,
 			marketing_country, marketing_mobile_device, marketing_frontend_language, marketing_browser_language, marketing_page_funnel',
 	),
 	'types' => array(
 		'1' => array(
 			'showitem' =>
-				'crdate, sender_mail, sender_name, subject, body;;;richtext[],
+				'crdate, receiver_mail,
+				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_mails.palette1;1,
+				subject, body;;;richtext[],
 				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sheet1,
-				receiver_mail, form, answers, feuser, spam_factor, time, sender_ip, user_agent,
+				form, answers, feuser, spam_factor, time, sender_ip, user_agent,
 				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sheet2,
 				marketing_referer_domain, marketing_referer, marketing_country, marketing_mobile_device,
 				marketing_frontend_language, marketing_browser_language, marketing_page_funnel,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, hidden;;1, starttime, endtime'),
 	),
 	'palettes' => array(
-		'1' => array(),
+		'1' => array('showitem' => 'sender_name, sender_mail'),
 	),
 	'columns' => array(
 		'sys_language_uid' => array(
@@ -115,6 +118,15 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 				'readOnly' => 1
 			),
 		),
+		'receiver_mail' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_mails.receiver_mail',
+			'config' => array(
+				'type' => 'text',
+				'cols' => '30',
+				'rows' => '5'
+			),
+		),
 		'sender_mail' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_mails.sender_mail',
@@ -160,15 +172,6 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 						'script' => 'wizard_rte.php',
 					),
 				),
-			),
-		),
-		'receiver_mail' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_mails.receiver_mail',
-			'config' => array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim'
 			),
 		),
 		'form' => array(
