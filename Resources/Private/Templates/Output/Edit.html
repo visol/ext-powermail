@@ -57,18 +57,8 @@ Render Powermail_Frontend Edit View
 			</f:else>
 		</f:if>
 
-		<f:link.page pageUid="{listPid}">
+		<f:link.page pageUid="{listPid}" class="powermail_frontend_back">
 			<f:translate key="Back" />
 		</f:link.page>
 	</div>
 </f:section>
-
-<f:for each="{fields}" as="field">
-	<f:for each="{mail.answers}" as="answer">
-		<f:if condition="{answer.field} == {field}">
-			<f:if condition="{vh:Condition.Or(array: '{0: \'input\', 1: \'check\', 2: \'radio\', 3: \'select\', 4: \'textarea\'}', string: '{field.type}')}">
-				<f:render partial="Output/Field/{vh:String.Upper(string:field.type)}" arguments="{_all}" />
-			</f:if>
-		</f:if>
-	</f:for>
-</f:for>

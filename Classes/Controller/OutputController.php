@@ -158,6 +158,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 */
 	public function updateAction(Mail $mail) {
 		$this->mailRepository->update($mail);
+		$this->addFlashmessage(LocalizationUtility::translate('PowermailFrontendEditSuccessful', 'powermail'));
 		$this->redirect('edit', NULL, NULL, array('mail' => $mail));
 	}
 

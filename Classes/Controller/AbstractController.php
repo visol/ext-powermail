@@ -171,7 +171,6 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	protected function reformatParamsForAction() {
 		$arguments = $this->request->getArguments();
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments, 'in2code: ' . __CLASS__ . ':' . __LINE__);
 		if (!isset($arguments['field'])) {
 			return;
 		}
