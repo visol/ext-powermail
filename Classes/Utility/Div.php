@@ -44,35 +44,36 @@ class Div {
 
 	/**
 	 * @var \In2code\Powermail\Domain\Repository\FormRepository
-	 *
 	 * @inject
 	 */
 	protected $formRepository;
 
 	/**
 	 * @var \In2code\Powermail\Domain\Repository\FieldRepository
-	 *
 	 * @inject
 	 */
 	protected $fieldRepository;
 
 	/**
+	 * @var \In2code\Powermail\Domain\Repository\MailRepository
+	 * @inject
+	 */
+	protected $mailRepository;
+
+	/**
 	 * @var \In2code\Powermail\Domain\Repository\UserRepository
-	 *
 	 * @inject
 	 */
 	protected $userRepository;
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	 *
 	 * @inject
 	 */
 	protected $configurationManager;
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-	 *
 	 * @inject
 	 */
 	protected $objectManager;
@@ -721,14 +722,17 @@ class Div {
 	 * Check if logged in user is allowed to make changes in Pi2
 	 *
 	 * @param array $settings $settings TypoScript and Flexform Settings
-	 * @param \In2code\Powermail\Domain\Model\Mail $mail
+	 * @param int|\In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
 	public function isAllowedToEdit($settings, $mail) {
-		// settings
+		if (!is_a($mail, '\In2code\Powermail\Domain\Model\Mail')) {
+			$mail = $this->mailRepository->findByUid(intval($mail));
+		}
 		if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
 			return FALSE;
 		}
+
 		// array with usergroups of current logged in user
 		$usergroups = GeneralUtility::trimExplode(',', $GLOBALS['TSFE']->fe_user->user['usergroup'], 1);
 		// array with all allowed users

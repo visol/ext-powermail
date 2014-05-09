@@ -146,6 +146,12 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 * @return void
 	 */
 	public function initializeUpdateAction() {
+		$arguments = $this->request->getArguments();
+		if (!$this->div->isAllowedToEdit($this->settings, $arguments['field']['__identity'])) {
+			$this->controllerContext = $this->buildControllerContext();
+			$this->addFlashmessage(LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail'));
+			$this->forward('list');
+		}
 		$this->reformatParamsForAction();
 	}
 
