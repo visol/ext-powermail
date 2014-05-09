@@ -159,7 +159,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 * Update mail
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
-	 * @dontvalidate $mail
+	 * @validate $mail In2code\Powermail\Domain\Validator\InputValidator
 	 * @return void
 	 */
 	public function updateAction(Mail $mail) {

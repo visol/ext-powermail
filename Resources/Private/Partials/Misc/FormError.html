@@ -7,7 +7,7 @@
 				<f:for each="{errors}" as="singleError">
 					<li>
 						<f:if condition="{singleError.code}">
-							<f:if condition="{vh:Getter.GetFieldPropertyFromMarkerAndForm(marker:'{singleError.code}', form:'{form}', property:'title')}">
+							<f:if condition="{vh:Getter.GetFieldPropertyFromMarkerAndForm(marker:singleError.code, form:form, property:'title')}">
 								<f:then>
 									<vh:Getter.GetFieldPropertyFromMarkerAndForm marker="{singleError.code}" form="{form}" property="title" />:
 								</f:then>

@@ -19,11 +19,14 @@ Render Powermail_Frontend Edit View
 								name="field"
 								object="{mail}"
 								enctype="multipart/form-data"
+								additionalAttributes="{vh:Validation.EnableParsleyAndAjax(form:mail.form)}"
 								class="powermail_form powermail_form_{mail.form.uid}">
 
 							<fieldset class="powermail_fieldset">
 
 								<h3>{mail.form.title}</h3>
+								<f:render partial="Misc/FormError" arguments="{form:mail.form}" />
+
 								<legend class="powermail_legend">
 									<f:for each="{mail.form.pages}" as="page" iteration="pageIteration">
 										<f:if condition="{pageIteration.isFirst}">{page.title}</f:if>
