@@ -236,10 +236,18 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				'value' => $value,
 				'valueType' => $valueType
 			);
+
+			// edit form: add answer id
+			if (!empty($arguments['field']['__identity'])) {
+				$newArguments['mail']['answers'][$i]['__identity'] = $this->answerRepository->findByFieldAndMail(
+					$fieldUid,
+					$arguments['field']['__identity']
+				)->getUid();
+			}
 			$i++;
 		}
 
-		// mail id from edit form
+		// edit form: add mail id
 		if (!empty($arguments['field']['__identity'])) {
 			$newArguments['mail']['__identity'] = $arguments['field']['__identity'];
 		}
