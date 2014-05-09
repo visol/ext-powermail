@@ -47,6 +47,13 @@ class TaskCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCon
 	protected $answerRepository;
 
 	/**
+	 * delete Files which are older than this seconds
+	 * 
+	 * @var int
+	 */
+	protected $delta = 3600;
+
+	/**
 	 * Remove unused uploaded Files
 	 * 		Open on Command Line with
 	 * 		php cli_dispatch.phpsh extbase task:cleanunuseduploads
@@ -62,8 +69,10 @@ class TaskCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCon
 		foreach ($allUploads as $upload) {
 			if (!in_array($upload, $usedUploads)) {
 				$absoluteFilePath = GeneralUtility::getFileAbsFileName($uploadPath . $upload);
-				unlink($absoluteFilePath);
-				$removeCounter++;
+				if (filemtime($absoluteFilePath) < (time() - $this->delta)) {
+					unlink($absoluteFilePath);
+					$removeCounter++;
+				}
 			}
 		}
 		$this->outputLine('Overall Files: ' . count($allUploads));

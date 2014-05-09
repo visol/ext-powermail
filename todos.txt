@@ -16,7 +16,7 @@
 - done: upload (multiupload with html5) and show upload if user goes back to form
 - done: decrease number of forms to select in plugin (probably with Page TSconfig)
 - done: show in TCA if sender_email or sender_name was not set
-- Schedulertask with CommandController to remove unused uploaded files (time)
+- done: Schedulertask with CommandController to remove unused uploaded files (time)
 - add a powermail 1.x form converter to 2.x
 - powermail_cond update
 - Adding Unit Tests
