@@ -115,11 +115,11 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return void
 	 */
-	public function editAction(Mail $mail) {
+	public function editAction(Mail $mail = NULL) {
 		$this->view->assign('mail', $mail);
 
 		// get fields for iteration
-		if ($this->settings['list']['fields']) {
+		if ($this->settings['edit']['fields']) {
 			$fieldArray = GeneralUtility::trimExplode(',', $this->settings['edit']['fields'], 1);
 		} else {
 			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
@@ -141,27 +141,23 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 	}
 
 	/**
+	 * Rewrite Arguments to receive a clean mail object
+	 *
+	 * @return void
+	 */
+	public function initializeUpdateAction() {
+		$this->reformatParamsForAction();
+	}
+
+	/**
 	 * Update mail
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Mail $mail
-	 * @param array $field Field Array with changes
 	 * @dontvalidate $mail
-	 * @dontvalidate $field
 	 * @return void
 	 */
-	public function updateAction(Mail $mail, $field = array()) {
-		if ($this->div->isAllowedToEdit($this->settings, $mail)) {
-			// one loop for every received field
-			foreach ((array) $field as $fieldUid => $value) {
-				$answer = $this->answerRepository->findByFieldAndMail($fieldUid, $mail);
-				$answer->setValue($value);
-				$this->answerRepository->update($answer);
-			}
-			$this->addFlashMessage(LocalizationUtility::translate('PowermailFrontendEditConfirm', 'powermail'));
-		} else {
-			$this->addFlashMessage(LocalizationUtility::translate('PowermailFrontendEditFailed', 'powermail'));
-		}
-
+	public function updateAction(Mail $mail) {
+		$this->mailRepository->update($mail);
 		$this->redirect('edit', NULL, NULL, array('mail' => $mail));
 	}
 

@@ -7,7 +7,7 @@
 	<f:form.textfield
 		type="{vh:Validation.FieldTypeFromValidation(field:field)}"
 		property="{field.marker}"
-		value="{vh:Misc.PrefillField(field:field)}"
+		value="{vh:Misc.PrefillField(field:field, mail:mail)}"
 		class="powermail_field powermail_input {vh:Validation.ErrorClass(field:field, class:'powermail_field_error')}"
 		additionalAttributes="{vh:Validation.ValidationDataAttribute(field:field)}"
 		id="powermail_field_{field.marker}" />

@@ -36,14 +36,17 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	 * Prefill string for fields
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail To prefill in Edit Action
 	 * @param \int $cycle Cycle Number (1,2,3...) - if filled checkbox or radiobutton
 	 * @return mixed Prefill field with this string
 	 */
-	public function render(\In2code\Powermail\Domain\Model\Field $field, $cycle = 0) {
+	public function render(
+		\In2code\Powermail\Domain\Model\Field $field, \In2code\Powermail\Domain\Model\Mail $mail = NULL, $cycle = 0) {
+
 		if ($cycle === 0) {
-			$value = $this->getDefaultValue($field);
+			$value = $this->getDefaultValue($field, $mail);
 		} else {
-			$value = $this->getMultiValue($field, $cycle);
+			$value = $this->getMultiValue($field, $mail, $cycle);
 		}
 
 		return $value;
@@ -53,12 +56,24 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	 * Get value for default fieldtypes (input, textarea, hidden, select)
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail To prefill in Edit Action
 	 * @return string|array
 	 */
-	protected function getDefaultValue(\In2code\Powermail\Domain\Model\Field $field) {
+	protected function getDefaultValue(
+		\In2code\Powermail\Domain\Model\Field $field, \In2code\Powermail\Domain\Model\Mail $mail = NULL) {
+
 		$value = '';
 		$marker = $field->getMarker();
 		$uid = $field->getUid();
+
+		// edit view
+		if ($mail !== NULL && $mail->getAnswers()) {
+			foreach ($mail->getAnswers() as $answer) {
+				if ($answer->getField() === $field) {
+					$value = $answer->getValue();
+				}
+			}
+		}
 
 		// if GET/POST with marker (&tx_powermail_pi1[field][marker]=value)
 		if (isset($this->piVars['field'][$marker])) {
@@ -140,15 +155,31 @@ class PrefillFieldViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractVi
 	 * Get value for multi fieldtypes (checkbox, radio)
 	 *
 	 * @param \In2code\Powermail\Domain\Model\Field $field
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail To prefill in Edit Action
 	 * @param \int $cycle Cycle Number (1,2,3...) - if filled checkbox or radiobutton
 	 * @return string
 	 */
-	protected function getMultiValue(\In2code\Powermail\Domain\Model\Field $field, $cycle = 0) {
+	protected function getMultiValue(
+		\In2code\Powermail\Domain\Model\Field $field, \In2code\Powermail\Domain\Model\Mail $mail = NULL, $cycle = 0) {
 		$marker = $field->getMarker();
 		$uid = $field->getUid();
 		$selected = 0;
 		$index = $cycle - 1;
 		$options = $field->getModifiedSettings();
+
+		// edit view
+		if ($mail !== NULL && $mail->getAnswers()) {
+			foreach ($mail->getAnswers() as $answer) {
+				if ($answer->getField() === $field) {
+					$values = $answer->getValue();
+					foreach ((array) $values as $value) {
+						if ($value === $options[$index]['value'] || $value === $options[$index]['label']) {
+							$selected = 1;
+						}
+					}
+				}
+			}
+		}
 
 		// if GET/POST with marker (&tx_powermail_pi1[field][marker][index]=value)
 		if (isset($this->piVars['field'][$marker]) && is_array($this->piVars['field'][$marker])) {

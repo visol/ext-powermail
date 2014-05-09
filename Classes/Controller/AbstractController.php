@@ -171,6 +171,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	protected function reformatParamsForAction() {
 		$arguments = $this->request->getArguments();
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($arguments, 'in2code: ' . __CLASS__ . ':' . __LINE__);
 		if (!isset($arguments['field'])) {
 			return;
 		}
@@ -237,6 +238,11 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				'valueType' => $valueType
 			);
 			$i++;
+		}
+
+		// mail id from edit form
+		if (!empty($arguments['field']['__identity'])) {
+			$newArguments['mail']['__identity'] = $arguments['field']['__identity'];
 		}
 
 		$this->request->setArguments($newArguments);

@@ -483,6 +483,9 @@
 			<trans-unit id="PowermailFrontendEditConfirm">
 				<source>Changes successfully saved</source>
 			</trans-unit>
+			<trans-unit id="PowermailFrontendEditNoMail">
+				<source>Missing required Mail parameter</source>
+			</trans-unit>
 			<trans-unit id="PowermailFrontendEditFailed">
 				<source>You are not allowed to make changes</source>
 			</trans-unit>

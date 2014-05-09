@@ -20,7 +20,10 @@ class IsThereAMailWithStartingLetterViewHelper extends \TYPO3\CMS\Fluid\Core\Vie
 	public function render($mails, $letter, $answerField) {
 		foreach ($mails as $mail) {
 			foreach ($mail->getAnswers() as $answer) {
-				if ($answer->getField()->getUid() === intval($answerField)) {
+				if (
+					method_exists($answer->getField(), 'getUid') &&
+					$answer->getField()->getUid() === intval($answerField)
+				) {
 					$value = $answer->getValue();
 					if (strtolower($value[0]) === strtolower($letter)) {
 						return TRUE;
