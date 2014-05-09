@@ -125,7 +125,7 @@ class OutputController extends \In2code\Powermail\Controller\AbstractController 
 			$fieldArray = $this->div->getFieldsFromForm($this->settings['main']['form']);
 		}
 		$fields = $this->fieldRepository->findByUids($fieldArray);
-		$this->view->assign('fields', $fields);
+		$this->view->assign('selectedFields', $fields);
 
 		// list pid
 		if (empty($this->settings['list']['pid'])) {
