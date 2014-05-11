@@ -111,4 +111,142 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		return $query->execute();
 	}
+
+	/**
+	 * Find all old powermail forms in database
+	 *
+	 * @return mixed
+	 */
+	public function findAllOldForms() {
+		$query = $this->createQuery();
+
+		$sql = 'select
+			c.pid,
+			c.uid,
+			c.header,
+			c.sys_language_uid,
+			c.l18n_parent,
+			c.sorting,
+			c.hidden,
+			c.tx_powermail_title,
+			c.tx_powermail_recipient,
+			c.tx_powermail_subject_r,
+			c.tx_powermail_subject_s,
+			c.tx_powermail_sender,
+			c.tx_powermail_sendername,
+			c.tx_powermail_confirm,
+			c.tx_powermail_pages,
+			c.tx_powermail_multiple,
+			c.tx_powermail_recip_table,
+			c.tx_powermail_recip_id,
+			c.tx_powermail_recip_field,
+			c.tx_powermail_thanks,
+			c.tx_powermail_mailsender,
+			c.tx_powermail_mailreceiver,
+			c.tx_powermail_redirect,
+			c.tx_powermail_fieldsets,
+			c.tx_powermail_users,
+			c.tx_powermail_preview
+		';
+		$sql .= ' from tx_powermail_fields f
+			left join tx_powermail_fieldsets fs ON f.fieldset = fs.uid
+			left join tt_content c ON c.uid = fs.tt_content
+		';
+		$sql .= ' where c.deleted = 0';
+		$sql .= ' group by c.uid';
+		$sql .= ' limit 10000';
+
+		$result = $query->statement($sql)->execute(TRUE);
+
+		return $result;
+	}
+
+	/**
+	 * @param int $uid tt_content uid
+	 * @return array
+	 */
+	public function findOldFieldsetsAndFieldsToTtContentRecord($uid) {
+		$query = $this->createQuery();
+
+		$sql = 'select
+			fs.uid,
+			fs.pid,
+			fs.sys_language_uid,
+			fs.l18n_parent,
+			fs.sorting,
+			fs.hidden,
+			fs.title,
+			fs.class
+		';
+		$sql .= ' from tx_powermail_fields f
+			left join tx_powermail_fieldsets fs ON f.fieldset = fs.uid
+			left join tt_content c ON c.uid = fs.tt_content
+		';
+		$sql .= ' where c.deleted = 0 and fs.deleted = 0 and c.uid = ' . intval($uid);
+		$sql .= ' group by fs.uid';
+		$sql .= ' limit 10000';
+
+		$fieldsets = $query->statement($sql)->execute(TRUE);
+
+		$result = array();
+		$counter = 0;
+		foreach ($fieldsets as $fieldset) {
+			$result[$counter] = $fieldset;
+			$result[$counter]['fields'] = $this->findOldFieldsToFieldset($fieldset['uid']);
+			$counter++;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @param int $uid Fieldset
+	 * @return array
+	 */
+	protected function findOldFieldsToFieldset($uid) {
+		$query = $this->createQuery();
+
+		$sql = 'select
+			f.uid,
+			f.pid,
+			f.sys_language_uid,
+			f.l18n_parent,
+			f.sorting,
+			f.hidden,
+			f.fe_group,
+			f.fieldset,
+			f.title,
+			f.formtype,
+			f.flexform,
+			f.fe_field,
+			f.name,
+			f.description,
+			f.class
+		';
+		$sql .= ' from tx_powermail_fields f
+			left join tx_powermail_fieldsets fs ON f.fieldset = fs.uid
+			left join tt_content c ON c.uid = fs.tt_content
+		';
+		$sql .= ' where c.deleted = 0 and fs.deleted = 0 and f.deleted = 0 and fs.uid = ' . intval($uid);
+		$sql .= ' group by f.uid';
+		$sql .= ' limit 10000';
+
+		$fields = $query->statement($sql)->execute(TRUE);
+
+		foreach ($fields as $key => $field) {
+			$subValues = GeneralUtility::xml2array($field['flexform']);
+			$fields[$key]['size'] = $subValues['data']['sDEF']['lDEF']['size']['vDEF'];
+			$fields[$key]['maxlength'] = $subValues['data']['sDEF']['lDEF']['maxlength']['vDEF'];
+			$fields[$key]['readonly'] = $subValues['data']['sDEF']['lDEF']['readonly']['vDEF'];
+			$fields[$key]['mandatory'] = $subValues['data']['sDEF']['lDEF']['mandatory']['vDEF'];
+			$fields[$key]['value'] = $subValues['data']['sDEF']['lDEF']['value']['vDEF'];
+			$fields[$key]['placeholder'] = $subValues['data']['sDEF']['lDEF']['placeholder']['vDEF'];
+			$fields[$key]['validate'] = $subValues['data']['sDEF']['lDEF']['validate']['vDEF'];
+			$fields[$key]['inputtype'] = $subValues['data']['sDEF']['lDEF']['inputtype']['vDEF'];
+			$fields[$key]['options'] = $subValues['data']['sDEF']['lDEF']['options']['vDEF'];
+			unset($fields[$key]['flexform']);
+		}
+
+		return $fields;
+	}
 }

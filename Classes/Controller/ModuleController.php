@@ -118,8 +118,33 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		}
 	}
 
+	/**
+	 * Convert all old forms preflight
+	 *
+	 * @return void
+	 */
 	public function converterBeAction() {
+		$oldForms = $this->formRepository->findAllOldForms();
+		$this->view->assign('oldForms', $oldForms);
+	}
 
+	/**
+	 * Convert all old forms
+	 *
+	 * @param array $converter
+	 * @return void
+	 */
+	public function converterUpdateBeAction($converter) {
+		$oldForms = $this->formRepository->findAllOldForms();
+		$formCounter = 0;
+		$oldFormsWithFieldsetsAndFields = array();
+		foreach ($oldForms as $form) {
+			$oldFormsWithFieldsetsAndFields[$formCounter] = $form;
+			$oldFormsWithFieldsetsAndFields[$formCounter]['fieldsests'] =
+				$this->formRepository->findOldFieldsetsAndFieldsToTtContentRecord($form['uid']);
+			$formCounter++;
+		}
+		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($oldFormsWithFieldsetsAndFields, 'in2code: ' . __CLASS__ . ':' . __LINE__);
 	}
 
 	/**
