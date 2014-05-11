@@ -59,6 +59,7 @@ class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findByMarkerAndForm($marker, $formUid = 0) {
 		$query = $this->createQuery();
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		$query->getQuerySettings()->setRespectSysLanguage(FALSE);
 		$query->matching(
 			$query->logicalAnd(
 				array(
@@ -68,6 +69,7 @@ class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			)
 		);
 		$query->setLimit(1);
-		return $query->execute()->getFirst();
+		$result = $query->execute()->getFirst();
+		return $result;
 	}
 }

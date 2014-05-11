@@ -203,20 +203,18 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			if (substr($marker, 0, 2) === '__') {
 				continue;
 			}
+			$fieldUid = $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']);
+			// Skip fields without Uid (secondary password, upload)
+			if ($fieldUid === 0) {
+				continue;
+			}
+
 
 			// allow subvalues in new property mapper
 			$propertyMappingConfiguration->forProperty('answers')->allowProperties($i);
 			$propertyMappingConfiguration->forProperty('answers.' . $i)->allowAllProperties();
 			$propertyMappingConfiguration->allowCreationForSubProperty('answers.' . $i);
 			$propertyMappingConfiguration->allowModificationForSubProperty('answers.' . $i);
-
-			$fieldUid = $this->div->getFieldUidFromMarker($marker, $arguments['mail']['form']);
-
-			// Skip fields for which the UID can not be determined
-			// 		(e.g. secondary password field, upload field).
-			if ($fieldUid === 0) {
-				continue;
-			}
 
 			$valueType = Div::getDataTypeFromFieldType(
 				$this->div->getFieldTypeFromMarker($marker, $arguments['mail']['form'])
