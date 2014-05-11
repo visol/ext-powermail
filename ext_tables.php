@@ -34,7 +34,7 @@ if (TYPO3_MODE === 'BE' && !$confArr['disableBackendModule'] && !(TYPO3_REQUESTT
 		'm1',
 		'',
 		array(
-			'Module' => 'listBe, checkBe, exportBe, reportingBe, reportingFormBe, reportingMarketingBe'
+			'Module' => 'listBe, reportingBe, toolsBe, overviewBe, checkBe, converterBe, reportingFormBe, reportingMarketingBe, exportBe'
 		),
 		array(
 			'access' => 'user,group',

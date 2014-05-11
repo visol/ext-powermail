@@ -1,0 +1,27 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:layout name="Backend" />
+
+	Show Backend Module: Overview
+
+<f:section name="content">
+
+	<h2><f:translate key="BackendOverviewTitle">Form Overview</f:translate></h2>
+
+	<f:flashMessages class="powermail_message" />
+
+	<div class="powermail_overview">
+		<f:if condition="{forms}">
+			<f:then>
+				<ul>
+					<f:for each="{forms}" as="form">
+						<li>{form.title}: Pagetitle</li>
+					</f:for>
+				</ul>
+			</f:then>
+			<f:else>
+				TODO: Keine Formulare gefunden
+			</f:else>
+		</f:if>
+	</div>
+
+</f:section>

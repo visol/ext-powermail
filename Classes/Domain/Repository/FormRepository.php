@@ -63,7 +63,6 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 */
 	public function hasCaptcha(\In2code\Powermail\Domain\Model\Form $form) {
 		$query = $this->createQuery();
-		// disable storage pid
 		$query->getQuerySettings()->setRespectStoragePage(FALSE);
 
 		$and = array(
@@ -99,5 +98,17 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$result = $query->statement($sql)->execute(TRUE);
 
 		return $result[0]['pages'];
+	}
+
+	/**
+	 * Find all and don't respect Storage
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findAll() {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+
+		return $query->execute();
 	}
 }

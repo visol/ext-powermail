@@ -62,6 +62,35 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	}
 
 	/**
+	 * Reporting
+	 *
+	 * @param string $subaction could be 'form' or 'marketing'
+	 * @return void
+	 */
+	public function reportingBeAction($subaction = NULL) {
+		if ($subaction == 'form') {
+			$this->forward('reportingFormBe');
+		}
+		if ($subaction == 'marketing') {
+			$this->forward('reportingMarketingBe');
+		}
+	}
+
+	public function toolsBeAction() {
+
+	}
+
+	/**
+	 * Form Overview
+	 *
+	 * @return void
+	 */
+	public function overviewBeAction() {
+		$forms = $this->formRepository->findAll();
+		$this->view->assign('forms', $forms);
+	}
+
+	/**
 	 * Check View Backend
 	 *
 	 * @param string $email email address
@@ -89,19 +118,8 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		}
 	}
 
-	/**
-	 * Reporting
-	 *
-	 * @param string $subaction could be 'form' or 'marketing'
-	 * @return void
-	 */
-	public function reportingBeAction($subaction = NULL) {
-		if ($subaction == 'form') {
-			$this->forward('reportingFormBe');
-		}
-		if ($subaction == 'marketing') {
-			$this->forward('reportingMarketingBe');
-		}
+	public function converterBeAction() {
+
 	}
 
 	/**

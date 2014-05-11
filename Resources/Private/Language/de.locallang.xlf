@@ -376,9 +376,21 @@
 				<source>Reporting (Marketing)</source>
 				<target state="translated">Auswertung (Marketing)</target>
 			</trans-unit>
+			<trans-unit id="BackendSelectionTools">
+				<source>Tools</source>
+				<target state="translated">Werkzeuge</target>
+			</trans-unit>
+			<trans-unit id="BackendSelectionOverview">
+				<source>Form Overview</source>
+				<target state="translated">Formular-Übersicht</target>
+			</trans-unit>
 			<trans-unit id="BackendSelectionCheck">
-				<source>Powermail Function Check</source>
-				<target state="translated">Powermail Funktions-Check</target>
+				<source>Function Check</source>
+				<target state="translated">Funktions-Check</target>
+			</trans-unit>
+			<trans-unit id="BackendSelectionConverter">
+				<source>Form Converter (Powermail 1.x => 2.x)</source>
+				<target state="translated">Formular-Konvertierer (Powermail 1.x => 2.x)</target>
 			</trans-unit>
 			<trans-unit id="BackendCheckTitle">
 				<source>Powermail Check</source>
@@ -431,6 +443,10 @@
 			<trans-unit id="BackendCheckUploadsFolderFailed">
 				<source>Default Upload Folder don't exists (uploads/tx_powermail/)</source>
 				<target state="translated">Standard Upload Verzeichnis existiert nicht (uploads/tx_powermail/)</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle">
+				<source>Form Overview</source>
+				<target state="translated">Formular Übersicht</target>
 			</trans-unit>
 			<trans-unit id="BackendEmailTitle">
 				<source>Test Email Sending</source>
