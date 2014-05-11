@@ -132,7 +132,8 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 			$this->view->assign('optinActive', TRUE);
 		}
 
-		if ($this->settings['db']['enable'] && $hash === NULL) {
+		// update mail with parsed fields from TS (subject, etc...)
+		if ($this->settings['db']['enable']) {
 			$this->mailRepository->update($mail);
 			$this->persistenceManager->persistAll();
 		}

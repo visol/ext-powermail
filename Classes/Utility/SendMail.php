@@ -122,7 +122,8 @@ class SendMail {
 
 		// stop mail process if subject is empty
 		if (empty($email['subject'])) {
-			return FALSE;
+			// don't want an error flashmessage
+			return TRUE;
 		}
 
 		$message = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Mail\MailMessage');
