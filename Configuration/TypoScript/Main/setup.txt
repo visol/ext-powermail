@@ -282,8 +282,8 @@ plugin.tx_powermail {
 				# Show only values if they are filled (for all views and for mails)
 				showOnlyFilledValues = {$plugin.tx_powermail.settings.misc.showOnlyFilledValues}
 
-				# HTML Output allowed
-				htmlField = {$plugin.tx_powermail.settings.misc.htmlField}
+				# HTML Output without removeXSS
+				disableRemoveXss = {$plugin.tx_powermail.settings.misc.disableRemoveXss}
 
 				# Submit Powermail Forms with AJAX (browser will not reload complete page)
 				ajaxSubmit = {$plugin.tx_powermail.settings.misc.ajaxSubmit}

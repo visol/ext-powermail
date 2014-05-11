@@ -173,8 +173,8 @@ plugin.tx_powermail {
 			# cat=powermail_additional//0800; type=boolean; label= Show only filled values: If the user submits a form, even not filled values are viewable. If you only want to show labels with filled values, use this setting
 			showOnlyFilledValues = 1
 
-			# cat=powermail_additional//0805; type=boolean; label= Misc Enable HTML Field: Per default HTML-Fields are disabled in powermail for security reasons. If you aware of possible XSS from your editors, you can enable this field type (e.g. 1)
-			htmlField = 0
+			# cat=powermail_additional//0805; type=boolean; label= HTML without RemoveXSS: Per default HTML-Output is parsed through a RemoveXSS-Function to avoid Cross-Site-Scripting for security reasons. If you are aware of possible XSS-Problems, caused by editors, you can disable removeXSS and your original HTML is shown in the Frontend.
+			disableRemoveXss = 0
 
 			# cat=powermail_additional//0808; type=boolean; label= AJAX Submit Form: Submit Powermail Forms with AJAX (browser will not reload complete page)
 			ajaxSubmit = 0
