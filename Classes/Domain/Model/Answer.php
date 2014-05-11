@@ -83,7 +83,7 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		}
 
 		// if type date
-		if ($this->getValueType() === 2 && is_numeric($value)) {
+		if ($this->getValueType() === 2 && is_numeric($value) && $this->getField() !== NULL) {
 			$value = date(
 				LocalizationUtility::translate(
 					'datepicker_format_' . $this->getField()->getDatepickerSettings(),

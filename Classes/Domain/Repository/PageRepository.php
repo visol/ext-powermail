@@ -43,7 +43,6 @@ class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function getPageNameFromUid($uid) {
 		$query = $this->createQuery();
 
-		// create sql statement
 		$sql = 'select title';
 		$sql .= ' from pages';
 		$sql .= ' where uid = ' . intval($uid);
@@ -52,5 +51,26 @@ class PageRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$result = $query->statement($sql)->execute(TRUE);
 
 		return $result[0]['title'];
+	}
+
+	/**
+	 * Get all pages with tt_content with a Powermail Plugin
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Form $form
+	 * @return array
+	 */
+	public function getPagesWithContentRelatedToForm($form) {
+		$query = $this->createQuery();
+
+		$searchString = '%<field index=\"settings.flexform.main.form\">';
+		$searchString .= '\n                    <value index=\"vDEF\">' . $form->getUid() . '</value>%';
+		$sql = 'select distinct pages.title, pages.uid';
+		$sql .= ' from pages left join tt_content on tt_content.pid = pages.uid';
+		$sql .= ' where tt_content.list_type = "powermail_pi1"';
+		$sql .= ' and tt_content.deleted = 0 and pages.deleted = 0';
+		$sql .= ' and tt_content.pi_flexform like "' . $searchString . '"';
+
+		$result = $query->statement($sql)->execute(TRUE);
+		return $result;
 	}
 }

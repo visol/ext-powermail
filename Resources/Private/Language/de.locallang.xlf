@@ -448,6 +448,34 @@
 				<source>Form Overview</source>
 				<target state="translated">Formular Übersicht</target>
 			</trans-unit>
+			<trans-unit id="BackendOverviewTable">
+				<source>Forms</source>
+				<target state="translated">Formulare</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol1">
+				<source>Form Title</source>
+				<target state="translated">Formulartitel</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol2">
+				<source>Stored on Page</source>
+				<target state="translated">Gespeichert auf Seite</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol3">
+				<source>Used on Page</source>
+				<target state="translated">Verwendet auf Seite</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol4">
+				<source>Powermail Pages</source>
+				<target state="translated">Powermail Seiten</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol5">
+				<source>Powermail Fields</source>
+				<target state="translated">Powermail Felder</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewNoForms">
+				<source>No Forms found</source>
+				<target state="translated">Keine Formulare zum Anzeigen vorhanden</target>
+			</trans-unit>
 			<trans-unit id="BackendEmailTitle">
 				<source>Test Email Sending</source>
 				<target state="translated">E-Mail Versand testen</target>

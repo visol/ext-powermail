@@ -336,6 +336,27 @@
 			<trans-unit id="BackendOverviewTitle">
 				<source>Form Overview</source>
 			</trans-unit>
+			<trans-unit id="BackendOverviewTable">
+				<source>Forms</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol1">
+				<source>Form Title</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol2">
+				<source>Stored on Page</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol3">
+				<source>Used on Page</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol4">
+				<source>Powermail Pages</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewCol5">
+				<source>Powermail Fields</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewNoForms">
+				<source>No Forms found</source>
+			</trans-unit>
 			<trans-unit id="BackendEmailTitle">
 				<source>Test Email Sending</source>
 			</trans-unit>
