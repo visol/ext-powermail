@@ -58,6 +58,7 @@ class FormSelectorUserFunc {
 		if (!empty($typoScriptConfiguration['tx_powermail.']['flexForm.']['formSelection'])) {
 			$startPid = $typoScriptConfiguration['tx_powermail.']['flexForm.']['formSelection'];
 		}
+		$params['items'] = array();
 		foreach ($this->getAllForms($startPid) as $form) {
 			$params['items'][] = array(
 				$form['title'],
