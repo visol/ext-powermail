@@ -235,18 +235,33 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		foreach ($fields as $key => $field) {
 			$subValues = GeneralUtility::xml2array($field['flexform']);
-			$fields[$key]['size'] = $subValues['data']['sDEF']['lDEF']['size']['vDEF'];
-			$fields[$key]['maxlength'] = $subValues['data']['sDEF']['lDEF']['maxlength']['vDEF'];
-			$fields[$key]['readonly'] = $subValues['data']['sDEF']['lDEF']['readonly']['vDEF'];
-			$fields[$key]['mandatory'] = $subValues['data']['sDEF']['lDEF']['mandatory']['vDEF'];
-			$fields[$key]['value'] = $subValues['data']['sDEF']['lDEF']['value']['vDEF'];
-			$fields[$key]['placeholder'] = $subValues['data']['sDEF']['lDEF']['placeholder']['vDEF'];
-			$fields[$key]['validate'] = $subValues['data']['sDEF']['lDEF']['validate']['vDEF'];
-			$fields[$key]['inputtype'] = $subValues['data']['sDEF']['lDEF']['inputtype']['vDEF'];
-			$fields[$key]['options'] = $subValues['data']['sDEF']['lDEF']['options']['vDEF'];
+			$fields[$key]['size'] = $this->getFlexFormValue($subValues, 'size');
+			$fields[$key]['maxlength'] = $this->getFlexFormValue($subValues, 'maxlength');
+			$fields[$key]['readonly'] = $this->getFlexFormValue($subValues, 'readonly');
+			$fields[$key]['mandatory'] = $this->getFlexFormValue($subValues, 'mandatory');
+			$fields[$key]['value'] = $this->getFlexFormValue($subValues, 'value');
+			$fields[$key]['placeholder'] = $this->getFlexFormValue($subValues, 'placeholder');
+			$fields[$key]['validate'] = $this->getFlexFormValue($subValues, 'validate');
+			$fields[$key]['inputtype'] = $this->getFlexFormValue($subValues, 'inputtype');
+			$fields[$key]['options'] = $this->getFlexFormValue($subValues, 'options');
+			$fields[$key]['path'] = $this->getFlexFormValue($subValues, 'typoscriptobject');
 			unset($fields[$key]['flexform']);
 		}
 
 		return $fields;
+	}
+
+	/**
+	 * @param $xmlArray
+	 * @param $key
+	 * @return string
+	 */
+	protected function getFlexFormValue($xmlArray, $key) {
+		if (isset($xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'])) {
+			if (!empty($xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'])) {
+				return $xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'];
+			}
+		}
+		return '';
 	}
 }

@@ -2,6 +2,7 @@
 namespace In2code\Powermail\Controller;
 
 use \In2code\Powermail\Utility\Div,
+	\In2code\Powermail\Utility\FormConverter,
 	\TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***************************************************************
@@ -140,11 +141,11 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		$oldFormsWithFieldsetsAndFields = array();
 		foreach ($oldForms as $form) {
 			$oldFormsWithFieldsetsAndFields[$formCounter] = $form;
-			$oldFormsWithFieldsetsAndFields[$formCounter]['fieldsests'] =
+			$oldFormsWithFieldsetsAndFields[$formCounter]['fieldsets'] =
 				$this->formRepository->findOldFieldsetsAndFieldsToTtContentRecord($form['uid']);
 			$formCounter++;
 		}
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($oldFormsWithFieldsetsAndFields, 'in2code: ' . __CLASS__ . ':' . __LINE__);
+		FormConverter::createNewFromOldForms($oldFormsWithFieldsetsAndFields, $converter);
 	}
 
 	/**
