@@ -27,11 +27,11 @@ class ShowFormNoteEditForm {
 		$formUid = $this->getRelatedForm($pa);
 
 		if ($formUid) {
+			$editFormLink = 'alt_doc.php?edit[tx_powermail_domain_model_forms][' . $formUid . ']=edit';
+			$editFormLink .= '&returnUrl=' . rawurlencode('alt_doc.php?edit[tt_content][' . $pa['row']['uid'] . ']=edit');
 
-			$editFormLink = 'alt_doc.php?returnUrl=alt_doc.php%3Fedit%5Btt_content%5D%5B67%2C%5D%3Dedit';
-			$editFormLink .= '&amp;edit[tx_powermail_domain_model_forms][' . $formUid . ']=edit';
 			$content .= '
-				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist" style="max-width: 600px;">
+				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
 					<tbody>
 						<tr class="t3-row-header">
 							<td nowrap="nowrap">
@@ -85,7 +85,7 @@ class ShowFormNoteEditForm {
 									' . count($this->getFieldsFromForm($formUid)) . '
 								</span>
 							</td>
-							<td nowrap="nowrap" class="col-title">
+							<td nowrap="nowrap" class="col-icon">
 								<a title="Edit" onclick="window.location.href = \'' . $editFormLink . '\'; return false;" href="#">
 									<span class="t3-icon t3-icon-actions t3-icon-actions-document t3-icon-document-open"
 										title="Edit Form">

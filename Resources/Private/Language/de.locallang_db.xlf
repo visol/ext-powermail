@@ -529,7 +529,7 @@
 			</trans-unit>
 			<trans-unit id="flexform.main.formnote.pages">
 				<source>Pages</source>
-				<target state="translated">Seigen</target>
+				<target state="translated">Seiten</target>
 			</trans-unit>
 			<trans-unit id="flexform.main.formnote.fields">
 				<source>Fields</source>
