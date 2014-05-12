@@ -387,6 +387,21 @@
 			<trans-unit id="flexform.main.form">
 				<source>Choose a Powermail Form</source>
 			</trans-unit>
+			<trans-unit id="flexform.main.formnote.noform">
+				<source>Please select a form</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.formname">
+				<source>Form Name</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.storedinpage">
+				<source>Stored in Page</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.pages">
+				<source>Pages</source>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.fields">
+				<source>Fields</source>
+			</trans-unit>
 			<trans-unit id="flexform.main.pid">
 				<source>Where to save Mails (empty = same page)</source>
 			</trans-unit>

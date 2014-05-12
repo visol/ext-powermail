@@ -529,10 +529,12 @@ class Div {
 				if (is_array($answer->getValue())) {
 					$value = implode(', ', $value);
 				}
-				if (!isset($arr[$answer->getField()->getUid()][$value])) {
-					$arr[$answer->getField()->getUid()][$value] = 1;
-				} else {
-					$arr[$answer->getField()->getUid()][$value]++;
+				if (method_exists($answer->getField(), 'getUid')) {
+					if (!isset($arr[$answer->getField()->getUid()][$value])) {
+						$arr[$answer->getField()->getUid()][$value] = 1;
+					} else {
+						$arr[$answer->getField()->getUid()][$value]++;
+					}
 				}
 			}
 		}

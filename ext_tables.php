@@ -67,29 +67,26 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
  * Include UserFuncs
  */
 if (TYPO3_MODE == 'BE') {
+	$extPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY);
+
 	// form selection
-	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/FormSelectorUserFunc.php'
-	);
+	require_once($extPath . 'Classes/Utility/Tca/FormSelectorUserFunc.php');
 
 	// show powermail fields in Pi2 (powermail_frontend)
-	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/FieldSelectorUserFunc.php'
-	);
+	require_once($extPath . 'Classes/Utility/Tca/FieldSelectorUserFunc.php');
 
 	// marker field in Pi1
-	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/Marker.php'
-	);
+	require_once($extPath . 'Classes/Utility/Tca/Marker.php');
 
 	// add options to TCA select fields with itemsProcFunc
-	require_once(
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Utility/Tca/AddOptionsToSelection.php'
-	);
+	require_once($extPath . 'Classes/Utility/Tca/AddOptionsToSelection.php');
+
+	// show form note in FlexForm
+	require_once($extPath . 'Classes/Utility/Tca/ShowFormNoteEditForm.php');
 
 	// WizIcon for Pi1
 	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['In2code\Powermail\Utility\Hook\WizIcon'] =
-		t3lib_extMgm::extPath($_EXTKEY) . 'Classes/Utility/Hook/WizIcon.php';
+		$extPath . 'Classes/Utility/Hook/WizIcon.php';
 }
 
 /**

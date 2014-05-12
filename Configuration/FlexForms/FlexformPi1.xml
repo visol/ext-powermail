@@ -31,7 +31,7 @@
 								<requestUpdate>1</requestUpdate>
 								<wizards>
 									<_PADDING>16</_PADDING>
-									<_VERTICAL></_VERTICAL>
+									<_VERTICAL>0</_VERTICAL>
 									<add>
 										<type>script</type>
 										<title>Add Form</title>
@@ -64,6 +64,14 @@
 							</config>
 						</TCEforms>
 					</settings.flexform.main.form>
+					<settings.flexform.main.formnote>
+						<TCEforms>
+							<config>
+								<type>user</type>
+								<userFunc>\In2code\Powermail\Utility\Tca\ShowFormNoteEditForm->showNote</userFunc>
+							</config>
+						</TCEforms>
+					</settings.flexform.main.formnote>
 					<settings.flexform.main.confirmation>
 						<TCEforms>
 							<label>LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:flexform.main.confirmation</label>

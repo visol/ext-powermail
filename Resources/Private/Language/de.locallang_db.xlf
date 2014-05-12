@@ -515,6 +515,26 @@
 				<source>Choose a Powermail Form</source>
 				<target state="translated">Powermail Formular wählen</target>
 			</trans-unit>
+			<trans-unit id="flexform.main.formnote.noform">
+				<source>Please select a form</source>
+				<target state="translated">Bitte Formular wählen</target>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.formname">
+				<source>Form Name</source>
+				<target state="translated">Formular Name</target>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.storedinpage">
+				<source>Stored in Page</source>
+				<target state="translated">Gespeichert auf Seite</target>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.pages">
+				<source>Pages</source>
+				<target state="translated">Seigen</target>
+			</trans-unit>
+			<trans-unit id="flexform.main.formnote.fields">
+				<source>Fields</source>
+				<target state="translated">Felder</target>
+			</trans-unit>
 			<trans-unit id="flexform.main.pid">
 				<source>Where to save Mails (empty = same page)</source>
 				<target state="translated">Wo sollen die Mails gespeichert werden? (leer = gleiche Seite)</target>
