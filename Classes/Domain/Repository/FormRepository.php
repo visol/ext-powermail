@@ -120,34 +120,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	public function findAllOldForms() {
 		$query = $this->createQuery();
 
-		$sql = 'select
-			c.pid,
-			c.uid,
-			c.header,
-			c.sys_language_uid,
-			c.l18n_parent,
-			c.sorting,
-			c.hidden,
-			c.tx_powermail_title,
-			c.tx_powermail_recipient,
-			c.tx_powermail_subject_r,
-			c.tx_powermail_subject_s,
-			c.tx_powermail_sender,
-			c.tx_powermail_sendername,
-			c.tx_powermail_confirm,
-			c.tx_powermail_pages,
-			c.tx_powermail_multiple,
-			c.tx_powermail_recip_table,
-			c.tx_powermail_recip_id,
-			c.tx_powermail_recip_field,
-			c.tx_powermail_thanks,
-			c.tx_powermail_mailsender,
-			c.tx_powermail_mailreceiver,
-			c.tx_powermail_redirect,
-			c.tx_powermail_fieldsets,
-			c.tx_powermail_users,
-			c.tx_powermail_preview
-		';
+		$sql = 'select c.*';
 		$sql .= ' from tx_powermail_fields f
 			left join tx_powermail_fieldsets fs ON f.fieldset = fs.uid
 			left join tt_content c ON c.uid = fs.tt_content
@@ -192,7 +165,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$counter = 0;
 		foreach ($fieldsets as $fieldset) {
 			$result[$counter] = $fieldset;
-			$result[$counter]['fields'] = $this->findOldFieldsToFieldset($fieldset['uid']);
+			$result[$counter]['_fields'] = $this->findOldFieldsToFieldset($fieldset['uid']);
 			$counter++;
 		}
 

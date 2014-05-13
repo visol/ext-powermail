@@ -141,11 +141,12 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		$oldFormsWithFieldsetsAndFields = array();
 		foreach ($oldForms as $form) {
 			$oldFormsWithFieldsetsAndFields[$formCounter] = $form;
-			$oldFormsWithFieldsetsAndFields[$formCounter]['fieldsets'] =
+			$oldFormsWithFieldsetsAndFields[$formCounter]['_fieldsets'] =
 				$this->formRepository->findOldFieldsetsAndFieldsToTtContentRecord($form['uid']);
 			$formCounter++;
 		}
-		$result = FormConverter::createNewFromOldForms($oldFormsWithFieldsetsAndFields, $converter);
+		$formConverter = $this->objectManager->get('\In2code\Powermail\Utility\FormConverter');
+		$result = $formConverter->createNewFromOldForms($oldFormsWithFieldsetsAndFields, $converter);
 		$this->view->assign('result', $result);
 	}
 

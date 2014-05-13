@@ -37,6 +37,18 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class FormConverter {
 
 	/**
+	 * Dryrun for testing
+	 *
+	 * @var bool
+	 */
+	protected $dryrun = FALSE;
+
+	/**
+	 * @var array
+	 */
+	protected $result = array();
+
+	/**
 	 * Create new forms from old ones
 	 *
 	 * @param array $oldFormsWithFieldsetsAndFields
@@ -44,11 +56,10 @@ class FormConverter {
 	 * @param bool $dryrun
 	 * @return array result
 	 */
-	public static function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration, $dryrun = TRUE) {
+	public function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration, $dryrun = FALSE) {
+		$this->setDryrun($dryrun);
 		$configuration['save'] = 48;
 		$configuration['hidden'] = '1';
-
-//		$x = self::rewriteVarialbes('das ist ###UID123### toll');
 
 		if (!$dryrun) {
 			GeneralUtility::devLog(
@@ -60,92 +71,223 @@ class FormConverter {
 		}
 
 		// create forms
-		$result = array();
 		$formCounter = 0;
 		foreach ((array) $oldFormsWithFieldsetsAndFields as $form) {
 			// ignore hidden forms
 			if ($form['hidden'] === '1' && $configuration['hidden'] === '1') {
 				continue;
 			}
-
-			$formUid = 0;
-			$formProperties = array(
-				'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
-				'title' => $form['tx_powermail_title'],
-				'pages' => $form['tx_powermail_fieldsets'],
-				'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
-				'hidden' => $form['hidden'],
-				'l10n_parent' => 0, // TODO
-				'sys_language_uid' => 0 // TODO
-			);
-			$result[$formCounter] = $formProperties;
-			if (!$dryrun) {
-				$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_forms', $formProperties);
-				$formUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
-			}
-
-			// create pages
-			$pageCounter = 0;
-			foreach ((array) $form['fieldsets'] as $page) {
-				$pageUid = 0;
-				$pageProperties = array(
-					'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
-					'forms' => $formUid,
-					'title' => $page['title'],
-					'css' => $page['class'],
-					'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
-					'hidden' => $page['hidden'],
-					'sorting' => $page['sorting'],
-					'l10n_parent' => 0, // TODO
-					'sys_language_uid' => 0 // TODO
-				);
-				$result[$formCounter]['fieldsets'][$pageCounter] = $pageProperties;
-				if (!$dryrun) {
-					$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_pages', $pageProperties);
-					$pageUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
-				}
-
-				// create fields
-				$fieldCounter = 0;
-				foreach ((array) $page['fields'] as $field) {
-					if (!self::rewriteFormType($field)) {
-						continue;
-					}
-					$fieldUid = 0;
-					$fieldProperties = array(
-						'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
-						'pages' => $pageUid,
-						'title' => $field['title'],
-						'type' => self::rewriteFormType($field),
-						'css' => self::rewriteStyles($field['class']),
-						'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
-						'hidden' => $field['hidden'],
-						'sorting' => $field['sorting'],
-						'marker' => 'UID' . $field['uid'],
-						'settings' => $field['options'],
-						'path' => $field['path'],
-						'content_element' => $field['path'],
-						'text' => $field['value'],
-						'prefill_value' => $field['value'],
-						'mandatory' => $field['mandatory'],
-						'validation' => self::rewriteValidation($field['validate'], $field['inputtype']),
-						'validation_configuration' => self::rewriteValidationConfiguration($field),
-						'l10n_parent' => 0, // TODO
-						'sys_language_uid' => 0 // TODO
-					);
-					$result[$formCounter]['fieldsets'][$pageCounter]['fields'][$fieldCounter] = $fieldProperties;
-					if (!$dryrun) {
-						$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_fields', $fieldProperties);
-						$fieldUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
-					}
-					$fieldCounter++;
-				}
-				$pageCounter++;
-			}
+			$form['pid'] = 48; // TODO remove at the end
+			$this->createTtContentRecord($form);
+			$this->createFormRecord($form, $configuration, $formCounter);
 			$formCounter++;
 		}
 
-		return $result;
+		// TODO
+		// tt_content flexform
+		// multilang
+		// admin only
+
+		return $this->result;
+	}
+
+	/**
+	 * Create tt_content record
+	 *
+	 * @param $form
+	 * @return int tt_content uid
+	 */
+	protected function createTtContentRecord($form) {
+		$ignoreFields = array(
+			'uid',
+			'tstamp',
+			'cruser_id',
+			'CType',
+			'_fieldsets'
+		);
+		$ttContentProperties = array();
+		foreach ($form as $tableColumn => $tableValue) {
+			if (!in_array($tableColumn, $ignoreFields)) {
+				$ttContentProperties[$tableColumn] = $tableValue;
+			}
+		}
+		$ttContentProperties['pid'] = $form['pid'];
+		$ttContentProperties['list_type'] = 'powermail_pi1';
+		$ttContentProperties['CType'] = 'list';
+		if (!$this->getDryrun()) {
+			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tt_content', $ttContentProperties);
+			return $GLOBALS['TYPO3_DB']->sql_insert_id();
+		}
+		return 0;
+	}
+
+	/**
+	 * Create Form Record
+	 *
+	 * @param array $form
+	 * @param array $configuration
+	 * @param int $formCounter
+	 * @return void
+	 */
+	protected function createFormRecord($form, $configuration, $formCounter) {
+		$formUid = 0;
+		$formProperties = array(
+			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
+			'title' => $form['tx_powermail_title'],
+			'pages' => $form['tx_powermail_fieldsets'],
+			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
+			'hidden' => $form['hidden'],
+			'l10n_parent' => 0, // TODO
+			'sys_language_uid' => 0 // TODO
+		);
+		$this->result[$formCounter] = $formProperties;
+		if (!$this->getDryrun()) {
+			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_forms', $formProperties);
+			$formUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+		}
+
+		// create pages
+		$pageCounter = 0;
+		foreach ((array) $form['_fieldsets'] as $page) {
+			$this->createPageRecord($form, $configuration, $page, $formUid, $formCounter, $pageCounter);
+			$pageCounter++;
+		}
+	}
+
+	/**
+	 * Create Page Record
+	 *
+	 * @param array $form
+	 * @param array $configuration
+	 * @param array $page
+	 * @param int $formUid
+	 * @param int $formCounter
+	 * @param int $pageCounter
+	 * @return void
+	 */
+	protected function createPageRecord($form, $configuration, $page, $formUid, $formCounter, $pageCounter) {
+		$pageUid = 0;
+		$pageProperties = array(
+			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
+			'forms' => $formUid,
+			'title' => $page['title'],
+			'css' => $page['class'],
+			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
+			'hidden' => $page['hidden'],
+			'sorting' => $page['sorting'],
+			'l10n_parent' => 0, // TODO
+			'sys_language_uid' => 0 // TODO
+		);
+		$this->result[$formCounter]['_pages'][$pageCounter] = $pageProperties;
+		if (!$this->getDryrun()) {
+			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_pages', $pageProperties);
+			$pageUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+		}
+
+		// create fields
+		$fieldCounter = 0;
+		foreach ((array) $page['_fields'] as $field) {
+			if (!$this->rewriteFormType($field)) {
+				continue;
+			}
+			$this->createFieldRecord($form, $configuration, $pageUid, $field, $formCounter, $pageCounter, $fieldCounter);
+			$fieldCounter++;
+		}
+	}
+
+	/**
+	 * Create Field Record
+	 *
+	 * @param array $form
+	 * @param array $configuration
+	 * @param int $pageUid
+	 * @param array $field
+	 * @param int $formCounter
+	 * @param int $pageCounter
+	 * @param int $fieldCounter
+	 * @return void
+	 */
+	protected function createFieldRecord($form, $configuration, $pageUid, $field, $formCounter, $pageCounter, $fieldCounter) {
+		$fieldProperties = array(
+			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
+			'pages' => $pageUid,
+			'title' => $field['title'],
+			'type' => $this->rewriteFormType($field),
+			'css' => $this->rewriteStyles($field['class']),
+			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
+			'hidden' => $field['hidden'],
+			'sorting' => $field['sorting'],
+			'marker' => 'UID' . $field['uid'],
+			'settings' => $field['options'],
+			'path' => $field['path'],
+			'content_element' => $field['path'],
+			'text' => $field['value'],
+			'prefill_value' => $field['value'],
+			'feuser_value' => $field['fe_field'],
+			'mandatory' => $field['mandatory'],
+			'validation' => $this->rewriteValidation($field['validate'], $field['inputtype']),
+			'validation_configuration' => $this->rewriteValidationConfiguration($field),
+			'datepicker_settings' => $this->getDatePickerSettings($field),
+			'sender_email' => $this->isSenderEmail($form, $field),
+			'sender_name' => $this->isSenderName($form, $field),
+			'l10n_parent' => 0, // TODO
+			'sys_language_uid' => 0 // TODO
+		);
+		$this->result[$formCounter]['_pages'][$pageCounter]['_fields'][$fieldCounter] = $fieldProperties;
+		if (!$this->getDryrun()) {
+			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_fields', $fieldProperties);
+//			$fieldUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+		}
+	}
+
+	/**
+	 * Contains this field the sendermail?
+	 *
+	 * @param array $form
+	 * @param array $field
+	 * @return string
+	 */
+	protected function isSenderEmail($form, $field) {
+		if ($form['tx_powermail_sender'] === 'uid' . $field['uid']) {
+			return '1';
+		}
+		return '0';
+	}
+
+	/**
+	 * Contains this field the sendername?
+	 *
+	 * @param array $form
+	 * @param array $field
+	 * @return string
+	 */
+	protected function isSenderName($form, $field) {
+		$senderNameFields = GeneralUtility::trimExplode(',', $form['tx_powermail_sendername'], TRUE);
+		foreach ($senderNameFields as $senderNameField) {
+			if ($senderNameField === 'uid' . $field['uid']) {
+				return '1';
+			}
+		}
+		return '0';
+	}
+
+	/**
+	 * get datepicker settings
+	 *
+	 * @param array $field
+	 * @return int
+	 */
+	protected function getDatePickerSettings($field) {
+		if ($field['formtype'] === 'date') {
+			return 'date';
+		}
+		if ($field['formtype'] === 'datetime') {
+			return 'datetime';
+		}
+		if ($field['inputtype'] === 'time') {
+			return 'time';
+		}
+		return '';
 	}
 
 	/**
@@ -154,7 +296,7 @@ class FormConverter {
 	 * @param array $field
 	 * @return bool|string
 	 */
-	public static function rewriteFormType($field) {
+	protected function rewriteFormType($field) {
 		if ($field['inputtype'] === 'time') {
 			return 'date';
 		}
@@ -194,9 +336,9 @@ class FormConverter {
 	 * @param $oldStyle
 	 * @return string
 	 */
-	public static function rewriteStyles($oldStyle) {
+	protected function rewriteStyles($oldStyle) {
 		$styleTypes = array(
-			'style1' => 'layout1',
+//			'style1' => 'layout1',
 			'style2' => 'layout2',
 			'style3' => 'layout3'
 		);
@@ -213,7 +355,7 @@ class FormConverter {
 	 * @param string $inputtype
 	 * @return string
 	 */
-	public static function rewriteValidation($oldString, $inputtype) {
+	protected function rewriteValidation($oldString, $inputtype) {
 		$newStrings = array(
 			'validate-email' => '1',
 			'validate-url' => '2',
@@ -246,7 +388,7 @@ class FormConverter {
 	 * @param array $field
 	 * @return string
 	 */
-	public static function rewriteValidationConfiguration($field) {
+	protected function rewriteValidationConfiguration($field) {
 		if ($field['validate'] === 'validate-pattern') {
 			if (!empty($field['pattern'])) {
 				return $field['pattern'];
@@ -266,8 +408,23 @@ class FormConverter {
 	 * @param string $string
 	 * @return string
 	 */
-	public static function rewriteVarialbes($string) {
+	protected function rewriteVariables($string) {
 		$string = preg_replace('|###(.*)?###|i', '{$1}', $string);
 		return $string;
+	}
+
+	/**
+	 * @param boolean $dryrun
+	 * @return void
+	 */
+	public function setDryrun($dryrun) {
+		$this->dryrun = $dryrun;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getDryrun() {
+		return $this->dryrun;
 	}
 }

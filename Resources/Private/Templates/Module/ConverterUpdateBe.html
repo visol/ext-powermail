@@ -84,7 +84,7 @@
 													</span>
 												</td>
 											</tr>
-											<f:for each="{form.fieldsets}" as="page">
+											<f:for each="{form._pages}" as="page">
 												<tr>
 													<td>{page.title}</td>
 													<td>{page.css}</td>
@@ -104,7 +104,7 @@
 																		</span>
 																	</td>
 																</tr>
-																<f:for each="{page.fields}" as="field">
+																<f:for each="{page._fields}" as="field">
 																	<tr class="db_list_normal">
 																		<td class="openHiddenTable">{field.title}</td>
 																		<td>
