@@ -65,15 +65,10 @@ class FormConverter {
 	 *
 	 * @param array $oldFormsWithFieldsetsAndFields
 	 * @param array $configuration
-	 * @param bool $dryrun
 	 * @return array result
 	 */
-	public function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration, $dryrun = FALSE) {
-		$this->setDryrun($dryrun);
-		$configuration['save'] = 48; // TODO enforce PID
-		$configuration['hidden'] = '1'; // TODO enforce ignoreHidden
-
-		if (!$dryrun) {
+	public function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration) {
+		if (!$this->getDryrun()) {
 			GeneralUtility::devLog(
 				'Old Forms to convert',
 				'powermail',
@@ -89,7 +84,6 @@ class FormConverter {
 			if ($form['hidden'] === '1' && $configuration['hidden'] === '1') {
 				continue;
 			}
-			$form['pid'] = 48; // TODO remove at the end
 			$formUid = $this->createFormRecord($form, $configuration, $formCounter);
 			$this->createTtContentRecord($form, $formUid);
 			$formCounter++;
@@ -117,6 +111,10 @@ class FormConverter {
 			return;
 		}
 		foreach ($oldFormsWithFieldsetsAndFields as $ttContent) {
+			// ignore hidden forms
+			if ($ttContent['hidden'] === '1' && $configuration['hidden'] === '1') {
+				continue;
+			}
 			$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tt_content', 'uid = ' . $ttContent['uid'], array('deleted' => 1));
 			foreach ($ttContent['_fieldsets'] as $fieldset) {
 				$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_powermail_fieldsets', 'uid = ' . $fieldset['uid'], array('deleted' => 1));
