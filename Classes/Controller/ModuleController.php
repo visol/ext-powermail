@@ -77,6 +77,7 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		}
 	}
 
+	// TODO
 	public function toolsBeAction() {
 
 	}
@@ -120,6 +121,18 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	}
 
 	/**
+	 * Init
+	 *
+	 * @return void
+	 */
+	public function initializeConverterBeAction() {
+		if (!Div::isBackendAdmin()) {
+			$this->controllerContext = $this->buildControllerContext();
+			$this->forward('toolsBe');
+		}
+	}
+
+	/**
 	 * Convert all old forms preflight
 	 *
 	 * @return void
@@ -127,6 +140,18 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	public function converterBeAction() {
 		$oldForms = $this->formRepository->findAllOldForms();
 		$this->view->assign('oldForms', $oldForms);
+	}
+
+	/**
+	 * Init
+	 *
+	 * @return void
+	 */
+	public function initializeConverterUpdateBeAction() {
+		if (!Div::isBackendAdmin()) {
+			$this->controllerContext = $this->buildControllerContext();
+			$this->forward('toolsBe');
+		}
 	}
 
 	/**

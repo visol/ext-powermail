@@ -401,8 +401,136 @@
 				<target state="translated">Alte Datensätze (aus Tabellen tx_powermail_fieldsets, tx_powermail_fields und tt_content) werden mit dem Flag deleted=1 versehen. Neue Datensätze werden angelegt (Tabellen tx_powermail_domain_model_forms, tx_powermail_domain_model_pages, tx_powermail_domain_model_fields, tt_content)</target>
 			</trans-unit>
 			<trans-unit id="BackendSelectionConverterTitle4">
-				<source>Attention: Please backup your database before converting. This step is irreversibel.</source>
-				<target state="translated">Achtung: Wir empfehlen dringend ein Backup vor der Konvertierung durchzuführen. Eine Konvertierung kann in der Regel nicht rückgängig gemacht werden.</target>
+				<source>Attention: Please backup your database before converting. This step is irreversibel, even if it was not successful.</source>
+				<target state="translated">Achtung: Wir empfehlen dringend, ein Backup vor der Konvertierung zu erstellen. Eine fehlgeschlagene Konvertierung kann in der Regel nicht rückgängig gemacht werden.</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormSave">
+				<source>Save new forms on page with PID</source>
+				<target state="translated">Neue Formulare auf Seite mit PID speichern</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDefaultReceiverName">
+				<source>Default Receiver Name</source>
+				<target state="translated">Standard Name des Empfängers</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDefaultSenderNameConfirmationMail">
+				<source>Default Sender Name for Confirmation Mail</source>
+				<target state="translated">Standard Sender-Name für Bestätigungs-E-Mail</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDefaultSenderMailConfirmationMail">
+				<source>Default Sender Email for Confirmation Mail</source>
+				<target state="translated">Standard Sender-E-Mail für Bestätigungs-E-Mail</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormHidden">
+				<source>Ignore Old Hidden Forms</source>
+				<target state="translated">Versteckte Formulare nicht beachten</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDryrun">
+				<source>Do only a Test Run (no records will be generated or deleted)</source>
+				<target state="translated">Testlauf (es werden keine Datensätze gelöscht oder erstellt)</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterOldForms">
+				<source>Old Forms</source>
+				<target state="translated">Alte Formulare</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterPage">
+				<source>Page</source>
+				<target state="translated">Seite</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterTtContentUid">
+				<source>tt_content UID</source>
+				<target state="translated">tt_content UID</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterLanguage">
+				<source>Language</source>
+				<target state="translated">Sprache</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterTitle">
+				<source>Title</source>
+				<target state="translated">Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterRecipient">
+				<source>Recipient</source>
+				<target state="translated">Empfänger</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterSubject">
+				<source>Subject</source>
+				<target state="translated">Betreff</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterFieldsetAmount">
+				<source>Number of Fieldsets</source>
+				<target state="translated">Anzahl Fieldsets</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterConfirmationPage">
+				<source>Confirmation Page</source>
+				<target state="translated">Bestätigungsseite</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterMultiple">
+				<source>Multiple</source>
+				<target state="translated">Mehrschrittformular</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterNoOldForms">
+				<source>No old Forms found</source>
+				<target state="translated">Keine alten Formulare gefunden</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateTitle2">
+				<source>Overview: Converted Forms</source>
+				<target state="translated">Übersicht: Konvertierte Formulare</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateMessageOk">
+				<source>Forms successfully generated!</source>
+				<target state="translated">Formulare erfolgreich erstellt!</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateMessageNote">
+				<source>Forms could be migrated</source>
+				<target state="translated">Formulare können erzeugt werden</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormTitle">
+				<source>Title</source>
+				<target state="translated">Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormPid">
+				<source>PID</source>
+				<target state="translated">PID</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormHidden">
+				<source>Hidden</source>
+				<target state="translated">Versteckt</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormPageAmount">
+				<source>Page Amount</source>
+				<target state="translated">Anzahl Seiten</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormPages">
+				<source>Pages</source>
+				<target state="translated">Seiten</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageTitle">
+				<source>Title</source>
+				<target state="translated">Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageLayout">
+				<source>Layout</source>
+				<target state="translated">Layout</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageFieldAmount">
+				<source>Field Amount</source>
+				<target state="translated">Anzahl Felder</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageFields">
+				<source>Fields</source>
+				<target state="translated">Felder</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFieldTitle">
+				<source>Title</source>
+				<target state="translated">Bezeichnung</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFieldProperties">
+				<source>Properties</source>
+				<target state="translated">Eigenschaften</target>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateNoFormsConverted">
+				<source>No Forms converted</source>
+				<target state="translated">Keine Formulare konvertiert</target>
 			</trans-unit>
 			<trans-unit id="BackendCheckTitle">
 				<source>Powermail Check</source>

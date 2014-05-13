@@ -1,3 +1,4 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
 <f:be.container
 		includeCssFiles="{0: '{f:uri.resource(path:\'Css/Backend.css\')}'}"
 		includeJsFiles="{0: '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js',
@@ -33,7 +34,7 @@
 						<f:be.menus.actionMenuItem label="{f:translate(key: 'BackendSelectionTools')}" controller="Module" action="toolsBe" />
 						<f:be.menus.actionMenuItem label="- {f:translate(key: 'BackendSelectionOverview')}" controller="Module" action="overviewBe" />
 						<f:be.menus.actionMenuItem label="- {f:translate(key: 'BackendSelectionCheck')}" controller="Module" action="checkBe" />
-						<f:be.menus.actionMenuItem label="- {f:translate(key: 'BackendSelectionConverterTitle')}" controller="Module" action="converterBe" />
+						<f:if condition="{vh:BeCheck.IsAdmin()}"><f:be.menus.actionMenuItem label="- {f:translate(key: 'BackendSelectionConverterTitle')}" controller="Module" action="converterBe" /></f:if>
 					</f:be.menus.actionMenu>
 				</div>
 				<div class="docheader-row2-right">

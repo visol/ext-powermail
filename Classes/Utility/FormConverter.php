@@ -97,7 +97,6 @@ class FormConverter {
 
 		// TODO
 		// multilang
-		// admin only
 
 		return $this->result;
 	}

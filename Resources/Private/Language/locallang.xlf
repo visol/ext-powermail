@@ -303,6 +303,102 @@
 			<trans-unit id="BackendSelectionConverterTitle4">
 				<source>Attention: Please backup your database before converting. This step is irreversibel.</source>
 			</trans-unit>
+			<trans-unit id="BackendConverterFormSave">
+				<source>Save new forms on page with PID</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDefaultReceiverName">
+				<source>Default Receiver Name</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDefaultSenderNameConfirmationMail">
+				<source>Default Sender Name for Confirmation Mail</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDefaultSenderMailConfirmationMail">
+				<source>Default Sender Email for Confirmation Mail</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormHidden">
+				<source>Ignore Old Hidden Forms</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterFormDryrun">
+				<source>Do only a Test Run (no records will be generated or deleted)</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterOldForms">
+				<source>Old Forms</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterPage">
+				<source>Page</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterTtContentUid">
+				<source>tt_content UID</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterLanguage">
+				<source>Language</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterTitle">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterRecipient">
+				<source>Recipient</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterSubject">
+				<source>Subject</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterFieldsetAmount">
+				<source>Number of Fieldsets</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterConfirmationPage">
+				<source>Confirmation Page</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterMultiple">
+				<source>Multiple</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterNoOldForms">
+				<source>No old Forms found</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateTitle2">
+				<source>Overview: Converted Forms</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateMessageOk">
+				<source>Forms successfully generated!</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateMessageNote">
+				<source>Forms could be migrated</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormTitle">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormPid">
+				<source>PID</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormHidden">
+				<source>Hidden</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormPageAmount">
+				<source>Page Amount</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFormPages">
+				<source>Pages</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageTitle">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageLayout">
+				<source>Layout</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageFieldAmount">
+				<source>Field Amount</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdatePageFields">
+				<source>Fields</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFieldTitle">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateFieldProperties">
+				<source>Properties</source>
+			</trans-unit>
+			<trans-unit id="BackendConverterUpdateNoFormsConverted">
+				<source>No Forms converted</source>
+			</trans-unit>
 			<trans-unit id="BackendCheckTitle">
 				<source>Powermail Check</source>
 			</trans-unit>

@@ -10,58 +10,58 @@
 <f:section name="content">
 
 	<h1><f:translate key="BackendSelectionConverterTitle" /></h1>
-	<h2><f:translate key="xxx">Converted Forms</f:translate></h2>
+	<h2><f:translate key="BackendConverterUpdateTitle2">Overview: Converted Forms</f:translate></h2>
 
 	<f:flashMessages class="powermail_message" />
 
 	<div class="powermail_converter">
-		<f:if condition="{converter.dryrun}">
-			<f:else>
-				<ul class="powermail_message powermail_message_ok">
-					<li>
-						<f:count>{result}</f:count>
-						<f:translate key="xxx">Forms successfully generated!</f:translate>
-					</li>
-				</ul>
-			</f:else>
-			<f:then>
-				<ul class="powermail_message powermail_message_note">
-					<li>
-						<f:count>{result}</f:count>
-						<f:translate key="xxx">Forms could be migrated</f:translate>
-					</li>
-				</ul>
-			</f:then>
-		</f:if>
 
 		<f:if condition="{result}">
 			<f:then>
+				<f:if condition="{converter.dryrun}">
+					<f:else>
+						<ul class="powermail_message powermail_message_ok">
+							<li>
+								<f:count>{result}</f:count>
+								<f:translate key="BackendConverterUpdateMessageOk">Forms successfully generated!</f:translate>
+							</li>
+						</ul>
+					</f:else>
+					<f:then>
+						<ul class="powermail_message powermail_message_note">
+							<li>
+								<f:count>{result}</f:count>
+								<f:translate key="BackendConverterUpdateMessageNote">Forms could be migrated</f:translate>
+							</li>
+						</ul>
+					</f:then>
+				</f:if>
 				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
 					<tbody>
 						<tr class="t3-row-header">
 							<td nowrap="nowrap">
 								<span class="c-table">
-									<f:translate key="xxx">Title</f:translate>
+									<f:translate key="BackendConverterUpdateFormTitle">Title</f:translate>
 								</span>
 							</td>
 							<td nowrap="nowrap">
 								<span class="c-table">
-									<f:translate key="xxx">PID</f:translate>
+									<f:translate key="BackendConverterUpdateFormPid">PID</f:translate>
 								</span>
 							</td>
 							<td nowrap="nowrap">
 								<span class="c-table">
-									<f:translate key="xxx">Hidden</f:translate>
+									<f:translate key="BackendConverterUpdateFormHidden">Hidden</f:translate>
 								</span>
 							</td>
 							<td nowrap="nowrap">
 								<span class="c-table">
-									<f:translate key="xxx">Page Amount</f:translate>
+									<f:translate key="BackendConverterUpdateFormPageAmount">Page Amount</f:translate>
 								</span>
 							</td>
 							<td nowrap="nowrap">
 								<span class="c-table">
-									<f:translate key="xxx">Pages</f:translate>
+									<f:translate key="BackendConverterUpdateFormPages">Pages</f:translate>
 								</span>
 							</td>
 						</tr>
@@ -85,22 +85,22 @@
 											<tr class="t3-row-header">
 												<td>
 													<span class="c-table">
-														<f:translate key="xxx">Title</f:translate>
+														<f:translate key="BackendConverterUpdatePageTitle">Title</f:translate>
 													</span>
 												</td>
 												<td>
 													<span class="c-table">
-														<f:translate key="xxx">Layout</f:translate>
+														<f:translate key="BackendConverterUpdatePageLayout">Layout</f:translate>
 													</span>
 												</td>
 												<td>
 													<span class="c-table">
-														<f:translate key="xxx">Field Amount</f:translate>
+														<f:translate key="BackendConverterUpdatePageFieldAmount">Field Amount</f:translate>
 													</span>
 												</td>
 												<td>
 													<span class="c-table">
-														<f:translate key="xxx">Fields</f:translate>
+														<f:translate key="BackendConverterUpdatePageFields">Fields</f:translate>
 													</span>
 												</td>
 											</tr>
@@ -115,12 +115,12 @@
 																<tr class="t3-row-header">
 																	<td>
 																		<span class="c-table">
-																			<f:translate key="xxx">Title</f:translate>
+																			<f:translate key="BackendConverterUpdateFieldTitle">Title</f:translate>
 																		</span>
 																	</td>
 																	<td>
 																		<span class="c-table">
-																			<f:translate key="xxx">Properties</f:translate>
+																			<f:translate key="BackendConverterUpdateFieldProperties">Properties</f:translate>
 																		</span>
 																	</td>
 																</tr>
@@ -154,7 +154,7 @@
 				</table>
 			</f:then>
 			<f:else>
-				<f:translate key="xxx">No Forms converted</f:translate>
+				<f:translate key="BackendConverterUpdateNoFormsConverted">No Forms converted</f:translate>
 			</f:else>
 		</f:if>
 	</div>

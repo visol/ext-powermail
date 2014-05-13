@@ -20,27 +20,27 @@
 			<f:then>
 				<f:form name="converter" class="converterForm" action="converterUpdateBe">
 					<div class="converterFormField">
-						<label for="save"><f:translate key="xxx">Save new forms on page with PID</f:translate>:</label>
+						<label for="save"><f:translate key="BackendConverterFormSave">Save new forms on page with PID</f:translate>:</label>
 						<f:form.textfield id="save" property="save" value="[samePage]" />
 					</div>
 					<div class="converterFormField">
-						<label for="defaultReceiverName"><f:translate key="xxx">Default Receiver Name</f:translate>:</label>
+						<label for="defaultReceiverName"><f:translate key="BackendConverterFormDefaultReceiverName">Default Receiver Name</f:translate>:</label>
 						<f:form.textfield id="defaultReceiverName" property="defaultReceiverName" value="Powermail" />
 					</div>
 					<div class="converterFormField">
-						<label for="defaultSenderNameConfirmationMail"><f:translate key="xxx">Default Sender Name for Confirmation Mail</f:translate>:</label>
+						<label for="defaultSenderNameConfirmationMail"><f:translate key="BackendConverterFormDefaultSenderNameConfirmationMail">Default Sender Name for Confirmation Mail</f:translate>:</label>
 						<f:form.textfield id="defaultSenderNameConfirmationMail" property="defaultSenderNameConfirmationMail" value="Administrator" />
 					</div>
 					<div class="converterFormField">
-						<label for="defaultSenderEmailConfirmationMail"><f:translate key="xxx">Default Sender Email for Confirmation Mail</f:translate>:</label>
+						<label for="defaultSenderEmailConfirmationMail"><f:translate key="BackendConverterFormDefaultSenderMailConfirmationMail">Default Sender Email for Confirmation Mail</f:translate>:</label>
 						<f:form.textfield id="defaultSenderEmailConfirmationMail" property="defaultSenderEmailConfirmationMail" value="info@domain.org" />
 					</div>
 					<div class="converterFormField">
-						<label for="hidden"><f:translate key="xxx">Ignore Old Hidden Forms</f:translate>:</label>
+						<label for="hidden"><f:translate key="BackendConverterFormHidden">Ignore Old Hidden Forms</f:translate>:</label>
 						<f:form.checkbox id="hidden" property="hidden" checked="checked" value="1" />
 					</div>
 					<div class="converterFormField">
-						<label for="dryrun"><f:translate key="xxx">Do only a Test Run</f:translate>:</label>
+						<label for="dryrun"><f:translate key="BackendConverterFormDryrun">Do only a Test Run</f:translate>:</label>
 						<f:form.checkbox id="dryrun" property="dryrun" checked="checked" value="1" />
 					</div>
 					<div class="converterFormField">
@@ -69,7 +69,7 @@
 						<td nowrap="nowrap" class="col-icon">&nbsp;</td>
 						<td nowrap="nowrap" colspan="8">
 									<span class="c-table">
-										<f:translate key="xxx">Old Forms</f:translate>
+										<f:translate key="BackendConverterOldForms">Old Forms</f:translate>
 									</span>
 							(<f:count subject="{oldForms}" />)
 						</td>
@@ -80,31 +80,31 @@
 							&nbsp;
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Page</f:translate>
+							<f:translate key="BackendConverterPage">Page</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">tt_content UID</f:translate>
+							<f:translate key="BackendConverterTtContentUid">tt_content UID</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Language</f:translate>
+							<f:translate key="BackendConverterLanguage">Language</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Title</f:translate>
+							<f:translate key="BackendConverterTitle">Title</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Recipient</f:translate>
+							<f:translate key="BackendConverterRecipient">Recipient</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Subject</f:translate>
+							<f:translate key="BackendConverterSubject">Subject</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Number of Fieldsets</f:translate>
+							<f:translate key="BackendConverterFieldsetAmount">Number of Fieldsets</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Confirmation Page</f:translate>
+							<f:translate key="BackendConverterConfirmationPage">Confirmation Page</f:translate>
 						</td>
 						<td nowrap="nowrap" class="col-title">
-							<f:translate key="xxx">Multiple</f:translate>
+							<f:translate key="BackendConverterMultiple">Multiple</f:translate>
 						</td>
 					</tr>
 
@@ -158,7 +158,7 @@
 			</f:then>
 			<f:else>
 				<strong>
-					<f:translate key="xxx">No old Forms found</f:translate>
+					<f:translate key="BackendConverterNoOldForms">No old Forms found</f:translate>
 				</strong>
 			</f:else>
 		</f:if>

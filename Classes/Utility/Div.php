@@ -771,6 +771,18 @@ class Div {
 	}
 
 	/**
+	 * Check if
+	 *
+	 * @return bool
+	 */
+	public static function isBackendAdmin() {
+		if (isset($GLOBALS['BE_USER']->user)) {
+			return $GLOBALS['BE_USER']->user['admin'] === 1;
+		}
+		return FALSE;
+	}
+
+	/**
 	 * Return usergroups uid of a given fe_user
 	 *
 	 * @param string $uid FE_user UID
