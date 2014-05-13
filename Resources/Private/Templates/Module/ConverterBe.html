@@ -8,7 +8,9 @@
 
 <f:section name="content">
 
-	<h2><f:translate key="BackendSelectionConverter" /></h2>
+	<h1><f:translate key="BackendSelectionConverterTitle" /></h1>
+	<h2><f:translate key="BackendSelectionConverterTitle2" /></h2>
+	<p><f:translate key="BackendSelectionConverterTitle3" /></p>
 
 	<f:flashMessages class="powermail_message" />
 
@@ -17,8 +19,8 @@
 			<f:then>
 				<f:form name="converter" class="converterForm" action="converterUpdateBe">
 					<div class="converterFormField">
-						<label for="delete"><f:translate key="xxx">Set deleted=1 for old forms</f:translate></label>
-						<f:form.checkbox id="delete" property="delete" checked="checked" value="1" />
+						<label for="hidden"><f:translate key="xxx">Ignore Old Hidden Forms</f:translate></label>
+						<f:form.checkbox id="hidden" property="hidden" checked="checked" value="1" />
 					</div>
 					<div class="converterFormField">
 						<label for="save"><f:translate key="xxx">Save new forms on page</f:translate></label>

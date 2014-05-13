@@ -42,10 +42,14 @@ class FormConverter {
 	 * @param array $oldFormsWithFieldsetsAndFields
 	 * @param array $configuration
 	 * @param bool $dryrun
-	 * @return void
+	 * @return array result
 	 */
-	public static function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration, $dryrun = FALSE) {
+	public static function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration, $dryrun = TRUE) {
 		$configuration['save'] = 48;
+		$configuration['hidden'] = '1';
+
+//		$x = self::rewriteVarialbes('das ist ###UID123### toll');
+
 		if (!$dryrun) {
 			GeneralUtility::devLog(
 				'Old Forms to convert',
@@ -56,7 +60,15 @@ class FormConverter {
 		}
 
 		// create forms
+		$result = array();
+		$formCounter = 0;
 		foreach ((array) $oldFormsWithFieldsetsAndFields as $form) {
+			// ignore hidden forms
+			if ($form['hidden'] === '1' && $configuration['hidden'] === '1') {
+				continue;
+			}
+
+			$formUid = 0;
 			$formProperties = array(
 				'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
 				'title' => $form['tx_powermail_title'],
@@ -66,13 +78,16 @@ class FormConverter {
 				'l10n_parent' => 0, // TODO
 				'sys_language_uid' => 0 // TODO
 			);
+			$result[$formCounter] = $formProperties;
 			if (!$dryrun) {
 				$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_forms', $formProperties);
 				$formUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
 			}
 
 			// create pages
+			$pageCounter = 0;
 			foreach ((array) $form['fieldsets'] as $page) {
+				$pageUid = 0;
 				$pageProperties = array(
 					'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
 					'forms' => $formUid,
@@ -84,56 +99,66 @@ class FormConverter {
 					'l10n_parent' => 0, // TODO
 					'sys_language_uid' => 0 // TODO
 				);
+				$result[$formCounter]['fieldsets'][$pageCounter] = $pageProperties;
 				if (!$dryrun) {
 					$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_pages', $pageProperties);
 					$pageUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
 				}
 
 				// create fields
+				$fieldCounter = 0;
 				foreach ((array) $page['fields'] as $field) {
-					if (!self::rewriteFormType($field['formtype'])) {
+					if (!self::rewriteFormType($field)) {
 						continue;
 					}
+					$fieldUid = 0;
 					$fieldProperties = array(
 						'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
 						'pages' => $pageUid,
 						'title' => $field['title'],
-						'type' => self::rewriteFormType($field['formtype']),
+						'type' => self::rewriteFormType($field),
 						'css' => self::rewriteStyles($field['class']),
 						'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
 						'hidden' => $field['hidden'],
 						'sorting' => $field['sorting'],
-						'marker' => 'uid' . $field['uid'],
+						'marker' => 'UID' . $field['uid'],
 						'settings' => $field['options'],
 						'path' => $field['path'],
 						'content_element' => $field['path'],
 						'text' => $field['value'],
 						'prefill_value' => $field['value'],
-						'validation' => self::rewriteValidation($field['validate']),
+						'mandatory' => $field['mandatory'],
+						'validation' => self::rewriteValidation($field['validate'], $field['inputtype']),
 						'validation_configuration' => self::rewriteValidationConfiguration($field),
 						'l10n_parent' => 0, // TODO
 						'sys_language_uid' => 0 // TODO
 					);
-					if ($field['title'] == 'Check') {
-						\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($field, 'in2code: ' . __CLASS__ . ':' . __LINE__);
-						\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($fieldProperties, 'in2code: ' . __CLASS__ . ':' . __LINE__);
-					}
+					$result[$formCounter]['fieldsets'][$pageCounter]['fields'][$fieldCounter] = $fieldProperties;
 					if (!$dryrun) {
 						$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_fields', $fieldProperties);
 						$fieldUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
 					}
+					$fieldCounter++;
 				}
+				$pageCounter++;
 			}
+			$formCounter++;
 		}
+
+		return $result;
 	}
 
 	/**
 	 * Reformat fieldtypes from old to new
 	 *
-	 * @param $oldFormType
+	 * @param array $field
 	 * @return bool|string
 	 */
-	public static function rewriteFormType($oldFormType) {
+	public static function rewriteFormType($field) {
+		if ($field['inputtype'] === 'time') {
+			return 'date';
+		}
+
 		$formTypes = array(
 			'text' => 'input',
 			'textarea' => 'textarea',
@@ -156,9 +181,10 @@ class FormConverter {
 			'countryselect' => 'country',
 			'typoscript' => 'typoscript'
 		);
-		if (array_key_exists($oldFormType, $formTypes)) {
-			return $formTypes[$oldFormType];
+		if (array_key_exists($field['formtype'], $formTypes)) {
+			return $formTypes[$field['formtype']];
 		}
+
 		return FALSE;
 	}
 
@@ -183,10 +209,11 @@ class FormConverter {
 	/**
 	 * Reformat validation
 	 *
-	 * @param $oldString
+	 * @param string $oldString
+	 * @param string $inputtype
 	 * @return string
 	 */
-	public static function rewriteValidation($oldString) {
+	public static function rewriteValidation($oldString, $inputtype) {
 		$newStrings = array(
 			'validate-email' => '1',
 			'validate-url' => '2',
@@ -201,6 +228,17 @@ class FormConverter {
 		if (array_key_exists($oldString, $newStrings)) {
 			return $newStrings[$oldString];
 		}
+
+		$newStrings = array(
+			'color' => '',
+			'range' => '8',
+			'tel' => '3',
+			'time' => ''
+		);
+		if (array_key_exists($inputtype, $newStrings)) {
+			return $newStrings[$inputtype];
+		}
+
 		return '';
 	}
 
@@ -210,8 +248,26 @@ class FormConverter {
 	 */
 	public static function rewriteValidationConfiguration($field) {
 		if ($field['validate'] === 'validate-pattern') {
-			return $field['pattern'];
+			if (!empty($field['pattern'])) {
+				return $field['pattern'];
+			}
+		}
+		if ($field['inputtype'] === 'range') {
+			return '0,10';
 		}
 		return '';
+	}
+
+	/**
+	 * Convert old to new marker
+	 * 		from: this is the ###uid123### value
+	 * 		to: this is the {uid123} value
+	 *
+	 * @param string $string
+	 * @return string
+	 */
+	public static function rewriteVarialbes($string) {
+		$string = preg_replace('|###(.*)?###|i', '{$1}', $string);
+		return $string;
 	}
 }

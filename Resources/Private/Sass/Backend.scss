@@ -475,6 +475,12 @@ tr.powermail_listbe_overview:hover a {
 			padding: 10px 0;
 		}
 	}
+	.hiddenConverterTable {
+		display: none;
+	}
+	.openHiddenTable {
+		cursor: pointer;
+	}
 }
 
 /**

@@ -242,6 +242,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$fields[$key]['value'] = $this->getFlexFormValue($subValues, 'value');
 			$fields[$key]['placeholder'] = $this->getFlexFormValue($subValues, 'placeholder');
 			$fields[$key]['validate'] = $this->getFlexFormValue($subValues, 'validate');
+			$fields[$key]['pattern'] = $this->getFlexFormValue($subValues, 'pattern');
 			$fields[$key]['inputtype'] = $this->getFlexFormValue($subValues, 'inputtype');
 			$fields[$key]['options'] = $this->getFlexFormValue($subValues, 'options');
 			$fields[$key]['path'] = $this->getFlexFormValue($subValues, 'typoscriptobject');

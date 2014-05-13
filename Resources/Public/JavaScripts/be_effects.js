@@ -208,11 +208,12 @@ jQuery(document).ready(function($) {
 	/**
 	 * Reporting View: Form
 	 */
-	$('.powermail_reporting_form_fields_table').find('tr:even').addClass('even');
-	$('.powermail_reporting_form_fields_table').find('tr:first').removeClass('even');
-	$('.powermail_reporting_form_fields_table').find('tr').hide();
-	$('.powermail_reporting_form_fields_table').find('tr:first').show();
-	$('.powermail_reporting_form_fields_table th').click(function() {
+	var $table = $('.powermail_reporting_form_fields_table');
+	$table.find('tr:even').addClass('even');
+	$table.find('tr:first').removeClass('even');
+	$table.find('tr').hide();
+	$table.find('tr:first').show();
+	$table.find('th').click(function() {
 		$this = $(this);
 		if ($this.hasClass('close')) {
 			$this.removeClass('close').addClass('open');
@@ -220,5 +221,14 @@ jQuery(document).ready(function($) {
 			$this.removeClass('open').addClass('close');
 		}
 		$this.parent().siblings().slideToggle('fast');
+	});
+
+	/**
+	 * Converter
+	 */
+	$('.openHiddenTable').click(function() {
+		var tr = $(this).closest('tr');
+		tr.find('.dots').hide();
+		tr.find('.hiddenConverterTable').show();
 	});
 });

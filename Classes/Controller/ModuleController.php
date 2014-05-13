@@ -145,7 +145,8 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 				$this->formRepository->findOldFieldsetsAndFieldsToTtContentRecord($form['uid']);
 			$formCounter++;
 		}
-		FormConverter::createNewFromOldForms($oldFormsWithFieldsetsAndFields, $converter);
+		$result = FormConverter::createNewFromOldForms($oldFormsWithFieldsetsAndFields, $converter);
+		$this->view->assign('result', $result);
 	}
 
 	/**

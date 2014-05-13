@@ -388,9 +388,17 @@
 				<source>Function Check</source>
 				<target state="translated">Funktions-Check</target>
 			</trans-unit>
-			<trans-unit id="BackendSelectionConverter">
-				<source>Form Converter (Powermail 1.x => 2.x)</source>
-				<target state="translated">Formular-Konvertierer (Powermail 1.x => 2.x)</target>
+			<trans-unit id="BackendSelectionConverterTitle">
+				<source>Form Converter</source>
+				<target state="translated">Formular-Konvertierer</target>
+			</trans-unit>
+			<trans-unit id="BackendSelectionConverterTitle2">
+				<source>Converts all Powermail 1.x to 2.x Forms</source>
+				<target state="translated">Konvertiert alle alten Powermail 1.x zu 2.x Formulare</target>
+			</trans-unit>
+			<trans-unit id="BackendSelectionConverterTitle3">
+				<source>Old records (from Tables tx_powermail_fieldsets, tx_powermail_fields and tt_content) will be flagged with deleted=1. New Records will be generated (Tables tx_powermail_domain_model_forms, tx_powermail_domain_model_pages, tx_powermail_domain_model_fields, tt_content)</source>
+				<target state="translated">Alte Datensätze (aus Tabellen tx_powermail_fieldsets, tx_powermail_fields und tt_content) werden mit dem Flag deleted=1 versehen. Neue Datensätze werden angelegt (Tabellen tx_powermail_domain_model_forms, tx_powermail_domain_model_pages, tx_powermail_domain_model_fields, tt_content)</target>
 			</trans-unit>
 			<trans-unit id="BackendCheckTitle">
 				<source>Powermail Check</source>
