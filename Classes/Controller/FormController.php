@@ -313,6 +313,9 @@ class FormController extends \In2code\Powermail\Controller\AbstractController {
 	 * @return void
 	 */
 	protected function redirectToTarget() {
+		if ($this->request->getControllerActionName() === 'confirmation') {
+			return;
+		}
 		$target = NULL;
 
 		// redirect from flexform

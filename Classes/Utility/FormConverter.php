@@ -266,7 +266,7 @@ class FormConverter {
 			'path' => $field['path'],
 			'content_element' => $field['path'],
 			'text' => $field['value'],
-			'prefill_value' => $field['value'],
+			'prefill_value' => $this->getPrefillValue($field),
 			'feuser_value' => $field['fe_field'],
 			'mandatory' => $field['mandatory'],
 			'validation' => $this->rewriteValidation($field['validate'], $field['inputtype']),
@@ -477,6 +477,19 @@ class FormConverter {
 			return '0,10';
 		}
 		return '';
+	}
+
+	/**
+	 * Prefill value
+	 *
+	 * @param array $field
+	 * @return string
+	 */
+	protected function getPrefillValue($field) {
+		if ($field['inputtype'] === 'time' || $field['formtype'] === 'date' || $field['formtype'] === 'datetime') {
+			return '';
+		}
+		return $field['value'];
 	}
 
 	/**
