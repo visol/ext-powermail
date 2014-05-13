@@ -82,7 +82,7 @@ class FormConverter {
 			);
 		}
 
-		// create forms
+		// create forms and content
 		$formCounter = 0;
 		foreach ((array) $oldFormsWithFieldsetsAndFields as $form) {
 			// ignore hidden forms
@@ -95,12 +95,36 @@ class FormConverter {
 			$formCounter++;
 		}
 
+		// delete old forms and content
+		$this->deleteOldRecords($oldFormsWithFieldsetsAndFields, $configuration);
+
 		// TODO
-		// tt_content flexform
 		// multilang
 		// admin only
 
 		return $this->result;
+	}
+
+	/**
+	 * Set flag to deleted=1 for old stuff
+	 *
+	 * @param array $oldFormsWithFieldsetsAndFields
+	 * @param array $configuration
+	 * @return void
+	 */
+	protected function deleteOldRecords($oldFormsWithFieldsetsAndFields, $configuration) {
+		if ($this->getDryrun()) {
+			return;
+		}
+		foreach ($oldFormsWithFieldsetsAndFields as $ttContent) {
+			$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tt_content', 'uid = ' . $ttContent['uid'], array('deleted' => 1));
+			foreach ($ttContent['_fieldsets'] as $fieldset) {
+				$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_powermail_fieldsets', 'uid = ' . $fieldset['uid'], array('deleted' => 1));
+				foreach ($fieldset['_fields'] as $field) {
+					$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tx_powermail_fields', 'uid = ' . $field['uid'], array('deleted' => 1));
+				}
+			}
+		}
 	}
 
 	/**
@@ -127,6 +151,7 @@ class FormConverter {
 		$ttContentProperties['pid'] = $form['pid'];
 		$ttContentProperties['list_type'] = 'powermail_pi1';
 		$ttContentProperties['CType'] = 'list';
+		$ttContentProperties['tstamp'] = time();
 		$ttContentProperties['pi_flexform'] = $this->createFlexForm($form, $formUid);
 		if (!$this->getDryrun()) {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tt_content', $ttContentProperties);
@@ -151,6 +176,8 @@ class FormConverter {
 			'pages' => $form['tx_powermail_fieldsets'],
 			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
 			'hidden' => $form['hidden'],
+			'crdate' => time(),
+			'tstamp' => time(),
 			'l10n_parent' => 0, // TODO
 			'sys_language_uid' => 0 // TODO
 		);
@@ -189,6 +216,8 @@ class FormConverter {
 			'css' => $page['class'],
 			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
 			'hidden' => $page['hidden'],
+			'tstamp' => time(),
+			'crdate' => time(),
 			'sorting' => $page['sorting'],
 			'l10n_parent' => 0, // TODO
 			'sys_language_uid' => 0 // TODO
@@ -245,6 +274,8 @@ class FormConverter {
 			'datepicker_settings' => $this->getDatePickerSettings($field),
 			'sender_email' => $this->isSenderEmail($form, $field),
 			'sender_name' => $this->isSenderName($form, $field),
+			'tstamp' => time(),
+			'crdate' => time(),
 			'l10n_parent' => 0, // TODO
 			'sys_language_uid' => 0 // TODO
 		);
