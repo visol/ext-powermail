@@ -4,6 +4,7 @@
 
 	Show Backend Module: Converter Update
 	{result}         Result array
+	{converter}      Configuration array
 
 
 <f:section name="content">
@@ -14,7 +15,26 @@
 	<f:flashMessages class="powermail_message" />
 
 	<div class="powermail_converter">
-		<f:if condition="result">
+		<f:if condition="{converter.dryrun}">
+			<f:else>
+				<ul class="powermail_message powermail_message_ok">
+					<li>
+						<f:count>{result}</f:count>
+						<f:translate key="xxx">Forms successfully generated!</f:translate>
+					</li>
+				</ul>
+			</f:else>
+			<f:then>
+				<ul class="powermail_message powermail_message_note">
+					<li>
+						<f:count>{result}</f:count>
+						<f:translate key="xxx">Forms could be migrated</f:translate>
+					</li>
+				</ul>
+			</f:then>
+		</f:if>
+
+		<f:if condition="{result}">
 			<f:then>
 				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
 					<tbody>

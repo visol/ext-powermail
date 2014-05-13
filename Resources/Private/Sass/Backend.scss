@@ -454,12 +454,13 @@ tr.powermail_listbe_overview:hover a {
 
 		label {
 			font-weight: bold;
-			width: 200px;
+			width: 300px;
 			float: left;
 		}
 		input {
 			float: left;
 			width: 200px;
+			margin-left: 20px;
 			&[type="checkbox"] {
 				width: auto;
 				margin-top: 7px;
@@ -483,7 +484,5 @@ tr.powermail_listbe_overview:hover a {
 	}
 }
 
-/**
- * DatePicker
- */
+@import "Message";
 @import "DatePicker";

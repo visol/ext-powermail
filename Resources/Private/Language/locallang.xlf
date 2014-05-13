@@ -300,6 +300,9 @@
 			<trans-unit id="BackendSelectionConverterTitle3">
 				<source>Old records (from Tables tx_powermail_fieldsets, tx_powermail_fields and tt_content) will be flagged with deleted=1. New Records will be generated (Tables tx_powermail_domain_model_forms, tx_powermail_domain_model_pages, tx_powermail_domain_model_fields, tt_content)</source>
 			</trans-unit>
+			<trans-unit id="BackendSelectionConverterTitle4">
+				<source>Attention: Please backup your database before converting. This step is irreversibel.</source>
+			</trans-unit>
 			<trans-unit id="BackendCheckTitle">
 				<source>Powermail Check</source>
 			</trans-unit>

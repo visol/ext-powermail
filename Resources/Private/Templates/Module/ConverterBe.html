@@ -11,6 +11,7 @@
 	<h1><f:translate key="BackendSelectionConverterTitle" /></h1>
 	<h2><f:translate key="BackendSelectionConverterTitle2" /></h2>
 	<p><f:translate key="BackendSelectionConverterTitle3" /></p>
+	<p><f:translate key="BackendSelectionConverterTitle4" /></p>
 
 	<f:flashMessages class="powermail_message" />
 
@@ -19,12 +20,28 @@
 			<f:then>
 				<f:form name="converter" class="converterForm" action="converterUpdateBe">
 					<div class="converterFormField">
-						<label for="hidden"><f:translate key="xxx">Ignore Old Hidden Forms</f:translate></label>
+						<label for="save"><f:translate key="xxx">Save new forms on page with PID</f:translate>:</label>
+						<f:form.textfield id="save" property="save" value="[samePage]" />
+					</div>
+					<div class="converterFormField">
+						<label for="defaultReceiverName"><f:translate key="xxx">Default Receiver Name</f:translate>:</label>
+						<f:form.textfield id="defaultReceiverName" property="defaultReceiverName" value="Powermail" />
+					</div>
+					<div class="converterFormField">
+						<label for="defaultSenderNameConfirmationMail"><f:translate key="xxx">Default Sender Name for Confirmation Mail</f:translate>:</label>
+						<f:form.textfield id="defaultSenderNameConfirmationMail" property="defaultSenderNameConfirmationMail" value="Administrator" />
+					</div>
+					<div class="converterFormField">
+						<label for="defaultSenderEmailConfirmationMail"><f:translate key="xxx">Default Sender Email for Confirmation Mail</f:translate>:</label>
+						<f:form.textfield id="defaultSenderEmailConfirmationMail" property="defaultSenderEmailConfirmationMail" value="info@domain.org" />
+					</div>
+					<div class="converterFormField">
+						<label for="hidden"><f:translate key="xxx">Ignore Old Hidden Forms</f:translate>:</label>
 						<f:form.checkbox id="hidden" property="hidden" checked="checked" value="1" />
 					</div>
 					<div class="converterFormField">
-						<label for="save"><f:translate key="xxx">Save new forms on page</f:translate></label>
-						<f:form.textfield id="save" property="save" value="[samePage]" />
+						<label for="dryrun"><f:translate key="xxx">Do only a Test Run</f:translate>:</label>
+						<f:form.checkbox id="dryrun" property="dryrun" checked="checked" value="1" />
 					</div>
 					<div class="converterFormField">
 						<label for="submit">&nbsp;</label>
@@ -140,7 +157,9 @@
 				</table>
 			</f:then>
 			<f:else>
-				<f:translate key="xxx">No old Forms found</f:translate>
+				<strong>
+					<f:translate key="xxx">No old Forms found</f:translate>
+				</strong>
 			</f:else>
 		</f:if>
 	</div>

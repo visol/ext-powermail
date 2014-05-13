@@ -68,6 +68,9 @@ class FormConverter {
 	 * @return array result
 	 */
 	public function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration) {
+		if (!empty($configuration['dryrun'])) {
+			$this->setDryrun(TRUE);
+		}
 		if (!$this->getDryrun()) {
 			GeneralUtility::devLog(
 				'Old Forms to convert',

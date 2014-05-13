@@ -150,6 +150,7 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		$formConverter->setDryrun(FALSE);
 		$result = $formConverter->createNewFromOldForms($oldFormsWithFieldsetsAndFields, $converter);
 		$this->view->assign('result', $result);
+		$this->view->assign('converter', $converter);
 	}
 
 	/**
