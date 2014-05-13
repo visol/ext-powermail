@@ -37,6 +37,18 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class FormConverter {
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+	 * @inject
+	 */
+	protected $configurationManager;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+	 * @inject
+	 */
+	protected $objectManager;
+
+	/**
 	 * Dryrun for testing
 	 *
 	 * @var bool
@@ -58,8 +70,8 @@ class FormConverter {
 	 */
 	public function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration, $dryrun = FALSE) {
 		$this->setDryrun($dryrun);
-		$configuration['save'] = 48;
-		$configuration['hidden'] = '1';
+		$configuration['save'] = 48; // TODO enforce PID
+		$configuration['hidden'] = '1'; // TODO enforce ignoreHidden
 
 		if (!$dryrun) {
 			GeneralUtility::devLog(
@@ -78,8 +90,8 @@ class FormConverter {
 				continue;
 			}
 			$form['pid'] = 48; // TODO remove at the end
-			$this->createTtContentRecord($form);
-			$this->createFormRecord($form, $configuration, $formCounter);
+			$formUid = $this->createFormRecord($form, $configuration, $formCounter);
+			$this->createTtContentRecord($form, $formUid);
 			$formCounter++;
 		}
 
@@ -94,10 +106,11 @@ class FormConverter {
 	/**
 	 * Create tt_content record
 	 *
-	 * @param $form
+	 * @param array $form
+	 * @param int $formUid Form that was created before
 	 * @return int tt_content uid
 	 */
-	protected function createTtContentRecord($form) {
+	protected function createTtContentRecord($form, $formUid) {
 		$ignoreFields = array(
 			'uid',
 			'tstamp',
@@ -114,6 +127,7 @@ class FormConverter {
 		$ttContentProperties['pid'] = $form['pid'];
 		$ttContentProperties['list_type'] = 'powermail_pi1';
 		$ttContentProperties['CType'] = 'list';
+		$ttContentProperties['pi_flexform'] = $this->createFlexForm($form, $formUid);
 		if (!$this->getDryrun()) {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tt_content', $ttContentProperties);
 			return $GLOBALS['TYPO3_DB']->sql_insert_id();
@@ -127,7 +141,7 @@ class FormConverter {
 	 * @param array $form
 	 * @param array $configuration
 	 * @param int $formCounter
-	 * @return void
+	 * @return int $formUid
 	 */
 	protected function createFormRecord($form, $configuration, $formCounter) {
 		$formUid = 0;
@@ -152,6 +166,7 @@ class FormConverter {
 			$this->createPageRecord($form, $configuration, $page, $formUid, $formCounter, $pageCounter);
 			$pageCounter++;
 		}
+		return $formUid;
 	}
 
 	/**
@@ -238,6 +253,39 @@ class FormConverter {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_fields', $fieldProperties);
 //			$fieldUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
 		}
+	}
+
+	/**
+	 * Create FlexForm
+	 *
+	 * @param array $form
+	 * @param int $formUid Form that was created before
+	 * @return string
+	 */
+	protected function createFlexForm($form, $formUid) {
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
+		$templatePathAndFilename .= 'Module/ConverterFlexForm.xml';
+		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $view */
+		$view = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
+		$view->getRequest()->setControllerExtensionName('Powermail');
+		$view->getRequest()->setPluginName('Pi1');
+		$view->getRequest()->setControllerName('Module');
+		$view->setTemplatePathAndFilename($templatePathAndFilename);
+
+		// manipulate variables
+		$form['tx_powermail_thanks'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
+		$form['tx_powermail_mailsender'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
+		$form['tx_powermail_mailreceiver'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
+		$form['tx_powermail_recipient'] = $this->rewriteVariables($form['tx_powermail_recipient']);
+		$form['tx_powermail_subject_r'] = $this->rewriteVariables($form['tx_powermail_subject_r']);
+		$form['tx_powermail_subject_s'] = $this->rewriteVariables($form['tx_powermail_subject_s']);
+		$view->assign('formUid', $formUid);
+		$view->assignMultiple($form);
+
+		return $view->render();
 	}
 
 	/**
@@ -406,10 +454,23 @@ class FormConverter {
 	 * 		to: this is the {uid123} value
 	 *
 	 * @param string $string
+	 * @param bool $rte
 	 * @return string
 	 */
-	protected function rewriteVariables($string) {
+	protected function rewriteVariables($string, $rte = FALSE) {
+		$string = str_replace('###POWERMAIL_ALL###', '{powermail_all}', $string);
 		$string = preg_replace('|###(.*)?###|i', '{$1}', $string);
+		if ($rte) {
+			$newString = '';
+			$manipulatedString = $string;
+			$manipulatedString = str_replace('</p>', "\n", $manipulatedString);
+			$manipulatedString = strip_tags($manipulatedString, 'br,div,b,strong,ul,li,a,i,blockquote,table,tr,td,img');
+			$lines = GeneralUtility::trimExplode("\n", $manipulatedString, TRUE);
+			foreach ($lines as $line) {
+				$newString .= '<p>' . $line . '</p>';
+				$string = $newString;
+			}
+		}
 		return $string;
 	}
 
