@@ -572,7 +572,8 @@ class FormConverter {
 			},
 			$string
 		);
-		if ($rte) {
+		if ($rte && !empty($this->configuration['parseFunc'])) {
+			$this->initialiazeTsfe();
 			$typoScriptSetup = $this->configurationManager->getConfiguration(
 				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
 			);
@@ -581,6 +582,39 @@ class FormConverter {
 			$string = $contentObject->_parseFunc($string, $parseFunc);
 		}
 		return $string;
+	}
+
+	/**
+	 * Initialize TSFE object
+	 *
+	 * @return void
+	 */
+	protected function initialiazeTsfe() {
+		if (!is_object($GLOBALS['TT'])) {
+			$GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker;
+			$GLOBALS['TT']->start();
+		}
+		if (!is_object($GLOBALS['TSFE'])) {
+			$GLOBALS['TSFE'] = new \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController(
+				$GLOBALS['TYPO3_CONF_VARS'], 1, 0, 0, 0, 0, 0, 0
+			);
+			$GLOBALS['TSFE']->tmpl = GeneralUtility::makeInstance('\TYPO3\CMS\Core\TypoScript\ExtendedTemplateService');
+			$GLOBALS['TSFE']->sys_page = GeneralUtility::makeInstance('\TYPO3\CMS\Frontend\Page\PageRepository');
+			$GLOBALS['TSFE']->tmpl->tt_track = 0;
+			$GLOBALS['TSFE']->tmpl->init();
+			$rootLine = $GLOBALS['TSFE']->sys_page->getRootLine(1);
+			$GLOBALS['TSFE']->tmpl->runThroughTemplates($rootLine, 1);
+			$GLOBALS['TSFE']->tmpl->generateConfig();
+			$GLOBALS['TSFE']->tmpl->loaded = 1;
+			$GLOBALS['TSFE']->getConfigArray();
+			$GLOBALS['TSFE']->linkVars = '' . $GLOBALS['TSFE']->config['config']['linkVars'];
+			if ($GLOBALS['TSFE']->config['config']['simulateStaticDocuments_pEnc_onlyP']) {
+				$ssd = GeneralUtility::trimExplode(',', $GLOBALS['TSFE']->config['config']['simulateStaticDocuments_pEnc_onlyP'], 1);
+				foreach ($ssd as $tempP) {
+					$GLOBALS['TSFE']->pEncAllowedParamNames[$tempP] = 1;
+				}
+			}
+		}
 	}
 
 	/**
