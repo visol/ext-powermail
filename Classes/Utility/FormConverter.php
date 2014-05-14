@@ -117,9 +117,6 @@ class FormConverter {
 		// delete old forms and content
 		$this->deleteOldRecords($oldFormsWithFieldsetsAndFields);
 
-		// TODO
-		// multilang
-
 		return $this->result;
 	}
 
@@ -344,12 +341,15 @@ class FormConverter {
 		$view->setTemplatePathAndFilename($templatePathAndFilename);
 
 		// manipulate variables
-		$form['tx_powermail_thanks'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
-		$form['tx_powermail_mailsender'] = $this->rewriteVariables($form['tx_powermail_mailsender'], TRUE);
-		$form['tx_powermail_mailreceiver'] = $this->rewriteVariables($form['tx_powermail_mailreceiver'], TRUE);
-		$form['tx_powermail_recipient'] = $this->rewriteVariables($form['tx_powermail_recipient']);
-		$form['tx_powermail_subject_r'] = $this->rewriteVariables($form['tx_powermail_subject_r']);
-		$form['tx_powermail_subject_s'] = $this->rewriteVariables($form['tx_powermail_subject_s']);
+		$form['tx_powermail_thanks'] = $this->rewriteVariables($form['tx_powermail_thanks'], $form, TRUE);
+		$form['tx_powermail_mailsender'] = $this->rewriteVariables($form['tx_powermail_mailsender'], $form, TRUE);
+		$form['tx_powermail_mailreceiver'] = $this->rewriteVariables($form['tx_powermail_mailreceiver'], $form, TRUE);
+		$form['tx_powermail_recipient'] = $this->rewriteVariables($form['tx_powermail_recipient'], $form);
+		$form['tx_powermail_subject_r'] = $this->rewriteVariables($form['tx_powermail_subject_r'], $form);
+		$form['tx_powermail_subject_s'] = $this->rewriteVariables($form['tx_powermail_subject_s'], $form);
+		if ($form['sys_language_uid'] > 0) {
+			$formUid = $this->localizationRelations['form'][$form['l18n_parent']];
+		}
 		$view->assign('formUid', $formUid);
 		$view->assignMultiple($form);
 
@@ -555,12 +555,23 @@ class FormConverter {
 	 * 		to: this is the {uid123} value
 	 *
 	 * @param string $string
+	 * @param array $form
 	 * @param bool $rte
 	 * @return string
 	 */
-	protected function rewriteVariables($string, $rte = FALSE) {
+	protected function rewriteVariables($string, $form, $rte = FALSE) {
 		$string = str_replace('###POWERMAIL_ALL###', '{powermail_all}', $string);
-		$string = preg_replace('|###([^#]*)?###|i', '{$1}', $string);
+		$string = preg_replace_callback(
+			'|###UID([^#]*)?###|i',
+			function($matches) use ($form) {
+				$uid = $matches[1];
+				if ($form['sys_language_uid'] > 0) {
+					$uid = $this->getDefaultUidFromOldLocalizedFieldUid($form, $uid);
+				}
+				return '{UID' . $uid . '}';
+			},
+			$string
+		);
 		if ($rte) {
 			$typoScriptSetup = $this->configurationManager->getConfiguration(
 				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
@@ -570,6 +581,24 @@ class FormConverter {
 			$string = $contentObject->_parseFunc($string, $parseFunc);
 		}
 		return $string;
+	}
+
+	/**
+	 * Rewrite old UID markers
+	 *
+	 * @param string $form
+	 * @param int $oldUid
+	 * @return int
+	 */
+	protected function getDefaultUidFromOldLocalizedFieldUid($form, $oldUid) {
+		foreach ($form['_fieldsets'] as $fieldset) {
+			foreach ($fieldset['_fields'] as $field) {
+				if ($oldUid === $field['uid']) {
+					return $field['l18n_parent'];
+				}
+			}
+		}
+		return 0;
 	}
 
 	/**

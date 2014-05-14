@@ -158,6 +158,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		';
 		$sql .= ' where c.deleted = 0 and fs.deleted = 0 and c.uid = ' . intval($uid);
 		$sql .= ' group by fs.uid';
+		$sql .= ' order by fs.sys_language_uid, fs.uid';
 		$sql .= ' limit 10000';
 
 		$fieldsets = $query->statement($sql)->execute(TRUE);
@@ -203,6 +204,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		';
 		$sql .= ' where c.deleted = 0 and fs.deleted = 0 and f.deleted = 0 and fs.uid = ' . intval($uid);
 		$sql .= ' group by f.uid';
+		$sql .= ' order by f.sys_language_uid, f.uid';
 		$sql .= ' limit 10000';
 
 		$fields = $query->statement($sql)->execute(TRUE);
