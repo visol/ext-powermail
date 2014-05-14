@@ -18,7 +18,7 @@
 - done: show in TCA if sender_email or sender_name was not set
 - done: Schedulertask with CommandController to remove unused uploaded files (time)
 - done: New PluginInformation about current Form
-- add a powermail 1.x form converter to 2.x
+- done: add a powermail 1.x form converter to 2.x
 - powermail_cond update
 - Adding Unit Tests
 - Adding RST Documentation

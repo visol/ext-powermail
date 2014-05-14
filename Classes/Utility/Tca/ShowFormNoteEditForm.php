@@ -27,8 +27,10 @@ class ShowFormNoteEditForm {
 		$formUid = $this->getRelatedForm($pa);
 
 		if ($formUid) {
+			$returnUrl = 'alt_doc.php?edit[tt_content][' . $pa['row']['uid'] . ']=edit&returnUrl=' . GeneralUtility::_GET('returnUrl');
+			$returnUrl = rawurlencode($returnUrl);
 			$editFormLink = 'alt_doc.php?edit[tx_powermail_domain_model_forms][' . $formUid . ']=edit';
-			$editFormLink .= '&returnUrl=' . rawurlencode('alt_doc.php?edit[tt_content][' . $pa['row']['uid'] . ']=edit');
+			$editFormLink .= '&returnUrl=' . $returnUrl;
 
 			$content .= '
 				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
