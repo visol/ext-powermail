@@ -13,14 +13,32 @@
 	<div class="powermail_reporting">
 
 		<div class="powermail_reporting_selection">
-			<div class="powermail_reporting_selection_left">
-				<h2><f:link.action action="reportingBe" arguments="{subaction : 'form'}"><f:translate key="BackendReportingForm" /></f:link.action></h2>
-				<f:link.action action="reportingBe" arguments="{subaction : 'form'}"><f:image src="{f:uri.resource(path: 'Image/chart_form.png')}" alt="Form Reporting" /></f:link.action>
+			<div class="powermail_reporting_selection_inner">
+				<h2>
+					<f:link.action action="overviewBe">
+						<f:translate key="BackendSelectionOverview">Form Overview</f:translate>
+					</f:link.action>
+				</h2>
+				<f:link.action action="overviewBe"><f:image src="{f:uri.resource(path: 'Image/chart_form_overview.png')}" alt="Form Reporting" /></f:link.action>
 			</div>
-			<div class="powermail_reporting_selection_right">
-				<h2><f:link.action action="reportingBe" arguments="{subaction : 'marketing'}"><f:translate key="BackendReportingMarketing" /></f:link.action></h2>
-				<f:link.action action="reportingBe" arguments="{subaction : 'marketing'}"><f:image src="{f:uri.resource(path: 'Image/chart_marketing.png')}" alt="Marketing Reporting" /></f:link.action>
-			</div>
+			<f:if condition="{vh:BeCheck.IsAdmin()}">
+				<div class="powermail_reporting_selection_inner">
+					<h2>
+						<f:link.action action="checkBe">
+							<f:translate key="BackendSelectionCheck">Function Check</f:translate>
+						</f:link.action>
+					</h2>
+					<f:link.action action="checkBe"><f:image src="{f:uri.resource(path: 'Image/chart_function_check.png')}" alt="Marketing Reporting" /></f:link.action>
+				</div>
+				<div class="powermail_reporting_selection_inner">
+					<h2>
+						<f:link.action action="converterBe">
+							<f:translate key="BackendSelectionConverterTitle">Form Converter</f:translate>
+						</f:link.action>
+					</h2>
+					<f:link.action action="converterBe"><f:image src="{f:uri.resource(path: 'Image/chart_form_converter.png')}" alt="Marketing Reporting" /></f:link.action>
+				</div>
+			</f:if>
 			<div class="clear"></div>
 		</div>
 

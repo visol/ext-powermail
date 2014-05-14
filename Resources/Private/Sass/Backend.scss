@@ -340,22 +340,33 @@ span.info {
 	border: 1px solid #A2AAB8;
 	padding: 20px;
 }
-.powermail_reporting_selection_left {
-	float: left;
-	margin-right: 80px;
-	background-color: #F8F8F8;
-	padding: 15px;
-	border: 1px solid #A2AAB8;
-}
+.powermail_reporting_selection_inner,
+.powermail_reporting_selection_left,
 .powermail_reporting_selection_right {
 	float: left;
+	width: 49%;
 	background-color: #F8F8F8;
 	padding: 15px;
 	border: 1px solid #A2AAB8;
+	margin-right: 2%;
+	margin-bottom: 2%;
 }
+.powermail_reporting_selection_inner:nth-child(even) {
+	margin-right: 0;
+}
+.powermail_reporting_selection_left {
+	float: left;
+}
+.powermail_reporting_selection_right {
+	float: right;
+}
+.powermail_reporting_selection_inner img,
 .powermail_reporting_selection_left img,
 .powermail_reporting_selection_right img {
 	padding-top: 15px;
+	max-width: 100%;
+	height: auto;
+	width: 800px;
 }
 
 
