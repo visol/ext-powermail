@@ -574,7 +574,7 @@ class Div {
 	/**
 	 * Get grouped marketing stuff for reporting
 	 *
-	 * @param object $mails Mails
+	 * @param \In2code\Powermail\Domain\Model\Mail $mails Mails
 	 * @param int $max Max Labels
 	 * @param string $maxLabel Label for "Max Labels" - could be "all others"
 	 * @return array
@@ -587,9 +587,10 @@ class Div {
 			'marketingMobileDevice' => array(),
 			'marketingFrontendLanguage' => array(),
 			'marketingBrowserLanguage' => array(),
-			'marketingPageFunnelLastPage' => array(),
+			'marketingPageFunnel' => array(),
 		);
 		foreach ($mails as $mail) {
+			/** @var Mail $mail */
 			foreach ($arr as $key => $v) {
 				$v = NULL;
 

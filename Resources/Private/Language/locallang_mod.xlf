@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="mlang_tabs_tab">
-				<source>Powermail</source>
+				<source>Mails</source>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tabdescr">
 				<source>List of all registered mails in database. Possibility to filter and export to CSV (Excel).</source>
