@@ -49,6 +49,13 @@ class FormConverter {
 	protected $objectManager;
 
 	/**
+	 * Configuration
+	 *
+	 * @var array
+	 */
+	protected $configuration = array();
+
+	/**
 	 * Dryrun for testing
 	 *
 	 * @var bool
@@ -82,7 +89,8 @@ class FormConverter {
 	 * @return array result
 	 */
 	public function createNewFromOldForms($oldFormsWithFieldsetsAndFields, $configuration) {
-		if (!empty($configuration['dryrun'])) {
+		$this->configuration = $configuration;
+		if (!empty($this->configuration['dryrun'])) {
 			$this->setDryrun(TRUE);
 		}
 		if (!$this->getDryrun()) {
@@ -98,16 +106,16 @@ class FormConverter {
 		$formCounter = 0;
 		foreach ((array) $oldFormsWithFieldsetsAndFields as $form) {
 			// ignore hidden forms
-			if ($form['hidden'] === '1' && $configuration['hidden'] === '1') {
+			if ($form['hidden'] === '1' && $this->configuration['hidden'] === '1') {
 				continue;
 			}
-			$formUid = $this->createFormRecord($form, $configuration, $formCounter);
+			$formUid = $this->createFormRecord($form, $formCounter);
 			$this->createTtContentRecord($form, $formUid);
 			$formCounter++;
 		}
 
 		// delete old forms and content
-		$this->deleteOldRecords($oldFormsWithFieldsetsAndFields, $configuration);
+		$this->deleteOldRecords($oldFormsWithFieldsetsAndFields);
 
 		// TODO
 		// multilang
@@ -119,16 +127,15 @@ class FormConverter {
 	 * Set flag to deleted=1 for old stuff
 	 *
 	 * @param array $oldFormsWithFieldsetsAndFields
-	 * @param array $configuration
 	 * @return void
 	 */
-	protected function deleteOldRecords($oldFormsWithFieldsetsAndFields, $configuration) {
+	protected function deleteOldRecords($oldFormsWithFieldsetsAndFields) {
 		if ($this->getDryrun()) {
 			return;
 		}
 		foreach ($oldFormsWithFieldsetsAndFields as $ttContent) {
 			// ignore hidden forms
-			if ($ttContent['hidden'] === '1' && $configuration['hidden'] === '1') {
+			if ($ttContent['hidden'] === '1' && $this->configuration['hidden'] === '1') {
 				continue;
 			}
 			$GLOBALS['TYPO3_DB']->exec_UPDATEquery('tt_content', 'uid = ' . $ttContent['uid'], array('deleted' => 1));
@@ -155,7 +162,8 @@ class FormConverter {
 			'cruser_id',
 			'CType',
 			'_fieldsets',
-			'l18n_parent'
+			'l18n_parent',
+			'l18n_diffsource'
 		);
 		$ttContentProperties = array();
 		foreach ($form as $tableColumn => $tableValue) {
@@ -184,14 +192,13 @@ class FormConverter {
 	 * Create Form Record
 	 *
 	 * @param array $form
-	 * @param array $configuration
 	 * @param int $formCounter
 	 * @return int $formUid
 	 */
-	protected function createFormRecord($form, $configuration, $formCounter) {
+	protected function createFormRecord($form, $formCounter) {
 		$formUid = 0;
 		$formProperties = array(
-			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
+			'pid' => ($this->configuration['save'] === '[samePage]' ? $form['pid'] : intval($this->configuration['save'])),
 			'title' => $form['tx_powermail_title'],
 			'pages' => $form['tx_powermail_fieldsets'],
 			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
@@ -213,7 +220,7 @@ class FormConverter {
 		// create pages
 		$pageCounter = 0;
 		foreach ((array) $form['_fieldsets'] as $page) {
-			$this->createPageRecord($form, $configuration, $page, $formUid, $formCounter, $pageCounter);
+			$this->createPageRecord($form, $page, $formUid, $formCounter, $pageCounter);
 			$pageCounter++;
 		}
 		return $formUid;
@@ -223,17 +230,16 @@ class FormConverter {
 	 * Create Page Record
 	 *
 	 * @param array $form
-	 * @param array $configuration
 	 * @param array $page
 	 * @param int $formUid
 	 * @param int $formCounter
 	 * @param int $pageCounter
 	 * @return void
 	 */
-	protected function createPageRecord($form, $configuration, $page, $formUid, $formCounter, $pageCounter) {
+	protected function createPageRecord($form, $page, $formUid, $formCounter, $pageCounter) {
 		$pageUid = 0;
 		$pageProperties = array(
-			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
+			'pid' => ($this->configuration['save'] === '[samePage]' ? $form['pid'] : intval($this->configuration['save'])),
 			'forms' => $formUid,
 			'title' => $page['title'],
 			'css' => $this->getValueIfDefaultLanguage($page, 'class'),
@@ -261,7 +267,7 @@ class FormConverter {
 			if (!$this->rewriteFormType($field)) {
 				continue;
 			}
-			$this->createFieldRecord($form, $configuration, $pageUid, $field, $formCounter, $pageCounter, $fieldCounter);
+			$this->createFieldRecord($form, $pageUid, $field, $formCounter, $pageCounter, $fieldCounter);
 			$fieldCounter++;
 		}
 	}
@@ -270,7 +276,6 @@ class FormConverter {
 	 * Create Field Record
 	 *
 	 * @param array $form
-	 * @param array $configuration
 	 * @param int $pageUid
 	 * @param array $field
 	 * @param int $formCounter
@@ -278,9 +283,9 @@ class FormConverter {
 	 * @param int $fieldCounter
 	 * @return void
 	 */
-	protected function createFieldRecord($form, $configuration, $pageUid, $field, $formCounter, $pageCounter, $fieldCounter) {
+	protected function createFieldRecord($form, $pageUid, $field, $formCounter, $pageCounter, $fieldCounter) {
 		$fieldProperties = array(
-			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
+			'pid' => ($this->configuration['save'] === '[samePage]' ? $form['pid'] : intval($this->configuration['save'])),
 			'pages' => $pageUid,
 			'title' => $field['title'],
 			'type' => $this->rewriteFormType($field),
@@ -340,8 +345,8 @@ class FormConverter {
 
 		// manipulate variables
 		$form['tx_powermail_thanks'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
-		$form['tx_powermail_mailsender'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
-		$form['tx_powermail_mailreceiver'] = $this->rewriteVariables($form['tx_powermail_thanks'], TRUE);
+		$form['tx_powermail_mailsender'] = $this->rewriteVariables($form['tx_powermail_mailsender'], TRUE);
+		$form['tx_powermail_mailreceiver'] = $this->rewriteVariables($form['tx_powermail_mailreceiver'], TRUE);
 		$form['tx_powermail_recipient'] = $this->rewriteVariables($form['tx_powermail_recipient']);
 		$form['tx_powermail_subject_r'] = $this->rewriteVariables($form['tx_powermail_subject_r']);
 		$form['tx_powermail_subject_s'] = $this->rewriteVariables($form['tx_powermail_subject_s']);
@@ -555,17 +560,14 @@ class FormConverter {
 	 */
 	protected function rewriteVariables($string, $rte = FALSE) {
 		$string = str_replace('###POWERMAIL_ALL###', '{powermail_all}', $string);
-		$string = preg_replace('|###(.*)?###|i', '{$1}', $string);
+		$string = preg_replace('|###([^#]*)?###|i', '{$1}', $string);
 		if ($rte) {
-			$newString = '';
-			$manipulatedString = $string;
-			$manipulatedString = str_replace('</p>', "\n", $manipulatedString);
-			$manipulatedString = strip_tags($manipulatedString, 'br,div,b,strong,ul,li,a,i,blockquote,table,tr,td,img');
-			$lines = GeneralUtility::trimExplode("\n", $manipulatedString, TRUE);
-			foreach ($lines as $line) {
-				$newString .= '<p>' . $line . '</p>';
-				$string = $newString;
-			}
+			$typoScriptSetup = $this->configurationManager->getConfiguration(
+				\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+			);
+			$parseFunc = $typoScriptSetup['lib.'][$this->configuration['parseFunc']];
+			$contentObject = $this->configurationManager->getContentObject();
+			$string = $contentObject->_parseFunc($string, $parseFunc);
 		}
 		return $string;
 	}
