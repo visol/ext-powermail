@@ -8,6 +8,24 @@
 
 	<h1><f:translate key="BackendSelectionOverview">Form Overview</f:translate></h1>
 
+	<f:if condition="{pid} > 0">
+		<f:then>
+			<p>
+				<f:translate key="BackendOverviewTitle2">All Forms within page</f:translate>
+				<strong>{vh:Getter.GetPageNameFromUid(uid:pid)}</strong>
+				<f:translate key="BackendOverviewTitle3">(and its subpages)</f:translate>
+			</p>
+			<p>
+				<f:link.action action="overviewBe" additionalParams="{id:0}" class="overviewShowAll">
+					<f:translate key="BackendOverviewTitle4">Show All</f:translate>
+				</f:link.action>
+			</p>
+		</f:then>
+		<f:else>
+			<p><f:translate key="BackendOverviewTitle5"><strong>All Forms from all Pages</strong></f:translate></p>
+		</f:else>
+	</f:if>
+
 	<f:flashMessages class="powermail_message" />
 
 	<div class="powermail_overview">
@@ -15,16 +33,6 @@
 			<f:then>
 				<table cellspacing="0" cellpadding="0" border="0" class="typo3-dblist">
 					<tbody>
-
-						<tr class="c-table-row-spacer">
-							<td nowrap="nowrap" class="col-icon"><img width="1" height="8" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class=""><img width="230" height="1" alt="" src="clear.gif"></td>
-							<td nowrap="nowrap" class="" width="10"><img width="1" height="1" alt="" src="clear.gif"></td>
-						</tr>
 						<tr class="t3-row-header">
 							<td nowrap="nowrap" class="col-icon">&nbsp;</td>
 							<td nowrap="nowrap" colspan="5">

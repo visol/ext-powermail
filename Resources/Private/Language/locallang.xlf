@@ -441,6 +441,18 @@
 			<trans-unit id="BackendOverviewTitle">
 				<source>Form Overview</source>
 			</trans-unit>
+			<trans-unit id="BackendOverviewTitle2">
+				<source>All Forms within page</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle3">
+				<source>(and its subpages)</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle4">
+				<source>Show All Forms</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle5">
+				<source>All Forms in this CMS</source>
+			</trans-unit>
 			<trans-unit id="BackendOverviewTable">
 				<source>Forms</source>
 			</trans-unit>

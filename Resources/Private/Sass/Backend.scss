@@ -454,6 +454,15 @@ table.powermail_reporting_form_fields_table th.close {
 tr.powermail_listbe_overview:hover a {
 	text-decoration: none;
 }
+a.overviewShowAll {
+	display: inline-block;
+	padding: 5px 20px;
+	border: 1px solid $greySoft1;
+	background: $greySoft2;
+	&:hover {
+		background: $greySoft1;
+	}
+}
 
 /**
  * Converter

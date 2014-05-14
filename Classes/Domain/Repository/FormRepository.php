@@ -113,6 +113,28 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
+	 * Find all within a Page and its subpages
+	 *
+	 * @param int $pid
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findAllInPid($pid) {
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setRespectStoragePage(FALSE);
+
+		if ($pid > 0) {
+			/** @var \TYPO3\CMS\Core\Database\QueryGenerator $queryGenerator */
+			$queryGenerator = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Database\QueryGenerator');
+			$pidList = $queryGenerator->getTreeList($pid, 20, 0, 1);
+			$query->matching(
+				$query->in('uid', GeneralUtility::trimExplode(',', $pidList, TRUE))
+			);
+		}
+
+		return $query->execute();
+	}
+
+	/**
 	 * Find all old powermail forms in database
 	 *
 	 * @return mixed

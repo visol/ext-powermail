@@ -588,6 +588,22 @@
 				<source>Form Overview</source>
 				<target state="translated">Formular Übersicht</target>
 			</trans-unit>
+			<trans-unit id="BackendOverviewTitle2">
+				<source>All Forms within page</source>
+				<target state="translated">Alle Formulare der Seite</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle3">
+				<source>(and its subpages)</source>
+				<target state="translated">(und deren Unterseiten)</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle4">
+				<source>Show All Forms</source>
+				<target state="translated">Zeige Alle Formulare</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewTitle5">
+				<source>All Forms in this CMS</source>
+				<target state="translated">Alle Formulare im CMS</target>
+			</trans-unit>
 			<trans-unit id="BackendOverviewTable">
 				<source>Forms</source>
 				<target state="translated">Formulare</target>

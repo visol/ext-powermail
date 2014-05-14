@@ -77,9 +77,12 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 		}
 	}
 
-	// TODO
+	/**
+	 * Tools overview
+	 *
+	 * @return void
+	 */
 	public function toolsBeAction() {
-
 	}
 
 	/**
@@ -88,8 +91,10 @@ class ModuleController extends \In2code\Powermail\Controller\AbstractController 
 	 * @return void
 	 */
 	public function overviewBeAction() {
-		$forms = $this->formRepository->findAll();
+		$pid = GeneralUtility::_GET('id');
+		$forms = $this->formRepository->findAllInPid($pid);
 		$this->view->assign('forms', $forms);
+		$this->view->assign('pid', $pid);
 	}
 
 	/**
