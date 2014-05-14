@@ -127,6 +127,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		';
 		$sql .= ' where c.deleted = 0';
 		$sql .= ' group by c.uid';
+		$sql .= ' order by c.sys_language_uid, c.uid';
 		$sql .= ' limit 10000';
 
 		$result = $query->statement($sql)->execute(TRUE);
@@ -219,6 +220,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$fields[$key]['inputtype'] = $this->getFlexFormValue($subValues, 'inputtype');
 			$fields[$key]['options'] = $this->getFlexFormValue($subValues, 'options');
 			$fields[$key]['path'] = $this->getFlexFormValue($subValues, 'typoscriptobject');
+			$fields[$key]['multiple'] = $this->getFlexFormValue($subValues, 'multiple');
 			unset($fields[$key]['flexform']);
 		}
 

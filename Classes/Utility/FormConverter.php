@@ -56,9 +56,23 @@ class FormConverter {
 	protected $dryrun = FALSE;
 
 	/**
+	 * Result for output
+	 *
 	 * @var array
 	 */
 	protected $result = array();
+
+	/**
+	 * Old to New array for localization
+	 *
+	 * @var array
+	 */
+	protected $localizationRelations = array(
+		'content' => array(),
+		'form' => array(),
+		'page' => array(),
+		'field' => array()
+	);
 
 	/**
 	 * Create new forms from old ones
@@ -140,7 +154,8 @@ class FormConverter {
 			'tstamp',
 			'cruser_id',
 			'CType',
-			'_fieldsets'
+			'_fieldsets',
+			'l18n_parent'
 		);
 		$ttContentProperties = array();
 		foreach ($form as $tableColumn => $tableValue) {
@@ -153,9 +168,14 @@ class FormConverter {
 		$ttContentProperties['CType'] = 'list';
 		$ttContentProperties['tstamp'] = time();
 		$ttContentProperties['pi_flexform'] = $this->createFlexForm($form, $formUid);
+		if ($form['sys_language_uid'] > 0) {
+			$ttContentProperties['l18n_parent'] = $this->localizationRelations['content'][$form['l18n_parent']];
+		}
 		if (!$this->getDryrun()) {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tt_content', $ttContentProperties);
-			return $GLOBALS['TYPO3_DB']->sql_insert_id();
+			$ttContentUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			$this->localizationRelations['content'][$form['uid']] = $ttContentUid;
+			return $ttContentUid;
 		}
 		return 0;
 	}
@@ -177,14 +197,17 @@ class FormConverter {
 			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
 			'hidden' => $form['hidden'],
 			'crdate' => time(),
-			'tstamp' => time(),
-			'l10n_parent' => 0, // TODO
-			'sys_language_uid' => 0 // TODO
+			'tstamp' => time()
 		);
+		if ($form['sys_language_uid'] > 0) {
+			$formProperties['sys_language_uid'] = $form['sys_language_uid'];
+			$formProperties['l10n_parent'] = $this->localizationRelations['form'][$form['l18n_parent']];
+		}
 		$this->result[$formCounter] = $formProperties;
 		if (!$this->getDryrun()) {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_forms', $formProperties);
 			$formUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			$this->localizationRelations['form'][$form['uid']] = $formUid;
 		}
 
 		// create pages
@@ -213,19 +236,23 @@ class FormConverter {
 			'pid' => ($configuration['save'] === '[samePage]' ? $form['pid'] : intval($configuration['save'])),
 			'forms' => $formUid,
 			'title' => $page['title'],
-			'css' => $page['class'],
+			'css' => $this->getValueIfDefaultLanguage($page, 'class'),
 			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
 			'hidden' => $page['hidden'],
 			'tstamp' => time(),
 			'crdate' => time(),
-			'sorting' => $page['sorting'],
-			'l10n_parent' => 0, // TODO
-			'sys_language_uid' => 0 // TODO
+			'sorting' => $page['sorting']
 		);
+		if ($page['sys_language_uid'] > 0) {
+			$pageProperties['sys_language_uid'] = $page['sys_language_uid'];
+			$pageProperties['l10n_parent'] = $this->localizationRelations['page'][$page['l18n_parent']];
+			unset($pageProperties['forms']);
+		}
 		$this->result[$formCounter]['_pages'][$pageCounter] = $pageProperties;
 		if (!$this->getDryrun()) {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_pages', $pageProperties);
 			$pageUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			$this->localizationRelations['page'][$page['uid']] = $pageUid;
 		}
 
 		// create fields
@@ -257,32 +284,37 @@ class FormConverter {
 			'pages' => $pageUid,
 			'title' => $field['title'],
 			'type' => $this->rewriteFormType($field),
-			'css' => $this->rewriteStyles($field['class']),
+			'css' => $this->rewriteStyles($field),
 			'cruser_id' => $GLOBALS['BE_USER']->user['uid'],
 			'hidden' => $field['hidden'],
 			'sorting' => $field['sorting'],
-			'marker' => 'UID' . $field['uid'],
+			'marker' => $this->getMarker($field),
 			'settings' => $field['options'],
-			'path' => $field['path'],
+			'path' => $this->getValueIfDefaultLanguage($field, 'path'),
 			'content_element' => $field['path'],
 			'text' => $field['value'],
 			'prefill_value' => $this->getPrefillValue($field),
-			'feuser_value' => $field['fe_field'],
-			'mandatory' => $field['mandatory'],
-			'validation' => $this->rewriteValidation($field['validate'], $field['inputtype']),
+			'feuser_value' => $this->getValueIfDefaultLanguage($field, 'fe_field'),
+			'mandatory' => $this->getValueIfDefaultLanguage($field, 'mandatory'),
+			'validation' => $this->rewriteValidation($field),
 			'validation_configuration' => $this->rewriteValidationConfiguration($field),
 			'datepicker_settings' => $this->getDatePickerSettings($field),
+			'multiselect' => $this->getValueIfDefaultLanguage($field, 'multiple'),
 			'sender_email' => $this->isSenderEmail($form, $field),
 			'sender_name' => $this->isSenderName($form, $field),
 			'tstamp' => time(),
-			'crdate' => time(),
-			'l10n_parent' => 0, // TODO
-			'sys_language_uid' => 0 // TODO
+			'crdate' => time()
 		);
+		if ($field['sys_language_uid'] > 0) {
+			$fieldProperties['sys_language_uid'] = $field['sys_language_uid'];
+			$fieldProperties['l10n_parent'] = $this->localizationRelations['field'][$field['l18n_parent']];
+			unset($fieldProperties['pages']);
+		}
 		$this->result[$formCounter]['_pages'][$pageCounter]['_fields'][$fieldCounter] = $fieldProperties;
 		if (!$this->getDryrun()) {
 			$GLOBALS['TYPO3_DB']->exec_INSERTquery('tx_powermail_domain_model_fields', $fieldProperties);
-//			$fieldUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			$fieldUid = $GLOBALS['TYPO3_DB']->sql_insert_id();
+			$this->localizationRelations['field'][$field['uid']] = $fieldUid;
 		}
 	}
 
@@ -327,6 +359,9 @@ class FormConverter {
 	 * @return string
 	 */
 	protected function isSenderEmail($form, $field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '0';
+		}
 		if ($form['tx_powermail_sender'] === 'uid' . $field['uid']) {
 			return '1';
 		}
@@ -341,6 +376,9 @@ class FormConverter {
 	 * @return string
 	 */
 	protected function isSenderName($form, $field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '0';
+		}
 		$senderNameFields = GeneralUtility::trimExplode(',', $form['tx_powermail_sendername'], TRUE);
 		foreach ($senderNameFields as $senderNameField) {
 			if ($senderNameField === 'uid' . $field['uid']) {
@@ -357,6 +395,9 @@ class FormConverter {
 	 * @return int
 	 */
 	protected function getDatePickerSettings($field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '0';
+		}
 		if ($field['formtype'] === 'date') {
 			return 'date';
 		}
@@ -412,17 +453,21 @@ class FormConverter {
 	/**
 	 * Reformat styles
 	 *
-	 * @param $oldStyle
+	 * @param array $field
 	 * @return string
 	 */
-	protected function rewriteStyles($oldStyle) {
+	protected function rewriteStyles($field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '';
+		}
+
 		$styleTypes = array(
 //			'style1' => 'layout1',
 			'style2' => 'layout2',
 			'style3' => 'layout3'
 		);
-		if (array_key_exists($oldStyle, $styleTypes)) {
-			return $styleTypes[$oldStyle];
+		if (array_key_exists($field['class'], $styleTypes)) {
+			return $styleTypes[$field['class']];
 		}
 		return '';
 	}
@@ -430,11 +475,14 @@ class FormConverter {
 	/**
 	 * Reformat validation
 	 *
-	 * @param string $oldString
-	 * @param string $inputtype
+	 * @param array $field
 	 * @return string
 	 */
-	protected function rewriteValidation($oldString, $inputtype) {
+	protected function rewriteValidation($field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '';
+		}
+
 		$newStrings = array(
 			'validate-email' => '1',
 			'validate-url' => '2',
@@ -446,8 +494,8 @@ class FormConverter {
 			'validate-alpha-w-umlaut' => '5',
 			'validate-alphanum-w-umlaut' => ''
 		);
-		if (array_key_exists($oldString, $newStrings)) {
-			return $newStrings[$oldString];
+		if (array_key_exists($field['validate'], $newStrings)) {
+			return $newStrings[$field['validate']];
 		}
 
 		$newStrings = array(
@@ -456,8 +504,8 @@ class FormConverter {
 			'tel' => '3',
 			'time' => ''
 		);
-		if (array_key_exists($inputtype, $newStrings)) {
-			return $newStrings[$inputtype];
+		if (array_key_exists($field['inputtype'], $newStrings)) {
+			return $newStrings[$field['inputtype']];
 		}
 
 		return '';
@@ -468,6 +516,10 @@ class FormConverter {
 	 * @return string
 	 */
 	protected function rewriteValidationConfiguration($field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '';
+		}
+
 		if ($field['validate'] === 'validate-pattern') {
 			if (!empty($field['pattern'])) {
 				return $field['pattern'];
@@ -516,6 +568,33 @@ class FormConverter {
 			}
 		}
 		return $string;
+	}
+
+	/**
+	 * Return value only if default language
+	 *
+	 * @param array $array
+	 * @param string $key
+	 * @return string
+	 */
+	protected function getValueIfDefaultLanguage($array, $key) {
+		if ($array['sys_language_uid'] > 0) {
+			return '';
+		}
+		return $array[$key];
+	}
+
+	/**
+	 * Create marker
+	 *
+	 * @param array $field
+	 * @return string
+	 */
+	protected function getMarker($field) {
+		if ($field['sys_language_uid'] > 0) {
+			return '';
+		}
+		return 'UID' . $field['uid'];
 	}
 
 	/**
