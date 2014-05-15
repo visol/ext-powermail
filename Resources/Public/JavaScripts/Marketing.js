@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
 	data += '&tx_powermail_pi1[mobileDevice]=' + (isMobile() ? 1 : 0);
 	data += '&tx_powermail_pi1[referer]=' + encodeURIComponent(document.referrer);
 	jQuery.ajax({
-		url: getBaseUrl() + '/index.php?id=5&eID=powermailEidMarketing',
+		url: getBaseUrl() + '/index.php?&eID=powermailEidMarketing',
 		data: data,
 		cache: false
 	});
