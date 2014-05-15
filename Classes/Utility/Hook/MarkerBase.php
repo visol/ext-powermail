@@ -88,19 +88,28 @@ class MarkerBase {
 
 		// if form is given in GET params (open form and pages and fields via IRRE)
 		if (isset($this->data['tx_powermail_domain_model_forms'])) {
-			foreach ((array) $this->data['tx_powermail_domain_model_forms'] as $uid => $field) {
-				$field = NULL;
+			foreach (array_keys((array) $this->data['tx_powermail_domain_model_forms']) as $uid) {
 				$formUid = $uid;
 			}
 		}
 
-		// if field is directly opened (no IRRE OR opened pages with their IRRE fields)
-		foreach ((array) $this->data['tx_powermail_domain_model_fields'] as $uid => $field) {
-			$field = NULL;
-			if (isset($this->data['tx_powermail_domain_model_fields'][$uid]['pages'])) {
-				$formUid = $this->getFormUidFromRelatedPage(
-					$this->data['tx_powermail_domain_model_fields'][$uid]['pages']
-				);
+		// if pages open (fields via IRRE)
+		if ($formUid === 0) {
+			foreach (array_keys((array) $this->data['tx_powermail_domain_model_pages']) as $uid) {
+				if (!empty($this->data['tx_powermail_domain_model_pages'][$uid]['forms'])) {
+					$formUid = $this->data['tx_powermail_domain_model_pages'][$uid]['forms'];
+				}
+			}
+		}
+
+		// if field is directly opened (no IRRE OR opened pages with their IRRE fields
+		if ($formUid === 0) {
+			foreach (array_keys((array) $this->data['tx_powermail_domain_model_fields']) as $uid) {
+				if (!empty($this->data['tx_powermail_domain_model_fields'][$uid]['pages'])) {
+					$formUid = $this->getFormUidFromRelatedPage(
+						$this->data['tx_powermail_domain_model_fields'][$uid]['pages']
+					);
+				}
 			}
 		}
 
