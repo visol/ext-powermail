@@ -257,7 +257,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return string
 	 */
 	protected function getFlexFormValue($xmlArray, $key) {
-		if (isset($xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'])) {
+		if (is_array($xmlArray) && isset($xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'])) {
 			if (!empty($xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'])) {
 				return $xmlArray['data']['sDEF']['lDEF'][$key]['vDEF'];
 			}
