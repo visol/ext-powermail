@@ -63,7 +63,7 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 	 * @param $field
 	 * @return void
 	 */
-	public function isValidField(Field $field, $value) {
+	protected function isValidField(Field $field, $value) {
 
 		// Mandatory Check
 		if ($field->getMandatory()) {
