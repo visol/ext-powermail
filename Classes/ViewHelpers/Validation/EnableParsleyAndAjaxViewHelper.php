@@ -25,6 +25,11 @@ class EnableParsleyAndAjaxViewHelper extends AbstractValidationViewHelper {
 			$dataArray['data-parsley-validate'] = 'data-parsley-validate';
 		}
 
+		// add attribute for html5 validation
+		if ($this->isNativeValidationEnabled()) {
+			$dataArray['data-validate'] = 'html5';
+		}
+
 		// add ajax attribute
 		if ($this->settings['misc']['ajaxSubmit'] === '1') {
 			$dataArray['data-powermail-ajax'] = 'true';
