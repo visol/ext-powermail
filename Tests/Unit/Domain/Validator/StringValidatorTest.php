@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Powermail\Tests;
+namespace In2code\Powermail\Tests\Domain\Validator;
 
 /***************************************************************
  *  Copyright notice
