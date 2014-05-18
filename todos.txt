@@ -20,10 +20,6 @@
 - done: New PluginInformation about current Form
 - done: add a powermail 1.x form converter to 2.x
 - done: powermail_cond update
-- Adding Unit Tests
+- done: Adding Unit Tests
+- done: Create testparcour for visual tests
 - Adding RST Documentation
-- Create testparcour for visual tests
-
-Possible Problems:
-- Date Parsing from Chrome (native HTML5)
-- Add two forms to one page
