@@ -19,7 +19,7 @@
 - done: Schedulertask with CommandController to remove unused uploaded files (time)
 - done: New PluginInformation about current Form
 - done: add a powermail 1.x form converter to 2.x
-- powermail_cond update
+- done: powermail_cond update
 - Adding Unit Tests
 - Adding RST Documentation
 - Create testparcour for visual tests
