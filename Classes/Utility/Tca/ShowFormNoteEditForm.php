@@ -126,7 +126,7 @@ class ShowFormNoteEditForm {
 	 */
 	protected function getRelatedForm($pa) {
 		$flexForm = GeneralUtility::xml2array($pa['row']['pi_flexform']);
-		if (isset($flexForm['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'])) {
+		if (is_array($flexForm) && isset($flexForm['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'])) {
 			return intval($flexForm['data']['main']['lDEF']['settings.flexform.main.form']['vDEF']);
 		}
 		return 0;
