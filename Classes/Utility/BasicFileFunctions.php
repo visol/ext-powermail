@@ -45,7 +45,8 @@ class BasicFileFunctions {
 	 * @return array
 	 */
 	public static function getUniqueNamesForFileUploads($files, $destinationPath, $addPath = TRUE) {
-		if (!isset($files[0]['tmp_name'])) {
+		// stop unique function if there is no $files[0]['tmp_name']
+		if (!is_array($files[0])) {
 			return $files;
 		}
 
