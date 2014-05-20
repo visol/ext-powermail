@@ -253,7 +253,14 @@
 																<a href="{vh:Misc.Link(path:'{settings.uploadPath}{subValue}', absolute:1)}" target="_blank">
 																	<f:if condition="{vh:Condition.IsImage(path:subValue)}">
 																		<f:then>
-																			<f:image src="{settings.uploadPath}{subValue}" alt="{subValue}" width="200" maxHeight="200" />
+																			<f:if condition="{vh:Condition.FileExists(file:'{settings.uploadPath}{subValue}')}">
+																				<f:then>
+																					<f:image src="{settings.uploadPath}{subValue}" alt="{subValue}" width="200" maxHeight="200" />
+																				</f:then>
+																				<f:else>
+																					File does not exist
+																				</f:else>
+																			</f:if>
 																		</f:then>
 																		<f:else>
 																			{subValue}
