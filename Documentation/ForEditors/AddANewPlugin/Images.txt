@@ -1,0 +1,35 @@
+﻿.. |img-72|     image:: ../../Images/manual_html_38cd0997.png
+   :height: 114
+   :width: 588
+.. :align: left
+.. :border: 0
+.. :name: Grafik77
+
+.. |img-73|     image:: ../../Images/manual_html_6cfc6f3b.png
+   :height: 352
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik78
+
+.. |img-74|     image:: ../../Images/manual_html_m6161843c.png
+   :height: 492
+   :width: 594
+.. :align: left
+.. :border: 0
+.. :name: Grafik79
+
+.. |img-75|     image:: ../../Images/manual_html_441745a6.png
+   :height: 435
+   :width: 591
+.. :align: left
+.. :border: 0
+.. :name: Grafik80
+
+.. |img-76|     image:: ../../Images/manual_html_6817cf3a.png
+   :height: 363
+   :width: 594
+.. :align: left
+.. :border: 0
+.. :name: Grafik81
+
