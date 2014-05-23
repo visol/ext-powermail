@@ -31,6 +31,7 @@ You will find the plugin settings within the tab “Plugin”. In this
 area you see another four tabs (Main Settings, Receiver, Sender,
 Submit Page).
 
+|img-72b|
 
 Main Settings
 ~~~~~~~~~~~~~

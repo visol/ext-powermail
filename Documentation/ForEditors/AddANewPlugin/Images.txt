@@ -1,12 +1,16 @@
 ﻿.. |img-72|     image:: ../../Images/manual_html_38cd0997.png
-   :height: 114
    :width: 588
 .. :align: left
 .. :border: 0
 .. :name: Grafik77
 
+.. |img-72b|     image:: ../../Images/manual_html_38cd0997b.png
+   :width: 588
+.. :align: left
+.. :border: 0
+.. :name: Grafik77b
+
 .. |img-73|     image:: ../../Images/manual_html_6cfc6f3b.png
-   :height: 352
    :width: 593
 .. :align: left
 .. :border: 0
