@@ -27,16 +27,35 @@ TypoScript setup:
 
 .. code-block:: typoscript
 
-	plugin.tx_powermail.view.templateRootPath = fileadmin/templates/powermailTemplates/
-	plugin.tx_powermail.view.partialRootPath = fileadmin/templates/powermailPartials/
-	plugin.tx_powermail.view.layoutRootPath = fileadmin/templates/powermailLayouts/
+	plugin.tx_powermail.view {
+		templateRootPath = fileadmin/templates/powermailTemplates/
+		partialRootPath = fileadmin/templates/powermailPartials/
+		layoutRootPath = fileadmin/templates/powermailLayouts/
+	}
 
 Take care that all files and folders from the original path (e.g.
 typo3conf/ext/powermail/Resources/Private/Templates) are copied to the
 new location!
 
-Do not change the original templates, otherwise it's hard to update
-powermail!
+
+Since **TYPO3 6.2** it's possible to overwrite single files.
+If you want to overwrite just one file (e.g. Resources/Private/Templates/Form/Form.html)
+you can copy this file to a fileadmin folder (20) and set a fallback folder (10) for the non-existing files.
+
+.. code-block:: typoscript
+
+	plugin.tx_powermail {
+		view {
+			templateRootPath >
+			templateRootPath {
+				10 = EXT:powermail/Resources/Private/Templates/
+				20 = fileadmin/templates/powermail/Resources/Private/Templates/
+			}
+		}
+	}
+
+
+Do not change the original templates of an extension, otherwise it's hard to update the extension!
 
 
 
@@ -54,7 +73,9 @@ debug viewhelper
 
 .. code-block:: typoscript
 
-	<f:debug>{giveMeTheValuesOfThisVariable}</f:debug>
+	<f:debug>{firstname}</f:debug>
+	<f:debug>{mail}</f:debug>
+	<f:debug>{_all}</f:debug>
 
 You can also use the variables in the RTE fields in backend.
 
