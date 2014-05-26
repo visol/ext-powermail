@@ -1,5 +1,4 @@
 ﻿.. |img-82|     image:: ../../Images/manual_html_m439c0dcd.png
-   :height: 67
    :width: 568
 .. :align: left
 .. :border: 0
@@ -13,7 +12,6 @@
 .. :name: Grafik88
 
 .. |img-84|     image:: ../../Images/manual_html_m749c8297.png
-   :height: 185
    :width: 545
 .. :align: left
 .. :border: 0

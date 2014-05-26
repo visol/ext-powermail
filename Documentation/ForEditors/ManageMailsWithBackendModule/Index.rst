@@ -189,6 +189,7 @@ Reporting
 """""""""
 
 Reporting Overview - Choose
+
 - Reporting Form or
 - Reporting Marketing
 
@@ -217,6 +218,7 @@ Tools
 """""
 
 Tools Overview - Choose
+
 - Form Overview or
 - Function Check or
 - Form Converter (Admin only)
@@ -226,28 +228,136 @@ Tools Overview - Choose
 Form Overview
 ~~~~~~~~~~~~~
 
-This view helps you to get a small overview over form values.
-Filter Mails in the same way as the listing with the filter area.
-Below the Filter Area you will see some small diagrams (one diagram for each field in the form on this page).
-
 |img-81e|
+
+This is a very helpful list with all powermail forms of your installation. This table helps you to manage your forms, even in large installations.
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+      Field
+   :Description:
+      Description
+   :Explanation:
+      Explanation
+
+ - :Field:
+      Form Title
+   :Description:
+      Form Title
+   :Explanation:
+      Click on Form title will open the form edit view. Mouseover will show you the Form UID.
+
+ - :Field:
+      Stored on Page
+   :Description:
+      This form is stored in this Page
+   :Explanation:
+      Click on Page title will open the page in page view. Mouseover will show you the Page UID.
+
+ - :Field:
+      Used on Page
+   :Description:
+      This form can be used on different Pages. One line for one page.
+   :Explanation:
+      Click on a Page title will open the page in page view. Mouseover will show you the Page UID.
+
+ - :Field:
+      Powermail Pages
+   :Description:
+      Amount of Powermail Pages within this form
+   :Explanation:
+      Mouseover will show you the Powermail-Page-Names.
+
+ - :Field:
+      Powermail Fields
+   :Description:
+      Amount of Powermail Fields within this form
+   :Explanation:
+      Mouseover will show you the Powermail-Field-Names.
+
+ - :Field:
+      Edit Icon
+   :Description:
+      Edit the form
+   :Explanation:
+      Same function as click on Form name.
 
 Function Check
 ~~~~~~~~~~~~~~
 
-This view helps you to get a small overview over the most important information about your visitors.
-Filter Mails in the same way as the listing with the filter area.
-Below the Filter Area you will see some small diagrams (Referer Domain, Referer URI, Visitors Country, Visitor uses a Mobile Device, Website Language, Browser Language, Page Funnel).
-Note: To activate the marketing information, please add the Powermail Marketing Static Template to your Root page.
+This views helps you to identify problems with your TYPO3-Installation and Powermail.
+Beside some basic checks there is a mail function. This function basicly works like the main powermail mail function. Test this function if your forms don't send mails.
 
 |img-81f|
 
 Form Converter
 ~~~~~~~~~~~~~~
 
-This view helps you to get a small overview over the most important information about your visitors.
-Filter Mails in the same way as the listing with the filter area.
-Below the Filter Area you will see some small diagrams (Referer Domain, Referer URI, Visitors Country, Visitor uses a Mobile Device, Website Language, Browser Language, Page Funnel).
-Note: To activate the marketing information, please add the Powermail Marketing Static Template to your Root page.
+Old records (from Tables tx_powermail_fieldsets, tx_powermail_fields and tt_content) will be flagged with deleted=1. New Records will be generated (Tables tx_powermail_domain_model_forms, tx_powermail_domain_model_pages, tx_powermail_domain_model_fields, tt_content).
+
+Note: This view is for admins only.
+
+**Attention:** Please backup your database before converting. This step is irreversibel!
 
 |img-81g|
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+      Field
+   :Description:
+      Description
+   :Explanation:
+      Explanation
+
+ - :Field:
+      PID
+   :Description:
+      Save new forms on page with PID
+   :Explanation:
+      Choose a PID to store the converted forms in. Use "[samePage]" to keep the pid.
+
+ - :Field:
+      Receiver Name
+   :Description:
+      Default Receiver Name
+   :Explanation:
+      Powermail needs a name for the receiver name. Just add a static value.
+
+ - :Field:
+      Sender Name
+   :Description:
+      Default Sender Name for Confirmation Mail
+   :Explanation:
+      Add a static value for the sender name of the confirmation mails.
+
+ - :Field:
+      Sender Email
+   :Description:
+      Default Sender Email for Confirmation Mail
+   :Explanation:
+      Add a static value for the sender email of the confirmation mails.
+
+ - :Field:
+      RTE ParseFunc
+   :Description:
+      RTE ParseFunc Path in TypoScript (without prefix lib.)
+   :Explanation:
+      RTE fields will be converted with the ParseFunc Function of TYPO3. If you have trouble with form converting, you can also clean this value completely.
+
+ - :Field:
+      Hidden Forms
+   :Description:
+      Ignore Old Hidden Forms
+   :Explanation:
+      Check this if only old, non-hidden forms should be converted.
+
+ - :Field:
+      Test Run
+   :Description:
+      Do only a Test Run (no records will be generated or deleted)
+   :Explanation:
+      Do a testrun before and see if the result is as expected.

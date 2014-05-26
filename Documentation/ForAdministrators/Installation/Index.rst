@@ -26,46 +26,57 @@ Main configuration for powermail for CMS wide settings.
 
 |img-83|
 
+.. t3-field-list-table::
+ :header-rows: 1
 
+ - :Field:
+      Field
+   :Description:
+      Description
+   :DefaultValue:
+      Default Value
 
-**Disable IP logging**
+ - :Field:
+      Disable IP logging
+   :Description:
+      If you generally don't want to save the sender IP address in the database, you can use this checkbox.
+   :DefaultValue:
+      0
 
-If you generally don't want to save the sender IP address in the
-database, you can use this checkbox.
+ - :Field:
+      Disable BE Module
+   :Description:
+      You can disable the backend module if you don't store mails in your database or if you don't need the module.
+   :DefaultValue:
+      0
 
+ - :Field:
+      Disable Plugin Information
+   :Description:
+      Below every powermail plugin is a short info table with form settings. You can disable theese information.
+   :DefaultValue:
+      0
 
-**Disable BE Module**
+ - :Field:
+      Enable Form caching
+   :Description:
+      With this setting, you can enable the caching of the form generation, what speeds up sites with powermail forms in the frontend. On the other hand, some additional features (like prefilling values from GET paramter, etc...) are not working any more.
+   :DefaultValue:
+      0
 
-You can disable the backend module if you don't store mails in your
-database or if you don't need the module.
+ - :Field:
+      Enable Merge for l10n_mode
+   :Description:
+      All fields with l10n\_mode exclude should change their translation behaviour to mergeIfNotBlank. This allows you to have different field values in different languages.
+   :DefaultValue:
+      0
 
-
-**Disable Plugin Information**
-
-Below every powermail plugin is a short info table with form settings.
-You can disable theese information.
-
-
-**Enable Form caching**
-
-With this setting, you can enable the caching of the form generation,
-what speeds up sites with powermail forms in the frontend. On the
-other hand, some additional features (like prefilling values from GET
-paramter, etc...) are not working any more.
-
-
-**Enable Merge for l10n\_mode**
-
-All fields with l10n\_mode exclude should change their translation
-behaviour to mergeIfNotBlank. This allows you to have different field
-values in different languages.
-
-
-**ElementBrowser replaces IRRE**
-
-Editors can add pages within a form table via IRRE. If this checkbox
-is enabled, an element browser replaces the IRRE Relation.
-
+ - :Field:
+      ElementBrowser replaces IRRE
+   :Description:
+      Editors can add pages within a form table via IRRE. If this checkbox is enabled, an element browser replaces the IRRE Relation.
+   :DefaultValue:
+      0
 
 Static Templates
 """"""""""""""""
@@ -74,25 +85,30 @@ Add powermail static templates for full functions
 
 |img-84|
 
-**Main Template (powermail)**
+.. t3-field-list-table::
+ :header-rows: 1
 
-Main functions and settings for any powermail form.
+ - :Field:
+      Field
+   :Description:
+      Description
 
+ - :Field:
+      Main Template (powermail)
+   :Description:
+      Main functions and settings for all powermail forms.
 
-**Add fancy CSS (powermail)**
+ - :Field:
+      Add Demo CSS (powermail)
+   :Description:
+      If you want to include a default CSS-File for forms and lists, add this template.
 
-If you want to have default CSS settings for powermail forms, check
-this template.
+ - :Field:
+      Powermail_Frontend (powermail)
+   :Description:
+      If you want to use powermail_frontend (Pi2), choose this template.
 
-
-**Powermail\_Frontend (powermail)**
-
-If you want to use powermail\_frontend (Pi2), choose this template.
-
-
-**Marketing Information (powermail)**
-
-If you add this template, a userFunc is added to this page (and all
-pages below). The userFunc tracks the behaviour of the user to provide
-marketing information (google Searchterm, Funnel, etc...)
-
+ - :Field:
+      Marketing Information (powermail)
+   :Description:
+      If you want to see some marketing information about your visitors, you have to add this Template to your root Template. An AJAX function (needs jQuery) sends basic information to a powermail script (Visitors Country, Page Funnel, etc...). Since powermail 2.1.x you can use static_filecache, because we removed the USER_INT function.

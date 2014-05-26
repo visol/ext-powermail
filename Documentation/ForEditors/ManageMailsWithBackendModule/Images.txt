@@ -43,3 +43,27 @@
 .. :align: left
 .. :border: 0
 .. :name: Grafik86
+
+.. |img-81d|     image:: ../../Images/manual_html_m45e59382d.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86
+
+.. |img-81e|     image:: ../../Images/manual_html_m45e59382e.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86
+
+.. |img-81f|     image:: ../../Images/manual_html_m45e59382f.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86
+
+.. |img-81g|     image:: ../../Images/manual_html_m45e59382g.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86
