@@ -26,3 +26,20 @@
 .. :border: 0
 .. :name: Grafik86
 
+.. |img-81a|     image:: ../../Images/manual_html_m45e59382a.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86
+
+.. |img-81b|     image:: ../../Images/manual_html_m45e59382b.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86
+
+.. |img-81c|     image:: ../../Images/manual_html_m45e59382c.png
+   :width: 593
+.. :align: left
+.. :border: 0
+.. :name: Grafik86

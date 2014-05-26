@@ -15,8 +15,8 @@
 .. role::   php(code)
 
 
-Manage Mails with Backend Module
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mail Backend Module
+^^^^^^^^^^^^^^^^^^^
 
 Open the Mail Backend Module and choose a page in the foldertree. All mails are listed.
 
@@ -185,15 +185,69 @@ CSV format.
    :Explanation:
       See Row before for an explanation.
 
-Mail List
+Reporting
 """""""""
 
-If the page contains mails, all mails will be listet. The view is
-splitted into two parts (Search Area and List Area).
+Reporting Overview - Choose
+- Reporting Form or
+- Reporting Marketing
 
-|img-79|
+|img-81a|
 
-Search Area
-~~~~~~~~~~~
+Reporting (Form)
+~~~~~~~~~~~~~~~~
 
-Search Area is useful to filter the mails (of the List Area) and to
+This view helps you to get a small overview over form values.
+Filter Mails in the same way as the listing with the filter area.
+Below the Filter Area you will see some small diagrams (one diagram for each field in the form on this page).
+
+|img-81b|
+
+Reporting (Marketing)
+~~~~~~~~~~~~~~~~~~~~~
+
+This view helps you to get a small overview over the most important information about your visitors.
+Filter Mails in the same way as the listing with the filter area.
+Below the Filter Area you will see some small diagrams (Referer Domain, Referer URI, Visitors Country, Visitor uses a Mobile Device, Website Language, Browser Language, Page Funnel).
+Note: To activate the marketing information, please add the Powermail Marketing Static Template to your Root page.
+
+|img-81c|
+
+Tools
+"""""
+
+Tools Overview - Choose
+- Form Overview or
+- Function Check or
+- Form Converter (Admin only)
+
+|img-81d|
+
+Form Overview
+~~~~~~~~~~~~~
+
+This view helps you to get a small overview over form values.
+Filter Mails in the same way as the listing with the filter area.
+Below the Filter Area you will see some small diagrams (one diagram for each field in the form on this page).
+
+|img-81e|
+
+Function Check
+~~~~~~~~~~~~~~
+
+This view helps you to get a small overview over the most important information about your visitors.
+Filter Mails in the same way as the listing with the filter area.
+Below the Filter Area you will see some small diagrams (Referer Domain, Referer URI, Visitors Country, Visitor uses a Mobile Device, Website Language, Browser Language, Page Funnel).
+Note: To activate the marketing information, please add the Powermail Marketing Static Template to your Root page.
+
+|img-81f|
+
+Form Converter
+~~~~~~~~~~~~~~
+
+This view helps you to get a small overview over the most important information about your visitors.
+Filter Mails in the same way as the listing with the filter area.
+Below the Filter Area you will see some small diagrams (Referer Domain, Referer URI, Visitors Country, Visitor uses a Mobile Device, Website Language, Browser Language, Page Funnel).
+Note: To activate the marketing information, please add the Powermail Marketing Static Template to your Root page.
+
+|img-81g|
