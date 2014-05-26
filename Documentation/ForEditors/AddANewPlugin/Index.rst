@@ -151,7 +151,7 @@ Explanation
       | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
       | - or mix dynamic and static values
    :Tab:
-      Receiver
+      Mail to Receiver
 
  - :Field:
       Receivers Mail
@@ -163,7 +163,7 @@ Explanation
       | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
       | - or mix dynamic and static values
    :Tab:
-      Receiver
+      Mail to Receiver
 
  - :Field:
       Frontend User Group
@@ -172,7 +172,7 @@ Explanation
    :Explanation:
       Select an existing group to send the mail to all users of a given group.
    :Tab:
-      Receiver
+      Mail to Receiver
 
  - :Field:
       Subject
@@ -184,7 +184,7 @@ Explanation
       | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
       | - or mix dynamic and static values
    :Tab:
-      Receiver
+      Mail to Receiver
 
  - :Field:
       Bodytext
@@ -197,7 +197,7 @@ Explanation
       | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
       | - or mix dynamic and static values
    :Tab:
-      Receiver
+      Mail to Receiver
 
 Sender
 ~~~~~~
@@ -211,105 +211,60 @@ Example Configuration
 Explanation
 '''''''''''
 
-.. ### BEGIN~OF~TABLE ###
+.. t3-field-list-table::
+ :header-rows: 1
 
-.. container:: table-row
+ - :Field:
+      Field
+   :Description:
+      Description
+   :Explanation:
+      Explanation
+   :Tab:
+      Tab
 
-   Field
-         Senders Name
+ - :Field:
+      Senders Name
+   :Description:
+      Add the name of the sender for confirmation mail.
+   :Explanation:
+      Add the name of the sender for the mail that will be send as confirmation mail back to the user. That is normally a static value. If you want to overwrite it or set it dynamically, please use TypoScript (see Setup).
+   :Tab:
+      Mail to User
 
-   Description
-         Add the name of the sender.
+ - :Field:
+      Sender Email
+   :Description:
+      Add the email address of the sender for confirmation mail.
+   :Explanation:
+      Add the email of the sender for the mail that will be send as confirmation mail back to the user. That is normally a static value. If you want to overwrite it or set it dynamically, please use TypoScript (see Setup).
+   :Tab:
+      Mail to User
 
-   Explanation
-         \- Add a static value
+ - :Field:
+      Subject
+   :Description:
+      Subject for confirmation mail to sender. Leaving subject empty disables the mail to the sender.
+   :Explanation:
+      | - Add a static value
+      | - Add a variable like {firstname}
+      | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
+      | - or mix dynamic and static values
+   :Tab:
+      Mail to User
 
-         \- Add a variable like {firstname}
-
-         \- Add a viewhelper call like
-         {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from
-         TypoScript or a userFunc
-
-         \- or mix dynamic and static values
-
-   Tab
-         Sender
-
-
-.. container:: table-row
-
-   Field
-         Senders Email
-
-   Description
-         Add the email address of the sender.
-
-   Explanation
-         \- Add one or more static values (split with a new line)
-
-         \- Add a variable like {email}
-
-         \- Add a viewhelper call like
-         {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from
-         TypoScript or a userFunc
-
-         \- or mix dynamic and static values
-
-   Tab
-         Sender
-
-
-.. container:: table-row
-
-   Field
-         Subject
-
-   Description
-         Subject for mail to sender. Leaving subject empty disables the mail to
-         the sender.
-
-   Explanation
-         \- Add a static value
-
-         \- Add a variable like {firstname}
-
-         \- Add a viewhelper call like
-         {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from
-         TypoScript or a userFunc
-
-         \- or mix dynamic and static values
-
-   Tab
-         Sender
-
-
-.. container:: table-row
-
-   Field
-         Bodytext
-
-   Description
-         Add some text for the mail to the sender.
-
-   Explanation
-         \- Add a static value
-
-         \- Add {powermail\_all} to get all values from the form in one table
-         (with labels)
-
-         \- Add a variable like {firstname}
-
-         \- Add a viewhelper call like
-         {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from
-         TypoScript or a userFunc
-
-         \- or mix dynamic and static values
-
-   Tab
-         Sender
-
-
-.. ###### END~OF~TABLE ######
+ - :Field:
+      Bodytext
+   :Description:
+      Add some text for the confirmation mail to sender.
+   :Explanation:
+      | - Add a static value
+      | - Add {powermail_all} to get all values from the form in one table (with labels)
+      | - Add a variable like {firstname}
+      | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
+      | - or mix dynamic and static values
+   :Tab:
+      Mail to User
 
 
 Submit Page
@@ -324,49 +279,37 @@ Example Configuration
 Explanation
 '''''''''''
 
-.. ### BEGIN~OF~TABLE ###
+.. t3-field-list-table::
+ :header-rows: 1
 
-.. container:: table-row
+ - :Field:
+      Field
+   :Description:
+      Description
+   :Explanation:
+      Explanation
+   :Tab:
+      Tab
 
-   Field
-         Text on submit page
+ - :Field:
+      Text on submit page
+   :Description:
+      Add some text for submit message. This text will be shown right after a successful submit.
+   :Explanation:
+      | - Add a static value
+      | - Add {powermail_all} to get all values from the form in one table (with labels)
+      | - Add a variable like {firstname}
+      | - Add a viewhelper call like {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from TypoScript or a userFunc
+      | - or mix dynamic and static values
+   :Tab:
+      Submit Page
 
-   Description
-         Add some text for submit message.
-
-   Explanation
-         \- Add a static value
-
-         \- Add {powermail\_all} to get all values from the form in one table
-         (with labels)
-
-         \- Add a variable like {firstname}
-
-         \- Add a viewhelper call like
-         {f:cObject(typoscriptObjectPath:'lib.test')} to get a value from
-         TypoScript or a userFunc
-
-         \- or mix dynamic and static values
-
-   Tab
-         Submit Page
-
-
-.. container:: table-row
-
-   Field
-         Redirect
-
-   Description
-         Add a redirect target instead of adding text (see row above).
-
-   Explanation
-         As soon as you enter a value, the user will be redirected to a target
-         on submit (internal page, external URL, document, mail address)
-
-   Tab
-         Submit Page
-
-
-.. ###### END~OF~TABLE ######
-
+ - :Field:
+      Redirect
+   :Description:
+      Add a redirect target instead of adding text (see row above).
+   :Explanation:
+      As soon as the form is submitted, the user will be redirected to the target
+      (internal page, external URL, document, mail address), even if there are values in the field "Text on submit page"
+   :Tab:
+      Submit Page

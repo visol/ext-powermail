@@ -18,8 +18,7 @@
 Manage Mails with Backend Module
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Choose a page where some mails from powermail are stored and open the
-powermail Backend Module on the left side.
+Open the Mail Backend Module and choose a page in the foldertree. All mails are listed.
 
 |img-77|
 
@@ -40,126 +39,86 @@ Search Area
 
 Search Area is useful to filter the mails (of the List Area) and to
 manage the Export.
+- Click on **Extended Search** opens some more fields which can be used for filtering
+- Clock on **Extended Export Settings** allows you to set the export columns
 
 |img-80|
 
-.. ### BEGIN~OF~TABLE ###
+.. t3-field-list-table::
+ :header-rows: 1
 
-.. container:: table-row
+ - :Field:
+      Field
+   :Description:
+      Description
+   :Explanation:
+      Explanation
 
-   Field
-         Fulltext Search
+ - :Field:
+      Fulltext Search
+   :Description:
+      This is the main search field for a full text search.
+   :Explanation:
+      If you enter a searchterm all fields of the mail and of the answers
+      are searched by your term (technical note: OR and LIKE %term%)
 
-   Description
-         This is the main search field for a full text search.
+ - :Field:
+      Filter List Button
+   :Description:
+      Submit Button for search.
+   :Explanation:
+      This is the main submit button which should be clicked if you're using
+      the fulltext search, even if you use some other fields (like Start, Stop, etc...).
 
-   Additional Explanation
-         If you enter a searchterm all fields of the mail and of the answers
-         are searched by your term (technical note: OR and LIKE %term%)
+ - :Field:
+      Start
+   :Description:
+      Choose a Start Date for the filter list.
+   :Explanation:
+      A datepicker will be opened on click (if the browser do not respect html5 datetime) to set Date and Time for the beginning of the timeframe.
 
+ - :Field:
+      Stop
+   :Description:
+      Choose a Stop Date for the filter list.
+   :Explanation:
+      A datepicker will be opened on click (if the browser do not respect html5 datetime) to set Date and Time for the ending of the timeframe.
 
-.. container:: table-row
+ - :Field:
+      Sender Name
+   :Description:
+      Search through the sender name field of the stored mail.
+   :Explanation:
+      All fields are related to each other with OR.
 
-   Field
-         Filter List Button
+ - :Field:
+      Sender Email
+   :Description:
+      Search through the sender email field of the stored mail.
+   :Explanation:
+      All fields are related to each other with OR.
 
-   Description
-         Submit Button for search.
+ - :Field:
+      Subject
+   :Description:
+      Search through the subjtect field of the stored mail.
+   :Explanation:
+      All fields are related to each other with OR.
 
-   Additional Explanation
-         This is the main submit button which should be clicked if you're using
-         the fulltext search field or any other search field.
+ - :Field:
+      Deactivated Mails
+   :Description:
+      Show only activated or deactivated mails.
+   :Explanation:
+      Deactivated mails could be interesting if you use Double-Opt-In e.g.
 
-
-.. container:: table-row
-
-   Field
-         Start
-
-   Description
-         Choose a Start Date for the filter list.
-
-   Additional Explanation
-         Date starts on 0:00 o'clock. Clicking into the field opens a
-         datepicker.
-
-
-.. container:: table-row
-
-   Field
-         Stop
-
-   Description
-         Choose a Stop Date for the filter list.
-
-   Additional Explanation
-         Date starts on 0:00 o'clock. Clicking into the field opens a
-         datepicker.Example: From 1.1.2012 up to 2.1.2012 filter emails of 24h.
-
-
-.. container:: table-row
-
-   Field
-         Sender Name
-
-   Description
-         Search through the sender name field of the stored mail.
-
-   Additional Explanation
-         All fields are related to each other with OR.
-
-
-.. container:: table-row
-
-   Field
-         Sender Email
-
-   Description
-         Search through the sender email field of the stored mail.
-
-   Additional Explanation
-         All fields are related to each other with OR.
-
-
-.. container:: table-row
-
-   Field
-         Subject
-
-   Description
-         Search through the subjtect field of the stored mail.
-
-   Additional Explanation
-         All fields are related to each other with OR.
-
-
-.. container:: table-row
-
-   Field
-         Deactivated Mails
-
-   Description
-         Show only activated or deactivated mails.
-
-   Additional Explanation
-         Deactivated mails could be interesting if you use Double-Opt-In e.g.
-
-
-.. container:: table-row
-
-   Field
-         Additional Fields
-
-   Description
-         Clicking on the green Plus Symbol opens a list of all fields (e.g.
-         firstname, lastname, email, etc...) from the form.
-
-   Additional Explanation
-         All fields are related to each other with OR.
-
-
-.. ###### END~OF~TABLE ######
-
+ - :Field:
+      Additional Fields
+   :Description:
+      Clicking on the green Plus Symbol opens a list of all fields (e.g.
+      firstname, lastname, email, etc...) from the form.
+   :Explanation:
+      All fields are related to each other with OR.
 
 Export Area
 ~~~~~~~~~~~
@@ -169,86 +128,72 @@ CSV format.
 
 |img-81|
 
-.. ### BEGIN~OF~TABLE ###
+.. t3-field-list-table::
+ :header-rows: 1
 
-.. container:: table-row
+ - :Field:
+      Field
+   :Description:
+      Description
+   :Explanation:
+      Explanation
 
-   Field
-         Field:
+ - :Field:
+      XLS Icon
+   :Description:
+      If you want to export the current list in XLS-Format, click the icon.
 
-   Description
-         Description:
+      XLS-Files can be opened with Microsoft Excel or Open Office (e.g.).
+   :Explanation:
+      If you filter or sort the list before, the export will only export the
+      filtered mails.
 
-   Additional Explanation
-         Additional Explanation:
+      See “Columns in Export File” if you want to change the export file
+      columns.
 
+ - :Field:
+      CSV Icon
+   :Description:
+      If you want to export the current list in CSV-Format, click the icon.
 
-.. container:: table-row
+      CSV-Files can be opened with Microsoft Excel or Open Office (e.g.).
+   :Explanation:
+      If you filter or sort the list before, the export will only export the
+      filtered mails.
 
-   Field
-         XLS Icon
+      See “Columns in Export File” if you want to change the export file
+      columns.
 
-   Description
-         If you want to export the current list in XLS-Format, click the icon.
+ - :Field:
+      Columns in Export File
+   :Description:
+      This area shows the columns and the ordering of the rows in the
+      export-file.Play around with drag and drop.
+   :Explanation:
+      Change sorting: Drag and drop a line up or down
 
-         XLS-Files can be opened with Microsoft Excel or Open Office (e.g.).
+      Add row: Choose a line of the “Available Columns” and drop on “Columns
+      in Export File”
 
-   Additional Explanation
-         If you filter or sort the list before, the export will only export the
-         filtered mails.
+      Remove row: Drag line and move to the “Available Columns”
 
-         See “Columns in Export File” if you want to change the export file
-         columns.
+ - :Field:
+      Available Columns
+   :Description:
+      This area shows the available columns that can be used in the export
+      file.
+   :Explanation:
+      See Row before for an explanation.
 
+Mail List
+"""""""""
 
-.. container:: table-row
+If the page contains mails, all mails will be listet. The view is
+splitted into two parts (Search Area and List Area).
 
-   Field
-         CSV Icon
+|img-79|
 
-   Description
-         If you want to export the current list in CSV-Format, click the icon.
+Search Area
+~~~~~~~~~~~
 
-         CSV-Files can be opened with Microsoft Excel or Open Office (e.g.).
-
-   Additional Explanation
-         If you filter or sort the list before, the export will only export the
-         filtered mails.
-
-         See “Columns in Export File” if you want to change the export file
-         columns.
-
-
-.. container:: table-row
-
-   Field
-         Columns in Export File
-
-   Description
-         This area shows the columns and the ordering of the rows in the
-         export-file.Play around with drag and drop.
-
-   Additional Explanation
-         Change sorting: Drag and drop a line up or down
-
-         Add row: Choose a line of the “Available Columns” and drop on “Columns
-         in Export File”
-
-         Remove row: Drag line and move to the “Available Columns”
-
-
-.. container:: table-row
-
-   Field
-         Available Columns
-
-   Description
-         This area shows the available columns that can be used in the export
-         file.
-
-   Additional Explanation
-         See Row before for an explanation.
-
-
-.. ###### END~OF~TABLE ######
-
+Search Area is useful to filter the mails (of the List Area) and to
