@@ -385,8 +385,8 @@ see which checks failed and the overall Spam Factor.
    3: Viagra and Free P0rn
    See link on http://freeporn.de or http://freeporn.com
 
-You can also enable the Spamshield Debug output to see the Methods
-which are failed above the form. Enable with TypoScript setup:
+You can also enable the Spamshield Debug to see the Methods
+which are failed above the form. Enable with TypoScript setup (Use extension devlog to see this settings):
 
 ::
 
@@ -415,51 +415,67 @@ Example for tt\_address:
 	plugin.tx_powermail.settings.setup {
 		# Save values to any table (example for tt_adress)
 		dbEntry {
-			# enable or disable db entry for tt_address
-			tt_address._enable = TEXT
-			tt_address._enable.value = 1
-			# write only if field email is not yet filled with current value
-			# (update: update values of existing entry)
-			# (none: no entry if field is filled)
-			# (disable: always add values don't care about existing values)
-			tt_address._ifUnique.email = update
-			# add mm relation to uid 2 of tt_address_group (via mm table)
-			tt_address._mm = COA
-			tt_address._mm.10 = COA
-			# 1 is always the mm table
-			tt_address._mm.10.1 = TEXT
-			tt_address._mm.10.1.value = tt_address_group_mm
-			# 2 is always the second table (e.g. categories table)
-			tt_address._mm.10.2 = TEXT
-			tt_address._mm.10.2.value = tt_address_group
-			# 3 is always the uid of a data record of the second table to get a relation to this (in this case uid 1 of tt_address_group)
-			tt_address._mm.10.3 = TEXT
-			tt_address._mm.10.3.value = 1
-			# fill table "tt_address" with field "email" with a static value => mail@mail.com
-			tt_address.email = TEXT
-			tt_address.email.value = mail@mail.com
-			# fill table "tt_address" with field "pid" with the current pid (e.g. 12)
-			tt_address.pid = TEXT
-			tt_address.pid.data = TSFE:id
-			# fill table "tt_address" with field "tstamp" with the current time as timestamp (like 123456789)
-			tt_address.tstamp = TEXT
-			tt_address.tstamp.data = date:U
-			# fill table "tt_address" with field "address" with the current formatted time (like "Date: 20.01.2013")
-			tt_address.address = TEXT
-			tt_address.address.data = date:U
-			tt_address.address.strftime = Date: %d.%m.%Y
-			tt_address.address.strftime = Date: %d.%m.%Y
-			# fill table "tt_address" with field "name" with the value from powermail {firstname}
-			tt_address.address.strftime = Date: %d.%m.%Y
-			tt_address.name = TEXT
-			tt_address.address.strftime = Date: %d.%m.%Y
-			tt_address.name.field = firstname
-			# fill table "tt_address" with field "last_name" with the value from powermail {lastname}
-			tt_address.last_name = TEXT
-			tt_address.last_name.field = lastname
-			# fill table "tt_address" with field "company" with the value from powermail {company}
-			tt_address.company = TEXT
-			tt_address.company.field = company
+			#####################################################
+				### EXAMPLE for adding values to table tt_address ###
+				#####################################################
+
+				# Enable or disable db entry for table tt_address
+				tt_address._enable = TEXT
+				tt_address._enable.value = 1
+
+				# Write only if any field is not yet filled with current value (e.g. test if an email is already in database)
+					# default: always add new records (don't care about existing values)
+					# update: update record if there is an existing entry (e.g. if email is already there)
+					# none: no entry if field is filled (do nothing if record already exists)
+				tt_address._ifUnique.email = update
+
+				# Fill new record of table "tt_address" with field "email" with a static value => mail@mail.com
+				tt_address.email = TEXT
+				tt_address.email.value = mail@mail.com
+
+				# Fill new record of table "tt_address" with field "pid" with the current pid (e.g. 12)
+				tt_address.pid = TEXT
+				tt_address.pid.data = TSFE:id
+
+				# Fill new record of table "tt_address" with field "tstamp" with the current time as timestamp (like 123456789)
+				tt_address.tstamp = TEXT
+				tt_address.tstamp.data = date:U
+
+				# Fill new record of table "tt_address" with field "address" with the current formatted time (like "Date: 20.01.2013")
+				tt_address.address = TEXT
+				tt_address.address.data = date:U
+				tt_address.address.strftime = Date: %d.%m.%Y
+
+				# Fill new record of table "tt_address" with field "name" with the value from powermail {firstname}
+				tt_address.name = TEXT
+				tt_address.name.field = firstname
+
+				# Fill new record of table "tt_address" with field "last_name" with the value from powermail {lastname}
+				tt_address.last_name = TEXT
+				tt_address.last_name.field = lastname
+
+				# Fill new record of table "tt_address" with field "company" with the value from powermail {company}
+				tt_address.company = TEXT
+				tt_address.company.field = company
+
+
+
+				##############################################################
+				### EXAMPLE for adding values to table tt_address_group_mm ###
+				### Add relation to an existing address group with uid 123 ###
+				##############################################################
+
+				# Enable or disable db entry for table tt_address_group_mm
+				tt_address_group_mm._enable = TEXT
+				tt_address_group_mm._enable.value = 1
+
+				# Fill new record of table "tt_address_group_mm" with field "uid_local" with uid of tt_address record that was just created before with .field=uid_[tablename]
+				tt_address_group_mm.uid_local = TEXT
+				tt_address_group_mm.uid_local.field = uid_tt_address
+
+				# Fill new record of table "tt_address_group_mm" with field "uid_foreign" with uid 123
+				tt_address_group_mm.uid_foreign = TEXT
+				tt_address_group_mm.uid_foreign.value = 123
 		}
 	}
 
@@ -484,9 +500,12 @@ See TypoScript Settings example:
 			# Send Form values to CRM like salesforce or eloqua
 			sendPost {
 				# Activate sendPost (0/1)
-				_enable = 1
+				_enable = TEXT
+				_enable.value = 0
+
 				# Target URL for POST values (like http://www.target.com/target.php)
 				targetUrl = http://eloqua.com/e/f.aspx
+
 				# build your post values like &param1=value1&param2=value2
 				values = COA
 				values {
@@ -496,12 +515,14 @@ See TypoScript Settings example:
 						field = vorname
 						wrap = &firstname=|
 					}
+
 					20 = TEXT
 					20 {
 						# value from field {e_mail}
 						field = e_mail
 						wrap = &email=|
 					}
+
 					30 = TEXT
 					30 {
 						# value from field {comment}
@@ -509,7 +530,8 @@ See TypoScript Settings example:
 						wrap = &text=|
 					}
 				}
-				# activate debug mode - shows all configuration from curl settings
+
+				# activate debug - log all configuration from curl settings to devlog (use extension devlog to view this values)
 				debug = 0
 			}
 		}
@@ -522,13 +544,10 @@ See TypoScript Settings example:
 Debug Powermail
 ^^^^^^^^^^^^^^^
 
-With TypoScript it's possible to enable some Frontend-Debug-Output
+With TypoScript it's possible to enable some Devlog Output,
 which could help you to fix problems or a misconfiguration.
 
-You do not need an additional extension to show the debug output. The
-method t3lib\_utility\_Debug::debug is used. With this it's possible
-to focus the debug output only for a defined IP-Adress (see TYPO3
-Install Tool).
+You need an additional extension to show the debug output (e.g. "devlog").
 
 Reference
 """""""""
