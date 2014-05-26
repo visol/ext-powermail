@@ -471,6 +471,12 @@
 			<trans-unit id="BackendOverviewCol5">
 				<source>Powermail Fields</source>
 			</trans-unit>
+			<trans-unit id="BackendOverviewPages">
+				<source>Page(s)</source>
+			</trans-unit>
+			<trans-unit id="BackendOverviewFields">
+				<source>Field(s)</source>
+			</trans-unit>
 			<trans-unit id="BackendOverviewNoForms">
 				<source>No Forms found</source>
 			</trans-unit>

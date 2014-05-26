@@ -90,12 +90,12 @@
 								</td>
 								<td nowrap="nowrap" class="col-title">
 									<span title="{vh:String.ImplodeField(objects:form.pages, field:'title', separator:', ')}">
-										<f:count>{form.pages}</f:count> Seiten
+										<f:count>{form.pages}</f:count> <f:translate key="BackendOverviewPages">Pages</f:translate>
 									</span>
 								</td>
 								<td nowrap="nowrap" class="col-title">
 									<span title="{vh:String.ImplodeField(objects:'{vh:Getter.GetFieldsFromForm(form:form)}', separator:', ')}">
-										<f:count><vh:Getter.GetFieldsFromForm form="{form}" /></f:count> Felder
+										<f:count><vh:Getter.GetFieldsFromForm form="{form}" /></f:count> <f:translate key="BackendOverviewFields">Fields</f:translate>
 									</span>
 								</td>
 								<td nowrap="nowrap" class="col-title">

@@ -628,6 +628,14 @@
 				<source>Powermail Fields</source>
 				<target state="translated">Powermail Felder</target>
 			</trans-unit>
+			<trans-unit id="BackendOverviewPages">
+				<source>Page(s)</source>
+				<target state="translated">Seite(n)</target>
+			</trans-unit>
+			<trans-unit id="BackendOverviewFields">
+				<source>Field(s)</source>
+				<target state="translated">Feld(er)</target>
+			</trans-unit>
 			<trans-unit id="BackendOverviewNoForms">
 				<source>No Forms found</source>
 				<target state="translated">Keine Formulare zum Anzeigen vorhanden</target>
