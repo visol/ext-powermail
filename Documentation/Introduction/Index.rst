@@ -61,8 +61,16 @@ University Package
 Powermail 2.1 was mainly supported from a consortium of german universities and colleges.
 We want to thank them for their trust in powermail and the further development. See **UP** for features which are part of the University Package.
 
-- TUM (Technische Universität München)
-- Some more... /TODO
+- h‐da Hochschule Darmstadt – University of Applied Sciences
+- Leibniz Universität Hannover
+- Technische Universität München
+- Hochschule für Wirtschaft und Umwelt Nürtingen‐Geislingen
+- Hochschule Osnabrück – University of Applied Sciences
+- Universität Rostock
+- Universität Ulm (ULM University)
+- Bauhaus‐Universität Weimar
+- Bergische Universität Wuppertal
+
 
 Facts
 ^^^^^

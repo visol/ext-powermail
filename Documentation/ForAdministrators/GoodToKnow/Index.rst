@@ -637,761 +637,656 @@ Main TypoScript
 Constants Overview
 ~~~~~~~~~~~~~~~~~~
 
-All constants should be prefixed with  plugin.tx_powermail.settings.
-
-.. container:: ts-properties
-
-=========================================================== ========================================== ===============================
-Property                                                    Type                                       Default
-=========================================================== ========================================== ===============================
-:ref:`goodtoknow-constantsmainpid`                          int+
-:ref:`goodtoknow-constantsmainform`                         text
-:ref:`goodtoknow-constantsmainconfirmation`                 boolean
-:ref:`goodtoknow-constantsmainoptin`                        boolean
-:ref:`goodtoknow-constantsmainmoresteps`                    boolean
-:ref:`goodtoknow-constantsreceiverenable`                   boolean                                    1
-:ref:`goodtoknow-constantsreceiverattachment`               boolean                                    1
-:ref:`goodtoknow-receivermailformat`                        options[both,html,text]                    both
-:ref:`goodtoknow-receiveroverwriteemail`                    text
-:ref:`goodtoknow-receiveroverwritename`                     text
-:ref:`goodtoknow-receiveroverwritesendername`               text
-:ref:`goodtoknow-receiveroverwritesenderemail`              text
-:ref:`goodtoknow-receiveroverwritesubject`                  text
-:ref:`goodtoknow-receiveroverwritecc`                       text
-:ref:`goodtoknow-receiveroverwritebcc`                      text
-:ref:`goodtoknow-receiveroverwritereturnpath`               text
-:ref:`goodtoknow-receiveroverwritereplytoemail`             text
-:ref:`goodtoknow-receiveroverwritereplytoname`              text
-:ref:`goodtoknow-receiveroverwritepriority`                 options[1,2,3,4,5]                         3
-:ref:`goodtoknow-senderenable`                              bool                                       1
-:ref:`goodtoknow-senderattachment`                          bool                                       0
-:ref:`goodtoknow-sendermailformat`                          options[both,html,plain]                   both
-:ref:`goodtoknow-senderoverwriteemail`                      text
-:ref:`goodtoknow-senderoverwritename`                       text
-:ref:`goodtoknow-senderoverwritesendername`                 text
-:ref:`goodtoknow-senderoverwritesenderemail`                text
-:ref:`goodtoknow-senderoverwritesubject`                    text
-:ref:`goodtoknow-senderoverwritecc`                         text
-:ref:`goodtoknow-senderoverwritebcc`                        text
-:ref:`goodtoknow-senderoverwritereturnpath`                 text
-:ref:`goodtoknow-senderoverwritereplytoemail`               text
-:ref:`goodtoknow-senderoverwritereplytoname`                text
-:ref:`goodtoknow-senderoverwritepriority`                   options[1,2,3,4,5]                         3
-:ref:`goodtoknow-dbenable`                                  boolean                                    1
-:ref:`goodtoknow-dbhidden`                                  boolean                                    0
-:ref:`goodtoknow-marketingenable`                           boolean                                    0
-:ref:`goodtoknow-marketinggoogleconversionid`               int+                                       1234567890
-:ref:`goodtoknow-marketinggoogleconversionlabel`            text                                       abcdefghijklmnopqrs
-:ref:`goodtoknow-marketinggoogleconversionlanguage`         text                                       en
-:ref:`goodtoknow-miscshowonlyfilledvalues`                  boolean                                    0
-:ref:`goodtoknow-mischtmlfield`                             boolean                                    0
-:ref:`goodtoknow-miscuploadfolder`                          text                                       uploads/tx\_powermail/
-:ref:`goodtoknow-miscuploadsize`                            int+                                       10000000
-:ref:`goodtoknow-miscuploadfileextensions`                  text                                       jpg,jpeg,gif,png,tif,txt,doc,docx,xls,xlsx,ppt,pptx,pdf,flv,mpg,mpeg,avi,mp3,zip,rar,ace
-:ref:`goodtoknow-miscdebugsettings`                         boolean                                    0
-:ref:`goodtoknow-miscdebugvariables`                        boolean                                    0
-:ref:`goodtoknow-miscdebugmail`                             boolean                                    0
-:ref:`goodtoknow-miscdebugsavetotable`                      boolean                                    0
-:ref:`goodtoknow-miscdebugspamshield`                       boolean                                    0
-:ref:`goodtoknow-spamshieldanable`                          boolean                                    1
-:ref:`goodtoknow-spamshieldfactor`                          int+                                       75
-:ref:`goodtoknow-spamshieldemail`                           text
-:ref:`goodtoknow-captchaimage`                              text                                       EXT:powermail/Resources/Private/Image/captcha\_bg.png
-:ref:`goodtoknow-captchafont`                               text                                       EXT:powermail/Resources/Private/Fonts/ARCADE.TTF
-:ref:`goodtoknow-captchatextcolor`                          text                                       #444444
-:ref:`goodtoknow-captchatextsize`                           int+                                       32
-:ref:`goodtoknow-textangle`                                 text                                       -5,5
-:ref:`goodtoknow-captchadistancehor`                        text                                       20,80
-:ref:`goodtoknow-captchadistancever`                        text                                       30,60
-:ref:`goodtoknow-javascriptpowermailjquery`                 text                                       https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js
-:ref:`goodtoknow-javascript.powermailjqueryui`              text                                       https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js
-=========================================================== ========================================== ===============================
-
-.. _goodtoknow-constantsmainpid:
-
-main.pid
-~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.pid =` int+
-
-Storage PID: Save mails in a defined Page (normally set via Flexform)
-
-
-.. _goodtoknow-constantsmainform:
-
-main.form
-~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.form =` text
-
-Form Uid: Commaseparated list of forms to show (normally set via Flexform)
-
-.. _goodtoknow-constantsmainconfirmation:
-
-main.confirmation
-~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.confirmation =` boolean
-
-Confirmation Page Active: Activate Confirmation Page (normally set via Flexform)
-
-
-.. _goodtoknow-constantsmainoptin:
-
-main.optin
-~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.optin =` boolean
-
-Double Optin Active: Activate Double Optin for Mail sender (normally set via Flexform)
-
-
-.. _goodtoknow-constantsmainmoresteps:
-
-main.moresteps
-~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.moresteps =`  boolean
-
-Morestep Active: Activate Morestep Forms (normally set via Flexform)
-
-
-.. _goodtoknow-constantsreceiverenable:
-
-receiver.enable
-~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiverenable =` boolean 1
-
-Receiver Mail: Enable Email to Receiver
-
-
-.. _goodtoknow-constantsreceiverattachment:
-
-receiver.attachment
-~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.attachment =`  boolean 1
-
-Receiver Attachments: Add uploaded files to emails
-
-.. _goodtoknow-receivermailformat:
-
-receiver.mailformat
-~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.mailformat =` text
-
-options[both,html,plain]    both
-
-Receiver Mail Format: Change mail format
-
-
-.. _goodtoknow-receiveroverwriteemail:
-
-receiver.overwrite.email
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.email =` text
-
-Receiver overwrite Email: Commaseparated list of mail receivers overwrites flexform settings (e.g. receiver1@mail.com,
-receiver1@mail.com)
-
-.. _goodtoknow-receiveroverwritename:
-
-receiver.overwrite.name
-~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.name =` text
-
-Receiver overwrite Name: Receiver Name overwrites flexform settings (e.g. Receiver Name)
-
-.. _goodtoknow-receiveroverwritesendername:
-
-receiver.overwrite.senderName
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.senderName =` text
-
-Receiver overwrite SenderName: Sender Name for mail to receiver
-overwrites flexform settings (e.g. Sender Name)
-
-.. _goodtoknow-receiveroverwritesenderemail:
-
-receiver.overwrite.senderEmail
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.senderEmail =` text
-
-Receiver overwrite SenderEmail: Sender Email for mail to receiver
-overwrites flexform settings (e.g. sender@mail.com)
-
-.. _goodtoknow-receiveroverwritesubject:
-
-receiver.overwrite.subject
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.subject =` text
-
-Receiver overwrite Mail Subject: Subject for mail to receiver
-overwrites flexform settings (e.g. New Mail from website)
-
-.. _goodtoknow-receiveroverwritecc:
-
-receiver.overwrite.cc
-~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.cc =` text
-
-Receiver CC Email Addresses: Commaseparated list of cc mail receivers
-(e.g. rec2@mail.com, rec3@mail.com)
-
-.. _goodtoknow-receiveroverwritebcc:
-
-receiver.overwrite.bcc
-~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.bcc =` text
-
-Receiver BCC Email Addresses: Commaseparated list of bcc mail
-receivers (e.g. rec2@mail.com, rec3@mail.com)
-
-.. _goodtoknow-receiveroverwritereturnpath:
-
-receiver.overwrite.returnPath
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.returnPath =` text
-
-Receiver Mail Return Path: Return Path for emails to receiver (e.g. return@mail.com)
-
-.. _goodtoknow-receiveroverwritereplytoemail:
-
-receiver.overwrite.replyToEmail
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.replyToEmail =` text
-
-Receiver Mail Reply Mail: Reply Email address for mail to receiver (e.g. reply@mail.com)
-
-.. _goodtoknow-receiveroverwritereplytoname:
-
-receiver.overwrite.replyToName
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.replyToName =` text
-
-Receiver Mail Reply Name: Reply Name for mail to receiver (e.g. Mr. Reply)
-
-.. _goodtoknow-receiveroverwritepriority:
-
-receiver.overwrite.priority
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.receiver.overwrite.priority =` integer
-
-options[1,2,3,4,5]       3
-
-Receiver Mail Priority: Set mail priority for mail to receiver (e.g. 3)
-
-.. _goodtoknow-senderenable:
-
-sender.enable
-~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.enable =` boolean
-
-
-boolean      1
-
-
-Sender Mail: Enable Email to Sender
-
-.. _goodtoknow-senderattachment:
-
-sender.attachment
-~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.attachment =` boolean
-
-boolean     0
-
-
-Sender Attachments: Add uploaded files to emails
-
-.. _goodtoknow-sendermailformat:
-
-sender.mailformat
-~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.mailformat =` text
-
-
-options[both,html,plain]       both
-
-
-Sender Mail Format: Change mail format
-
-.. _goodtoknow-senderoverwriteemail:
-
-sender.overwrite.email
-~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.email=` text
-
-Sender overwrite Email: Commaseparated list of mail receivers
-overwrites flexform settings (e.g. receiver1@mail.com,
-receiver1@mail.com)
-
-.. _goodtoknow-senderoverwritename:
-
-sender.overwrite.name
-~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.name =` text
-
-Sender overwrite Name: Receiver Name overwrites flexform settings (e.g. Receiver Name)
-
-.. _goodtoknow-senderoverwritesendername:
-
-sender.overwrite.senderName
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.senderName =` text
-
-Sender overwrite SenderName: Sender Name for mail to sender overwrites
-flexform settings (e.g. Sender Name)
-
-.. _goodtoknow-senderoverwritesenderemail:
-
-sender.overwrite.senderEmail
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.senderEmail =` text
-
-Sender overwrite SenderEmail: Sender Email for mail to sender
-overwrites flexform settings (e.g. sender@mail.com)
-
-.. _goodtoknow-senderoverwritesubject:
-
-sender.overwrite.subject
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.subject =` text
-
-Sender overwrite Mail Subject: Subject for mail to sender overwrites
-flexform settings (e.g. Thx for your mail)
-
-.. _goodtoknow-senderoverwritecc:
-
-sender.overwrite.cc
-~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.cc =` text
-
-Sender CC Email Addresses: Commaseparated list of cc mail receivers (e.g. rec2@mail.com, rec3@mail.com)
-
-.. _goodtoknow-senderoverwritebcc:
-
-sender.overwrite.bcc
-~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.bcc =` text
-
-Sender BCC Email Addresses: Commaseparated list of bcc mail receivers
-(e.g. rec2@mail.com, rec3@mail.com)
-
-.. _goodtoknow-senderoverwritereturnpath:
-
-sender.overwrite.returnPath
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.returnPath =` text
-
-Sender Mail Return Path: Return Path for emails to sender (e.g. return@mail.com)
-
-.. _goodtoknow-senderoverwritereplytoemail:
-
-sender.overwrite.replyToEmail
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.replyToEmail =` text
-
-Sender Mail Reply Mail: Reply Email address for mail to sender (e.g.
-reply@mail.com)
-
-.. _goodtoknow-senderoverwritereplytoname:
-
-sender.overwrite.replyToName
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.replyToName =` text
-
-Sender Mail Reply Name: Reply Name for mail to sender (e.g. Mr. Reply)
-
-.. _goodtoknow-senderoverwritepriority:
-
-sender.overwrite.priority
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.sender.overwrite.priority =` integer
-
-options[1,2,3,4,5]       3
-
-Sender Mail Priority: Set mail priority for mail to sender (e.g. 3)
-
-.. _goodtoknow-dbenable:
-
-db.enable
-~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.db.enable =` boolean
-
-boolean      1
-
-
-Storage Mails enabled: Store Mails in database
-
-.. _goodtoknow-dbhidden:
-
-db.hidden
-~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.db.hidden =` 0 | 1
-
-boolean 0
-
-Storage Hidden Mails: Add mails with hidden flag (e.g. 1)
-
-.. _goodtoknow-marketingenable:
-
-marketing.enable
-~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.marketing.enable=` 0 | 1
-
-Enable Google Conversion: Enable JavaScript for google conversion - This is interesting if you want to track every submit in your Google Adwords account for a complete conversion.
-
-boolean         0
-
-.. _goodtoknow-marketinggoogleconversionid:
-
-marketing.google_conversion_id
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.marketing.google_conversion_id=` 1234567890
-
-Google Conversion Id: Add your google conversion id (see www.google.com/adwords for details)
-
-int+     1234567890
-
-
-.. _goodtoknow-marketinggoogleconversionlabel:
-
-marketing.google_conversion_label
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.marketing.google_conversion_label=` abcdefghijklmnopqrs
-
-Google Conversion Label: Add your google conversion label (see www.google.com/adwords for details)
-
-text         abcdefghijklmnopqrs
-
-.. _goodtoknow-marketinggoogleconversionlanguage:
-
-marketing.google_conversion_language
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.marketing.google_conversion_language=` en
-
-Google Conversion Language: Add your google conversion language (see www.google.com/adwords for details)
-
-text         en
-
-.. _goodtoknow-miscshowonlyfilledvalues:
-
-misc.showOnlyFilledValues
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.showOnlyFilledValues=` 0
-
-Show only filled values: If the user submits a form, even not filled
-values are viewable. If you only want to show labels with filled
-values, use this setting
-
-boolean         0
-
-.. _goodtoknow-mischtmlfield:
-
-misc.htmlField
-~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.htmlField=` 0
-
-Misc Enable HTML Field: Per default HTML-Fields are disabled in
-powermail for security reasons. If you aware of possible XSS from your
-editors, you can enable this field type (e.g. 1)
-
-boolean         0
-
-.. _goodtoknow-miscuploadfolder:
-
-misc.uploadFolder
-~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.uploadFolder=` uploads/tx\_powermail/
-
-Misc Upload Folder: Define the folder where files should be uploaded
-with upload fields (e.g. fileadmin/uploads/)
-
-text         uploads/tx\_powermail/
-
-.. _goodtoknow-miscuploadsize:
-
-misc.uploadSize
-~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.uploadSize=` 10000000
-
-Misc Upload Filesize: Define the maximum filesize of file uploads in
-bytes (10000000 default -> 10 MByte)
-
-int+         10000000
-
-.. _goodtoknow-miscuploadfileextensions:
-
-misc.uploadFileExtensions
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.uploadFileExtensions=` jpg,jpeg,gif,png,tif,txt,doc,docx,xls,xlsx,ppt,pptx,pdf,flv,mpg,mpeg,avi,mp3,zip,rar,ace
-
-Misc Upload Fileextensions: Define the allowed filetypes with their
-extensions for fileuploads and separate them with commas (e.g.
-jpg,jpeg,gif)
-
-text         jpg,jpeg,gif,png,tif,txt,doc,docx,xls,xlsx,ppt,pptx,pdf,flv,mpg,mpeg,avi,mp3,zip,rar,ace
-
-.. _goodtoknow-miscdebugsettings:
-
-misc.debugSettings
-~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.debugSettings=` 0
-
-Debug Settings: Show all Settings from TypoScript, Flexform and Global
-Config in Frontend (e.g. 1)
-
-boolean         0
-
-.. _goodtoknow-miscdebugvariables:
-
-misc.debugVariables
-~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.debugVariables=` 0
-
-Debug Variables: Show all given Plugin variables from GET or POST
-(e.g. 1)
-
-boolean         0
-
-.. _goodtoknow-miscdebugmail:
-
-misc.debugMail
-~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.debugMail=` 0
-
-Debug Mails: Show all mail values (e.g. 1)
-
-boolean         0
-
-.. _goodtoknow-miscdebugsavetotable:
-
-misc.debugSaveToTable
-~~~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.debugSaveToTable=` 0
-
-Debug Save to Table: Show all values if you want to save powermail
-variables to another table (e.g. 1)
-
-boolean         0
-
-.. _goodtoknow-miscdebugspamshield:
-
-misc.debugSpamshield
-~~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.misc.debugSpamshield=` 0
-
-Debug Spamshield: Show Spamshield Functions (e.g. 1)
-
-boolean         0
-
-.. _goodtoknow-spamshieldanable:
-
-spamshield.enable
-~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.spamshield.enable=` 1
-
-SpamShield Active: En- or disable Spamshield for Powermail
-
-boolean         1
-
-.. _goodtoknow-spamshieldfactor:
-
-spamshield.factor
-~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.spamshield.factor=` 75
-
-Spamshield Spamfactor in %: Set limit for spamfactor in powermail
-forms in % (e.g. 85)
-
-int+         75
-
-.. _goodtoknow-spamshieldemail:
-
-spamshield.email
-~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.spamshield.email=`
-
-Spamshield Notifymail: Admin can get an email if he/she wants to get
-informed if a mail failed. Let this field empty and no mail will be
-sent (e.g. admin@mail.com)
-
-text
-
-.. _goodtoknow-captchaimage:
-
-captcha.image
-~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.image=` EXT:powermail/Resources/Private/Image/captcha\_bg.png
-
-Captcha Background: Set own captcha background image (e.g.
-fileadmin/bg.png)
-
-text         EXT:powermail/Resources/Private/Image/captcha\_bg.png
-
-.. _goodtoknow-captchafont:
-
-captcha.font
-~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.font=` EXT:powermail/Resources/Private/Fonts/ARCADE.TTF
-
-Captcha Font: Set TTF-Font for captcha image (e.g. fileadmin/font.ttf)
-
-text         EXT:powermail/Resources/Private/Fonts/ARCADE.TTF
-
-.. _goodtoknow-captchatextcolor:
-
-captcha.textColor
-~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.textColor=` #444444
-
-Captcha Text Color: Define your text color in hex code - must start with # (e.g. #ff0000)
-
-text         #444444
-
-.. _goodtoknow-captchatextsize:
-
-captcha.textSize
-~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.textSize=` 32
-
-Captcha Text Size: Define your text size in px (e.g. 24)
-
-int+         32
-
-.. _goodtoknow-textangle:
-
-captcha.textAngle
-~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.textAngle=` -5,5
-
-Captcha Text Angle: Define two different values (start and stop) for your text random angle and separate it with a comma (e.g. -10,10)
-
-text         -5,5
-
-.. _goodtoknow-captchadistancehor:
-
-captcha.distanceHor
-~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.distanceHor=` 20,80
-
-Captcha Text Distance Hor: Define two different values (start and
-stop) for your text horizontal random distance and separate it with a
-comma (e.g. 20,80)
-
-text         20,80
-
-.. _goodtoknow-captchadistancever:
-
-captcha.distanceVer
-~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.captcha.distanceVer=` 30,60
-
-Captcha Text Distance Ver: Define two different values (start and
-stop) for your text vertical random distance and separate it with a
-comma (e.g. 30,60)
-
-text         30,60
-
-
-.. _goodtoknow-javascriptpowermailjquery:
-
-javascript.powermailJQuery
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.javascript.powermailJQuery=` https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js
-
-jQuery Source: Change jQuery Source - per default it will be loaded
-from googleapis.com
-
-text         https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js
-
-.. _goodtoknow-javascript.powermailjqueryui:
-
-javascript.powermailJQueryUi
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-:typoscript:`plugin.tx_powermail.settings.main.javascript.powermailJQueryUi=` https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js
-
-jQuery UI Source: Change jQuery UI Source - per default it will be loaded from googleapis.com
-
-text         https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Constants:
+      Constants (should be prefixed with plugin.tx_powermail.settings.)
+   :Description:
+      Description
+   :Type:
+      Type
+   :Default:
+      Default
+
+ - :Constants:
+      main.pid
+   :Description:
+      Storage PID: Save mails in a defined Page (normally set via Flexform)
+   :Type:
+      int+
+   :Default:
+
+
+ - :Constants:
+      main.form
+   :Description:
+      Form Uid: Commaseparated list of forms to show (normally set via Flexform)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      main.confirmation
+   :Description:
+      Confirmation Page Active: Activate Confirmation Page (normally set via Flexform)
+   :Type:
+      bool
+   :Default:
+
+
+ - :Constants:
+      main.optin
+   :Description:
+      Double Optin Active: Activate Double Optin for Mail sender (normally set via Flexform)
+   :Type:
+      bool
+   :Default:
+
+
+ - :Constants:
+      main.moresteps
+   :Description:
+      Morestep Active: Activate Morestep Forms (normally set via Flexform)
+   :Type:
+      bool
+   :Default:
+
+
+ - :Constants:
+      validation.native
+   :Description:
+      Native Browser Validation: Validate User Input with HTML5 native browser validation on clientside
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      validation.client
+   :Description:
+      Native Browser Validation: JavaScript Browser Validation: Validate User Input with JavaScript on clientside
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      validation.server
+   :Description:
+      PHP Server Validation: Validate User Input with PHP on serverside
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      receiver.enable
+   :Description:
+      Receiver Mail: Enable Email to Receiver
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      receiver.attachment
+   :Description:
+      Receiver Attachments: Add uploaded files to emails
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      receiver.mailformat
+   :Description:
+      Receiver Mail Format: Change mail format
+   :Type:
+      options[both,html,plain]
+   :Default:
+      both
+
+ - :Constants:
+      receiver.overwrite.email
+   :Description:
+      Receiver overwrite Email: Commaseparated list of mail receivers overwrites flexform settings (e.g. receiver1@mail.com, receiver1@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.name
+   :Description:
+      Receiver overwrite Name: Receiver Name overwrites flexform settings (e.g. Receiver Name)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.senderName
+   :Description:
+      Receiver overwrite SenderName: Sender Name for mail to receiver overwrites flexform settings (e.g. Sender Name)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.senderEmail
+   :Description:
+      Receiver overwrite SenderEmail: Sender Email for mail to receiver overwrites flexform settings (e.g. sender@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.subject
+   :Description:
+      Receiver overwrite Mail Subject: Subject for mail to receiver overwrites flexform settings (e.g. New Mail from website)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.cc
+   :Description:
+      Receiver CC Email Addresses: Commaseparated list of cc mail receivers (e.g. rec2@mail.com, rec3@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.bcc
+   :Description:
+      Receiver BCC Email Addresses: Commaseparated list of bcc mail receivers (e.g. rec2@mail.com, rec3@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.returnPath
+   :Description:
+      Receiver Mail Return Path: Return Path for emails to receiver (e.g. return@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.replyToEmail
+   :Description:
+      Receiver Mail Reply Mail: Reply Email address for mail to receiver (e.g. reply@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.replyToName
+   :Description:
+      Receiver Mail Reply Name: Reply Name for mail to receiver (e.g. Mr. Reply)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.overwrite.priority
+   :Description:
+      Receiver Mail Priority: Set mail priority for mail to receiver (e.g. 3)
+   :Type:
+      options[1,2,3,4,5]
+   :Default:
+      3
+
+ - :Constants:
+      receiver.senderHeader.email
+   :Description:
+      Server-Mail: If set, the Mail-Header Sender is set (RFC 2822 - 3.6.2 Originator fields)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      receiver.senderHeader.name
+   :Description:
+      Server-Mail: If set, the Mail-Header Sender is set (RFC 2822 - 3.6.2 Originator fields)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.enable
+   :Description:
+      Sender Mail: Enable Email to Sender
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      sender.attachment
+   :Description:
+      Sender Attachments: Add uploaded files to emails
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      sender.mailformat
+   :Description:
+      Sender Mail Format: Change mail format
+   :Type:
+      options[both,html,plain]
+   :Default:
+      both
+
+ - :Constants:
+      sender.overwrite.email
+   :Description:
+      Sender overwrite Email: Commaseparated list of mail receivers overwrites flexform settings (e.g. receiver1@mail.com, receiver1@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.name
+   :Description:
+      Sender overwrite Name: Receiver Name overwrites flexform settings (e.g. Receiver Name)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.senderName
+   :Description:
+      Sender overwrite SenderName: Sender Name for mail to sender overwrites flexform settings (e.g. Sender Name)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.senderEmail
+   :Description:
+      Sender overwrite SenderEmail: Sender Email for mail to sender overwrites flexform settings (e.g. sender@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.subject
+   :Description:
+      Sender overwrite Mail Subject: Subject for mail to sender overwrites flexform settings (e.g. Thx for your mail)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.cc
+   :Description:
+      Sender CC Email Addresses: Commaseparated list of cc mail receivers (e.g. rec2@mail.com, rec3@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.bcc
+   :Description:
+      Sender BCC Email Addresses: Commaseparated list of bcc mail receivers (e.g. rec2@mail.com, rec3@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.returnPath
+   :Description:
+      Sender Mail Return Path: Return Path for emails to sender (e.g. return@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.replyToEmail
+   :Description:
+      Sender Mail Reply Mail: Reply Email address for mail to sender (e.g. reply@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.replyToName
+   :Description:
+      Sender Mail Reply Name: Reply Name for mail to sender (e.g. Mr. Reply)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.overwrite.priority
+   :Description:
+      Sender Mail Priority: Set mail priority for mail to sender (e.g. 3)
+   :Type:
+      options[1,2,3,4,5]
+   :Default:
+      3
+
+ - :Constants:
+      sender.senderHeader.email
+   :Description:
+      Server-Mail: If set, the Mail-Header Sender is set (RFC 2822 - 3.6.2 Originator fields)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      sender.senderHeader.name
+   :Description:
+      Server-Name: you can define a name along with the mail address (optional)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      db.enable
+   :Description:
+      Mail Storage enabled: Store Mails in database
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      db.hidden
+   :Description:
+      Hidden Mails in Storage: Add mails with hidden flag (e.g. 1)
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      marketing.enable
+   :Description:
+      Enable Google Conversion: Enable JavaScript for google conversion - This is interesting if you want to track every submit in your Google Adwords account for a complete conversion.
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      marketing.google_conversion_id
+   :Description:
+      Enable Google Conversion: Enable JavaScript for google conversion - This is interesting if you want to track every submit in your Google Adwords account for a complete conversion.
+   :Type:
+      int+
+   :Default:
+      1234567890
+
+ - :Constants:
+      marketing.google_conversion_label
+   :Description:
+      Google Conversion Label: Add your google conversion label (see www.google.com/adwords for details)
+   :Type:
+      text
+   :Default:
+      abcdefghijklmnopqrs
+
+ - :Constants:
+      marketing.google_conversion_language
+   :Description:
+      Google Conversion Language: Add your google conversion language (see www.google.com/adwords for details)
+   :Type:
+      text
+   :Default:
+      en
+
+ - :Constants:
+      misc.showOnlyFilledValues
+   :Description:
+      Show only filled values: If the user submits a form, even not filled values are viewable. If you only want to show labels with filled values, use this setting
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      misc.disableRemoveXss
+   :Description:
+      HTML without RemoveXSS: Per default HTML-Output is parsed through a RemoveXSS-Function to avoid Cross-Site-Scripting for security reasons. If you are aware of possible XSS-Problems, caused by editors, you can disable removeXSS and your original HTML is shown in the Frontend.
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.ajaxSubmit
+   :Description:
+      AJAX Submit Form: Submit Powermail Forms with AJAX (browser will not reload complete page)
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.uploadFolder
+   :Description:
+      Misc Upload Folder: Define the folder where files should be uploaded with upload fields (e.g. fileadmin/uploads/)
+   :Type:
+      bool
+   :Default:
+      uploads/tx_powermail/
+
+ - :Constants:
+      misc.uploadSize
+   :Description:
+      Misc Upload Filesize: Define the maximum filesize of file uploads in bytes (10000000 default -> 10 MByte)
+   :Type:
+      int+
+   :Default:
+      10000000
+
+ - :Constants:
+      misc.uploadFileExtensions
+   :Description:
+      Misc Upload Fileextensions: Define the allowed filetypes with their extensions for fileuploads and separate them with commas (e.g. jpg,jpeg,gif)
+   :Type:
+      text
+   :Default:
+      jpg,jpeg,gif,png,tif,txt,doc,docx,xls,xlsx,ppt,pptx,pdf,flv,mpg,mpeg,avi,mp3,zip,rar,ace,csv
+
+ - :Constants:
+      misc.forceJavaScriptDatePicker
+   :Description:
+      Force JavaScript Datepicker: Per default html5 Date or Datetime format is used. If you don't want to use it and want to have the same datepicker all over all browsers, you can enable this feature
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.debugSettings
+   :Description:
+      Debug Settings: Show all Settings from TypoScript, Flexform and Global Config in Devlog
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.debugVariables
+   :Description:
+      Debug Variables: Show all given Plugin variables from GET or POST in Devlog
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.debugMail
+   :Description:
+      Debug Mails: Show all mail values in Devlog
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.debugSaveToTable
+   :Description:
+      Debug Save to Table: Show all values if you want to save powermail variables to another table in Devlog
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      misc.debugSpamshield
+   :Description:
+      Debug Spamshield: Show Spamshield Functions in Devlog
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      spamshield.enable
+   :Description:
+      SpamShield Active: En- or disable Spamshield for Powermail
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      spamshield.factor
+   :Description:
+      Spamshield Spamfactor in %: Set limit for spamfactor in powermail forms in % (e.g. 85)
+   :Type:
+      int+
+   :Default:
+      75
+
+ - :Constants:
+      spamshield.email
+   :Description:
+      Spamshield Notifymail: Admin can get an email if he/she wants to get informed if a mail failed. Let this field empty and no mail will be sent (e.g. admin@mail.com)
+   :Type:
+      text
+   :Default:
+
+
+ - :Constants:
+      captcha.image
+   :Description:
+      Captcha Background: Set own captcha background image (e.g. fileadmin/bg.png)
+   :Type:
+      text
+   :Default:
+      EXT:powermail/Resources/Private/Image/captcha_bg.png
+
+ - :Constants:
+      captcha.font
+   :Description:
+      Captcha Font: Set TTF-Font for captcha image (e.g. fileadmin/font.ttf)
+   :Type:
+      text
+   :Default:
+      EXT:powermail/Resources/Private/Fonts/ARCADE.TTF
+
+ - :Constants:
+      captcha.textColor
+   :Description:
+      Captcha Text Color: Define your text color in hex code - must start with # (e.g. #ff0000)
+   :Type:
+      text
+   :Default:
+      #444444
+
+ - :Constants:
+      captcha.textSize
+   :Description:
+      Captcha Text Size: Define your text size in px (e.g. 24)
+   :Type:
+      int+
+   :Default:
+      32
+
+ - :Constants:
+      captcha.textAngle
+   :Description:
+      Captcha Text Angle: Define two different values (start and stop) for your text random angle and separate it with a comma (e.g. -10,10)
+   :Type:
+      text
+   :Default:
+      -5,5
+
+ - :Constants:
+      captcha.distanceHor
+   :Description:
+      Captcha Text Distance Hor: Define two different values (start and stop) for your text horizontal random distance and separate it with a comma (e.g. 20,80)
+   :Type:
+      text
+   :Default:
+      20,80
+
+ - :Constants:
+      captcha.distanceVer
+   :Description:
+      Captcha Text Distance Ver: Define two different values (start and stop) for your text vertical random distance and separate it with a comma (e.g. 30,60)
+   :Type:
+      text
+   :Default:
+      30,60
+
+ - :Constants:
+      javascript.addJQueryFromGoogle
+   :Description:
+      Include jQuery From Google: Add jQuery JavaScript (will be loaded from ajax.googleapis.com)
+   :Type:
+      bool
+   :Default:
+      0
+
+ - :Constants:
+      javascript.addAdditionalJavaScript
+   :Description:
+      Include additional JavaScrpt: Add additional JavaScript and CSS Files (form validation, datepicker, etc...)
+   :Type:
+      bool
+   :Default:
+      1
+
+ - :Constants:
+      javascript.powermailJQuery
+   :Description:
+      jQuery Source: Change jQuery Source - per default it will be loaded from googleapis.com
+   :Type:
+      text
+   :Default:
+      //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js
 
 
 
