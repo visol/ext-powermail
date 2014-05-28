@@ -298,9 +298,6 @@ plugin.tx_powermail {
 				datepicker {
 					# Per default html5 Date or Datetime format is used. If you don't want to use it and want to have the same datepicker all over all browsers, you can enable this feature
 					forceJavaScriptDatePicker = {$plugin.tx_powermail.settings.misc.forceJavaScriptDatePicker}
-
-					# If you use the JavaScript Datepicker, you can define the date format (see forceJavaScriptDatePicker)
-					dateFormat = {$plugin.tx_powermail.settings.misc.dateFormat}
 				}
 			}
 

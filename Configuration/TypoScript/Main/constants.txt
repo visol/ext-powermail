@@ -191,9 +191,6 @@ plugin.tx_powermail {
 			# cat=powermail_additional//1040; type=boolean; label= Force JavaScript Datepicker: Per default html5 Date or Datetime format is used. If you don't want to use it and want to have the same datepicker all over all browsers, you can enable this feature
 			forceJavaScriptDatePicker = 0
 
-			# cat=powermail_additional//0845; type=text; label= Date Format: If you use the JavaScript Datepicker, you can define the date format (see forceJavaScriptDatePicker)
-			dateFormat = %d.%m.%Y
-
 			# cat=powermail_additional//0850; type=boolean; label= Debug Settings: Show all Settings from TypoScript, Flexform and Global Config in Devlog
 			debugSettings = 0
 
