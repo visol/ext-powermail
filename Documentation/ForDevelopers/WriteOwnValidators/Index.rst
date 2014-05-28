@@ -15,6 +15,47 @@
 .. role::   php(code)
 
 
+.. _writejavascriptvalidation:
+
+Write own JavaScript Validation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Introduction
+""""""""""""
+
+Since powermail 2.1 parsley.js (Version 2.0) is in use
+
+`http://parsleyjs.org/ <http://parsleyjs.org/>`_
+
+**How to add validation with parsley.js to a form**
+
+Example form with a reqired and an email field. In addition to HTML5, this input fields are validated with parsley:
+::
+
+   <form data-parsley-validate>
+        <input type="text" name="firstname" required="required" />
+
+        <input type="email" name="email" />
+
+        <input type="submit" />
+   </form>
+
+**Write an own JavaScript Validation**
+
+::
+
+    <input type="text" data-parsley-multiple="3" data-parsley-error-message="Please try again" />
+        [...]
+    <script type="text/javascript">
+        window.ParsleyValidator
+            .addValidator('multiple', function (value, requirement) {
+                return 0 === value % requirement;
+            }, 32)
+            .addMessage('en', 'multiple', 'This value should be a multiple of %s');
+    </script>
+
+
+
 .. _writephpvalidation:
 
 Write own PHP Validation
@@ -36,34 +77,33 @@ Dispatcher within the class waits for your extension.
 SignalSlot in CustomValidator
 """""""""""""""""""""""""""""
 
+.. t3-field-list-table::
+ :header-rows: 1
 
-.. ### BEGIN~OF~TABLE ###
+ - :Class:
+      Signal Class Name
+   :Name:
+      Signal Name
+   :File:
+      Located in File
+   :Method:
+      Located in Method
 
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Domain\_Validator\_CustomValidator
-
-   Signal Name
-         isValid
-
-   Located in File
-         CustomValidator.php
-
-   Located in Method
-         isValid()
-
-
-.. ###### END~OF~TABLE ######
-
+ - :Class:
+      \In2code\Powermail\Domain\Validator\CustomValidator
+   :Name:
+      isValid
+   :File:
+      CustomValidator.php
+   :Method:
+      isValid()
 
 Call the Custom Validator from your Extension
 """""""""""""""""""""""""""""""""""""""""""""
 
-Example for TYPO3 4.6 - add a new extension (example key
-powermail\_extend).
+Add a new extension (example key powermail_extend).
 
-Example ext\_localconf.php:
+Example ext_localconf.php:
 
 ::
 

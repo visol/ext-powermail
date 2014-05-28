@@ -25,7 +25,6 @@ For Developers
    :glob:
 
    DatabaseModel/Index
-   WriteOwnPhpValidation/Index
+   WriteOwnValidators/Index
    SignalSlots/Index
    UserfuncsWithCobject/Index
-

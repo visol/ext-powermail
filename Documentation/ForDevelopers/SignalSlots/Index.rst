@@ -19,159 +19,108 @@ Signal Slots
 ^^^^^^^^^^^^
 
 Powermail offers a lot of SignalSlots (Extbase pendant to Hooks) to
-extend the functions from your extension. Please use forge.typo3.org
-if you need another signalSlot.
+extend the functions from your extension. Please report to
+forge.typo3.org if you need a new signal.
 
+.. t3-field-list-table::
+ :header-rows: 1
 
-.. ### BEGIN~OF~TABLE ###
+ - :Class:
+      Signal Class Name
+   :Name:
+      Signal Name
+   :File:
+      Located in File
+   :Method:
+      Located in Method
+   :Description:
+      Description
 
-.. container:: table-row
+ - :Class:
+      \\In2code\\Powermail\\Domain\\Validator\\CustomValidator
+   :Name:
+      isValid
+   :File:
+      CustomValidator.php
+   :Method:
+      isValid()
+   :Description:
+      Add your own serverside Validation
 
-   Signal Class Name
-         Tx\_Powermail\_Domain\_Validator\_CustomValidator
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      formActionBeforeRenderView
+   :File:
+      FormController.php
+   :Method:
+      formAction()
+   :Description:
+      Slot is called before the form is rendered
 
-   Signal Name
-         isValid
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      confirmationActionBeforeRenderView
+   :File:
+      FormController.php
+   :Method:
+      confirmationAction()
+   :Description:
+      Slot is called before the confirmation view is rendered
 
-   Located in File
-         CustomValidator.php
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      createActionBeforeRenderView
+   :File:
+      FormController.php
+   :Method:
+      createAction()
+   :Description:
+      Slot is called before the answered are stored and the mails are sent
 
-   Located in Method
-         isValid()
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      createActionAfterMailDbSaved
+   :File:
+      FormController.php
+   :Method:
+      createAction()
+   :Description:
+      Slot ist called directly after the mail was stored in the db
 
-   Description
-         Extend Powermail with your own validation
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      createActionAfterSubmitView
+   :File:
+      FormController.php
+   :Method:
+      createAction()
+   :Description:
+      Slot is called after the thx message was rendered
 
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      optinConfirmActionBeforeRenderView
+   :File:
+      FormController.php
+   :Method:
+      optinConfirmAction()
+   :Description:
+      Slot is called before the optin confirmation view is rendered (only if
+      Double-Opt-In is in use)
 
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         formActionBeforeRenderView
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         formAction()
-
-   Description
-         Slot is called before the form is rendered
-
-
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         confirmationActionBeforeRenderView
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         confirmationAction()
-
-   Description
-         Slot is called before the confirmation view is rendered
-
-
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         createActionBeforeRenderView
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         createAction()
-
-   Description
-         Slot is called before the answered are stored and the mails are sent
-
-
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         createActionAfterMailDbSaved
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         createAction()
-
-   Description
-         Slot ist called directly after the mail was stored in the db
-
-
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         createActionAfterSubmitView
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         createAction()
-
-   Description
-         Slot is called after the thx message was rendered (Only available if
-         no redirect was activated – if you use a redirect, please choose Slot
-         createActionAfterMailDbSaved)
-
-
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         optinConfirmActionBeforeRenderView
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         optinConfirmAction()
-
-   Description
-         Slot is called before the optin confirmation view is rendered (only if
-
-         Double-Opt-In is in use)
-
-
-.. container:: table-row
-
-   Signal Class Name
-         Tx\_Powermail\_Controller\_FormsController
-
-   Signal Name
-         initializeActionSettings
-
-   Located in File
-         FormsController.php
-
-   Located in Method
-         initializeAction()
-
-   Description
-         Change Settings from Flexform or TypoScript before Action is called
-
-
-.. ###### END~OF~TABLE ######
-
+ - :Class:
+      \\In2code\\Powermail\\Controller\\FormController
+   :Name:
+      initializeObjectSettings
+   :File:
+      FormController.php
+   :Method:
+      initializeObject()
+   :Description:
+      Change Settings from Flexform or TypoScript before Action is called
