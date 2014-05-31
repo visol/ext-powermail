@@ -11,14 +11,14 @@ FAQ
 Can I use old mails in powermail 2.0?
 -------------------------------------
 
-No. It's not possible to use old powermail mails with the new module. At the moment there is no update script.
+No. It's not possible to use old powermail mails with the new module. Old mails are stored in table tx_powermail_mails. This table is not accepted any more in version 2.0 or higher.
 
 .. _caniuseoldforms:
 
 Can I use old forms in powermail 2.0?
 -------------------------------------
 
-No. It's not possible to use old powermail forms with the new module. At the moment there is no update script.
+Yes. You can convert old forms (1.x) to version 2.x in powermail 2.1. Please use the related powermail backend module.
 
 
 .. _canisueanothercaptcha:
@@ -31,8 +31,8 @@ No. At the moment we support only a calculating captcha in the powermail core. M
 
 .. _canisavetoothertables:
 
-Can I save values to tt\_address, fe\_users, tt\_news, etc...?
---------------------------------------------------------------
+Can I save values to tt_address, fe_users, tt_news, etc...?
+-----------------------------------------------------------
 
 Yes. It's very easy to save values to a third-party-table – see manual part
 
@@ -180,12 +180,12 @@ How to prefill a field in the powermail form?
 Prefilling of fields will be done by the prefillFieldsViewHelper. It
 listen to the following methods and parameters:
 
-1. GET/POST param like &tx\_powermail\_pi1[marker]=value
-2. GET/POST param like &tx\_powermail\_pi1[field][123]=value
-3. GET/POST param like &tx\_powermail\_pi1[uid123]=value
-4. If field should be filled with values from FE\_User (Flexform Settings)
-5. If field should be prefilled from static Flexform Setting
-6. Fill with TypoScript cObject like
+# GET/POST param like &tx\_powermail\_pi1[marker]=value
+# GET/POST param like &tx\_powermail\_pi1[field][123]=value
+# GET/POST param like &tx\_powermail\_pi1[uid123]=value
+# If field should be filled with values from FE\_User (Flexform Settings)
+# If field should be prefilled from static Flexform Setting
+# Fill with TypoScript cObject like
 
 .. code-block:: typoscript
 
@@ -205,56 +205,21 @@ listen to the following methods and parameters:
 	}
 
 
-.. _howisjsincluded:
-
-How is JavaScript included to Powermail?
-----------------------------------------
-
-Powermail loads jQuery and jQuery UI by default from googleapis.com.
-You can change that behaviour with constants or typoscript.
-
-Responsible TypoScript for the include of JS and CSS:
-
-.. code-block:: typoscript
-
-	page {
-		# Inlude JavaScript files
-		includeJSFooterlibs {
-			powermailJQuery = {$plugin.tx_powermail.settings.javascript.powermailJQuery}
-			powermailJQuery.external = 1
-			powermailJQueryUi = {$plugin.tx_powermail.settings.javascript.powermailJQueryUi}
-			powermailJQueryUi.external = 1
-			powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/Js/jquery.ui.datepicker.min.js
-			powermailJQueryFormValidationLanguage = EXT:powermail/Resources/Public/Js/jquery.validationEngine-en.js
-			powermailJQueryFormValidation = EXT:powermail/Resources/Public/Js/jquery.validationEngine.js
-			powermailJQueryTabs = EXT:powermail/Resources/Public/Js/tabs.js
-		}
-		includeJSFooter {
-			powermailForm = EXT:powermail/Resources/Public/Js/form.js
-		}
-		# Include CSS files
-		includeCSS {
-			powermailJQueryUiTheme = EXT:powermail/Resources/Public/Css/jquery.ui.theme.css
-			powermailJQueryUiDatepicker = EXT:powermail/Resources/Public/Css/jquery.ui.datepicker.css
-		}
-	}
-
-You can change this by overwriting some or all lines in your
-TypoScript.
-
-
 .. _howdonotincludejquery:
 
-How can I disable the including of jQuery?
-------------------------------------------
+How can I include jQuery?
+-------------------------
 
-Maybe you already included jQuery on every of your pages. So powermail
-should not include it twice. Overwrite it with TypoScript Setup:
+In powermail 2.0 and smaller, jQuery was included automaticly. Since 2.1, you have to enable this feature via Constants:
 
 .. code-block: typoscript
 
-	page.includeJSFooterlibs.powermailJQuery >
-	page.includeJSFooterlibs.powermailJQueryUi >
+	plugin.tx_powermail.settings {
+		javascript {
+			addJQueryFromGoogle = 1
+			powermailJQuery = //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js
+		}
+	}
 
 
 .. _howcaniuset3jquery:
