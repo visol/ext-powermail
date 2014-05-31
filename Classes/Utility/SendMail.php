@@ -245,23 +245,15 @@ class SendMail {
 	 * @return bool
 	 */
 	protected function createEmailBody($email, \In2code\Powermail\Domain\Model\Mail &$mail, $settings) {
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-		);
-		$templatePathAndFilename = GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']);
-		$templatePathAndFilename .= $email['template'] . '.html';
 		$emailBodyObject = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
 		$emailBodyObject->getRequest()->setControllerExtensionName('Powermail');
 		$emailBodyObject->getRequest()->setPluginName('Pi1');
 		$emailBodyObject->getRequest()->setControllerName('Form');
 		$emailBodyObject->setFormat('html');
+		$templatePathAndFilename = $this->div->getTemplatePath() . 'Form/PowermailAll.html';
 		$emailBodyObject->setTemplatePathAndFilename($templatePathAndFilename);
-		$emailBodyObject->setPartialRootPath(
-			GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath'])
-		);
-		$emailBodyObject->setLayoutRootPath(
-			GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['layoutRootPath'])
-		);
+		$emailBodyObject->setLayoutRootPath($this->div->getTemplatePath('layout'));
+		$emailBodyObject->setPartialRootPath($this->div->getTemplatePath('partial'));
 
 		// get variables
 		// additional variables

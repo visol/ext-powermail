@@ -213,26 +213,34 @@ class Div {
 	 */
 	public function powermailAll(\In2code\Powermail\Domain\Model\Mail $mail, $section = 'web', $settings = array()) {
 		$powermailAll = $this->objectManager->get('\TYPO3\CMS\Fluid\View\StandaloneView');
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-		);
-		$templatePathAndFilename = GeneralUtility::getFileAbsFileName(
-			$extbaseFrameworkConfiguration['view']['templateRootPath']
-		);
-		$templatePathAndFilename .= 'Form/PowermailAll.html';
-		$powermailAll->setLayoutRootPath(GeneralUtility::getFileAbsFileName(
-			$extbaseFrameworkConfiguration['view']['layoutRootPath'])
-		);
-		$powermailAll->setPartialRootPath(
-			GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['partialRootPath'])
-		);
+		$templatePathAndFilename = $this->getTemplatePath() . 'Form/PowermailAll.html';
 		$powermailAll->setTemplatePathAndFilename($templatePathAndFilename);
+		$powermailAll->setLayoutRootPath($this->getTemplatePath('layout'));
+		$powermailAll->setPartialRootPath($this->getTemplatePath('partial'));
 		$powermailAll->assign('mail', $mail);
 		$powermailAll->assign('section', $section);
 		$powermailAll->assign('settings', $settings);
 		$content = $powermailAll->render();
 
 		return $content;
+	}
+
+	/**
+	 * Get absolute paths for templates with fallback
+	 *
+	 * @param string $part "template", "partial", "layout"
+	 * @return string
+	 */
+	public function getTemplatePath($part = 'template') {
+		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+			\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+		);
+		$templatePath = $extbaseFrameworkConfiguration['view'][$part . 'RootPath'];
+		if (empty($templatePath)) {
+			$templatePath = 'EXT:powermail/Resources/Private/' . ucfirst($part) . 's/';
+		}
+		$absoluteTemplatePath = GeneralUtility::getFileAbsFileName($templatePath);
+		return $absoluteTemplatePath;
 	}
 
 	/**
