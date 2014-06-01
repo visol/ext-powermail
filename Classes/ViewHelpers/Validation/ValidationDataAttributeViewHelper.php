@@ -292,7 +292,25 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 				}
 				break;
 
+			/**
+			 * Custom Validation Attribute
+			 *
+			 * If CustomValidation was added via Page TSConfig
+			 * 		tx_powermail.flexForm.validation.addFieldOptions.100 = New Validation
+			 *
+			 * <input type="text" data-parsley-custom100="1" />
+			 */
 			default:
+				if (
+					$field->getValidation() &&
+					($this->isNativeValidationEnabled() || $this->isClientValidationEnabled())
+				) {
+					$value = 1;
+					if ($field->getValidationConfiguration()) {
+						$value = $field->getValidationConfiguration();
+					}
+					$dataArray['data-parsley-custom' . $field->getValidation()] = $value;
+				}
 		}
 
 		// set errormessage if javascript validation active

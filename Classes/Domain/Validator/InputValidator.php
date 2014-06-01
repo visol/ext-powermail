@@ -64,7 +64,6 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 	 * @return void
 	 */
 	protected function isValidField(Field $field, $value) {
-
 		// Mandatory Check
 		if ($field->getMandatory()) {
 			if (!$this->validateMandatory($value)) {
@@ -145,13 +144,31 @@ class InputValidator extends \In2code\Powermail\Domain\Validator\StringValidator
 				}
 				break;
 
-			// e.g. "custom" => search for method validateCustom()
+			/**
+			 * E.g. Validation was extended with Page TSconfig
+			 * 		tx_powermail.flexForm.validation.addFieldOptions.100 = New Validation
+			 *
+			 * Register your Class and Method with TypoScript Setup
+			 * 		plugin.tx_powermail.settings.setup.validation.customValidation.100 =
+			 * 			\In2code\Powermailextended\Domain\Validator\ZipValidator
+			 *
+			 * Add method to your class
+			 * 		validate100($value, $validationConfiguration)
+			 *
+			 * Define your Errormessage with TypoScript Setup
+			 * 		plugin.tx_powermail._LOCAL_LANG.default.validationerror_validation.100 =
+			 * 			Error happens!
+			 */
 			default:
-				$validation = $field->getValidation();
-				if (method_exists($this, 'validate' . ucfirst($validation))) {
-					if (!$this->{'validate' . ucfirst($validation)}($value)) {
-						// message from locallang - "validationerror_custom"
-						$this->setErrorAndMessage($field, $validation);
+				if ($field->getValidation()) {
+					$validation = $field->getValidation();
+					if (!empty($this->settings['validation.']['customValidation.'][$validation])) {
+						$extendedValidator = $this->objectManager->get($this->settings['validation.']['customValidation.'][$validation]);
+						if (method_exists($extendedValidator, 'validate' . ucfirst($validation))) {
+							if (!$extendedValidator->{'validate' . ucfirst($validation)}($value, $field->getValidationConfiguration())) {
+								$this->setErrorAndMessage($field, 'validation.' . $validation);
+							}
+						}
 					}
 				}
 		}
