@@ -94,6 +94,13 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $prefillValue = '';
 
 	/**
+	 * placeholder
+	 *
+	 * @var string
+	 */
+	protected $placeholder = '';
+
+	/**
 	 * $createFromTyposcript
 	 *
 	 * @var string
@@ -331,6 +338,21 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setPrefillValue($prefillValue) {
 		$this->prefillValue = $prefillValue;
+	}
+
+	/**
+	 * @param string $placeholder
+	 * @return void
+	 */
+	public function setPlaceholder($placeholder) {
+		$this->placeholder = $placeholder;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPlaceholder() {
+		return $this->placeholder;
 	}
 
 	/**

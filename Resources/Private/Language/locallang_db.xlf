@@ -285,6 +285,9 @@
 			<trans-unit id="tx_powermail_domain_model_fields.prefill_value">
 				<source>With Value</source>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.placeholder">
+				<source>Placeholder</source>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.create_from_typoscript">
 				<source>Create from TypoScript (e.g. lib.fieldvalues)</source>
 			</trans-unit>

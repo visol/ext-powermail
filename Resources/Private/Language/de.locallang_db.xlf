@@ -379,6 +379,10 @@
 				<source>With Value</source>
 				<target state="translated">Mit Wert</target>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.placeholder">
+				<source>Placeholder</source>
+				<target state="translated">Platzhalter</target>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.create_from_typoscript">
 				<source>Create from TypoScript (e.g. lib.fieldvalues)</source>
 				<target state="translated">Über TypoScript erstellen (z.B. lib.fieldvalues)</target>

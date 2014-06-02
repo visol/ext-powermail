@@ -8,7 +8,7 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 	'interface' => array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
-			path, content_element, text, prefill_value, create_from_typoscript, mandatory,
+			path, content_element, text, prefill_value, placeholder, create_from_typoscript, mandatory,
 			validation, validation_configuration, css, multiselect, datepicker_settings,
 			feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
@@ -18,17 +18,19 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'pages, title, type, settings, path, content_element, text,
 				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.palette1;1,
 				--div--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.sheet1,
-				validation_title, --palette--; Validation;2, prefill_title, --palette--;
-				Prefill;3, --palette--;Layout;4, marker_title, --palette--;Variables;5,
+				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation_title;2,
+				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_title;3,
+				--palette--;Layout;4,
+				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.marker_title;5,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
 				l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => 'sender_email, sender_name', '', 'canNotCollapse' => 1),
 		'2' => array('showitem' => 'mandatory, validation, validation_configuration', '', 'canNotCollapse' => 1),
-		'3' => array('showitem' => 'prefill_value, feuser_value, create_from_typoscript'),
+		'3' => array('showitem' => 'prefill_value, placeholder, feuser_value, create_from_typoscript', '', 'canNotCollapse' => 1),
 		'4' => array('showitem' => 'css, multiselect, datepicker_settings'),
-		'5' => array('showitem' => 'auto_marker, marker, own_marker_select'),
+		'5' => array('showitem' => 'auto_marker, marker, own_marker_select', '', 'canNotCollapse' => 1),
 		'canNotCollapse' => '1'
 	),
 	'columns' => array(
@@ -281,15 +283,6 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden'
 		),
-		'validation_title' => array(
-			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation_title',
-			'config' => array(
-				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
-			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio'
-		),
 		'mandatory' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
@@ -471,14 +464,6 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			),
 			'displayCond' => 'FIELD:validation:>:5'
 		),
-		'prefill_title' => array(
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_title',
-			'config' => array(
-				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
-			),
-			'displayCond' => 'FIELD:type:IN:input,textarea,select,check,radio,hidden,country'
-		),
 		'prefill_value' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_value',
@@ -488,6 +473,15 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 				'rows' => '2'
 			),
 			'displayCond' => 'FIELD:type:IN:input,textarea,hidden,country'
+		),
+		'placeholder' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.placeholder',
+			'config' => array(
+				'type' => 'input',
+				'size' => 10
+			),
+			'displayCond' => 'FIELD:type:=:input'
 		),
 		'feuser_value' => array(
 			'l10n_mode' => 'exclude',
@@ -625,14 +619,6 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 			),
 			'displayCond' => 'FIELD:type:IN:date'
 		),
-		'marker_title' => array(
-			'l10n_mode' => 'exclude',
-			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.marker_title',
-			'config' => array(
-				'type' => 'user',
-				'userFunc' => 'In2code\Powermail\Utility\Tca\Marker->doNothing'
-			),
-		),
 		'auto_marker' => array(
 			'l10n_mode' => 'exclude',
 			'exclude' => 1,
@@ -693,7 +679,6 @@ if ($confArr['l10n_mode_merge']) {
 	$TCA['tx_powermail_domain_model_fields']['columns']['path']['l10n_mode'] = 'mergeIfNotBlank';
 	$TCA['tx_powermail_domain_model_fields']['columns']['sender_email']['l10n_mode'] = 'mergeIfNotBlank';
 	$TCA['tx_powermail_domain_model_fields']['columns']['sender_name']['l10n_mode'] = 'mergeIfNotBlank';
-	$TCA['tx_powermail_domain_model_fields']['columns']['validation_title']['l10n_mode'] = 'mergeIfNotBlank';
 	$TCA['tx_powermail_domain_model_fields']['columns']['mandatory']['l10n_mode'] = 'mergeIfNotBlank';
 	$TCA['tx_powermail_domain_model_fields']['columns']['validation']['l10n_mode'] = 'mergeIfNotBlank';
 	$TCA['tx_powermail_domain_model_fields']['columns']['validation_configuration']['l10n_mode'] = 'mergeIfNotBlank';

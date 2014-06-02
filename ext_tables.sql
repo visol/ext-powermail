@@ -101,6 +101,7 @@ CREATE TABLE tx_powermail_domain_model_fields (
 	content_element int(11) DEFAULT '0' NOT NULL,
 	text text NOT NULL,
 	prefill_value text NOT NULL,
+	placeholder text NOT NULL,
 	create_from_typoscript text NOT NULL,
 	validation int(11) DEFAULT '0' NOT NULL,
 	validation_configuration varchar(255) DEFAULT '' NOT NULL,
@@ -115,9 +116,6 @@ CREATE TABLE tx_powermail_domain_model_fields (
 	marker varchar(255) DEFAULT '' NOT NULL,
 
 	# Dummy Fields
-	validation_title tinyint(2) unsigned DEFAULT '0' NOT NULL,
-	prefill_title tinyint(2) unsigned DEFAULT '0' NOT NULL,
-	marker_title tinyint(2) unsigned DEFAULT '0' NOT NULL,
 	auto_marker tinyint(2) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

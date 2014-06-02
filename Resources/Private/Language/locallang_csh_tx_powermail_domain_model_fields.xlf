@@ -45,6 +45,9 @@
 			<trans-unit id="prefill_value.description">
 				<source>Prefill this field with a static text. The related field wil be prefilled (If you use a prefill value for a country-field, add the wanted code - e.g. DEU or USA)</source>
 			</trans-unit>
+			<trans-unit id="placeholder.description">
+				<source>A placeholder text is an example, that should help the user to fill out an input field. This text is shown in bright grey within the input field. If you have a name field, you could use the placeholder "John Doe"</source>
+			</trans-unit>
 			<trans-unit id="feuser_value.description">
 				<source>Prefill this field with value of a logged in fe_user (overwrites the static prefill text)</source>
 			</trans-unit>
