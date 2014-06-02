@@ -312,6 +312,14 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					),
 
 					/**
+					 * Spacer
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.spacer1',
+						'--div--'
+					),
+
+					/**
 					 * EMAIL (+html5)
 					 *
 					 * html5 example: <input type="email" />
@@ -366,6 +374,14 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.5',
 						5
+					),
+
+					/**
+					 * Spacer
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.spacer2',
+						'--div--'
 					),
 
 					/**
@@ -428,6 +444,14 @@ $TCA['tx_powermail_domain_model_fields'] = array(
 					array(
 						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation.10',
 						10
+					),
+
+					/**
+					 * Spacer
+					 */
+					array(
+						'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.type.spacer3',
+						'--div--'
 					),
 				),
 				'size' => 1,
