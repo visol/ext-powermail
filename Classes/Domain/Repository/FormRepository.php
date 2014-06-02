@@ -127,7 +127,7 @@ class FormRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$queryGenerator = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Database\QueryGenerator');
 			$pidList = $queryGenerator->getTreeList($pid, 20, 0, 1);
 			$query->matching(
-				$query->in('uid', GeneralUtility::trimExplode(',', $pidList, TRUE))
+				$query->in('pid', GeneralUtility::trimExplode(',', $pidList, TRUE))
 			);
 		}
 
