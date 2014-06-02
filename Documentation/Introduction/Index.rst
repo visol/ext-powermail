@@ -83,6 +83,7 @@ Facts
     - New JavaScript Validation Framework ParsleyJs was included (**UP**)
     - Combine different validators are just disable some
     - Validation support Multistep Form and AJAX submit now (**UP**)
+    - Add own serverside and clientside validators
 
   - AJAX Form Submit possible
   - New Field: Countryselection (with or without static_info_tables) (**UP**)
@@ -101,7 +102,7 @@ Facts
 
 - Misc
   - A form converter (for forms from 1.x to 2.x) was added in a new view in the Backend Module (**UP**)
-  - A powermail_cond update (see this extension) was also created for powermail 2.1 (**UP**)
+  - A powermail_cond update (see manual of powermail_cond) was also created for powermail 2.1 (**UP**)
 
 - Code-Refactoring
 
@@ -119,6 +120,7 @@ Facts
 - Quality
   - Unittests added for different methods (e.g. all serverside validators)
   - A Testparcour was generated to test the main features of powermail (**UP**)
+  - We focussed on TYPO3 6.2 LTS to increase quality
 
 **UP** = Part of the University Package (see sponsors note)
 

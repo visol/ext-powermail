@@ -1098,7 +1098,14 @@ Explanation
    :Description:
       Fill Options from TypoScript
    :Explanation:
-      If you want to create your options (see above) from TypoScript, you can use this field. Please split each line in your TypoScript with [\n]
+      If you want to create your options (see above) from TypoScript, you can use this field. Please split each line in your TypoScript with [\\n]
+
+
+      Example:
+
+      lib.options = TEXT
+
+      lib.options.value = red[\\n]blue[\\n]pink
    :Tab:
       Extended
 

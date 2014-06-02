@@ -7,7 +7,7 @@ Good to know
 ------------
 
 
-:ref:`templates` | :ref:`spamprevention` | :ref:`savingvaluestothirdpartytables` | :ref:`sendvaluestocrm` | :ref:`goodtoknowdebug`
+:ref:`templates` | :ref:`ajaxsubmit` | :ref:`spamprevention` | :ref:`savingvaluestothirdpartytables` | :ref:`sendvaluestocrm` | :ref:`goodtoknowdebug` | :ref:`removeUnusedImages`
 
 .. _templates:
 
@@ -57,6 +57,19 @@ you can copy this file to a fileadmin folder (20) and set a fallback folder (10)
 
 Do not change the original templates of an extension, otherwise it's hard to update the extension!
 
+
+.. _ajaxsubmit:
+
+AJAX Submit
+"""""""""""
+
+If you want to use submit via AJAX, you can enable this in TypoScript Setup (jQuery is needed for AJAX functions)
+
+.. code-block:: typoscript
+
+	plugin.tx_powermail.settings.setup.misc.ajaxSubmit = 1
+
+|img-ajaxsubmit|
 
 
 .. _usingvariables:
@@ -2064,3 +2077,15 @@ Constants
 
 		}
 	}
+
+
+.. _removeUnusedImages:
+
+Remove unused images via Scheduler
+""""""""""""""""""""""""""""""""""
+
+If you want to remove unused, uploaded files from the server, you can use a scheduler task (Command Controller) for this.
+Define a folder, where powermail should search for unused files. All file which have no relation to a Mail record and is older than 1h will be removed.
+Note: This is irreversible - Please take care of a backup
+
+|img-schedulertask|

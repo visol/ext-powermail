@@ -55,14 +55,17 @@ class TaskCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandCon
 
 	/**
 	 * Remove unused uploaded Files
-	 * 		Open on Command Line with
-	 * 		php cli_dispatch.phpsh extbase task:cleanunuseduploads
-	 * 		Needs BE-User _cli_lowlevel
+	 * 		with a scheduler task
 	 *
 	 * @param string $uploadPath Define the upload Path
 	 * @return void
 	 */
 	public function cleanUnusedUploadsCommand($uploadPath = 'uploads/tx_powermail/') {
+		/**
+		 * Open on Command Line with
+		 * php cli_dispatch.phpsh extbase task:cleanunuseduploads
+		 * Needs BE-User _cli_lowlevel
+		 */
 		$usedUploads = $this->getUsedUploads();
 		$allUploads = BasicFileFunctions::getFilesFromRelativePath($uploadPath);
 		$removeCounter = 0;
