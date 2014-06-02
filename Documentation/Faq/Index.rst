@@ -8,14 +8,14 @@ FAQ
 
 .. _caniuseoldmails:
 
-Can I use old mails in powermail 2.0?
+Can I use old mails in powermail 2.x?
 -------------------------------------
 
 No. It's not possible to use old powermail mails with the new module. Old mails are stored in table tx_powermail_mails. This table is not accepted any more in version 2.0 or higher.
 
 .. _caniuseoldforms:
 
-Can I use old forms in powermail 2.0?
+Can I use old forms in powermail 2.x?
 -------------------------------------
 
 Yes. You can convert old forms (1.x) to version 2.x in powermail 2.1. Please use the related powermail backend module.
@@ -263,7 +263,7 @@ I want to have automatic export files with the scheduler module – what's wrong
 
 Nothing. It is just not yet possible. In powermail 1.4 up to 1.7 it was possible
 to get automatic export files from a cli script or from the scheduler. This feature is
-not yet integrated in version 2.0.
+not yet integrated in version 2.x.
 
 .. _marketinginformationnotworking
 

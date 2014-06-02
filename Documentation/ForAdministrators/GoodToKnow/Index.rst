@@ -1340,6 +1340,27 @@ Setup
 
 					# enable serverside validation
 					server = {$plugin.tx_powermail.settings.validation.server}
+
+					##########################################################
+					# CUSTOMVALIDATION EXAMPLE
+					#
+					# E.g. Validation was extended with Page TSconfig
+					# 		tx_powermail.flexForm.validation.addFieldOptions.100 = New Validation
+					#
+					# Register your Class and Method with TypoScript Setup
+					# 		plugin.tx_powermail.settings.setup.validation.customValidation.100 =
+					# 			\In2code\Powermailextended\Domain\Validator\ZipValidator
+					#
+					# Add method to your class
+					# 		validate100($value, $validationConfiguration)
+					#
+					# Define your Errormessage with TypoScript Setup
+					# 		plugin.tx_powermail._LOCAL_LANG.default.validationerror_validation.100 = Error happens!
+					#
+					# ##########################################################
+					customValidation {
+	#					100 = \In2code\Powermailextended\Domain\Validator\ZipValidator
+					}
 				}
 
 				receiver {

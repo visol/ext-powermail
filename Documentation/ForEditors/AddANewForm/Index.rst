@@ -1795,7 +1795,7 @@ Captcha Field
 What does it do?
 ''''''''''''''''
 
-- **General:** Want to prevent spam? Spamshield is integrated in powermail 2.0. In addtion you can add a calculating-captcha field to the form. The form can only be submitted if the result of the captcha is correct.
+- **General:** Want to prevent spam? Spamshield is integrated in powermail 2.x. In addtion you can add a calculating-captcha field to the form. The form can only be submitted if the result of the captcha is correct.
 
 Frontend Output Example
 '''''''''''''''''''''''
