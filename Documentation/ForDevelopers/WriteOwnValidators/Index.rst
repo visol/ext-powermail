@@ -1,4 +1,4 @@
-﻿
+﻿.. include:: Images.txt
 
 .. ==================================================
 .. FOR YOUR INFORMATION
@@ -15,21 +15,142 @@
 .. role::   php(code)
 
 
-.. _writejavascriptvalidation:
+.. _newvalidators:
 
-Write own JavaScript Validation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Add new Validators
+^^^^^^^^^^^^^^^^^^
 
 Introduction
 """"""""""""
 
-Since powermail 2.1 parsley.js (Version 2.0) is in use
+Since powermail 2.1 a combination of different validation types is possible:
 
+- Serverside Validation (PHP)
+- Clientside Validation (JavaScript)
+- Clientside Validation (Native with HTML5)
+
+You can enable or disable or combine some of the validation via TypoScript
+
+::
+
+   plugin.tx_powermail.settings.setup {
+   	    validation {
+			native = 1
+			client = 1
+			server = 1
+   	    }
+   }
+
+Parsley.js allows us to have a robust solution for JavaScript and Native HTML5 Validation
+
+|img-serversidevalidation|
+
+Serverside Validation Example
+
+
+|img-clientsidevalidation|
+
+Clientside Validation Example
+
+Want to learn more about Parsley.js?
 `http://parsleyjs.org/ <http://parsleyjs.org/>`_
 
-**How to add validation with parsley.js to a form**
+Add own Validator
+"""""""""""""""""
 
-Example form with a reqired and an email field. In addition to HTML5, this input fields are validated with parsley:
+Add new Option
+~~~~~~~~~~~~~~
+
+Per default, all standard validators are available for a field
+
+|img-validation1|
+
+If you want to add a new validation, use Page TSConfig for this. In this case, we want to validate for a ZIP-Code which is greater than 79999 (for bavarian ZIP within Germany):
+::
+
+   tx_powermail.flexForm.validation.addFieldOptions.100 = Bavarian ZIP Code
+
+This leads to a new validation option for the editors:
+
+|img-validation2|
+
+Add new JavaScript Validation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will see a HTML-Code like this for this field
+::
+
+   <input type="text" ... data-parsley-error-message="" data-parsley-custom100="80000" />
+
+Add a new Extension or simply a JavaScript File with this content. Please pay attention to the ordering. This code must be included after all JavaScript of powermail.
+::
+
+   window.ParsleyValidator
+   .addValidator('custom100', function (value, requirement) {
+   	if (value >= 80000) {
+   		return true;
+   	}
+   	return false;
+   }, 32)
+   .addMessage('en', 'custom100', 'Error');
+
+
+See Extension powermailextended.zip in your powermail folder powermail/Resources/Private/Software/
+
+Add new PHP Validation
+~~~~~~~~~~~~~~~~~~~~~~
+
+First of all, you have to register a PHP Class for your new validation via TypoScript (and an errormessage in case of a negative validation).
+::
+
+   plugin.tx_powermail {
+    	settings.setup {
+    		validation {
+    			customValidation {
+    				100 = \In2code\Powermailextended\Domain\Validator\ZipValidator
+    			}
+    		}
+    	}
+    	_LOCAL_LANG.default.validationerror_validation.100 = Please add a ZIP with 8 begginning
+   }
+
+In this case we choose a further Extension "powermailextended" and add a new file and folders powermailextended/Classes/Domain/Validator/ZipValidator.php
+
+The content:
+::
+
+   <?php
+   namespace In2code\Powermailextended\Domain\Validator;
+
+   /**
+    * ZipValidator
+    */
+   class ZipValidator {
+
+   	/**
+   	 * Check if given number is higher than in configuration
+   	 *
+   	 * @param string $value
+   	 * @param string $validationConfiguration
+   	 * @return bool
+   	 */
+   	public function validate100($value, $validationConfiguration) {
+   		if (is_numeric($value) && $value >= $validationConfiguration) {
+   			return TRUE;
+   		}
+   		return FALSE;
+   	}
+   }
+
+See Extension powermailextended.zip in your powermail folder powermail/Resources/Private/Software/
+
+JavaScript Validation by Hand
+"""""""""""""""""""""""""""""
+
+Parsley Introduction
+~~~~~~~~~~~~~~~~~~~~
+
+Example form, validated with parsley.js, with a required and an email field. In addition to HTML5, this input fields are validated with parsley:
 ::
 
    <form data-parsley-validate>
@@ -40,7 +161,9 @@ Example form with a reqired and an email field. In addition to HTML5, this input
         <input type="submit" />
    </form>
 
-**Write an own JavaScript Validation**
+
+Own Parsley Validator
+~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -56,16 +179,13 @@ Example form with a reqired and an email field. In addition to HTML5, this input
 
 
 
-.. _writephpvalidation:
-
-Write own PHP Validation
-^^^^^^^^^^^^^^^^^^^^^^^^
-
+PHP Validation by Hand
+""""""""""""""""""""""
 
 Introduction
 """"""""""""
 
-You can use the CustomValidator (used twice in powermail
+You can also use the CustomValidator (used twice in powermail
 FormsController: confirmationAction and createAction) to write your
 own field validation after a form submit.
 
@@ -90,7 +210,7 @@ SignalSlot in CustomValidator
       Located in Method
 
  - :Class:
-      \In2code\Powermail\Domain\Validator\CustomValidator
+      \\In2code\\Powermail\\Domain\\Validator\\CustomValidator
    :Name:
       isValid
    :File:
@@ -107,21 +227,18 @@ Example ext_localconf.php:
 
 ::
 
-   $signalSlotDispatcher = t3lib_div::makeInstance('Tx_Extbase_SignalSlot_Dispatcher');
-   $signalSlotDispatcher->connect('Tx_Powermail_Domain_Validator_CustomValidator', 'isValid', 'Tx_PowermailExtend_Controller_TestController', 'addInformation', FALSE);
+   $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
+   $signalSlotDispatcher->connect('\In2code\Powermail\Domain\Validator\CustomValidator', 'isValid', '\Vendor\Extkey\Domain\Validator\CustomValidator', 'addInformation', FALSE);
 
-Example Controller file:
+Example file:
 
 ::
 
-   class Tx_PowermailExtend_Controller_TestController extends Tx_Extbase_MVC_Controller_ActionController {
-
+   class \Vendor\Extkey\Domain\Validator\CustomValidator {
            public function addInformation($params, $obj) {
-
                    // field with uid 12 failed
                    $obj->isValid = false;
                    $obj->setError('mandatory', 12);
            }
-
    }
 

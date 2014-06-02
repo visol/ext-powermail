@@ -1,4 +1,4 @@
-﻿
+.. include:: Images.txt
 
 .. ==================================================
 .. FOR YOUR INFORMATION
@@ -11,21 +11,15 @@
 .. role::   underline
 .. role::   typoscript(code)
 .. role::   ts(typoscript)
-   :class:  typoscript
+:class:  typoscript
 .. role::   php(code)
 
 
-For Developers
---------------
+Add own Fields
+^^^^^^^^^^^^^^
 
 
-.. toctree::
-   :maxdepth: 2
-   :titlesonly:
-   :glob:
 
-   DatabaseModel/Index
-   WriteOwnValidators/Index
-   AddNewFields/Index
-   SignalSlots/Index
-   UserfuncsWithCobject/Index
+|img-typeselection|
+
+|img-typeselection2|
