@@ -236,25 +236,24 @@ manual of that extension)
 JavaScript validation does not work – what's wrong?
 ---------------------------------------------------
 
-At the moment we do not use t3jquery. Powermail loads jQuery and
-jQuery UI by default from googleapis.com. You can change that
-behaviour with constants or typoscript.
+At the moment we do not use t3jquery. Powermail loads jQuery (if you activated it with TypoScript) from googleapis.com.
+You can change that behaviour with constants or typoscript.
 
 It's importand to have the correct ordering of the JavaScript files.
-First you need the libraries and after that your JavaScript.
+First you need the libraries (jQuery, Datepicker, Parsley) and after that your JavaScript.
 
 Check the correct including of your JavaScript in the HTML source –
 example Footer could be:
 
 .. code-block:: html
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js" type="text/javascript"></script>
-	<script src="typo3conf/ext/powermail/Resources/Public/Js/jquery.ui.datepicker.min.js?1336555116" type="text/javascript"></script>
-	<script src="typo3conf/ext/powermail/Resources/Public/Js/jquery.validationEngine-en.js?1336586579" type="text/javascript"></script>
-	<script src="typo3conf/ext/powermail/Resources/Public/Js/jquery.validationEngine.js?1336586579" type="text/javascript"></script>
-	<script src="typo3conf/ext/powermail/Resources/Public/Js/tabs.js?1336555116" type="text/javascript"></script>
-	<script src="typo3conf/ext/powermail/Resources/Public/Js/form.js?1336555115" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+	<script src="typo3conf/ext/powermail/Resources/Public/JavaScripts/jquery.datetimepicker.js?1400758352" type="text/javascript"></script>
+	<script src="typo3conf/ext/powermail/Resources/Public/JavaScripts/parsley.min.js?1400758352" type="text/javascript"></script>
+	<script src="typo3conf/ext/powermail/Resources/Public/JavaScripts/tabs.js?1400758352" type="text/javascript"></script>
+	<script src="typo3conf/ext/powermail/Resources/Public/JavaScripts/form.js?1400758352" type="text/javascript"></script>
+	<script src="typo3conf/ext/powermail/Resources/Public/JavaScripts/Marketing.js?1400758352" type="text/javascript"></script>
+	<script src="typo3conf/ext/powermail/Resources/Public/JavaScripts/powermail_frontend.js?1400758352" type="text/javascript"></script>
 
 
 .. _automaticexportviascheduler:
@@ -282,7 +281,7 @@ I want to add a new Field Type to powermail – how can I do this
 Yes, you can add a new Fieldtype (in record
 tx\_powermail\_domain\_model\_fields) with some Page TSConfig.
 
-See following example to add a new fieldtype with Partial Newfield.html
+See following example to add a new fieldtype with Partial Newfield.html (see Documentation/ForDevelopers/NewField for an advanced example)
 
 .. code-block:: typoscript
 
@@ -294,10 +293,8 @@ I have a problem, what can I do?
 --------------------------------
 
 - Did you read the manual?
-- Turning on the Debug Output in Powermail (via TypoScript) can solve some problems
-- Try to get free help from a TYPO3 Forum like (typo3.net or typo3forum.net)
-- Do you need payed support? Ask the author Alexander Kellner \@  http://www.in2code.de for it.
+- Turning on the Debug Output in Powermail (via TypoScript) can help you to find a solution (please use extension devlog to look into the debug arrays)
+- Try to get free help from a TYPO3 Forum like (typo3.org, typo3.net or typo3forum.net)
+- Do you need payed support? Please write to http://www.in2code.de
 - Did you find a bug? Report it to http://forge.typo3.org/projects/extension-powermail/issues
-- Did you miss a feature? Ask the author Alexander Kellner \@ www.in2code.de for it.
-
-
+- Did you miss a feature? Feel free to write it down also to forge http://forge.typo3.org/projects/extension-powermail/issues

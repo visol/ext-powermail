@@ -15,11 +15,19 @@ powermail is powered by http://www.in2code.de/
 
 Do you need help from the community: http://www.typo3.net/
 
+Don't miss the best TYPO3 blogging page: http://www.typo3blogger.de/
+
 Did you see some helping information on http://www.youtube.com/ => search for “powermail”
 
 .. youtube:: tuhMiwEvhIs
-  :width: 600px
+   :width: 600px
+.. :align: left
 
-Don't miss the best TYPO3 blogging page: http://www.typo3blogger.de/
+Powermail 2.0 Introduction 1/2
 
 
+.. youtube:: XAkenuTmxZ0
+   :width: 600px
+.. :align: left
+
+Powermail 2.0 Introduction 2/2
