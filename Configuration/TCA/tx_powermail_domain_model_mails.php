@@ -1,10 +1,29 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
-	die ('Access denied.');
-}
-
-$TCA['tx_powermail_domain_model_mails'] = array(
-	'ctrl' => $TCA['tx_powermail_domain_model_mails']['ctrl'],
+$mailsTca = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_mails',
+		'label' => 'sender_mail',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'dividers2tabs' => TRUE,
+		'versioningWS' => 2,
+		'versioning_followPages' => TRUE,
+		'origUid' => 't3_origuid',
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
+		'default_sortby' => 'ORDER BY crdate DESC',
+		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime',
+		),
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('powermail') .
+			'Resources/Public/Icons/tx_powermail_domain_model_mails.gif',
+		'searchFields' => 'sender_mail, sender_name, subject, body'
+	),
 	'interface' => array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, crdate, receiver_mail,
@@ -329,3 +348,5 @@ $TCA['tx_powermail_domain_model_mails'] = array(
 		),
 	),
 );
+
+return $mailsTca;
