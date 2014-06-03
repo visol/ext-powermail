@@ -7,7 +7,7 @@ Good to know
 ------------
 
 
-:ref:`templates` | :ref:`ajaxsubmit` | :ref:`spamprevention` | :ref:`savingvaluestothirdpartytables` | :ref:`sendvaluestocrm` | :ref:`goodtoknowdebug` | :ref:`removeUnusedImages`
+:ref:`templates` | :ref:`ajaxsubmit` | :ref:`filterFormSelection` | :ref:`spamprevention` | :ref:`savingvaluestothirdpartytables` | :ref:`sendvaluestocrm` | :ref:`goodtoknowdebug` | :ref:`removeUnusedImages`
 
 .. _templates:
 
@@ -58,20 +58,6 @@ you can copy this file to a fileadmin folder (20) and set a fallback folder (10)
 Do not change the original templates of an extension, otherwise it's hard to update the extension!
 
 
-.. _ajaxsubmit:
-
-AJAX Submit
-"""""""""""
-
-If you want to use submit via AJAX, you can enable this in TypoScript Setup (jQuery is needed for AJAX functions)
-
-.. code-block:: typoscript
-
-	plugin.tx_powermail.settings.setup.misc.ajaxSubmit = 1
-
-|img-ajaxsubmit|
-
-
 .. _usingvariables:
 
 Using Variables (former known as Markers)
@@ -109,6 +95,44 @@ RTE? Use a cObject viehelper:
 	{f:cObject(typoscriptObjectPath:'lib.test')}
 
 
+
+.. _ajaxsubmit:
+
+AJAX Submit
+^^^^^^^^^^^
+
+If you want to use submit via AJAX, you can enable this in TypoScript Setup (jQuery is needed for AJAX functions)
+
+.. code-block:: typoscript
+
+	plugin.tx_powermail.settings.setup.misc.ajaxSubmit = 1
+
+|img-ajaxsubmit|
+
+
+
+.. _filterFormSelection:
+
+Filter Form Selection
+^^^^^^^^^^^^^^^^^^^^^
+
+On large TYPO3 installations it is hard to keep an overview about all forms (see Backend Module "Form Overview"). Your editors may see forms from other trees, that are not relevant at the form chooser in the powermail plugin.
+
+|img-formselection|
+
+You can filter this to the current page or to a tree. Just use Page TSConfig for a filter.
+
+.. code-block:: typoscript
+
+	# Show only Forms from the same page
+	tx_powermail.flexForm.formSelection = current
+
+	# Show Forms from page 46 (and all subpages)
+	tx_powermail.flexForm.formSelection = 46
+
+|img-formselectionpagetsconfig|
+
+|img-formselectionfiltered|
 
 
 .. _spamprevention:
