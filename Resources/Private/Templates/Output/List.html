@@ -62,7 +62,14 @@ Render Powermail_Frontend List View
 													<f:link.page pageUid="{settings.misc.file.folder}{subValue}" target="_blank">
 														<f:if condition="{vh:Condition.IsImage(path:subValue)}">
 															<f:then>
-																<f:image src="{settings.misc.file.folder}{subValue}" alt="{subValue}" width="200" maxHeight="200" />
+																<f:if condition="{vh:Condition.FileExists(file:'{settings.misc.file.folder}{subValue}')}">
+																	<f:then>
+																		<f:image src="{settings.misc.file.folder}{subValue}" alt="{subValue}" width="200" maxHeight="200" />
+																	</f:then>
+																	<f:else>
+																		File does not exist
+																	</f:else>
+																</f:if>
 															</f:then>
 															<f:else>
 																{subValue}
