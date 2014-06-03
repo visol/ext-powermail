@@ -301,10 +301,7 @@ class ValidationDataAttributeViewHelper extends AbstractValidationViewHelper {
 			 * <input type="text" data-parsley-custom100="1" />
 			 */
 			default:
-				if (
-					$field->getValidation() &&
-					($this->isNativeValidationEnabled() || $this->isClientValidationEnabled())
-				) {
+				if ($field->getValidation() && $this->isClientValidationEnabled()) {
 					$value = 1;
 					if ($field->getValidationConfiguration()) {
 						$value = $field->getValidationConfiguration();
