@@ -8,6 +8,10 @@ conf.py:
   project: Powermail
   version: 2
   release: 2.1.0
+  latex_elements:
+    papersize: a4paper
+    pointsize: 10pt
+    preamble: \usepackage{typo3}
   intersphinx_mapping:
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/
@@ -17,6 +21,5 @@ conf.py:
     - t3sphinx.ext.t3extras
     - t3sphinx.ext.t3tablerows
     - t3sphinx.ext.targets
-    - t3sphinx.ext.t3fieldlisttable
     - sphinxcontrib.youtube
 ...

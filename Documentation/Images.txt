@@ -6,10 +6,10 @@
 .. :name: graphics5
 .. :vspace: 57
 
-.. |img-2|      image:: Images/manual_html_m12b2d25f.gif
+.. |img-2|      image:: Images/manual_html_m12b2d25f.png
 .. :align: left
 
-.. |img-3|      image:: Images/manual_html_35bfceb.gif
+.. |img-3|      image:: Images/manual_html_35bfceb.png
    :height: 300
    :width: 300
 .. :align: left

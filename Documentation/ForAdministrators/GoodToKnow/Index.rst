@@ -589,7 +589,7 @@ You need an additional extension to show the debug output (e.g. "devlog").
 Reference
 """""""""
 
-.. container:: ts-properties
+.. container::ts-properties
 
 =========================================================== ========================================== ===============================
 Property                                                    Affected Views                              Default

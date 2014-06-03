@@ -6,7 +6,9 @@
 Introduction
 ============
 
-:ref:`what` | :ref:`whats-new` | :ref:`compatibility` | :ref:`screenshots` |
+.. only:: html
+
+	:ref:`what` | :ref:`whats-new` | :ref:`compatibility` | :ref:`screenshots` |
 
 .. _what:
 
@@ -61,14 +63,14 @@ University Package
 Powermail 2.1 was mainly supported from a consortium of german universities and colleges.
 We want to thank them for their trust in powermail and the further development. See **UP** for features which are part of the University Package.
 
-- h‐da Hochschule Darmstadt – University of Applied Sciences
+- h-da Hochschule Darmstadt – University of Applied Sciences
 - Leibniz Universität Hannover
 - Technische Universität München
-- Hochschule für Wirtschaft und Umwelt Nürtingen‐Geislingen
+- Hochschule für Wirtschaft und Umwelt Nürtingen-Geislingen
 - Hochschule Osnabrück – University of Applied Sciences
 - Universität Rostock
 - Universität Ulm (ULM University)
-- Bauhaus‐Universität Weimar
+- Bauhaus-Universität Weimar
 - Bergische Universität Wuppertal
 
 
@@ -131,7 +133,7 @@ Powermail >= 2.0 is a complete rebuild of the old powermail. Main
 focus was to keep flexibility and all the features and to create even
 more. The rebuild was done with Extbase and Fluid.
 
-See videos to 2.0 on youtube:
+See videos to 2.0 on youtube
 
 - Powermail 2.0 Introduction: `http://youtu.be/tuhMiwEvhIs <http://youtu.be/tuhMiwEvhIs>`_
 

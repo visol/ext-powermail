@@ -45,7 +45,7 @@ Can I write my own javascript/php validator?
 --------------------------------------------
 
 Yes. Write your own validator – see manual part
-For Developers / Write own JavaScript Validator and For Developers / Write own PHP Validation :ref:`writephpvalidation`
+For Developers / Write own JavaScript Validator and For Developers / Write own PHP Validation :ref:`newvalidators`
 
 
 
@@ -265,7 +265,7 @@ Nothing. It is just not yet possible. In powermail 1.4 up to 1.7 it was possible
 to get automatic export files from a cli script or from the scheduler. This feature is
 not yet integrated in version 2.x.
 
-.. _marketinginformationnotworking
+.. _marketinginformationnotworking:
 
 Marketing Information are not working – what's wrong?
 -----------------------------------------------------
@@ -298,3 +298,5 @@ I have a problem, what can I do?
 - Do you need payed support? Please write to http://www.in2code.de
 - Did you find a bug? Report it to http://forge.typo3.org/projects/extension-powermail/issues
 - Did you miss a feature? Feel free to write it down also to forge http://forge.typo3.org/projects/extension-powermail/issues
+
+

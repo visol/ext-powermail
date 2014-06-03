@@ -2918,8 +2918,6 @@ Frontend Output Example
 Backend Configuration Example
 '''''''''''''''''''''''''''''
 
-|img-country1|
-
 |img-country2|
 
 Explanation
