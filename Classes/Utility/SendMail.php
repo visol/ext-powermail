@@ -250,7 +250,7 @@ class SendMail {
 		$emailBodyObject->getRequest()->setPluginName('Pi1');
 		$emailBodyObject->getRequest()->setControllerName('Form');
 		$emailBodyObject->setFormat('html');
-		$templatePathAndFilename = $this->div->getTemplatePath() . 'Form/PowermailAll.html';
+		$templatePathAndFilename = $this->div->getTemplatePath() . $email['template'] . '.html';
 		$emailBodyObject->setTemplatePathAndFilename($templatePathAndFilename);
 		$emailBodyObject->setLayoutRootPath($this->div->getTemplatePath('layout'));
 		$emailBodyObject->setPartialRootPath($this->div->getTemplatePath('partial'));
