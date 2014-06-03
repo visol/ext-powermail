@@ -63,6 +63,13 @@ class FormConverter {
 	protected $dryrun = FALSE;
 
 	/**
+	 * Delete Old Forms
+	 *
+	 * @var bool
+	 */
+	protected $deleteOldForms = TRUE;
+
+	/**
 	 * Result for output
 	 *
 	 * @var array
@@ -127,7 +134,7 @@ class FormConverter {
 	 * @return void
 	 */
 	protected function deleteOldRecords($oldFormsWithFieldsetsAndFields) {
-		if ($this->getDryrun()) {
+		if ($this->getDryrun() || !$this->deleteOldForms) {
 			return;
 		}
 		foreach ($oldFormsWithFieldsetsAndFields as $ttContent) {
@@ -295,6 +302,7 @@ class FormConverter {
 			'path' => $this->getValueIfDefaultLanguage($field, 'path'),
 			'content_element' => $field['path'],
 			'text' => $field['value'],
+			'placeholder' => $field['placeholder'],
 			'prefill_value' => $this->getPrefillValue($field),
 			'feuser_value' => $this->getValueIfDefaultLanguage($field, 'fe_field'),
 			'mandatory' => $this->getValueIfDefaultLanguage($field, 'mandatory'),
