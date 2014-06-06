@@ -1111,6 +1111,31 @@ class Div {
 	}
 
 	/**
+	 * Get Subfolder of current TYPO3 Installation
+	 *
+	 * @param bool $leadingSlash
+	 * @param bool $trailingSlash
+	 * @return string
+	 */
+	public static function getSubFolderOfCurrentUrl($leadingSlash = TRUE, $trailingSlash = FALSE) {
+		$subfolder = '';
+		if (GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' !== GeneralUtility::getIndpEnv('TYPO3_SITE_URL')) {
+			$subfolder = str_replace(
+				GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/',
+				'',
+				GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
+			);
+			if ($leadingSlash) {
+				$subfolder = '/' . $subfolder;
+			}
+			if (!$trailingSlash) {
+				$subfolder = substr($subfolder, 0, -1);
+			}
+		}
+		return $subfolder;
+	}
+
+	/**
 	 * Get Fieldlist from Form UID
 	 *
 	 * @param int $formUid Form UID

@@ -1,7 +1,8 @@
 <?php
 namespace In2code\Powermail\Utility\Hook;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\In2code\Powermail\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -83,17 +84,19 @@ class PluginInfo {
 			$GLOBALS['LANG']->sL($this->locallangPath . 'form') =>
 				$this->getFormTitle($this->getFieldFromFlexform('main', 'settings.flexform.main.form')),
 			$GLOBALS['LANG']->sL($this->locallangPath . 'confirmationPage') =>
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />',
+				'<img src="' . Div::getSubFolderOfCurrentUrl() . '/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />',
 			$GLOBALS['LANG']->sL($this->locallangPath . 'optin') =>
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />',
+				'<img src="' . Div::getSubFolderOfCurrentUrl() . '/typo3conf/ext/powermail/Resources/Public/Image/icon-check.png" alt="1" />'
 		);
 		if (!$this->getFieldFromFlexform('main', 'settings.flexform.main.confirmation')) {
 			$array[$GLOBALS['LANG']->sL($this->locallangPath . 'confirmationPage')] =
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />';
+				'<img src="' . Div::getSubFolderOfCurrentUrl() .
+					'/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />';
 		}
 		if (!$this->getFieldFromFlexform('main', 'settings.flexform.main.optin')) {
 			$array[$GLOBALS['LANG']->sL($this->locallangPath . 'optin')] =
-				'<img src="/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />';
+				'<img src="' . Div::getSubFolderOfCurrentUrl() .
+					'/typo3conf/ext/powermail/Resources/Public/Image/icon-notchecked.png" alt="0" />';
 		}
 		if ($this->showTable) {
 			return $this->createOutput($array);
