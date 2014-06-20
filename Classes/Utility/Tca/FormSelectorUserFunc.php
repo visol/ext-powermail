@@ -54,12 +54,13 @@ class FormSelectorUserFunc {
 	 */
 	public function getForms(&$params, $pObj) {
 		$typoScriptConfiguration = \TYPO3\CMS\Backend\Utility\BackendUtility::getPagesTSconfig(Div::getPidFromBackendPage());
+		$language = $params['row']['sys_language_uid'];
 		$startPid = 0;
 		if (!empty($typoScriptConfiguration['tx_powermail.']['flexForm.']['formSelection'])) {
 			$startPid = $typoScriptConfiguration['tx_powermail.']['flexForm.']['formSelection'];
 		}
 		$params['items'] = array();
-		foreach ($this->getAllForms($startPid) as $form) {
+		foreach ($this->getAllForms($startPid, $language) as $form) {
 			$params['items'][] = array(
 				$form['title'],
 				$form['uid']
@@ -71,15 +72,21 @@ class FormSelectorUserFunc {
 	 * Get Forms from Database
 	 *
 	 * @param int|string $startPid Integer or "current"
+	 * @param int $language
 	 * @return array
 	 */
-	protected function getAllForms($startPid) {
+	protected function getAllForms($startPid, $language) {
 		$select = 'tx_powermail_domain_model_forms.uid, tx_powermail_domain_model_forms.title';
 		$from = 'tx_powermail_domain_model_forms';
 		$where = '
 			tx_powermail_domain_model_forms.deleted = 0 and
 			tx_powermail_domain_model_forms.hidden = 0 and
-			tx_powermail_domain_model_forms.sys_language_uid IN (-1,0)';
+			(tx_powermail_domain_model_forms.sys_language_uid IN (-1,0) or
+			(
+				tx_powermail_domain_model_forms.l10n_parent = 0 and
+				tx_powermail_domain_model_forms.sys_language_uid = ' . intval($language) . '
+			)
+			)';
 		if (!empty($startPid)) {
 			$where .= ' and pid in (' . $this->getPidListFromStartingPoint($startPid) . ')';
 		}
