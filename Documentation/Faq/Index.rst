@@ -172,6 +172,67 @@ the Frontend.
 
 |img-93|
 
+
+.. _howtohidefieldsforeditors:
+
+How to hide fields for editors?
+-------------------------------
+
+Hiding field from tables form, page or field
+''''''''''''''''''''''''''''''''''''''''''''
+
+For editors (not administrators) fields can be disabled in the right management of TYPO3 (see TYPO3 documentation how to show or hide fields for editors).
+
+Another way is to hide fields for editors (and administrators) via Page TSConfig:
+
+.. code-block:: typoscript
+
+	TCEFORM {
+		tx_powermail_domain_model_forms {
+			css.disabled = 1
+		}
+		tx_powermail_domain_model_pages {
+			css.disabled = 1
+		}
+		tx_powermail_domain_model_fields {
+			css.disabled = 1
+			feuser_value.disabled = 1
+			placeholder.disabled = 1
+		}
+	}
+
+Hiding fields from FlexForm
+'''''''''''''''''''''''''''
+
+If you add a powermail plugin, you will see some options in FlexForm. If you want to hide some of theese fields (for editors and administrators), you can also do it via Page TSConfig:
+
+.. code-block:: typoscript
+
+	TCEFORM {
+		tt_content {
+			pi_flexform {
+				powermail_pi1 {
+					main {
+						settings\.flexform\.main\.moresteps.disabled = 1
+						settings\.flexform\.main\.optin.disabled = 1
+						settings\.flexform\.main\.confirmation.disabled = 1
+						settings\.flexform\.main\.pid.disabled = 1
+					}
+
+					receiver {
+						settings\.flexform\.receiver\.fe_group.disabled = 1
+					}
+
+					thx {
+						settings\.flexform\.thx\.redirect.disabled = 1
+					}
+				}
+			}
+		}
+	}
+
+
+
 .. _howtoprefillfields:
 
 How to prefill a field in the powermail form?
