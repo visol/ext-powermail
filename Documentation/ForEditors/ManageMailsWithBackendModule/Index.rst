@@ -299,7 +299,7 @@ Old records (from Tables tx_powermail_fieldsets, tx_powermail_fields and tt_cont
 
 Note: This view is for admins only.
 
-**Attention:** Please backup your database before converting. This step is irreversibel!
+**Attention:** Please backup your database before converting. This step is irreversible!
 
 |img-81g|
 
