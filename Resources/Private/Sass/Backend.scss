@@ -20,10 +20,15 @@
 .clear {
 	clear: both;
 }
-.powermail-backend * {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+.powermail-backend {
+	* {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	table.typo3-dblist tr td.col-title {
+		width: auto;
+	}
 }
 .powermail-backend-select {
 	padding-left: 0;
