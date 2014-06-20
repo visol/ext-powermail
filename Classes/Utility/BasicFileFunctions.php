@@ -69,6 +69,8 @@ class BasicFileFunctions {
 	 * @return string
 	 */
 	public static function getUniqueName($filename, $destinationPath, $addPath = TRUE) {
+		self::cleanFileName($filename);
+
 		/** @var \TYPO3\CMS\Core\Utility\File\BasicFileUtility $basicFileFunctions */
 		$basicFileFunctions = GeneralUtility::makeInstance('\TYPO3\CMS\Core\Utility\File\BasicFileUtility');
 		$newFileName = $basicFileFunctions->getUniqueName(
@@ -79,6 +81,18 @@ class BasicFileFunctions {
 			$newFileName = basename($newFileName);
 		}
 		return $newFileName;
+	}
+
+	/**
+	 * Only allowed a-z, A-Z, 0-9, -, .
+	 * Others will be replaced
+	 *
+	 * @param string $filename
+	 * @param string $replace
+	 * @return void
+	 */
+	public static function cleanFileName(&$filename, $replace = '_') {
+		$filename = preg_replace('/[^a-zA-Z0-9-\.]/', $replace, trim($filename));
 	}
 
 	/**
