@@ -87,7 +87,7 @@ class StringValidator extends \In2code\Powermail\Domain\Validator\AbstractValida
 	 * @return bool
 	 */
 	protected function validateNumbersOnly($value) {
-		if (!empty($value) && strval(intval($value)) === strval($value)) {
+		if (strval(intval($value)) === strval($value)) {
 			return TRUE;
 		};
 		return FALSE;
