@@ -228,7 +228,13 @@ Example ext_localconf.php:
 ::
 
    $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\SignalSlot\Dispatcher');
-   $signalSlotDispatcher->connect('\In2code\Powermail\Domain\Validator\CustomValidator', 'isValid', '\Vendor\Extkey\Domain\Validator\CustomValidator', 'addInformation', FALSE);
+   $signalSlotDispatcher->connect(
+        'In2code\Powermail\Domain\Validator\CustomValidator',
+        'isValid',
+        'Vendor\Extkey\Domain\Validator\CustomValidator',
+        'addInformation',
+        FALSE
+   );
 
 Example file:
 
