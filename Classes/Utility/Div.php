@@ -729,6 +729,16 @@ class Div {
 	}
 
 	/**
+	 * Check if String is JSON Array
+	 *
+	 * @param string $string
+	 * @return bool
+	 */
+	public static function isJsonArray($string) {
+		return is_array(json_decode($string));
+	}
+
+	/**
 	 * Check if logged in user is allowed to make changes in Pi2
 	 *
 	 * @param array $settings $settings TypoScript and Flexform Settings

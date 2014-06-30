@@ -552,7 +552,7 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setMarketingPageFunnel($marketingPageFunnel) {
 		if (is_array($marketingPageFunnel)) {
-			$marketingPageFunnel = serialize($marketingPageFunnel);
+			$marketingPageFunnel = json_encode($marketingPageFunnel);
 		}
 		$this->marketingPageFunnel = $marketingPageFunnel;
 	}
@@ -561,8 +561,8 @@ class Mail extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return array
 	 */
 	public function getMarketingPageFunnel() {
-		if (\In2code\Powermail\Utility\Div::isSerialized($this->marketingPageFunnel)) {
-			return unserialize($this->marketingPageFunnel);
+		if (\In2code\Powermail\Utility\Div::isJsonArray($this->marketingPageFunnel)) {
+			return json_decode($this->marketingPageFunnel);
 		}
 		return (array)$this->marketingPageFunnel;
 	}

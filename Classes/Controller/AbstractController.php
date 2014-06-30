@@ -226,7 +226,7 @@ class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 				if (empty($value)) {
 					$value = '';
 				} else {
-					$value = serialize($value);
+					$value = json_encode($value);
 				}
 			}
 			$newArguments['mail']['answers'][$i] = array(

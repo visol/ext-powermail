@@ -75,10 +75,10 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$value = $this->value;
 
 		// if serialized, change to array
-		if (Div::isSerialized($this->value)) {
+		if (Div::isJsonArray($this->value)) {
 			// only if type multivalue or upload
 			if ($this->getValueType() === 1 || $this->getValueType() === 3) {
-				$value = unserialize($value);
+				$value = json_decode($value);
 			}
 		}
 
@@ -109,9 +109,9 @@ class Answer extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return void
 	 */
 	public function setValue($value) {
-		// if array, serialize to string
+		// if array, encode to string
 		if (is_array($value)) {
-			$value = serialize($value);
+			$value = json_encode($value);
 		}
 
 		// if date, get timestamp (datepicker)
