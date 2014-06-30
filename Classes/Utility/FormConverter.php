@@ -574,7 +574,7 @@ class FormConverter {
 			function($matches) use ($form) {
 				$uid = $matches[1];
 				if ($form['sys_language_uid'] > 0) {
-					$uid = $this->getDefaultUidFromOldLocalizedFieldUid($form, $uid);
+					$uid = FormConverter::getDefaultUidFromOldLocalizedFieldUid($form, $uid);
 				}
 				return '{UID' . $uid . '}';
 			},
@@ -632,7 +632,7 @@ class FormConverter {
 	 * @param int $oldUid
 	 * @return int
 	 */
-	protected function getDefaultUidFromOldLocalizedFieldUid($form, $oldUid) {
+	public static function getDefaultUidFromOldLocalizedFieldUid($form, $oldUid) {
 		foreach ($form['_fieldsets'] as $fieldset) {
 			foreach ($fieldset['_fields'] as $field) {
 				if ($oldUid === $field['uid']) {
