@@ -1,4 +1,4 @@
-﻿.. |img-9|      image:: ../../Images/manual_html_m1fa9f681.png
+.. |img-9|      image:: ../../Images/manual_html_m1fa9f681.png
 .. :align: left
 .. :border: 0
 .. :name: Grafik6

@@ -1,4 +1,4 @@
-﻿.. |img-87|     image:: /Images/manual_html_m3d145654.png
+.. |img-87|     image:: /Images/manual_html_m3d145654.png
    :height: 295
    :width: 587
 .. :align: left

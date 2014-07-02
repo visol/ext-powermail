@@ -1,4 +1,4 @@
-﻿.. |img-90|     image:: ../../Images/manual_html_56f7f042.jpg
+.. |img-90|     image:: ../../Images/manual_html_56f7f042.jpg
    :height: 518
    :width: 587
 .. :align: left

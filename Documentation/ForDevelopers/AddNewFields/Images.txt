@@ -1,4 +1,4 @@
-﻿.. |img-typeselection|     image:: /Images/typeselection.jpg
+.. |img-typeselection|     image:: /Images/typeselection.jpg
 .. :align: left
 .. :border: 0
 .. :name: typeselection

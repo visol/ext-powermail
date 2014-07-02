@@ -1,4 +1,4 @@
-﻿.. |frontend1|      image:: /Images/frontend1.png
+.. |frontend1|      image:: /Images/frontend1.png
 .. :align: left
 .. :border: 0
 .. :name: frontend1

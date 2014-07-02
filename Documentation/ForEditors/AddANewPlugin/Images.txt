@@ -1,4 +1,4 @@
-﻿.. |img-72|     image:: ../../Images/manual_html_38cd0997.png
+.. |img-72|     image:: ../../Images/manual_html_38cd0997.png
    :width: 588
 .. :align: left
 .. :border: 0

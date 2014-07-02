@@ -1,4 +1,4 @@
-﻿.. include:: Images.txt
+.. include:: Images.txt
 .. include:: ../../Includes.txt
 
 .. _goodtoknow:

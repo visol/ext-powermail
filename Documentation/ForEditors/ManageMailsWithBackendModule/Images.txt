@@ -1,4 +1,4 @@
-﻿.. |img-77|     image:: ../../Images/manual_html_41027b63.png
+.. |img-77|     image:: ../../Images/manual_html_41027b63.png
 .. :align: left
 .. :border: 0
 .. :name: Grafik82
