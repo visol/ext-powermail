@@ -670,7 +670,6 @@ $fieldsTca = array(
 			)
 		),
 		'pages' => array(
-			'l10n_mode' => 'exclude',
 			'exclude' => 1,
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.pages',
 			'config' => array(

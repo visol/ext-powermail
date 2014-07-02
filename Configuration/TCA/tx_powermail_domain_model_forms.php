@@ -164,7 +164,6 @@ $formsTca = array(
 			),
 		),
 		'pages' => array(
-			'l10n_mode' => 'exclude',
 			'exclude' => 0,
 			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_forms.pages',
 			'config' => array(
