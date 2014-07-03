@@ -443,6 +443,10 @@
 				<source>Variables</source>
 				<target state="translated">Variablen</target>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.description">
+				<source>Description</source>
+				<target state="translated">Beschreibung</target>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.own_marker">
 				<source>Enter your own Variable Name</source>
 				<target state="translated">Variablenname (ohne umschließende {})</target>

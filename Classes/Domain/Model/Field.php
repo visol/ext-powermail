@@ -129,6 +129,13 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $css = '';
 
 	/**
+	 * description
+	 *
+	 * @var string
+	 */
+	protected $description = '';
+
+	/**
 	 * multiselect
 	 *
 	 * @var bool
@@ -421,6 +428,21 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setCss($css) {
 		$this->css = $css;
+	}
+
+	/**
+	 * @param string $description
+	 * @return void
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDescription() {
+		return $this->description;
 	}
 
 	/**

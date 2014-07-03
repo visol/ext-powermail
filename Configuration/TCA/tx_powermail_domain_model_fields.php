@@ -29,7 +29,7 @@ $fieldsTca = array(
 		'showRecordFieldList' =>
 			'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings,
 			path, content_element, text, prefill_value, placeholder, create_from_typoscript, mandatory,
-			validation, validation_configuration, css, multiselect, datepicker_settings,
+			validation, validation_configuration, css, description, multiselect, datepicker_settings,
 			feuser_value, sender_email, sender_name, own_marker_select, auto_marker, marker',
 	),
 	'types' => array(
@@ -41,6 +41,7 @@ $fieldsTca = array(
 				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.validation_title;2,
 				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.prefill_title;3,
 				--palette--;Layout;4,
+				description,
 				--palette--;LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.marker_title;5,
 				--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access, sys_language_uid;;;;1-1-1,
 				l10n_parent, l10n_diffsource, hidden;;1,starttime, endtime'),
@@ -668,6 +669,17 @@ $fieldsTca = array(
 				'type' => 'check',
 				'default' => 0
 			)
+		),
+		'description' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:powermail/Resources/Private/Language/locallang_db.xlf:tx_powermail_domain_model_fields.description',
+			'config' => array(
+				'type' => 'text',
+				'cols' => '32',
+				'rows' => '2',
+				'eval' => 'trim'
+			),
+			'displayCond' => 'FIELD:type:!IN:content,hidden,html,reset,submit,text,typoscript'
 		),
 		'pages' => array(
 			'exclude' => 1,

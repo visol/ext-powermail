@@ -21,6 +21,33 @@
 			float: left;
 			clear: left;
 			font-weight: bold;
+
+			&[title] {
+				cursor: help;
+
+				&:after {
+					content: 'i';
+					display: inline-block;
+					@include border-radius(100px);
+					height: 16px;
+					width: 16px;
+					background-color: $greySoft3;
+					margin: 0 0 0 2px;
+					font-size: 14px;
+					line-height: 16px;
+					text-align: center;
+					color: white;
+					font-family: arial;
+					font-weight: bold;
+				}
+
+				&[title=""] {
+					cursor: inherit;
+					&:after {
+						display: none;
+					}
+				}
+			}
 		}
 
 		.powermail_fieldwrap {

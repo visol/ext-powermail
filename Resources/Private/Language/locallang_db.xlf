@@ -333,6 +333,9 @@
 			<trans-unit id="tx_powermail_domain_model_fields.marker_title">
 				<source>Variables</source>
 			</trans-unit>
+			<trans-unit id="tx_powermail_domain_model_fields.description">
+				<source>Description</source>
+			</trans-unit>
 			<trans-unit id="tx_powermail_domain_model_fields.own_marker">
 				<source>Enter your own Variable Name</source>
 			</trans-unit>
