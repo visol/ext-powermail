@@ -461,7 +461,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * @return boolean
+	 * @return string
 	 */
 	public function getMultiselectForField() {
 		$value = $this->getMultiselect();
@@ -485,7 +485,11 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string
 	 */
 	public function getDatepickerSettings() {
-		return $this->datepickerSettings;
+		$datepickerSettings = $this->datepickerSettings;
+		if (empty($datepickerSettings)) {
+			$datepickerSettings = 'date';
+		}
+		return $datepickerSettings;
 	}
 
 	/**
@@ -494,7 +498,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return string
 	 */
 	public function getDatepickerSettingsOptimized() {
-		$settings = $this->datepickerSettings;
+		$settings = $this->getDatepickerSettings();
 		if ($settings === 'datetime') {
 			$settings = 'datetime-local';
 		}
