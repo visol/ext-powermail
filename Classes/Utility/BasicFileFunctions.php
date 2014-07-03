@@ -129,11 +129,12 @@ class BasicFileFunctions {
 	 *
 	 * @param string $destinationPath
 	 * @param string $allowedFileExtensions
+	 * @param \In2code\Powermail\Domain\Model\Mail $mail
 	 * @return bool
 	 */
-	public static function fileUpload($destinationPath, $allowedFileExtensions = '') {
+	public static function fileUpload($destinationPath, $allowedFileExtensions = '', \In2code\Powermail\Domain\Model\Mail $mail) {
 		$result = FALSE;
-		if (isset($_FILES['tx_powermail_pi1']['tmp_name']['field'])) {
+		if (isset($_FILES['tx_powermail_pi1']['tmp_name']['field']) && self::hasFormAnUploadField($mail->getForm())) {
 			foreach (array_keys($_FILES['tx_powermail_pi1']['tmp_name']['field']) as $marker) {
 				foreach ($_FILES['tx_powermail_pi1']['tmp_name']['field'][$marker] as $key => $tmpName) {
 					$uniqueFileName = self::getUniqueName($_FILES['tx_powermail_pi1']['name']['field'][$marker][$key], $destinationPath);
@@ -197,5 +198,22 @@ class BasicFileFunctions {
 			$array[] = $file;
 		}
 		return $array;
+	}
+
+	/**
+	 * Check if this form has an upload field
+	 *
+	 * @param \In2code\Powermail\Domain\Model\Form $form
+	 * @return bool
+	 */
+	public static function hasFormAnUploadField(\In2code\Powermail\Domain\Model\Form $form) {
+		foreach ($form->getPages() as $page) {
+			foreach ($page->getFields() as $field) {
+				if ($field->getType() === 'file') {
+					return TRUE;
+				}
+			}
+		}
+		return FALSE;
 	}
 }
