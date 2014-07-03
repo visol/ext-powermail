@@ -193,7 +193,8 @@ $pagesTca = array(
 				),
 				'foreign_table' => 'tx_powermail_domain_model_forms',
 				'foreign_table_where' =>
-					'AND tx_powermail_domain_model_forms.pid=###CURRENT_PID### AND tx_powermail_domain_model_forms.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
+					'AND tx_powermail_domain_model_forms.pid=###CURRENT_PID###
+					AND tx_powermail_domain_model_forms.sys_language_uid IN (-1,###REC_FIELD_sys_language_uid###)',
 			),
 		),
 		'sorting' => array(
