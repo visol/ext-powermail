@@ -49,7 +49,7 @@ class CalculatingCaptcha {
 	 *
 	 * @var \string
 	 */
-	public $captchaImage = 'EXT:powermail/Resources/Public/Image/captcha.png';
+	public $captchaImage = 'typo3temp/tx_powermail/CalculatingCaptcha.png';
 
 	/**
 	 * Render Link to Captcha Image
@@ -152,7 +152,8 @@ class CalculatingCaptcha {
 			$content
 		);
 		// save image file
-		imagepng($img,
+		imagepng(
+			$img,
 			GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)
 		);
 		// delete temp image

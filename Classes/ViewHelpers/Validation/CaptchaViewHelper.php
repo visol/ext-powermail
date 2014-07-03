@@ -1,5 +1,5 @@
 <?php
-namespace In2code\Powermail\ViewHelpers\Misc;
+namespace In2code\Powermail\ViewHelpers\Validation;
 
 /**
  * Get Captcha
