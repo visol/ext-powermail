@@ -502,7 +502,7 @@ $fieldsTca = array(
 				'type' => 'input',
 				'size' => 10
 			),
-			'displayCond' => 'FIELD:type:=:input'
+			'displayCond' => 'FIELD:type:IN:input'
 		),
 		'feuser_value' => array(
 			'l10n_mode' => 'exclude',

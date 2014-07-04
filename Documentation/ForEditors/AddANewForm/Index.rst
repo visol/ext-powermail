@@ -315,6 +315,15 @@ Explanation
       Extended
 
  - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
+   :Tab:
+      Extended
+
+ - :Field:
       Variables – Individual Fieldname
    :Description:
       This is a marker of this field.
@@ -757,6 +766,15 @@ Explanation
       Extended
 
  - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
+   :Tab:
+      Extended
+
+ - :Field:
       Variables – Individual Fieldname
    :Description:
       This is a marker of this field.
@@ -931,6 +949,15 @@ Explanation
       Choose a layout.
    :Explanation:
       This adds a CSS-Class to the frontend output. Administrator can add, remove or rename some of the entries.
+   :Tab:
+      Extended
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
    :Tab:
       Extended
 
@@ -1115,6 +1142,15 @@ Explanation
       Choose a layout.
    :Explanation:
       This adds a CSS-Class to the frontend output. Administrator can add, remove or rename some of the entries.
+   :Tab:
+      Extended
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
    :Tab:
       Extended
 
@@ -1351,6 +1387,15 @@ Explanation
       Extended
 
  - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
+   :Tab:
+      Extended
+
+ - :Field:
       Variables – Individual Fieldname
    :Description:
       This is a marker of this field.
@@ -1568,6 +1613,15 @@ Explanation
       Choose a layout.
    :Explanation:
       This adds a CSS-Class to the frontend output. Administrator can add, remove or rename some of the entries.
+   :Tab:
+      Extended
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
    :Tab:
       Extended
 
@@ -1841,6 +1895,15 @@ Explanation
       See explanation below for a special fieldtype. Different fields are related to some fieldtypes – not all fields are shown on every type.
    :Tab:
       General
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
+   :Tab:
+      Extended
 
  - :Field:
       Variables – Individual Fieldname
@@ -2435,6 +2498,15 @@ Explanation
       Extended
 
  - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
+   :Tab:
+      Extended
+
+ - :Field:
       Variables – Individual Fieldname
    :Description:
       This is a marker of this field.
@@ -2559,6 +2631,15 @@ Explanation
       Allow upload of more than only one file.
    :Explanation:
       Multiupload via HTML5 - the visitors browser must support this feature. If not, only one file could be uploaded.
+   :Tab:
+      Extended
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
    :Tab:
       Extended
 
@@ -2846,6 +2927,15 @@ Explanation
       Extended
 
  - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
+   :Tab:
+      Extended
+
+ - :Field:
       Variables – Individual Fieldname
    :Description:
       This is a marker of this field.
@@ -2920,6 +3010,8 @@ Backend Configuration Example
 
 |img-country2|
 
+|img-country3|
+
 Explanation
 '''''''''''
 
@@ -2977,6 +3069,15 @@ Explanation
       Choose a layout.
    :Explanation:
       This adds a CSS-Class to the frontend output. Administrator can add, remove or rename some of the entries.
+   :Tab:
+      Extended
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
    :Tab:
       Extended
 
@@ -3096,6 +3197,15 @@ Explanation
       Choose a layout.
    :Explanation:
       This adds a CSS-Class to the frontend output. Administrator can add, remove or rename some of the entries.
+   :Tab:
+      Extended
+
+ - :Field:
+      Description
+   :Description:
+      Add a description for this field.
+   :Explanation:
+      Per default a description will be rendered as title-attribute in the labels in frontend.
    :Tab:
       Extended
 

@@ -94,6 +94,7 @@ Facts
   - HTML5 Datepicker (Datetime, Date, Time) with JavaScript Fallback
   - Fill Options of Fields (Select, Checkboxes and Radiobuttons) out of TypoScript (static or dynamic)
   - New Field Property Placeholder
+  - New Field Property Description
   - Decrease number of forms to selection in plugin for editors with Page TSConfig
   - Scheduler Task with CommandController allows admins to remove unused uploaded files (**UP**)
 
