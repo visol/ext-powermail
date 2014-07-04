@@ -34,7 +34,8 @@ class CaptchaViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
 	 * @return string HTML-Tag for Captcha image
 	 */
 	public function render() {
-		return $this->captchaEngine->render($this->settings);
+		$this->captchaEngine->setConfiguration($this->settings);
+		return $this->captchaEngine->render();
 	}
 
 	/**

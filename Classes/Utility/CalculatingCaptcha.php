@@ -1,7 +1,8 @@
 <?php
 namespace In2code\Powermail\Utility;
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility,
+	\In2code\Powermail\Utility\Div;
 
 /***************************************************************
  *  Copyright notice
@@ -29,7 +30,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 
 /**
- * Div is a class for a collection of misc functions
+ * CalculatingCaptcha
  *
  * @package powermail
  * @license http://www.gnu.org/licenses/lgpl.html
@@ -42,52 +43,44 @@ class CalculatingCaptcha {
 	 *
 	 * @var \array
 	 */
-	protected $conf;
+	protected $configuration;
 
 	/**
 	 * Path to captcha image
 	 *
 	 * @var \string
 	 */
-	public $captchaImage = 'typo3temp/tx_powermail/CalculatingCaptcha.png';
+	protected $captchaImage = 'typo3temp/tx_powermail/CalculatingCaptcha.png';
 
 	/**
 	 * Render Link to Captcha Image
 	 *
-	 * @param \array $conf
-	 * @return \string
+	 * @return string
 	 */
-	public function render($conf) {
-		$this->conf = $conf;
-		// get random string for captcha
-		$string = $this->getString();
-		// create image
-		$content = $this->createImage($string);
-		return $content;
+	public function render() {
+		$string = $this->getStringForCaptcha();
+		if (!is_dir(dirname($this->getCaptchaImage()))) {
+			return 'Error: Folder ' . dirname($this->getCaptchaImage()) . '/ don\'t exists';
+		}
+		return $this->createImage($string);
 	}
 
 	/**
 	 * Check if given code is correct
 	 *
 	 * @param string $code String to compare
-	 * @param int $clearSession Flag if session should be cleared or not
+	 * @param bool $clearSession
 	 * @return boolean
 	 */
-	public function validCode($code, $clearSession = 1) {
-		$valid = 0;
-		// if code is set and equal to session value
+	public function validCode($code, $clearSession = TRUE) {
 		if (intval($code) == $GLOBALS['TSFE']->fe_user->sesData['powermail_captcha_value'] && !empty($code)) {
-
-			// clear session
 			if ($clearSession) {
 				$GLOBALS['TSFE']->fe_user->setKey('ses', 'powermail_captcha_value', '');
 				$GLOBALS['TSFE']->storeSessionData();
 			}
-
-			// Set error code
-			$valid = 1;
+			return TRUE;
 		}
-		return $valid;
+		return FALSE;
 	}
 
 	/**
@@ -97,50 +90,29 @@ class CalculatingCaptcha {
 	 * @return string	Image HTML Code
 	 */
 	protected function createImage($content) {
-		$subfolder = '';
-		// if request_host is different to site_url (TYPO3 runs in a subfolder)
-		if (GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/' != GeneralUtility::getIndpEnv('TYPO3_SITE_URL')) {
-			// get the folder (like "subfolder/")
-			$subfolder = str_replace(
-				GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST') . '/',
-				'',
-				GeneralUtility::getIndpEnv('TYPO3_SITE_URL')
-			);
-		}
-		// background image
-		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder;
-		$startimage .= $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['image']);
+		$startimage = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . Div::getSubFolderOfCurrentUrl(FALSE, TRUE);
+		$startimage .= $GLOBALS['TSFE']->tmpl->getFileName($this->configuration['captcha.']['default.']['image']);
 
-		// if file is correct
+		// if startfile does not exist
 		if (!is_file($startimage)) {
-			return 'Error: No Image found';
+			return 'Error: No Image found on ' . $startimage;
 		}
 
 		// Backgroundimage
 		$img = ImageCreateFromPNG($startimage);
 		$config = array();
-		// change HEX color to RGB
-		$config['color_rgb'] = sscanf($this->conf['captcha.']['default.']['textColor'], '#%2x%2x%2x');
-		// Font color
+		$config['color_rgb'] = sscanf($this->configuration['captcha.']['default.']['textColor'], '#%2x%2x%2x');
 		$config['color'] = ImageColorAllocate($img, $config['color_rgb'][0], $config['color_rgb'][1], $config['color_rgb'][2]);
-		// fontfile
-		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder;
-		$config['font'] .= $GLOBALS['TSFE']->tmpl->getFileName($this->conf['captcha.']['default.']['font']);
-		// Fontsize
-		$config['fontsize'] = $this->conf['captcha.']['default.']['textSize'];
-		// give me the angles for the font
-		$config['angle'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['textAngle'], 1);
-		// random angle
+		$config['font'] = GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . Div::getSubFolderOfCurrentUrl(FALSE, TRUE);
+		$config['font'] .= $GLOBALS['TSFE']->tmpl->getFileName($this->configuration['captcha.']['default.']['font']);
+		$config['fontsize'] = $this->configuration['captcha.']['default.']['textSize'];
+		$config['angle'] = GeneralUtility::trimExplode(',', $this->configuration['captcha.']['default.']['textAngle'], TRUE);
 		$config['fontangle'] = mt_rand($config['angle'][0], $config['angle'][1]);
-		// give me the horizontal distances
-		$config['distance_hor'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceHor'], 1);
-		// random distance
+		$config['distance_hor'] = GeneralUtility::trimExplode(',', $this->configuration['captcha.']['default.']['distanceHor'], TRUE);
 		$config['fontdistance_hor'] = mt_rand($config['distance_hor'][0], $config['distance_hor'][1]);
-		// give me the vertical distances
-		$config['distance_vert'] = GeneralUtility::trimExplode(',', $this->conf['captcha.']['default.']['distanceVer'], 1);
-		// random distance
+		$config['distance_vert'] = GeneralUtility::trimExplode(',', $this->configuration['captcha.']['default.']['distanceVer'], TRUE);
 		$config['fontdistance_vert'] = mt_rand($config['distance_vert'][0], $config['distance_vert'][1]);
-		// add text to image
+
 		imagettftext(
 			$img,
 			$config['fontsize'],
@@ -151,16 +123,14 @@ class CalculatingCaptcha {
 			$config['font'],
 			$content
 		);
-		// save image file
 		imagepng(
 			$img,
-			GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' . $subfolder . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)
+			GeneralUtility::getIndpEnv('TYPO3_DOCUMENT_ROOT') . '/' .
+				Div::getSubFolderOfCurrentUrl(FALSE, TRUE) . $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage)
 		);
-		// delete temp image
 		imagedestroy($img);
 
-		// path to new image
-		return $GLOBALS['TSFE']->tmpl->getFileName($this->captchaImage) . '?hash=' . time();
+		return $GLOBALS['TSFE']->tmpl->getFileName($this->getCaptchaImage()) . '?hash=' . time();
 	}
 
 	/**
@@ -168,58 +138,74 @@ class CalculatingCaptcha {
 	 *
 	 * @return string
 	 */
-	protected function getString() {
-		// config
-		// 1. Get random numbers
-		// operator +/-
-		$op = mt_rand(0, 1);
-		// loop max. 100 times
+	protected function getStringForCaptcha() {
+		$operatorNumber = mt_rand(0, 1);
+		$number1 = $number2 = 0;
 		for ($i = 0; $i < 100; $i++) {
-			// random number 1
 			$number1 = mt_rand(0, 15);
-			// random number 2
 			$number2 = mt_rand(0, 15);
 
 			// don't want negative numbers
-			if ($op != 1 || $number1 > $number2) {
+			if ($operatorNumber !== 1 || $number1 > $number2) {
 				break;
 			}
 		}
-		// give me the operator
-		switch ($op) {
+
+		switch ($operatorNumber) {
 			case 1:
 				$operator = '-';
-				// result
 				$result = $number1 - $number2;
 				break;
 
 			case 2:
 				$operator = 'x';
-				// result
 				$result = $number1 * $number2;
 				break;
 
 			case 3:
 				$operator = ':';
-				// result
 				$result = $number1 / $number2;
 				break;
 
 			case 0:
 			default:
-				// operator
 				$operator = '+';
-				// result
 				$result = $number1 + $number2;
 		}
 
-		// Save result to session
-
-		// Generate Session with result
 		$GLOBALS['TSFE']->fe_user->setKey('ses', 'powermail_captcha_value', $result);
 		$GLOBALS['TSFE']->storeSessionData();
 
 		return $number1 . ' ' . $operator . ' ' . $number2;
 	}
 
+	/**
+	 * @param array $configuration
+	 * @return void
+	 */
+	public function setConfiguration($configuration) {
+		$this->configuration = $configuration;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getConfiguration() {
+		return $this->configuration;
+	}
+
+	/**
+	 * @param string $captchaImage
+	 * @return void
+	 */
+	public function setCaptchaImage($captchaImage) {
+		$this->captchaImage = $captchaImage;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCaptchaImage() {
+		return $this->captchaImage;
+	}
 }
