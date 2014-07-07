@@ -151,6 +151,15 @@ class CalculatingCaptcha {
 			}
 		}
 
+		if (!empty($this->configuration['captcha.']['default.']['forceValue'])) {
+			$parts = GeneralUtility::trimExplode('+', $this->configuration['captcha.']['default.']['forceValue'], TRUE);
+			if (count($parts) === 2) {
+				$operatorNumber = 0;
+				$number1 = $parts[0];
+				$number2 = $parts[1];
+			}
+		}
+
 		switch ($operatorNumber) {
 			case 1:
 				$operator = '-';
