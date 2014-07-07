@@ -1,0 +1,7 @@
+default:
+    extensions:
+        Behat\MinkExtension\Extension:
+            #base_url: http://powermail21.dev.in2code.ws
+            base_url: http://62.localhost.de
+            goutte: ~
+            selenium2: ~
