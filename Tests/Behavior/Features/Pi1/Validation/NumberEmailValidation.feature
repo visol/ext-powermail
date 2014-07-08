@@ -1,4 +1,5 @@
 # Features/Pi1/Validation/NumberEmailValidation.feature
+@Pi1ValidationNumberEmailValidation
 Feature: NumberEmailValidation
   In order to see a word definition
   As a website user

@@ -1,4 +1,5 @@
 # Features/Pi1/Default/ShortFormDoubleOptin.feature
+@Pi1DefaultShortDoubleOptin
 Feature: ShortFormDoubleOptin
   In order to see a word definition
   As a website user
@@ -24,6 +25,3 @@ Feature: ShortFormDoubleOptin
     Then I should see "alex@in2code.de"
     And I press "Weiter"
     Then I should see "Bitte überprüfen Sie Ihr E-Mail-Postfach und bestätigen Sie diese Aktion."
-
-  # English
-  # Todo English

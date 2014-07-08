@@ -1,11 +1,12 @@
 # Features/Pi1/Default/AllFields.feature
+@Pi1DefaultAllFields
 Feature: AllFields
   In order to see a word definition
   As a website user
   I need to be able to submit a form
 
   # L=0
-  Scenario: Searching for a AllFields Form that does exist in german
+  Scenario: Check if AllFields Form is rendered correctly
     Given I am on "/index.php?id=10"
     Then I should see "Input (E-Mail)"
     Then I should see "Textarea"

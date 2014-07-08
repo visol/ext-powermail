@@ -1,4 +1,5 @@
 # Features/Pi1/Validation/SpamShieldValidation.feature
+@Pi1ValidationSpamShieldValidation
 Feature: SpamShieldValidation
   In order to see a word definition
   As a website user

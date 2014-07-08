@@ -1,4 +1,7 @@
 default:
+    paths:
+      features: Features
+      bootstrap: %behat.paths.features%/Bootstrap
     extensions:
         Behat\MinkExtension\Extension:
             #base_url: http://powermail21.dev.in2code.ws

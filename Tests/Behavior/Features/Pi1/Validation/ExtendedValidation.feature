@@ -1,4 +1,5 @@
 # Features/Pi1/Validation/ExtendedValidation.feature
+@Pi1ValidationExtendedValidation
 Feature: ExtendedValidation
   In order to see a word definition
   As a website user

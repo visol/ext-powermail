@@ -1,11 +1,12 @@
 # Features/Pi1/Default/Date.feature
+@Pi1DefaultDate
 Feature: Date
   In order to see a word definition
   As a website user
   I need to be able to submit a form
 
   # Form is rendered?
-  Scenario: Searching for a DefaultForm
+  Scenario: Check if Date Form is rendered correctly
     Given I am on "/index.php?id=28"
     Then I should see "Date,Datetime,Time"
     Then I should see "String"
@@ -15,7 +16,7 @@ Feature: Date
     Then I should see "Datum2"
 
   # Fill out form, see confirmation, go back and change something, see confirmation, see submit
-  Scenario: Fill out DefaultForm and submit
+  Scenario: Fill out DateForm and try to change dates
     Given I am on "/index.php?id=28"
     When I fill in "tx_powermail_pi1[field][string]" with "Datetest"
     When I fill in "tx_powermail_pi1[field][datum]" with "09.07.2014"

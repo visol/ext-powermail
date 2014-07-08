@@ -1,4 +1,5 @@
 # Features/Pi1/Default/ShortFormAndRedirect.feature
+@Pi1DefaultShortFormAndRedirect
 Feature: ShortFormAndRedirect
   In order to see a word definition
   As a website user

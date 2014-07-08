@@ -1,4 +1,5 @@
 # Features/Pi1/Validation/PhpValidation.feature
+@Pi1ValidationPhpValidation
 Feature: PhpValidation
   In order to see a word definition
   As a website user
@@ -15,14 +16,17 @@ Feature: PhpValidation
     Then I should see "Check"
     Then I should see "Radio"
     And I press "Submit"
+
     Then I should see "Dieses Feld muss ausgefüllt werden!"
     Then I should see 7 ".powermail_message_error > li" elements
     Then I fill in "tx_powermail_pi1[field][lastname]" with "Christian"
     And I press "Submit"
+
     Then I should see "Dieses Feld muss ausgefüllt werden!"
     Then I should see 6 ".powermail_message_error > li" elements
     Then I fill in "tx_powermail_pi1[field][inputpattern]" with "test"
     And I press "Submit"
+
     Then I should see "Dieses Feld muss ausgefüllt werden!"
     Then I should see 6 ".powermail_message_error > li" elements
     Then I fill in "tx_powermail_pi1[field][inputpattern]" with "http://www.test.de"
@@ -33,6 +37,7 @@ Feature: PhpValidation
     Then I check "tx_powermail_pi1[field][validation][]"
     Then I select "pink" from "tx_powermail_pi1[field][marker]"
     And I press "Submit"
+
     Then I should see "Sind diese Eingaben korrekt?"
     Then I should see "Christian"
     Then I should see "Sonntag"
@@ -43,6 +48,7 @@ Feature: PhpValidation
     Then I should see "lila"
     Then I should see "pink"
     And I press "Weiter"
+
     Then I should see "Danke, Ihre Eingaben:"
     Then I should see "Christian"
     Then I should see "Sonntag"
