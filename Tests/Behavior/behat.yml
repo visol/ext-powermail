@@ -6,5 +6,6 @@ default:
         Behat\MinkExtension\Extension:
             #base_url: http://powermail21.dev.in2code.ws
             base_url: http://62.localhost.de
+            files_path: D:\xampp\htdocs\websites\62\fileadmin\user_upload
             goutte: ~
             selenium2: ~

@@ -121,6 +121,7 @@ Facts
   - PHPsniffer used for Refactoring
 
 - Quality
+  - Added Behavior-Tests for many Frontend-Functions (With Behat with Mink and Selenium)
   - Unittests added for different methods (e.g. all serverside validators)
   - A Testparcour was generated to test the main features of powermail (**UP**)
   - We focussed on TYPO3 6.2 LTS to increase quality

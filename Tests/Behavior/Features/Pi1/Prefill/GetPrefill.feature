@@ -1,20 +1,15 @@
-# Features/Pi1/Default/TypoScriptPrefill.feature
-Feature: TypoScriptPrefill
+# Features/Pi1/Default/GetPrefill.feature
+Feature: GetPrefill
   In order to see a word definition
   As a website user
   I need to be able to submit a form
 
-  @Pi1PrefillTypoScriptPrefill
-  Scenario: Check if Form can be prefilled with TypoScript Configuration
-    Given I am on "/index.php?id=16"
-    Then I should see "Input"
-    Then I should see "Textarea"
-    Then I should see "Select"
-    Then I should see "Select Multi"
-    Then I should see "Check"
-    Then I should see "Radio"
-    Then the "tx_powermail_pi1[field][input]" field should contain "Alex Kellner"
-    Then the sourcecode should contain 'name="tx_powermail_pi1[field][marker]">Das'
+  # id=17 will be redirected to id=19 with some GET-Parameters
+  @Pi1PrefillGetPrefill
+  Scenario: Check if Form can be prefilled with GET-Parameters
+    Given I am on "/index.php?id=17"
+    Then the "tx_powermail_pi1[field][input]" field should contain "Silke Kellner"
+    Then the "tx_powermail_pi1[field][marker]" field should contain "Der Test"
     Then the sourcecode should contain '<option value="green" selected="selected">green</option>'
     Then the sourcecode should contain '<option value="brown" selected="selected">brown</option>'
     Then the sourcecode should contain '<option value="black" selected="selected">black</option>'

@@ -20,10 +20,26 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext {
 	 *
 	 * @Given /^I wait "([^"]*)" seconds$/
 	 *
-	 * @param string $seconds
+	 * @param string|int $seconds
 	 * @return void
 	 */
 	public function iWaitSeconds($seconds) {
+		if ($seconds === 'a few') {
+			$seconds = 8;
+		}
 		sleep($seconds);
+	}
+
+	/**
+	 * Search for this string in html sourcecode
+	 *
+	 * @Then /^the sourcecode should contain \'([^\']*)\'$/
+	 *
+	 * @param string $html
+	 * @return void
+	 */
+	public function theSourcecodeShouldContain($html) {
+		$html = str_replace('\n', "\n", $html);
+		$this->assertSession()->responseContains($this->fixStepArgument($html));
 	}
 }
