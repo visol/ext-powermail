@@ -7,7 +7,7 @@ This is a (hopefully) momentary fork to avoid problems with the Powermail releas
 
 Semantic versioning is used: http://semver.org/
 
-The initial version is 3.0.0-f.
+The initial version is 3.0.0-F.
 
 Changes in Powermail are backported as needed by the maintainers of this fork.
 
