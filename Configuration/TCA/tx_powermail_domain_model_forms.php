@@ -223,8 +223,16 @@ if ($confArr['replaceIrreWithElementBrowser']) {
 /**
  * Switch from l10n_mode "exclude" to "mergeIfNotBlank"
  */
-if ($confArr['l10n_mode_merge']) {
+if ($confArr['l10n_mode_merge'] && !$confArr['l10n_enable_irre']) {
 	$formsTca['columns']['css']['l10n_mode'] = 'mergeIfNotBlank';
+}
+
+/**
+* Make whole form including pages and fields translatable using IRRE
+*/
+if ($confArr['l10n_enable_irre'] && !$confArr['l10n_mode_merge']) {
+	$formsTca['columns']['css']['l10n_display'] = 'defaultAsReadonly';
+	$formsTca['columns']['pages']['l10n_mode'] = 'mergeIfNotBlank';
 }
 
 return $formsTca;
