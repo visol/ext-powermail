@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array (
 		mailform extension with a lots of features (spam prevention, marketing, double-optin, etc...)',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '3.0.0-F',
+	'version' => '3.0.1-F',
 	'dependencies' => 'cms,extbase,fluid',
 	'conflicts' => '',
 	'priority' => '',
