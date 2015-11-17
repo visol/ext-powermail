@@ -240,7 +240,15 @@ $fieldsTca = array(
 				'eval' => 'required',
 				'itemsProcFunc' => 'In2code\Powermail\Utility\Tca\AddOptionsToSelection->addOptionsForType',
 			),
-			'displayCond' => 'FIELD:sys_language_uid:=:0',
+            'displayCond' => array(
+                'OR' => array(
+                    'FIELD:sys_language_uid:=:0',
+                    'AND' => array(
+                        'FIELD:sys_language_uid:>:0',
+                        'FIELD:l10n_parent:=:0',
+                    )
+                )
+            ),
 		),
 		'settings' => array(
 			'exclude' => 0,
